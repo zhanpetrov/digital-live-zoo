@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Digital Live Zoo</title>
+<meta name="description" content="Every free live animal cam on Earth in one zoo: safari waterholes, pandas, bears, penguins, eagles and more, live right now.">
+<meta property="og:title" content="Digital Live Zoo">
+<meta property="og:description" content="Hundreds of live animal cams on six continents. Watch what is awake right now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: night-safari visitor map for the planet. Stencil sign header, a live Main Stage player, a filter bar, the enclosure grid, and an in-page multicam wall. */
+:root{
+  --bg:#0b120e; --panel:#121d17; --panel-2:#18261e; --line:#24362b;
+  --fg:#e7eee4; --muted:#93a598; --faint:#5e7163;
+  --sign:#f2c230; --live:#ff4a3d; --day:#9fd36b; --night:#7aa2ff;
+  --display:"Big Shoulders Stencil Display","Arial Narrow",Impact,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:18px 64px;display:grid;gap:18px}
+a{color:var(--fg)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--sign);outline-offset:2px}
+
+header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7vw,80px);line-height:.9;letter-spacing:.02em;margin:0;color:var(--sign);text-transform:uppercase}
+.brand p{margin:8px 0 0;color:var(--muted);max-width:64ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:10px}
+.stats b{color:var(--fg);font-weight:500;font-variant-numeric:tabular-nums}
+.stats .aw b{color:var(--day)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;text-decoration:none}
+.btn:hover{border-color:var(--muted)}
+.btn.sign{background:var(--sign);color:#1b1500;border-color:var(--sign)}
+.btn.small{padding:7px 12px;font-size:13px}
+.btn[aria-pressed="true"]{border-color:var(--day);color:var(--day)}
+
+/* stage */
+.stage{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);background:var(--panel);border:1px solid var(--live);border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,74,61,.35),0 18px 50px rgba(0,0,0,.35)}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}}
+.player{position:relative;aspect-ratio:16/9;background:#000;max-width:100%}
+.player iframe,.player>div{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player .tag{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:7px;background:var(--live);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;padding:5px 9px;border-radius:6px;pointer-events:none}
+.player .tag i{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.stage-body{padding:18px 20px;display:flex;flex-direction:column;gap:11px;min-width:0}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--live)}
+.stage-body h2{font-family:var(--display);font-weight:800;font-size:38px;line-height:.95;margin:0;text-transform:uppercase;text-wrap:balance}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:14px;margin:0}
+.facts dt{color:var(--faint);font-weight:600}
+.facts dd{margin:0;min-width:0}
+.why{font-size:13px;color:var(--muted);margin:0}
+.clock{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.dp{display:inline-flex;align-items:center;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.dp.day{color:var(--day)} .dp.night{color:var(--night)} .dp.dusk{color:var(--sign)}
+.stage-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.progress{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.progress b{display:block;height:100%;width:0;background:var(--sign)}
+
+/* filters */
+.filters{display:grid;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flabel{font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);min-width:74px}
+.pill{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:600;color:var(--muted);display:inline-flex;gap:6px;align-items:center}
+.pill small{font-family:var(--mono);font-size:11px;color:var(--faint)}
+.pill[aria-pressed="true"]{background:var(--sign);border-color:var(--sign);color:#1b1500}
+.pill[aria-pressed="true"] small{color:#4a3d00}
+.search{flex:1 1 220px;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+select{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--muted)}
+.toggle[aria-pressed="true"]{color:var(--day);border-color:var(--day)}
+.count{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:470px){.grid{grid-template-columns:minmax(0,1fr)}}
+.enc{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;content-visibility:auto;contain-intrinsic-size:auto 320px}
+.enc.onstage{border-color:var(--live);box-shadow:0 0 0 1px var(--live)}
+.enc.picked{border-color:var(--sign)}
+.th{position:relative;aspect-ratio:16/9;background:#000;max-width:100%;border:0;padding:0;width:100%;cursor:pointer}
+.th img{width:100%;height:100%;object-fit:cover}
+.th .ty{position:absolute;left:8px;top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;background:rgba(11,18,14,.82);color:var(--sign);padding:2px 7px;border-radius:5px}
+.th .ontag{position:absolute;right:8px;top:8px;background:var(--live);color:#fff;font-weight:800;font-size:11px;letter-spacing:.12em;padding:3px 7px;border-radius:5px}
+.th .play{position:absolute;inset:auto 8px 8px auto;background:rgba(11,18,14,.82);color:var(--fg);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px}
+.enc .pl{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.enc h4{margin:0;font-size:15px;font-weight:700;line-height:1.2}
+.enc .where{font-size:12.5px;color:var(--muted)}
+.enc .row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.enc .row span:last-child{text-align:right}
+.acts{display:flex;gap:6px;margin-top:auto}
+.mini{flex:1;border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:7px 10px;font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;text-align:center}
+.mini[aria-pressed="true"]{background:var(--sign);color:#1b1500;border-color:var(--sign)}
+.mini.stagebtn{border-color:var(--live);color:#ffc9c4}
+.noembed{font-size:11.5px;color:var(--sign)}
+.empty{grid-column:1/-1;color:var(--muted);padding:24px 0;text-align:center}
+
+/* wall */
+.wallbar{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:rgba(18,29,23,.96);border:1px solid var(--sign);border-radius:14px;padding:10px 14px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.wall{position:fixed;inset:0;z-index:20;background:#050806;display:flex;flex-direction:column;padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))}
+.wall-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:0 4px 10px}
+.wall-head h3{font-family:var(--display);font-weight:800;font-size:26px;margin:0;color:var(--sign);text-transform:uppercase}
+.wall-grid{flex:1;display:grid;gap:6px;min-height:0}
+.tile{position:relative;background:#000;border-radius:8px;overflow:hidden;min-height:0}
+.tile>div,.tile iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.tile .cap{position:absolute;left:8px;bottom:8px;z-index:2;display:flex;gap:6px;align-items:center}
+.tile .cap span{background:rgba(5,8,6,.78);color:var(--fg);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px}
+.tile .cap button{background:rgba(5,8,6,.78);border:1px solid var(--line);color:var(--fg);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px}
+.tile.sound{box-shadow:inset 0 0 0 3px var(--sign)}
+.tile.sound .cap button{background:var(--sign);color:#1b1500;border-color:var(--sign)}
+
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+summary{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;color:var(--sign)}
+details ul{margin:10px 0 0;padding-left:20px;display:grid;gap:6px;max-width:78ch}
+.note{color:var(--muted);font-size:13px;margin:8px 0 0;max-width:78ch}
+footer{color:var(--faint);font-size:12.5px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sign);color:#1b1500;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:30}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="sign">
+    <div class="brand">
+      <h1>Digital Live Zoo</h1>
+      <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
+      <div class="stats" id="stats"><span>Opening the zoo…</span></div>
+    </div>
+  </header>
+
+  <section class="stage" aria-label="Main stage">
+    <div class="player"><div id="stPlayer"></div><span class="tag"><i></i>MAIN STAGE</span></div>
+    <div class="stage-body">
+      <span class="eyebrow" id="stEyebrow">On stage now</span>
+      <h2 id="stName">Loading…</h2>
+      <dl class="facts">
+        <dt>Where</dt><dd id="stWhere"></dd>
+        <dt>Local time</dt><dd><span class="clock" id="stClock"></span> <span id="stDp"></span></dd>
+        <dt>Habitat</dt><dd id="stType"></dd>
+        <dt>Watching</dt><dd id="stWatch"></dd>
+      </dl>
+      <p class="why" id="stWhy"></p>
+      <div class="progress" aria-hidden="true"><b id="stProg"></b></div>
+      <div class="stage-actions">
+        <button class="btn sign" id="sound" type="button">Sound on</button>
+        <button class="btn" id="tour" type="button" aria-pressed="true">Touring the planet</button>
+        <button class="btn" id="next" type="button">Next cam</button>
+        <a class="btn" id="stYT" href="#" target="_blank" rel="noopener">YouTube ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="filters" aria-label="Filters">
+    <div class="frow"><span class="flabel">Continent</span><span id="fCont" class="frow"></span></div>
+    <div class="frow"><span class="flabel">Habitat</span><span id="fType" class="frow"></span></div>
+    <div class="frow">
+      <span class="flabel">Find</span>
+      <input class="search" id="q" type="search" placeholder="panda, eagle, Kenya, penguins…" aria-label="Search cams">
+      <button class="toggle" id="awake" type="button" aria-pressed="false">Awake now</button>
+      <select id="sort" aria-label="Sort"><option value="w">Most watched</option><option value="t">Local time</option><option value="n">Name</option></select>
+      <button class="btn small" id="topWall" type="button">Wall of the top 9 here</button>
+      <span class="count" id="count"></span>
+    </div>
+  </section>
+
+  <section aria-label="Cams"><div class="grid" id="grid"></div></section>
+
+  <div class="wallbar" id="wallbar" hidden>
+    <span id="wallTxt">Your wall: 0 cams</span>
+    <span style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn sign small" id="wallOpen" type="button">Open the wall</button>
+      <button class="btn small" id="wallClear" type="button">Clear</button>
+    </span>
+  </div>
+
+  <details>
+    <summary>How the zoo works</summary>
+    <ul>
+      <li>The cams were found by searching YouTube in 14 languages. City cams, news, music loops, “cat TV” and documentary reruns were left out, so every cam here is a real live view of animals.</li>
+      <li>Each cam is tagged with its place, time zone and habitat. “Awake now” keeps the cams where it is between 5 am and 8 pm locally.</li>
+      <li>The Main Stage changes every 45 seconds and follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam.</li>
+      <li>A wall plays up to 9 cams at once. Tap “Sound” on a tile to hear that one.</li>
+      <li>The list is checked every hour: restarted streams get their new link, dead ones are removed, and new cams are added a few times a day.</li>
+    </ul>
+    <p class="note">Every video plays from its owner’s channel through YouTube’s own player. Some owners block playback on other sites; those cams open on YouTube instead. Recording or re-editing a stream for anything public needs the cam owner’s permission.</p>
+  </details>
+  <footer id="foot"></footer>
+</div>
+
+<div class="wall" id="wall" hidden role="dialog" aria-label="Wall of live cams">
+  <div class="wall-head"><h3 id="wallTitle">Wall</h3><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small" id="wallMute" type="button">Mute all</button><button class="btn sign small" id="wallClose" type="button">Close wall</button></span></div>
+  <div class="wall-grid" id="wallGrid"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+(function(){
+  const TYPES = {safari:"Safari", zoo:"Zoos & sanctuaries", aqua:"Aquariums & ocean", birds:"Birds & nests", wild:"Forests & rivers", pets:"Farms & rescues"};
+  const CONTS = ["Africa","Asia","Europe","North America","Latin America","Oceania"];
+  const TOUR_MS = 45000, WALL_MAX = 9;
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  let CAMS = [], BYID = {};
+  const state = {cont:"all", type:"all", q:"", awake:false, sort:"w"};
+  const picked = new Set(), noEmbed = new Set(), shown = {};
+  try{ JSON.parse(localStorage.getItem("zoo-wall")||"[]").forEach(id=>picked.add(id)); }catch(e){}
+  try{ JSON.parse(localStorage.getItem("zoo-noembed")||"[]").forEach(id=>noEmbed.add(id)); }catch(e){}
+
+  const fmts = {};
+  function local(tz){
+    try{
+      const f = fmts[tz] || (fmts[tz] = new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false}));
+      const s = f.format(new Date()), h = parseInt(s.slice(0,2),10), m = parseInt(s.slice(3,5),10);
+      const dp = (h>=7 && h<18) ? "day" : (h>=5 && h<7) || (h>=18 && h<20) ? "dusk" : "night";
+      return {s, dp, mins:h*60+m};
+    }catch(e){ return {s:"--:--", dp:"day", mins:0}; }
+  }
+  const DPL = {day:"Day", dusk:"Golden hour", night:"Night"};
+  const awakeNow = c => local(c.tz).dp !== "night";
+  const ytUrl = c => "https://www.youtube.com/watch?v="+c.id;
+  const thumb = c => "https://i.ytimg.com/vi/"+c.id+"/mqdefault_live.jpg";
+
+  // ---------- stage player ----------
+  let player = null, ytReady = false, soundOn = false, touring = true;
+  const stage = {id:null, since:0, why:""};
+  function mkPlayer(el, id, onErr){
+    return new YT.Player(el, {videoId:id, playerVars:{autoplay:1, mute:1, playsinline:1, rel:0, modestbranding:1},
+      events:{onReady:e=>{ e.target.mute(); e.target.playVideo(); }, onError:e=>onErr && onErr(e.data)}});
+  }
+  window.onYouTubeIframeAPIReady = ()=>{ ytReady = true; if(stage.id) bootPlayer(); };
+  if(window.YT && window.YT.Player){ ytReady = true; }
+  function bootPlayer(){
+    if(player || !ytReady || !stage.id) return;
+    player = new YT.Player("stPlayer", {videoId:stage.id, playerVars:{autoplay:1, mute:1, playsinline:1, rel:0, modestbranding:1},
+      events:{
+        onReady:e=>{ soundOn ? e.target.unMute() : e.target.mute(); e.target.playVideo(); },
+        onError:e=>{ if([100,101,150,153].includes(e.data)){ markNoEmbed(stage.id); nextCam("That cam can’t play outside YouTube, so the stage moved on."); } }
+      }});
+  }
+  function markNoEmbed(id){ noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
+  function setStage(id, why){
+    const c = BYID[id]; if(!c) return;
+    if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
+    stage.id = id; stage.since = Date.now(); stage.why = why;
+    if(player && player.loadVideoById){ player.loadVideoById(id); soundOn ? player.unMute() : player.mute(); } else bootPlayer();
+    renderStage(); markStage();
+  }
+  function candidates(){
+    const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id);
+    const aw = v.filter(awakeNow);
+    return (aw.length ? aw : v).sort((a,b)=>b.w-a.w).slice(0,30);
+  }
+  function nextCam(why){
+    const l = candidates(); if(!l.length) return;
+    l.sort((a,b)=>(shown[a.id]||0)-(shown[b.id]||0) || b.w-a.w);
+    setStage(l[0].id, why || "Most watched cam in this view where it is daytime.");
+  }
+  setInterval(()=>{
+    if(!stage.id) return;
+    const t = Date.now() - stage.since;
+    $("stProg").style.width = touring ? Math.min(100, t/TOUR_MS*100)+"%" : "0%";
+    if(touring && t >= TOUR_MS && $("wall").hidden) nextCam("Touring the planet: next most-watched daytime cam in this view.");
+  }, 500);
+
+  // ---------- render ----------
+  function renderStats(){
+    const aw = CAMS.filter(awakeNow).length;
+    const countries = new Set(CAMS.map(c=>c.k).filter(Boolean)).size;
+    $("stats").innerHTML = `<span><b>${CAMS.length}</b> live cams</span><span><b>${new Set(CAMS.map(c=>c.c)).size}</b> continents</span><span><b>${countries}</b> countries</span><span class="aw"><b>${aw}</b> in daylight now</span>`;
+  }
+  function renderFilters(){
+    const cc = k => CAMS.filter(c=>k==="all"||c.c===k).length;
+    $("fCont").innerHTML = ["all",...CONTS].map(k=>`<button class="pill" type="button" data-cont="${k}" aria-pressed="${state.cont===k}">${k==="all"?"All":k} <small>${cc(k)}</small></button>`).join("");
+    const tc = k => CAMS.filter(c=>(state.cont==="all"||c.c===state.cont)&&(k==="all"||c.ty===k)).length;
+    $("fType").innerHTML = ["all",...Object.keys(TYPES)].map(k=>`<button class="pill" type="button" data-type="${k}" aria-pressed="${state.type===k}">${k==="all"?"All":TYPES[k]} <small>${tc(k)}</small></button>`).join("");
+  }
+  const cardEls = {};
+  function cardHTML(c){
+    return `<article class="enc" data-id="${c.id}">
+      <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="play">▶ Watch</span></button>
+      <div class="pl">
+        <h4>${esc(c.n)}</h4>
+        <div class="where">${esc(c.p)}</div>
+        <div class="row"><span class="clock"></span><span class="dp"></span></div>
+        <div class="row"><span>${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
+        <div class="noembed" ${noEmbed.has(c.id)?"":"hidden"}>Plays only on YouTube</div>
+        <div class="acts">
+          <button class="mini" type="button" data-pick="${c.id}" aria-pressed="${picked.has(c.id)}">${picked.has(c.id)?"On wall":"Add to wall"}</button>
+          <a class="mini" href="${ytUrl(c)}" target="_blank" rel="noopener" aria-label="Open ${esc(c.n)} on YouTube">YouTube ↗</a>
+        </div>
+      </div>
+    </article>`;
+  }
+  function renderGrid(){
+    $("grid").innerHTML = CAMS.map(cardHTML).join("") + `<p class="empty" id="empty" hidden>No cams match. Try another continent or turn off “Awake now”.</p>`;
+    document.querySelectorAll("#grid .enc").forEach(el=>{ cardEls[el.dataset.id] = el; if(picked.has(el.dataset.id)) el.classList.add("picked"); });
+    applyFilters(); updateClocks(); markStage();
+  }
+  function visible(){
+    const q = state.q.trim().toLowerCase();
+    return CAMS.filter(c=>(state.cont==="all"||c.c===state.cont) && (state.type==="all"||c.ty===state.type) && (!state.awake||awakeNow(c)) &&
+      (!q || (c.n+" "+c.p+" "+c.ch+" "+TYPES[c.ty]+" "+c.k).toLowerCase().includes(q)));
+  }
+  function sorted(list){
+    const l = list.slice();
+    if(state.sort==="w") l.sort((a,b)=>b.w-a.w);
+    else if(state.sort==="n") l.sort((a,b)=>a.n.localeCompare(b.n));
+    else l.sort((a,b)=>local(b.tz).mins-local(a.tz).mins);
+    return l;
+  }
+  function applyFilters(){
+    const vis = sorted(visible()), set = new Set(vis.map(c=>c.id)), grid = $("grid");
+    CAMS.forEach(c=>{ cardEls[c.id].hidden = !set.has(c.id); });
+    vis.forEach(c=>grid.appendChild(cardEls[c.id]));
+    grid.appendChild($("empty")); $("empty").hidden = vis.length>0;
+    $("count").textContent = vis.length+" of "+CAMS.length;
+    $("topWall").disabled = !vis.length;
+  }
+  function updateClocks(){
+    CAMS.forEach(c=>{
+      const el = cardEls[c.id]; if(!el) return;
+      const t = local(c.tz);
+      el.querySelector(".clock").textContent = t.s+" local";
+      const d = el.querySelector(".dp"); d.className = "dp "+t.dp; d.textContent = DPL[t.dp];
+    });
+    if(stage.id){ const t = local(BYID[stage.id].tz); $("stClock").textContent = t.s; $("stDp").className = "dp "+t.dp; $("stDp").textContent = DPL[t.dp]; }
+  }
+  function markStage(){
+    document.querySelectorAll("#grid .enc.onstage").forEach(el=>{ el.classList.remove("onstage"); el.querySelector(".ontag").hidden = true; });
+    const el = cardEls[stage.id]; if(el){ el.classList.add("onstage"); el.querySelector(".ontag").hidden = false; }
+  }
+  function renderStage(){
+    const c = BYID[stage.id]; if(!c) return;
+    $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
+    $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
+    $("stYT").href = ytUrl(c); $("stWhy").textContent = stage.why;
+    updateClocks();
+  }
+
+  // ---------- wall ----------
+  let wallPlayers = [];
+  function renderWallBar(){
+    const n = picked.size;
+    $("wallbar").hidden = !n;
+    $("wallTxt").textContent = "Your wall: "+n+(n===1?" cam":" cams")+(n>=WALL_MAX?" (full)":"");
+    try{ localStorage.setItem("zoo-wall", JSON.stringify([...picked])); }catch(e){}
+  }
+  function togglePick(id, btn){
+    if(picked.has(id)) picked.delete(id);
+    else { if(picked.size>=WALL_MAX){ toast("A wall holds up to "+WALL_MAX+" cams"); return; } picked.add(id); }
+    btn.setAttribute("aria-pressed", String(picked.has(id))); btn.textContent = picked.has(id) ? "On wall" : "Add to wall";
+    cardEls[id].classList.toggle("picked", picked.has(id));
+    renderWallBar();
+  }
+  function openWall(list, title){
+    list = list.filter(c=>!noEmbed.has(c.id)).slice(0,WALL_MAX);
+    if(!list.length){ toast("No cams to put on the wall"); return; }
+    if(!ytReady){ toast("The player is still loading, try again in a second"); return; }
+    if(player && player.pauseVideo) player.pauseVideo();
+    const cols = list.length<=1?1: list.length<=4?2:3, rows = Math.ceil(list.length/cols);
+    const g = $("wallGrid");
+    g.style.gridTemplateColumns = `repeat(${cols},minmax(0,1fr))`; g.style.gridTemplateRows = `repeat(${rows},minmax(0,1fr))`;
+    g.innerHTML = list.map((c,i)=>`<div class="tile" data-i="${i}"><div id="wt${i}"></div><div class="cap"><span>${esc(c.n)} · ${local(c.tz).s}</span><button type="button" data-sound="${i}">Sound</button></div></div>`).join("");
+    $("wallTitle").textContent = title || "Your wall";
+    $("wall").hidden = false; document.body.style.overflow = "hidden";
+    wallPlayers = list.map((c,i)=>mkPlayer("wt"+i, c.id, code=>{ if([100,101,150,153].includes(code)) markNoEmbed(c.id); }));
+  }
+  function closeWall(){
+    wallPlayers.forEach(p=>{ try{ p.destroy(); }catch(e){} }); wallPlayers = [];
+    $("wallGrid").innerHTML = ""; $("wall").hidden = true; document.body.style.overflow = "";
+    if(player && player.playVideo) player.playVideo();
+  }
+  function wallSound(i){
+    wallPlayers.forEach((p,k)=>{ try{ k===i ? p.unMute() : p.mute(); }catch(e){} });
+    document.querySelectorAll("#wallGrid .tile").forEach((t,k)=>t.classList.toggle("sound", k===i));
+  }
+
+  let tt; function toast(m){ const t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(()=>t.classList.remove("on"), 2400); }
+
+  // ---------- events ----------
+  $("grid").addEventListener("click", e=>{
+    const s = e.target.closest("[data-stage]"); if(s){ setStage(s.dataset.stage, "You picked this cam."); window.scrollTo({top:0, behavior:"smooth"}); return; }
+    const p = e.target.closest("[data-pick]"); if(p) togglePick(p.dataset.pick, p);
+  });
+  $("fCont").addEventListener("click", e=>{ const b = e.target.closest("[data-cont]"); if(!b) return; state.cont = b.dataset.cont; renderFilters(); applyFilters(); });
+  $("fType").addEventListener("click", e=>{ const b = e.target.closest("[data-type]"); if(!b) return; state.type = b.dataset.type; renderFilters(); applyFilters(); });
+  $("q").addEventListener("input", e=>{ state.q = e.target.value; applyFilters(); });
+  $("awake").addEventListener("click", e=>{ state.awake = !state.awake; e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
+  $("sort").addEventListener("change", e=>{ state.sort = e.target.value; applyFilters(); });
+  $("sound").addEventListener("click", e=>{ soundOn = !soundOn; e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; if(player){ soundOn ? player.unMute() : player.mute(); } });
+  $("tour").addEventListener("click", e=>{ touring = !touring; e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); });
+  $("next").addEventListener("click", ()=>nextCam("You skipped ahead."));
+  $("topWall").addEventListener("click", ()=>{ const v = sorted(visible()).filter(c=>c.ty!=="pets" || state.type==="pets"); openWall(v.length?v:sorted(visible()), "Top cams in this view"); });
+  $("wallOpen").addEventListener("click", ()=>openWall([...picked].map(id=>BYID[id]).filter(Boolean), "Your wall"));
+  $("wallClear").addEventListener("click", ()=>{ picked.clear(); document.querySelectorAll("[data-pick]").forEach(b=>{ b.setAttribute("aria-pressed","false"); b.textContent = "Add to wall"; }); document.querySelectorAll(".enc.picked").forEach(el=>el.classList.remove("picked")); renderWallBar(); });
+  $("wallClose").addEventListener("click", closeWall);
+  $("wallMute").addEventListener("click", ()=>{ wallPlayers.forEach(p=>{ try{ p.mute(); }catch(e){} }); document.querySelectorAll("#wallGrid .tile").forEach(t=>t.classList.remove("sound")); });
+  $("wallGrid").addEventListener("click", e=>{ const b = e.target.closest("[data-sound]"); if(b) wallSound(+b.dataset.sound); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("wall").hidden) closeWall(); });
+
+  // ---------- boot ----------
+  fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()).then(cat=>{
+    CAMS = cat.cams; CAMS.forEach(c=>BYID[c.id]=c);
+    [...picked].forEach(id=>{ if(!BYID[id]) picked.delete(id); });
+    const u = new Date(cat.updated);
+    $("foot").textContent = CAMS.length+" cams · list last checked "+u.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" · built with Claude";
+    renderStats(); renderFilters(); renderGrid(); renderWallBar();
+    const hash = decodeURIComponent(location.hash.slice(1));
+    if(BYID[hash]) setStage(hash, "Shared link."); else nextCam("Most watched cam where it is daytime right now.");
+  }).catch(()=>{ $("stats").innerHTML = "<span>The zoo’s list did not load. Reload the page.</span>"; });
+  setInterval(()=>{ if(CAMS.length){ updateClocks(); renderStats(); if(state.awake) applyFilters(); } }, 60000);
+})();
+</script>
+</body>
+</html>
