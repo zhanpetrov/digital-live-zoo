@@ -128,6 +128,10 @@ footer{color:var(--faint);font-size:12.5px}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"https://us.i.posthog.com", defaults:"2025-05-24", person_profiles:"identified_only"});
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -218,6 +222,9 @@ footer{color:var(--faint);font-size:12.5px}
   try{ JSON.parse(localStorage.getItem("zoo-wall")||"[]").forEach(id=>picked.add(id)); }catch(e){}
   try{ JSON.parse(localStorage.getItem("zoo-noembed")||"[]").forEach(id=>noEmbed.add(id)); }catch(e){}
 
+  const track = (ev, props)=>{ try{ window.posthog && posthog.capture(ev, props); }catch(e){} };
+  const camProps = id => { const c = BYID[id] || {}; return {cam_id:id, cam_name:c.n, continent:c.c, habitat:c.ty, country:c.k}; };
+
   const fmts = {};
   function local(tz){
     try{
@@ -249,11 +256,12 @@ footer{color:var(--faint);font-size:12.5px}
         onError:e=>{ if([100,101,150,153].includes(e.data)){ markNoEmbed(stage.id); nextCam("That cam can’t play outside YouTube, so the stage moved on."); } }
       }});
   }
-  function markNoEmbed(id){ noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
+  function markNoEmbed(id){ track("cam_embed_blocked", camProps(id)); noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
   function setStage(id, why){
     const c = BYID[id]; if(!c) return;
     if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
     stage.id = id; stage.since = Date.now(); stage.why = why;
+    track("cam_on_stage", Object.assign(camProps(id), {reason:why}));
     if(player && player.loadVideoById){ player.loadVideoById(id); soundOn ? player.unMute() : player.mute(); } else bootPlayer();
     renderStage(); markStage();
   }
@@ -360,6 +368,7 @@ footer{color:var(--faint);font-size:12.5px}
   function togglePick(id, btn){
     if(picked.has(id)) picked.delete(id);
     else { if(picked.size>=WALL_MAX){ toast("A wall holds up to "+WALL_MAX+" cams"); return; } picked.add(id); }
+    track(picked.has(id) ? "wall_cam_added" : "wall_cam_removed", camProps(id));
     btn.setAttribute("aria-pressed", String(picked.has(id))); btn.textContent = picked.has(id) ? "On wall" : "Add to wall";
     cardEls[id].classList.toggle("picked", picked.has(id));
     renderWallBar();
@@ -374,6 +383,7 @@ footer{color:var(--faint);font-size:12.5px}
     g.style.gridTemplateColumns = `repeat(${cols},minmax(0,1fr))`; g.style.gridTemplateRows = `repeat(${rows},minmax(0,1fr))`;
     g.innerHTML = list.map((c,i)=>`<div class="tile" data-i="${i}"><div id="wt${i}"></div><div class="cap"><span>${esc(c.n)} · ${local(c.tz).s}</span><button type="button" data-sound="${i}">Sound</button></div></div>`).join("");
     $("wallTitle").textContent = title || "Your wall";
+    track("wall_opened", {title:title || "Your wall", cams:list.length});
     $("wall").hidden = false; document.body.style.overflow = "hidden";
     wallPlayers = list.map((c,i)=>mkPlayer("wt"+i, c.id, code=>{ if([100,101,150,153].includes(code)) markNoEmbed(c.id); }));
   }
@@ -394,13 +404,13 @@ footer{color:var(--faint);font-size:12.5px}
     const s = e.target.closest("[data-stage]"); if(s){ setStage(s.dataset.stage, "You picked this cam."); window.scrollTo({top:0, behavior:"smooth"}); return; }
     const p = e.target.closest("[data-pick]"); if(p) togglePick(p.dataset.pick, p);
   });
-  $("fCont").addEventListener("click", e=>{ const b = e.target.closest("[data-cont]"); if(!b) return; state.cont = b.dataset.cont; renderFilters(); applyFilters(); });
-  $("fType").addEventListener("click", e=>{ const b = e.target.closest("[data-type]"); if(!b) return; state.type = b.dataset.type; renderFilters(); applyFilters(); });
-  $("q").addEventListener("input", e=>{ state.q = e.target.value; applyFilters(); });
-  $("awake").addEventListener("click", e=>{ state.awake = !state.awake; e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
-  $("sort").addEventListener("change", e=>{ state.sort = e.target.value; applyFilters(); });
-  $("sound").addEventListener("click", e=>{ soundOn = !soundOn; e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; if(player){ soundOn ? player.unMute() : player.mute(); } });
-  $("tour").addEventListener("click", e=>{ touring = !touring; e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); });
+  $("fCont").addEventListener("click", e=>{ const b = e.target.closest("[data-cont]"); if(!b) return; state.cont = b.dataset.cont; track("filter_changed", {filter:"continent", value:state.cont}); renderFilters(); applyFilters(); });
+  $("fType").addEventListener("click", e=>{ const b = e.target.closest("[data-type]"); if(!b) return; state.type = b.dataset.type; track("filter_changed", {filter:"habitat", value:state.type}); renderFilters(); applyFilters(); });
+  let qt; $("q").addEventListener("input", e=>{ state.q = e.target.value; applyFilters(); clearTimeout(qt); qt = setTimeout(()=>{ if(state.q.trim()) track("search", {query:state.q.trim(), results:visible().length}); }, 1200); });
+  $("awake").addEventListener("click", e=>{ state.awake = !state.awake; track("filter_changed", {filter:"awake", value:state.awake}); e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
+  $("sort").addEventListener("change", e=>{ state.sort = e.target.value; track("filter_changed", {filter:"sort", value:state.sort}); applyFilters(); });
+  $("sound").addEventListener("click", e=>{ soundOn = !soundOn; track("sound_toggled", {on:soundOn}); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; if(player){ soundOn ? player.unMute() : player.mute(); } });
+  $("tour").addEventListener("click", e=>{ touring = !touring; track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); });
   $("next").addEventListener("click", ()=>nextCam("You skipped ahead."));
   $("topWall").addEventListener("click", ()=>{ const v = sorted(visible()).filter(c=>c.ty!=="pets" || state.type==="pets"); openWall(v.length?v:sorted(visible()), "Top cams in this view"); });
   $("wallOpen").addEventListener("click", ()=>openWall([...picked].map(id=>BYID[id]).filter(Boolean), "Your wall"));
