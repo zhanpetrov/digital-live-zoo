@@ -38,7 +38,11 @@ jobs:
           path: .state
           key: activity-state-${{ github.run_id }}
           restore-keys: activity-state-
-      - run: python tools/activity.py catalog.json activity.json .state .model/clip_vision.onnx
+      - name: Score cams
+        run: |
+          python tools/activity.py catalog.json activity.json .state .model/clip_vision.onnx 2> err.txt | tee out.txt || {
+            echo "::error title=activity.py failed::$(tail -c 1500 err.txt | tr '\n' '|')"; exit 1; }
+          echo "::notice title=Activity::$(head -1 out.txt)"
       - uses: actions/cache/save@v4
         with:
           path: .state
