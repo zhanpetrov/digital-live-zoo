@@ -2040,7 +2040,7 @@
   "index": false
  },
  "/animals/elephants/": {
-  "h": "2ecc3ab103e1",
+  "h": "3bc1675afea1",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2060,7 +2060,7 @@
   "index": false
  },
  "/animals/great-apes/": {
-  "h": "bc42c188cbf9",
+  "h": "28df1f9b998b",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2070,7 +2070,7 @@
   "index": false
  },
  "/animals/sloths/": {
-  "h": "a08ff30a7083",
+  "h": "5d60dadab193",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2100,7 +2100,7 @@
   "index": false
  },
  "/animals/tigers/": {
-  "h": "1028ad56ed7b",
+  "h": "cb82d9f0acca",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2145,7 +2145,7 @@
   "index": false
  },
  "/animals/wildebeest-migration/": {
-  "h": "250c7f9de398",
+  "h": "5d263ed0570b",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2160,7 +2160,7 @@
   "index": false
  },
  "/animals/giraffes/": {
-  "h": "828aefcb35a0",
+  "h": "9d765bc74bd2",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2200,12 +2200,12 @@
   "index": false
  },
  "/animals/polar-bears/": {
-  "h": "1ce513e90346",
+  "h": "f3b1538acb39",
   "mod": "2026-10-03",
   "index": false
  },
  "/animals/rhinos/": {
-  "h": "84f743519d30",
+  "h": "fd3d46441755",
   "mod": "2026-10-03",
   "index": false
  },
@@ -2220,12 +2220,12 @@
   "index": false
  },
  "/animals/wolves/": {
-  "h": "3b7ea2553cf3",
+  "h": "892a07d8681a",
   "mod": "2026-10-03",
   "index": false
  },
  "/animals/": {
-  "h": "db5bdc89a2ae",
+  "h": "e00eb9e75848",
   "mod": "2026-10-03",
   "index": true
  },

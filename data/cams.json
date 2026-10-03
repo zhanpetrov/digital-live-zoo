@@ -60,7 +60,8 @@
    "desc": "Watch a wild African penguin colony live at Stony Point in Betty's Bay, South Africa. The species is critically endangered.",
    "src": [
     "https://www.birdlife.org/news/2024/11/20/african-penguin-on-the-brink-of-extinction/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "african-penguin-nest-stony-point",
@@ -94,7 +95,8 @@
    "desc": "Watch an African penguin nest live in the wild Stony Point colony at Betty's Bay, South Africa.",
    "src": [
     "https://www.birdlife.org/news/2024/11/20/african-penguin-on-the-brink-of-extinction/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "alligator-farm-st-augustine",
@@ -1733,7 +1735,8 @@
    },
    "title": "Live blue penguin cam: Ōamaru, New Zealand · Digital Live Zoo",
    "desc": "Watch little blue penguins live at the Ōamaru Blue Penguin Colony in New Zealand. They come ashore around dusk, local time.",
-   "src": []
+   "src": [],
+   "started": {}
   },
   {
    "slug": "bonobos-lola-ya-bonobo",
@@ -2167,7 +2170,8 @@
    "src": [
     "https://www.komoro-tour.jp/blog/id_7103/",
     "https://marugoto-toshin.nagano.jp/2022/05/01/komorosi-zoo/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "coral-and-fish-aquarium-of-the-pacific",
@@ -3193,7 +3197,8 @@
    },
    "title": "Erect-crested penguin cam: Antipodes Island · Digital Live Zoo",
    "desc": "Watch erect-crested penguins live on remote Antipodes Island, south-east of New Zealand, one of the only places they breed.",
-   "src": []
+   "src": [],
+   "started": {}
   },
   {
    "slug": "eurasian-eagle-owl-eifel",
@@ -5107,7 +5112,8 @@
    },
    "title": "Little blue penguin nest cam: New Plymouth, New Zealand · Digital Live Zoo",
    "desc": "Watch a little blue penguin nest live in New Plymouth, New Zealand, streamed by the Ngamotu Marine Society.",
-   "src": []
+   "src": [],
+   "started": {}
   },
   {
    "slug": "little-owls-bommelerwaard",
@@ -5166,7 +5172,8 @@
    },
    "title": "Little penguin nest cam: New Zealand · Digital Live Zoo",
    "desc": "Watch a little penguin nest live in New Zealand, where the parents come and go mostly in the dark.",
-   "src": []
+   "src": [],
+   "started": {}
   },
   {
    "slug": "little-penguins-burnie-penguin-centre",
@@ -5198,7 +5205,8 @@
    },
    "title": "Live little penguin cam: Burnie, Tasmania · Digital Live Zoo",
    "desc": "Watch little penguins live at the Burnie Penguin Centre in Tasmania. They come ashore after dark, local time.",
-   "src": []
+   "src": [],
+   "started": {}
   },
   {
    "slug": "loon-cam-lake-fairlee",
@@ -6851,7 +6859,8 @@
    "desc": "Watch Magellanic penguins live on the beach of their habitat at the Aquarium of the Pacific in Long Beach, California.",
    "src": [
     "https://www.aquariumofpacific.org/exhibits/webcams/penguin_habitat"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguin-pool-birdland",
@@ -6883,7 +6892,8 @@
    "desc": "Watch the penguin pool live at Birdland Park and Gardens in Bourton-on-the-Water, in England's Cotswolds.",
    "src": [
     "https://en.wikipedia.org/wiki/Birdland_Park_and_Gardens"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-california-academy-of-sciences",
@@ -6917,7 +6927,8 @@
    "desc": "Watch African penguins live at the California Academy of Sciences in San Francisco, with feedings on camera at 10:30 am and 3 pm daily.",
    "src": [
     "https://www.calacademy.org/learn-explore/animal-webcams/live-penguin-cams"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-melbourne-zoo",
@@ -6951,7 +6962,8 @@
    "desc": "Watch little penguins, the smallest penguin species, live at Wild Sea in Melbourne Zoo, Australia.",
    "src": [
     "https://www.zoo.org.au/melbourne/animals-and-habitats/wild-sea/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-moody-gardens",
@@ -6985,7 +6997,8 @@
    "desc": "Watch Humboldt penguins live in the Aquarium Pyramid at Moody Gardens in Galveston, Texas, with the local time and what's happening now.",
    "src": [
     "https://www.moodygardens.com/blog-posts/humboldt-penguin-chicks-2026"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-new-england-aquarium",
@@ -7020,7 +7033,8 @@
    "desc": "Watch African and southern rockhopper penguins live at the New England Aquarium in Boston.",
    "src": [
     "https://www.neaq.org/exhibit/penguin-exhibit/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-pittsburgh-zoo",
@@ -7055,7 +7069,8 @@
    "desc": "Watch gentoo and macaroni penguins live at the Pittsburgh Zoo & Aquarium, with the local time and what's happening now.",
    "src": [
     "https://www.pittsburghzoo.org/animals/webcams-online-activities/penguin-webcam/"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "penguins-saint-louis-zoo",
@@ -7092,7 +7107,8 @@
    "desc": "Watch king, gentoo, rockhopper and Humboldt penguins live at Penguin & Puffin Coast in the Saint Louis Zoo.",
    "src": [
     "https://stlzoo.org/zones/the-wild/penguin-and-puffin-coast"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "peregrine-falcons-367-collins",
@@ -10432,7 +10448,8 @@
    "desc": "Watch Magellanic penguins swim live underwater at the Aquarium of the Pacific in Long Beach, California.",
    "src": [
     "https://www.aquariumofpacific.org/exhibits/webcams/penguin_habitat"
-   ]
+   ],
+   "started": {}
   },
   {
    "slug": "underwater-pier-pompano-beach",
