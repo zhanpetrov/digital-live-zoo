@@ -1,0 +1,39 @@
+name: Made for Kids check
+
+# Lists cams YouTube marks Made for Kids in mfk.json; the site leaves them out (YouTube API policy III.E.4).
+# Does nothing until a repository secret named YT_API_KEY holds a YouTube Data API v3 key.
+on:
+  schedule:
+    - cron: "37 18 * * *"
+  push:
+    branches: [main]
+    paths: [catalog.json]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mfk
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/mfk.py catalog.json mfk.json
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      - name: Publish mfk.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A mfk.json 2>/dev/null || exit 0
+          git commit -q -m "Update Made for Kids list" || exit 0
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1

@@ -623,9 +623,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("wall").hidden) closeWall(); });
 
   // ---------- boot ----------
-  fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()).then(cat=>{
-    // YouTube API policy: no tracking around Made for Kids videos, so cams flagged mfk are left out of the zoo.
-    CAMS = cat.cams.filter(c=>!c.mfk); CAMS.forEach(c=>BYID[c.id]=c);
+  // mfk.json lists cams YouTube marks Made for Kids (written by .github/workflows/mfk.yml). YouTube's API policy
+  // requires tracking to be off around those videos, so they are left out of the zoo.
+  const mfkList = fetch("mfk.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(m=>new Set((m && m.ids) || [])).catch(()=>new Set());
+  Promise.all([fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()), mfkList]).then(([cat, mfk])=>{
+    CAMS = cat.cams.filter(c=>!c.mfk && !mfk.has(c.id)); CAMS.forEach(c=>BYID[c.id]=c);
     [...picked].forEach(id=>{ if(!BYID[id]) picked.delete(id); });
     const u = new Date(cat.updated);
     $("foot").textContent = CAMS.length+" cams · list last checked "+u.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" · built with Claude";

@@ -12,7 +12,8 @@ Every free live animal cam on YouTube we could find, in one zoo: safari waterhol
 - `index.html` — the whole site, no build step.
 - `activity.json` — how much is happening on each cam (0–100), rewritten every 20 minutes by `.github/workflows/activity.yml` running `tools/activity.py`. It compares each cam's live YouTube thumbnail with its previous frame and with its usual background, relative to what is normal for that cam.
 - `privacy.html` — privacy page (YouTube player, PostHog, AdSense).
-- `catalog.json` — the cam list. Each cam: `id` (YouTube video id), `n` name, `p` place, `k` country, `c` continent, `tz` IANA time zone, `ty` habitat (`safari`, `zoo`, `aqua`, `birds`, `wild`, `pets`), `ch` / `cid` channel, `w` viewers at last check, `mfk` true if YouTube marks the video Made for Kids (those cams are not shown, because YouTube's API policy requires tracking to be off around them).
+- `catalog.json` — the cam list. Each cam: `id` (YouTube video id), `n` name, `p` place, `k` country, `c` continent, `tz` IANA time zone, `ty` habitat (`safari`, `zoo`, `aqua`, `birds`, `wild`, `pets`), `ch` / `cid` channel, `w` viewers at last check, `mfk` true if YouTube marks the video Made for Kids.
+- `mfk.json` — cams YouTube marks Made for Kids, written daily by `.github/workflows/mfk.yml` running `tools/mfk.py` (needs a `YT_API_KEY` repository secret with a YouTube Data API v3 key). The site leaves these cams out, because YouTube's API policy requires tracking to be off around them.
 
 The list is refreshed every hour: restarted streams get their new id, dead ones are dropped, and new cams are added a few times a day.
 
