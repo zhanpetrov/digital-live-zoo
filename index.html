@@ -33,6 +33,25 @@ img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--sign);outline-offset:2px}
 
 header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between}
+.brand{flex:1 1 480px;min-width:0}
+
+/* header ad: the only ad on the site. Beside the sign on wide screens, under it on narrow ones. Never in the player, the wall or the grid. */
+.adbox{flex:0 0 auto;display:grid;gap:5px;justify-items:start;max-width:100%}
+.adlabel{font-family:var(--mono);font-size:10px;line-height:1;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.adslot{display:block;width:320px;height:50px;max-width:100%;overflow:hidden;background:var(--panel)}
+@media (min-width:520px){.adslot{width:468px;height:60px}}
+@media (min-width:800px){.adslot{width:728px;height:90px}}
+@media (max-width:799px){.adbox{margin-bottom:6px}}
+.adbox:has(ins[data-ad-status="unfilled"]){display:none}
+/* sample creative for ?adpreview only (fictional brand) */
+.adsample{position:relative;display:flex;align-items:center;gap:12px;padding:0 14px;background:#f3eedf;color:#1d2a20;font-family:var(--body);text-decoration:none}
+.adsample .m{flex:0 0 auto;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#2f5b3a;color:#f3eedf;font-family:var(--display);font-weight:800;font-size:22px}
+.adsample .c{flex:1;min-width:0;display:grid;gap:2px}
+.adsample .c b{font-size:19px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adsample .c small{font-size:13.5px;color:#4b5a4f}
+.adsample .go{flex:0 0 auto;background:#2f5b3a;color:#fff;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px}
+@media (max-width:799px){.adsample{gap:9px;padding:0 10px}.adsample .m{width:40px;height:40px;font-size:16px}.adsample .c b{font-size:15px}.adsample .c small{font-size:12px}.adsample .go{font-size:12.5px;padding:7px 12px}}
+@media (max-width:519px){.adsample .m{width:32px;height:32px;font-size:13px}.adsample .c small{display:none}.adsample .c b{font-size:14px}}
 .brand h1{font-family:var(--display);font-weight:800;font-size:clamp(42px,7vw,80px);line-height:.9;letter-spacing:.02em;margin:0;color:var(--sign);text-transform:uppercase}
 .brand p{margin:8px 0 0;color:var(--muted);max-width:64ch}
 .stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:10px}
@@ -134,10 +153,15 @@ summary{font-family:var(--display);font-weight:800;font-size:20px;text-transform
 details ul{margin:10px 0 0;padding-left:20px;display:grid;gap:6px;max-width:78ch}
 .note{color:var(--muted);font-size:13px;margin:8px 0 0;max-width:78ch}
 footer{color:var(--faint);font-size:12.5px}
+footer a{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sign);color:#1b1500;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:30}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<script>
+/* Header ad. Empty = no ad. After AdSense approves the site, put the publisher id ("ca-pub-…") and the ad unit's slot id here. */
+window.ZOO_ADS = {client: "", slot: ""};
+</script>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"https://us.i.posthog.com", defaults:"2025-05-24", person_profiles:"identified_only"});
@@ -151,6 +175,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
       <div class="stats" id="stats"><span>Opening the zoo…</span></div>
     </div>
+    <aside class="adbox" id="adbox" aria-label="Advertisement" hidden>
+      <span class="adlabel">Advertisements</span>
+      <div id="adslot"></div>
+    </aside>
   </header>
 
   <section class="stage" aria-label="Main stage">
@@ -215,7 +243,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     </ul>
     <p class="note">Every video plays from its owner’s channel through YouTube’s own player. Some owners block playback on other sites; those cams open on YouTube instead. Recording or re-editing a stream for anything public needs the cam owner’s permission.</p>
   </details>
-  <footer id="foot"></footer>
+  <footer><span id="foot"></span> · <a href="privacy.html">Privacy</a></footer>
 </div>
 
 <div class="wall" id="wall" hidden role="dialog" aria-label="Wall of live cams">
@@ -552,6 +580,25 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     document.querySelectorAll("#wallGrid .tile").forEach((t,k)=>t.classList.toggle("sound", k===i));
   }
 
+  // ---------- header ad ----------
+  // One slot, filled once per page load, no refresh. ?adpreview shows a sample in the slot.
+  const SAMPLE_AD = `<a class="adslot adsample" href="#" onclick="return false" aria-label="Sample ad"><span class="m">K&amp;F</span><span class="c"><b>Kestrel &amp; Fern Field Optics</b><small>Binoculars for dawn watchers. Free returns.</small></span><span class="go">Shop now</span></a>`;
+  function bootAd(){
+    const cfg = window.ZOO_ADS || {}, box = $("adbox"), host = $("adslot");
+    if(cfg.client && cfg.slot){
+      const s = document.createElement("script");
+      s.async = true; s.crossOrigin = "anonymous";
+      s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(cfg.client);
+      document.head.appendChild(s);
+      host.innerHTML = `<ins class="adsbygoogle adslot" style="display:inline-block" data-ad-client="${esc(cfg.client)}" data-ad-slot="${esc(cfg.slot)}"></ins>`;
+      box.hidden = false;
+      try{ (window.adsbygoogle = window.adsbygoogle || []).push({}); }catch(e){}
+    } else if(new URLSearchParams(location.search).has("adpreview")){
+      host.innerHTML = SAMPLE_AD; box.querySelector(".adlabel").textContent = "Advertisements · sample, not a real ad"; box.hidden = false;
+    }
+  }
+  bootAd();
+
   let tt; function toast(m){ const t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(()=>t.classList.remove("on"), 2400); }
 
   // ---------- events ----------
@@ -577,7 +624,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   // ---------- boot ----------
   fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()).then(cat=>{
-    CAMS = cat.cams; CAMS.forEach(c=>BYID[c.id]=c);
+    // YouTube API policy: no tracking around Made for Kids videos, so cams flagged mfk are left out of the zoo.
+    CAMS = cat.cams.filter(c=>!c.mfk); CAMS.forEach(c=>BYID[c.id]=c);
     [...picked].forEach(id=>{ if(!BYID[id]) picked.delete(id); });
     const u = new Date(cat.updated);
     $("foot").textContent = CAMS.length+" cams · list last checked "+u.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" · built with Claude";
