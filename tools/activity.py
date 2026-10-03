@@ -48,7 +48,7 @@ W, H = 64, 36            # motion analysis size
 PIX = 30                 # per-pixel change (0-255) that counts as "changed"
 DARK, FLAT = 28, 10      # too dark / too uniform (blank card) to judge
 SCENE_CUT = 0.55         # more than this changed = camera moved or switched angles
-STATIC_RUNS = 3          # same bytes this many runs in a row = promo image, not a live frame
+STATIC_SECS = 3 * 3600   # same bytes this long = promo image, not a live frame
 LOOK_EMPTY = 0.3         # CLIP "something to look at" below this = nothing to see
 
 cams = json.load(open(catalog_path, encoding="utf-8"))["cams"]
@@ -182,24 +182,32 @@ with cf.ThreadPoolExecutor(12) as ex:
     fetched = list(ex.map(fetch, cams))
 
 fresh = []          # (id, image) whose thumbnail changed since last run
+unjudged = []       # (id, image) the picture model hasn't looked at yet (new cam, or state from an older version)
 for cam_id, data, _ in fetched:
     st = state.setdefault(cam_id, {})
     if data is None:
         continue
     h = hashlib.md5(data).hexdigest()
-    st["static"] = st.get("static", 0) + 1 if st.get("hash") == h else 0
+    now = time.time()
+    if st.get("hash") != h or "since" not in st:
+        st["since"] = now                                      # when this exact image first appeared
+    st["static"] = 0 if st.get("hash") != h else 1
     st["hash"] = h
+    st["promo"] = now - st["since"] > STATIC_SECS
+    try:
+        img = Image.open(io.BytesIO(data))
+    except Exception:
+        continue
     if st["static"] == 0:
-        try:
-            fresh.append((cam_id, Image.open(io.BytesIO(data))))
-        except Exception:
-            pass
+        fresh.append((cam_id, img))
+    elif "look" not in st:
+        unjudged.append((cam_id, img))
 
 for cam_id, img in fresh:
     st = state[cam_id]
     st["mot"], st["blank"] = motion(st, img)
-if clip and fresh:
-    for (cam_id, _), lk in zip(fresh, clip.look([im for _, im in fresh])):
+if clip and (fresh or unjudged):
+    for (cam_id, _), lk in zip(fresh + unjudged, clip.look([im for _, im in fresh + unjudged])):
         st = state[cam_id]
         st["look"] = round(lk, 3)
         base = st.get("lbase", lk)
@@ -230,7 +238,7 @@ for cam, (cam_id, data, (v, answered)) in zip(cams, fetched):
     surge = min(max(spike - 1.3, 0) / 1.5, 1) if v >= 50 else 0
 
     # picture
-    static = st.get("static", 0) >= STATIC_RUNS
+    static = st.get("promo", False)
     look, lbase, mot = st.get("look"), st.get("lbase"), st.get("mot", 0.0)
     if static:
         flags += "s"
