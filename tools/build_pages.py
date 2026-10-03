@@ -409,7 +409,7 @@ def build(fetch_dates=False):
     habitat_of = {}
     for a, slugs in animal_hubs.items():
         tys = [live[s]["ty"] for s in slugs]
-        habitat_of[a] = max(set(tys), key=tys.count)
+        habitat_of[a] = max(sorted(set(tys)), key=tys.count)
     for a, slugs in animal_hubs.items():
         cfg = hubs_cfg.get("animals", {}).get(a, {})
         name = ANIMALS[a]
