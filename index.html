@@ -49,7 +49,15 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 @media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}}
 .player{position:relative;aspect-ratio:16/9;background:#000;max-width:100%}
 .player iframe,.player>div{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player .tag{position:absolute;left:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:7px;background:var(--live);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;padding:5px 9px;border-radius:6px;pointer-events:none}
+/* two stacked players: the back one warms up the next cam unseen, the front one fades away to reveal it */
+.player .slot{transition:opacity .9s ease}
+.player .slot.away{opacity:0}
+.player .slot.snap{transition:none}
+.player .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;background:#000;opacity:0;transition:opacity .9s ease;pointer-events:none}
+.player .poster.on{opacity:1}
+.player .poster.snap{transition:none}
+.player .shield{z-index:4}
+.player .tag{position:absolute;left:12px;top:12px;z-index:5;display:inline-flex;align-items:center;gap:7px;background:var(--live);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;padding:5px 9px;border-radius:6px;pointer-events:none}
 .player .tag i{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s steps(2) infinite}
 @keyframes blink{50%{opacity:.2}}
 .stage-body{padding:18px 20px;display:flex;flex-direction:column;gap:11px;min-width:0}
@@ -144,7 +152,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   </header>
 
   <section class="stage" aria-label="Main stage">
-    <div class="player"><div id="stPlayer"></div><span class="tag"><i></i>MAIN STAGE</span></div>
+    <div class="player">
+      <div class="slot" id="stS0" style="z-index:2"><div id="stP0"></div></div>
+      <div class="slot" id="stS1" style="z-index:1"><div id="stP1"></div></div>
+      <img class="poster on" id="stPoster" alt="">
+      <div class="shield" id="shield" aria-hidden="true"></div>
+      <span class="tag"><i></i>MAIN STAGE</span>
+    </div>
     <div class="stage-body">
       <span class="eyebrow" id="stEyebrow">On stage now</span>
       <h2 id="stName">Loading…</h2>
@@ -240,47 +254,150 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const thumb = c => "https://i.ytimg.com/vi/"+c.id+"/mqdefault_live.jpg";
 
   // ---------- stage player ----------
-  let player = null, ytReady = false, soundOn = false, touring = true;
+  // Two YouTube players are stacked on the stage. The next cam loads and plays, muted, in the
+  // back player while the current one keeps running. Only once it has been playing for a few
+  // seconds (past YouTube's spinner and start-up overlays) does the front player fade away to
+  // reveal it, with the sound crossfading too. The viewer never sees a black frame or a cut.
+  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000;
+  const WARM = {tour:3500, now:1500, first:800};
+  const NO_EMBED = [100,101,150,153];
+  const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
+  let ytReady = false, soundOn = false, touring = true, fading = false, manual = false;
   const stage = {id:null, since:0, why:""};
+  const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, want:null, playingSince:0}));
+  let front = 0, pend = null;          // pend = the cam warming up in the back player
+  const skipUntil = {};
+  const back = () => S[1-front];
+  const posterUrl = c => "https://i.ytimg.com/vi/"+c.id+"/hqdefault_live.jpg";
+  const pstate = s => { try{ return s.p.getPlayerState(); }catch(e){ return -9; } };
+
   function mkPlayer(el, id, onErr){
     return new YT.Player(el, {videoId:id, playerVars:{autoplay:1, mute:1, playsinline:1, rel:0, modestbranding:1},
       events:{onReady:e=>{ e.target.mute(); e.target.playVideo(); }, onError:e=>onErr && onErr(e.data)}});
   }
-  window.onYouTubeIframeAPIReady = ()=>{ ytReady = true; if(stage.id) bootPlayer(); };
+  window.onYouTubeIframeAPIReady = ()=>{ ytReady = true; if(pend && !pend.t0 && !fading) startPend(); };
   if(window.YT && window.YT.Player){ ytReady = true; }
-  function bootPlayer(){
-    if(player || !ytReady || !stage.id) return;
-    player = new YT.Player("stPlayer", {videoId:stage.id, playerVars:{autoplay:1, mute:1, playsinline:1, rel:0, modestbranding:1},
-      events:{
-        onReady:e=>{ soundOn ? e.target.unMute() : e.target.mute(); e.target.playVideo(); },
-        onError:e=>{ if([100,101,150,153].includes(e.data)){ markNoEmbed(stage.id); nextCam("That cam can’t play outside YouTube, so the stage moved on."); } }
-      }});
+
+  function loadSlot(s, id){
+    s.want = id; s.playingSince = 0;
+    if(s.p){ if(s.ready){ s.p.mute(); s.p.loadVideoById(id); } return; }   // still booting: onReady picks up s.want
+    s.p = new YT.Player("stP"+s.k, {videoId:id, playerVars:Object.assign({origin:location.origin}, PV), events:{
+      onReady:e=>{ s.ready = true; e.target.mute(); if(!s.want) e.target.stopVideo(); else if(s.want !== id) e.target.loadVideoById(s.want); else e.target.playVideo(); },
+      onStateChange:e=>onState(s, e.data),
+      onError:e=>onErr(s, e.data)
+    }});
   }
+  function stopSlot(s){ s.want = null; s.playingSince = 0; try{ s.p.mute(); s.p.stopVideo(); }catch(e){} }
+  function onState(s, st){
+    if(st === 1 && s.want && !s.playingSince) s.playingSince = Date.now();
+    if(s === S[front] && stage.id){
+      if(st === 0) frontTrouble("That stream just ended, so the stage moved on.");
+      syncShield();
+    }
+  }
+  function onErr(s, code){
+    const id = s.want;
+    if(id && NO_EMBED.includes(code)) markNoEmbed(id);
+    if(pend && s === back() && id === pend.id) retry();
+    else if(s === S[front] && stage.id) frontTrouble("That cam stopped playing, so the stage moved on.");
+  }
+  function syncShield(){ $("shield").hidden = manual && pstate(S[front]) !== 1; }   // only lifted if the browser blocks autoplay
   function markNoEmbed(id){ track("cam_embed_blocked", camProps(id)); noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
-  function setStage(id, why){
-    const c = BYID[id]; if(!c) return;
-    if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
-    stage.id = id; stage.since = Date.now(); stage.why = why;
-    track("cam_on_stage", Object.assign(camProps(id), {reason:why}));
-    if(player && player.loadVideoById){ player.loadVideoById(id); soundOn ? player.unMute() : player.mute(); } else bootPlayer();
-    renderStage(); markStage();
-  }
-  function candidates(){
-    const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id);
+
+  function pick(){
+    const now = Date.now();
+    const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now));
     const aw = v.filter(awakeNow);
-    return (aw.length ? aw : v).sort((a,b)=>b.w-a.w).slice(0,30);
-  }
-  function nextCam(why){
-    const l = candidates(); if(!l.length) return;
+    const l = (aw.length ? aw : v).sort((a,b)=>b.w-a.w).slice(0,30);
     l.sort((a,b)=>(shown[a.id]||0)-(shown[b.id]||0) || b.w-a.w);
-    setStage(l[0].id, why || "Most watched cam in this view where it is daytime.");
+    return l[0];
   }
+  // Ask for a cam. now=true switches as soon as it is ready; otherwise it waits for the tour's turn.
+  function prepare(id, why, o){
+    o = o || {};
+    if(!BYID[id]) return;
+    if(id === stage.id){ cancelPend(); stage.why = why; stage.since = Date.now(); renderStage(); return; }
+    if(pend && pend.id === id){ pend.now = pend.now || !!o.now; pend.user = pend.user || !!o.user; pend.why = why; showTuning(); return; }
+    pend = {id, why, now:!!o.now, user:!!o.user, tries:o.tries||0, t0:0};
+    if(ytReady && !fading) startPend();
+    showTuning();
+  }
+  function startPend(){
+    pend.t0 = Date.now();
+    if(!stage.id || $("stPoster").classList.contains("on")) $("stPoster").src = posterUrl(BYID[pend.id]);
+    loadSlot(back(), pend.id);
+  }
+  function cancelPend(){ if(!pend) return; const started = pend.t0; pend = null; if(started && !fading) stopSlot(back()); showTuning(); }
+  function retry(){
+    const p = pend; pend = null; stopSlot(back());
+    skipUntil[p.id] = Date.now() + 10*60000;
+    if(p.user && stage.id){ toast("That cam only plays on YouTube right now. Use its YouTube ↗ button."); showTuning(); return; }
+    if(p.tries >= 4 && stage.id){ showTuning(); return; }
+    const c = pick(); if(c) prepare(c.id, p.user ? "Most watched cam where it is daytime right now." : p.why, {now:p.now, tries:p.tries+1});
+  }
+  function nextCam(why, o){
+    if(pend && !pend.user){ pend.now = true; pend.why = why; showTuning(); return; }   // the next one is already warming up
+    const c = pick(); if(c) prepare(c.id, why || "Most watched cam in this view where it is daytime.", Object.assign({now:true}, o));
+  }
+  function frontTrouble(why){
+    // hide YouTube's error screen behind a still of the cam that is coming next
+    if(!pend) nextCam(why); else pend.now = true;
+    if(pend){ const po = $("stPoster"); po.src = posterUrl(BYID[pend.id]); po.classList.add("snap","on"); void po.offsetWidth; po.classList.remove("snap"); showTuning(); }
+  }
+  function showTuning(){
+    $("stEyebrow").textContent = (pend && pend.now && stage.id) ? "Tuning in: "+BYID[pend.id].n+"…" : "On stage now";
+  }
+
+  function commit(){
+    const p = pend; pend = null;
+    const inc = back(), out = S[front];
+    if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
+    stage.id = p.id; stage.since = Date.now(); stage.why = p.why;
+    track("cam_on_stage", Object.assign(camProps(p.id), {reason:p.why}));
+    renderStage(); markStage(); showTuning();
+    if(soundOn) crossVolume(out, inc);
+    front = inc.k; syncShield();
+    fading = true;
+    out.el.classList.add("away"); $("stPoster").classList.remove("on");
+    setTimeout(()=>{
+      inc.el.style.zIndex = 2; out.el.style.zIndex = 1;
+      out.el.classList.add("snap"); out.el.classList.remove("away"); void out.el.offsetWidth; out.el.classList.remove("snap");
+      stopSlot(out);
+      fading = false;
+      if(pend && !pend.t0 && ytReady) startPend();
+    }, FADE_MS + 60);
+  }
+  function crossVolume(a, b){
+    const n = 10; let i = 0;
+    try{ b.p.setVolume(0); b.p.unMute(); }catch(e){}
+    const iv = setInterval(()=>{
+      i++; const v = Math.round(100*i/n);
+      try{ b.p.setVolume(v); }catch(e){}
+      try{ if(a.p) a.p.setVolume(100-v); }catch(e){}
+      if(i >= n){ clearInterval(iv); try{ if(a.p){ a.p.mute(); a.p.setVolume(100); } }catch(e){} }
+    }, FADE_MS/n);
+  }
+
   setInterval(()=>{
-    if(!stage.id) return;
-    const t = Date.now() - stage.since;
-    $("stProg").style.width = touring ? Math.min(100, t/TOUR_MS*100)+"%" : "0%";
-    if(touring && t >= TOUR_MS && $("wall").hidden) nextCam("Touring the planet: next most-watched daytime cam in this view.");
-  }, 500);
+    const t = stage.id ? Date.now() - stage.since : 0;
+    $("stProg").style.width = touring && stage.id ? Math.min(100, t/TOUR_MS*100)+"%" : "0%";
+    if(!$("wall").hidden || fading) return;
+    if(touring && stage.id && !pend && t >= TOUR_MS - PRELOAD_MS){
+      const c = pick(); if(c) prepare(c.id, "Touring the planet: next most-watched daytime cam in this view.");
+    }
+    if(!pend || !pend.t0) return;
+    const s = back(), now = Date.now();
+    const due = !stage.id || pend.now || (touring && t >= TOUR_MS);
+    const warm = !stage.id ? WARM.first : pend.now ? WARM.now : WARM.tour;
+    if(manual){ if(due && s.ready && now - pend.t0 > 1500) commit(); return; }
+    if(s.playingSince){
+      if(due && now - s.playingSince >= warm && pstate(s) === 1) commit();
+    } else if(now - pend.t0 > (stage.id ? LOAD_TIMEOUT : 8000)){
+      const st = pstate(s);
+      if(!stage.id && s.ready && (st === -1 || st === 5)){ manual = true; commit(); }   // autoplay blocked: hand the play button to the viewer
+      else retry();
+    }
+  }, 250);
 
   // ---------- render ----------
   function renderStats(){
@@ -377,7 +494,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     list = list.filter(c=>!noEmbed.has(c.id)).slice(0,WALL_MAX);
     if(!list.length){ toast("No cams to put on the wall"); return; }
     if(!ytReady){ toast("The player is still loading, try again in a second"); return; }
-    if(player && player.pauseVideo) player.pauseVideo();
+    cancelPend(); try{ S[front].p.pauseVideo(); }catch(e){}
     const cols = list.length<=1?1: list.length<=4?2:3, rows = Math.ceil(list.length/cols);
     const g = $("wallGrid");
     g.style.gridTemplateColumns = `repeat(${cols},minmax(0,1fr))`; g.style.gridTemplateRows = `repeat(${rows},minmax(0,1fr))`;
@@ -390,7 +507,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function closeWall(){
     wallPlayers.forEach(p=>{ try{ p.destroy(); }catch(e){} }); wallPlayers = [];
     $("wallGrid").innerHTML = ""; $("wall").hidden = true; document.body.style.overflow = "";
-    if(player && player.playVideo) player.playVideo();
+    try{ S[front].p.playVideo(); }catch(e){}
+    if(stage.id && $("stPoster").classList.contains("on")) nextCam("Back from the wall: the last cam had stopped, so here is the next one.");
   }
   function wallSound(i){
     wallPlayers.forEach((p,k)=>{ try{ k===i ? p.unMute() : p.mute(); }catch(e){} });
@@ -401,7 +519,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   // ---------- events ----------
   $("grid").addEventListener("click", e=>{
-    const s = e.target.closest("[data-stage]"); if(s){ setStage(s.dataset.stage, "You picked this cam."); window.scrollTo({top:0, behavior:"smooth"}); return; }
+    const s = e.target.closest("[data-stage]"); if(s){ prepare(s.dataset.stage, "You picked this cam.", {now:true, user:true}); window.scrollTo({top:0, behavior:"smooth"}); return; }
     const p = e.target.closest("[data-pick]"); if(p) togglePick(p.dataset.pick, p);
   });
   $("fCont").addEventListener("click", e=>{ const b = e.target.closest("[data-cont]"); if(!b) return; state.cont = b.dataset.cont; track("filter_changed", {filter:"continent", value:state.cont}); renderFilters(); applyFilters(); });
@@ -409,8 +527,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   let qt; $("q").addEventListener("input", e=>{ state.q = e.target.value; applyFilters(); clearTimeout(qt); qt = setTimeout(()=>{ if(state.q.trim()) track("search", {query:state.q.trim(), results:visible().length}); }, 1200); });
   $("awake").addEventListener("click", e=>{ state.awake = !state.awake; track("filter_changed", {filter:"awake", value:state.awake}); e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
   $("sort").addEventListener("change", e=>{ state.sort = e.target.value; track("filter_changed", {filter:"sort", value:state.sort}); applyFilters(); });
-  $("sound").addEventListener("click", e=>{ soundOn = !soundOn; track("sound_toggled", {on:soundOn}); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; if(player){ soundOn ? player.unMute() : player.mute(); } });
-  $("tour").addEventListener("click", e=>{ touring = !touring; track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); });
+  $("sound").addEventListener("click", e=>{ soundOn = !soundOn; track("sound_toggled", {on:soundOn}); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; const fp = S[front].p; if(fp){ try{ if(soundOn){ fp.setVolume(100); fp.unMute(); } else fp.mute(); }catch(err){} } });
+  $("tour").addEventListener("click", e=>{ touring = !touring; track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); if(!touring && pend && !pend.now) cancelPend(); });
   $("next").addEventListener("click", ()=>nextCam("You skipped ahead."));
   $("topWall").addEventListener("click", ()=>{ const v = sorted(visible()).filter(c=>c.ty!=="pets" || state.type==="pets"); openWall(v.length?v:sorted(visible()), "Top cams in this view"); });
   $("wallOpen").addEventListener("click", ()=>openWall([...picked].map(id=>BYID[id]).filter(Boolean), "Your wall"));
@@ -428,7 +546,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("foot").textContent = CAMS.length+" cams · list last checked "+u.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" · built with Claude";
     renderStats(); renderFilters(); renderGrid(); renderWallBar();
     const hash = decodeURIComponent(location.hash.slice(1));
-    if(BYID[hash]) setStage(hash, "Shared link."); else nextCam("Most watched cam where it is daytime right now.");
+    if(BYID[hash]) prepare(hash, "Shared link.", {now:true, user:true}); else nextCam("Most watched cam where it is daytime right now.");
   }).catch(()=>{ $("stats").innerHTML = "<span>The zoo’s list did not load. Reload the page.</span>"; });
   setInterval(()=>{ if(CAMS.length){ updateClocks(); renderStats(); if(state.awake) applyFilters(); } }, 60000);
 })();
