@@ -100,6 +100,8 @@ select{background:var(--bg);border:1px solid var(--line);border-radius:999px;pad
 .th img{width:100%;height:100%;object-fit:cover}
 .th .ty{position:absolute;left:8px;top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;background:rgba(11,18,14,.82);color:var(--sign);padding:2px 7px;border-radius:5px}
 .th .ontag{position:absolute;right:8px;top:8px;background:var(--live);color:#fff;font-weight:800;font-size:11px;letter-spacing:.12em;padding:3px 7px;border-radius:5px}
+.th .hot{position:absolute;left:8px;bottom:8px;background:var(--live);color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:3px 7px;border-radius:5px}
+.stats .hotn b{color:var(--live)}
 .th .play{position:absolute;inset:auto 8px 8px auto;background:rgba(11,18,14,.82);color:var(--fg);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px}
 .enc .pl{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .enc h4{margin:0;font-size:15px;font-weight:700;line-height:1.2}
@@ -186,7 +188,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <span class="flabel">Find</span>
       <input class="search" id="q" type="search" placeholder="panda, eagle, Kenya, penguins…" aria-label="Search cams">
       <button class="toggle" id="awake" type="button" aria-pressed="false">Awake now</button>
-      <select id="sort" aria-label="Sort"><option value="w">Most watched</option><option value="t">Local time</option><option value="n">Name</option></select>
+      <select id="sort" aria-label="Sort"><option value="w">Most watched</option><option value="a">Most action now</option><option value="t">Local time</option><option value="n">Name</option></select>
       <button class="btn small" id="topWall" type="button">Wall of the top 9 here</button>
       <span class="count" id="count"></span>
     </div>
@@ -228,6 +230,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const TYPES = {safari:"Safari", zoo:"Zoos & sanctuaries", aqua:"Aquariums & ocean", birds:"Birds & nests", wild:"Forests & rivers", pets:"Farms & rescues"};
   const CONTS = ["Africa","Asia","Europe","North America","Latin America","Oceania"];
   const TOUR_MS = 45000, WALL_MAX = 9;
+  // tour pacing with activity data: stay at least MIN_MS, up to HOT_MS while the cam has action
+  const MIN_MS = 25000, HOT_MS = 180000, HOT = 55, REVISIT_MS = 10*60000;
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   let CAMS = [], BYID = {};
@@ -252,6 +256,23 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const awakeNow = c => local(c.tz).dp !== "night";
   const ytUrl = c => "https://www.youtube.com/watch?v="+c.id;
   const thumb = c => "https://i.ytimg.com/vi/"+c.id+"/mqdefault_live.jpg";
+
+  // ---------- activity (tools/activity.py scores every cam's live thumbnail on a schedule) ----------
+  let ACT = {};
+  const lastOn = {};
+  const actScore = id => { const a = ACT[id]; return a && a[1]!=="d" ? a[0] : 0; };
+  const isHot = id => actScore(id) >= HOT;
+  function loadActivity(){
+    fetch("activity.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(a=>{
+      if(!a || Date.now() - Date.parse(a.updated) > 90*60000){ ACT = {}; }
+      else ACT = a.cams || {};
+      if(CAMS.length){ renderStats(); renderActivity(); if(state.sort==="a") applyFilters(); }
+    }).catch(()=>{});
+  }
+  loadActivity(); setInterval(loadActivity, 4*60000);
+  function renderActivity(){
+    Object.keys(cardEls).forEach(id=>{ const b = cardEls[id].querySelector(".hot"); if(b) b.hidden = !isHot(id); });
+  }
 
   // ---------- stage player ----------
   // Two YouTube players are stacked on the stage. The next cam loads and plays, muted, in the
@@ -303,8 +324,16 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
   function syncShield(){ $("shield").hidden = manual && pstate(S[front]) !== 1; }   // only lifted if the browser blocks autoplay
   function markNoEmbed(id){ track("cam_embed_blocked", camProps(id)); noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
+  function hotCandidates(){
+    const now = Date.now();
+    return visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now) && isHot(c.id) && !(now - (lastOn[c.id]||0) < REVISIT_MS))
+      .sort((a,b)=>actScore(b.id)-actScore(a.id));
+  }
+  const ACT_WHY = "Action spotted here in the last few minutes, so the stage came over.";
+  const whyFor = (c, why) => isHot(c.id) ? (why==="You skipped ahead." ? "You skipped ahead to the cam with the most action right now." : ACT_WHY) : why;
 
   function pick(){
+    const h = hotCandidates(); if(h.length) return h[0];
     const now = Date.now();
     const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now));
     const aw = v.filter(awakeNow);
@@ -333,11 +362,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     skipUntil[p.id] = Date.now() + 10*60000;
     if(p.user && stage.id){ toast("That cam only plays on YouTube right now. Use its YouTube ↗ button."); showTuning(); return; }
     if(p.tries >= 4 && stage.id){ showTuning(); return; }
-    const c = pick(); if(c) prepare(c.id, p.user ? "Most watched cam where it is daytime right now." : p.why, {now:p.now, tries:p.tries+1});
+    const c = pick(); if(c) prepare(c.id, whyFor(c, p.user ? "Most watched cam where it is daytime right now." : p.why), {now:p.now, tries:p.tries+1});
   }
   function nextCam(why, o){
     if(pend && !pend.user){ pend.now = true; pend.why = why; showTuning(); return; }   // the next one is already warming up
-    const c = pick(); if(c) prepare(c.id, why || "Most watched cam in this view where it is daytime.", Object.assign({now:true}, o));
+    const c = pick(); if(c) prepare(c.id, whyFor(c, why || "Most watched cam in this view where it is daytime."), Object.assign({now:true}, o));
   }
   function frontTrouble(why){
     // hide YouTube's error screen behind a still of the cam that is coming next
@@ -352,8 +381,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const p = pend; pend = null;
     const inc = back(), out = S[front];
     if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
-    stage.id = p.id; stage.since = Date.now(); stage.why = p.why;
-    track("cam_on_stage", Object.assign(camProps(p.id), {reason:p.why}));
+    stage.id = p.id; stage.since = Date.now(); stage.why = p.why; lastOn[p.id] = Date.now();
+    track("cam_on_stage", Object.assign(camProps(p.id), {reason:p.why, activity:actScore(p.id)}));
     renderStage(); markStage(); showTuning();
     if(soundOn) crossVolume(out, inc);
     front = inc.k; syncShield();
@@ -380,14 +409,21 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   setInterval(()=>{
     const t = stage.id ? Date.now() - stage.since : 0;
-    $("stProg").style.width = touring && stage.id ? Math.min(100, t/TOUR_MS*100)+"%" : "0%";
+    const hasAct = Object.keys(ACT).length > 0;
+    const limit = hasAct && isHot(stage.id) ? HOT_MS : TOUR_MS;   // stay longer while the action lasts
+    $("stProg").style.width = touring && stage.id ? Math.min(100, t/limit*100)+"%" : "0%";
     if(!$("wall").hidden || fading) return;
-    if(touring && stage.id && !pend && t >= TOUR_MS - PRELOAD_MS){
-      const c = pick(); if(c) prepare(c.id, "Touring the planet: next most-watched daytime cam in this view.");
+    if(touring && stage.id && hasAct && t >= MIN_MS && (!pend || !isHot(pend.id))){
+      // jump early when another cam has clearly more going on
+      const h = hotCandidates()[0];
+      if(h && actScore(h.id) >= actScore(stage.id) + 20){ if(pend) cancelPend(); prepare(h.id, ACT_WHY, {now:true}); }
+    }
+    if(touring && stage.id && !pend && t >= limit - PRELOAD_MS){
+      const c = pick(); if(c) prepare(c.id, whyFor(c, "Touring the planet: next most-watched daytime cam in this view."));
     }
     if(!pend || !pend.t0) return;
     const s = back(), now = Date.now();
-    const due = !stage.id || pend.now || (touring && t >= TOUR_MS);
+    const due = !stage.id || pend.now || (touring && t >= limit);
     const warm = !stage.id ? WARM.first : pend.now ? WARM.now : WARM.tour;
     if(manual){ if(due && s.ready && now - pend.t0 > 1500) commit(); return; }
     if(s.playingSince){
@@ -403,7 +439,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function renderStats(){
     const aw = CAMS.filter(awakeNow).length;
     const countries = new Set(CAMS.map(c=>c.k).filter(Boolean)).size;
-    $("stats").innerHTML = `<span><b>${CAMS.length}</b> live cams</span><span><b>${new Set(CAMS.map(c=>c.c)).size}</b> continents</span><span><b>${countries}</b> countries</span><span class="aw"><b>${aw}</b> in daylight now</span>`;
+    $("stats").innerHTML = `<span><b>${CAMS.length}</b> live cams</span><span><b>${new Set(CAMS.map(c=>c.c)).size}</b> continents</span><span><b>${countries}</b> countries</span><span class="aw"><b>${aw}</b> in daylight now</span>`+(Object.keys(ACT).length ? `<span class="hotn"><b>${CAMS.filter(c=>isHot(c.id)).length}</b> with action now</span>` : "");
   }
   function renderFilters(){
     const cc = k => CAMS.filter(c=>k==="all"||c.c===k).length;
@@ -414,7 +450,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const cardEls = {};
   function cardHTML(c){
     return `<article class="enc" data-id="${c.id}">
-      <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="play">▶ Watch</span></button>
+      <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="hot" ${isHot(c.id)?"":"hidden"}>● ACTION NOW</span><span class="play">▶ Watch</span></button>
       <div class="pl">
         <h4>${esc(c.n)}</h4>
         <div class="where">${esc(c.p)}</div>
@@ -441,6 +477,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function sorted(list){
     const l = list.slice();
     if(state.sort==="w") l.sort((a,b)=>b.w-a.w);
+    else if(state.sort==="a") l.sort((a,b)=>actScore(b.id)-actScore(a.id) || b.w-a.w);
     else if(state.sort==="n") l.sort((a,b)=>a.n.localeCompare(b.n));
     else l.sort((a,b)=>local(b.tz).mins-local(a.tz).mins);
     return l;

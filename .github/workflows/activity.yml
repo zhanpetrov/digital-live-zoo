@@ -1,0 +1,43 @@
+name: Cam activity
+
+# Scores every cam's live thumbnail so the Main Stage tour can go where something is happening.
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: activity
+  cancel-in-progress: false
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q pillow
+      - uses: actions/cache/restore@v4
+        with:
+          path: .state
+          key: activity-state-${{ github.run_id }}
+          restore-keys: activity-state-
+      - run: python tools/activity.py catalog.json activity.json .state
+      - uses: actions/cache/save@v4
+        with:
+          path: .state
+          key: activity-state-${{ github.run_id }}
+      - name: Publish activity.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add activity.json
+          git commit -q -m "Update cam activity" || exit 0
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1
