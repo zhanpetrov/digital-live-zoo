@@ -4,7 +4,7 @@ name: Cam activity
 # so the Main Stage tour goes where something is happening. See tools/activity.py.
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "13,43 * * * *"   # off the top of the hour, when GitHub drops the most scheduled runs
   workflow_dispatch:
 
 permissions:

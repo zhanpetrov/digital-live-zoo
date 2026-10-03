@@ -301,7 +301,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const skipTour = id => flagged(id, "e") || flagged(id, "x") || flagged(id, "d");
   function loadActivity(){
     fetch("activity.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(a=>{
-      ACT = (!a || a.v !== 2 || Date.now() - Date.parse(a.updated) > 90*60000) ? {} : (a.cams || {});
+      ACT = (!a || a.v !== 2 || Date.now() - Date.parse(a.updated) > 3*3600000) ? {} : (a.cams || {});
       if(CAMS.length){ renderStats(); renderActivity(); if(state.sort==="a") applyFilters(); }
     }).catch(()=>{});
   }
