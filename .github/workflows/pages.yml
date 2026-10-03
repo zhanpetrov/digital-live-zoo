@@ -26,6 +26,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python tools/build_pages.py --dates
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
       - name: Publish pages
         run: |
           git config user.name "github-actions[bot]"

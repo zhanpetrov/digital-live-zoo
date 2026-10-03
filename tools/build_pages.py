@@ -16,7 +16,7 @@ the owner restarts the stream; the page URL never does. Output:
 A cam page is indexable only when its note is approved (note_ok) and the cam is live; an animal hub
 only when its intro is approved (intro_ok). Everything else is built with noindex, follow.
 """
-import datetime, hashlib, html, json, os, re, shutil, sys, unicodedata, urllib.request
+import datetime, hashlib, html, json, os, re, shutil, sys, unicodedata, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -107,20 +107,38 @@ def reconcile(catalog, store, mfk):
     return ents, live
 
 
-def stream_start(video_id):
-    """Start time of a live stream from its YouTube watch page (works in CI, not in every sandbox)."""
-    try:
-        req = urllib.request.Request(f"https://www.youtube.com/watch?v={video_id}",
-                                     headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "en-US,en;q=0.8"})
-        page = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace")
-    except Exception as ex:  # network blocked or YouTube unavailable
-        print(f"  start time for {video_id}: {ex}")
-        return None
-    for pat in (r'"startTimestamp":"([^"]+)"', r'"uploadDate":"([^"]+)"', r'"publishDate":"([^"]+)"'):
-        m = re.search(pat, page)
-        if m:
-            return m.group(1)
-    return None
+def stream_starts(video_ids):
+    """Start time of each live stream. Uses the YouTube Data API when YT_API_KEY is set (CI);
+    otherwise reads the watch page, which YouTube often blocks from data centres."""
+    out, key = {}, os.environ.get("YT_API_KEY", "").strip()
+    ids = list(dict.fromkeys(video_ids))
+    if key:
+        for i in range(0, len(ids), 50):
+            q = urllib.parse.urlencode({"part": "liveStreamingDetails,snippet", "id": ",".join(ids[i:i + 50]), "key": key})
+            try:
+                data = json.load(urllib.request.urlopen("https://www.googleapis.com/youtube/v3/videos?" + q, timeout=30))
+            except Exception as ex:
+                print(f"  YouTube API: {ex}")
+                continue
+            for v in data.get("items", []):
+                t = (v.get("liveStreamingDetails") or {}).get("actualStartTime") or (v.get("snippet") or {}).get("publishedAt")
+                if t:
+                    out[v["id"]] = t
+        return out
+    for vid in ids:
+        try:
+            req = urllib.request.Request(f"https://www.youtube.com/watch?v={vid}",
+                                         headers={"User-Agent": "Mozilla/5.0", "Accept-Language": "en-US,en;q=0.8"})
+            page = urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace")
+        except Exception as ex:
+            print(f"  start time for {vid}: {ex}")
+            continue
+        for pat in (r'"startTimestamp":"([^"]+)"', r'"uploadDate":"([^"]+)"'):
+            m = re.search(pat, page)
+            if m:
+                out[vid] = m.group(1)
+                break
+    return out
 
 
 # ---------------------------------------------------------------- html pieces
@@ -370,14 +388,14 @@ def build(fetch_dates=False):
             last_rows[e["slug"]] = dict(e["last"], n=e["n"], id=e["ids"][-1], w=0)
 
     if fetch_dates:
+        need = {e["slug"]: live[e["slug"]]["id"] for e in store["cams"]
+                if e["slug"] in live and e.get("note_ok") and live[e["slug"]]["id"] not in (e.get("started") or {})}
+        got = stream_starts(need.values()) if need else {}
+        print(f"stream start times: {len(got)} of {len(need)} needed")
         for e in store["cams"]:
-            if e["slug"] in live and e.get("note_ok"):
-                vid = live[e["slug"]]["id"]
-                e.setdefault("started", {})
-                if vid not in e["started"]:
-                    t = stream_start(vid)
-                    if t:
-                        e["started"] = {vid: t}
+            vid = need.get(e["slug"])
+            if vid and vid in got:
+                e["started"] = {vid: got[vid]}
 
     by_w = lambda s: -(live[s].get("w") or 0)
     animal_cams = {}
