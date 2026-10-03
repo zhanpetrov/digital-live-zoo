@@ -2,15 +2,15 @@
 
 Every free live animal cam on YouTube we could find, in one zoo: safari waterholes, pandas, bears, penguins, eagles, storks, coral reefs and more, on six continents.
 
-- **Main Stage** plays a live cam right on the page and tours the planet, following the action: it jumps to cams where something is moving right now and stays up to 3 minutes while the action lasts. When nothing stands out it falls back to the most-watched daytime cams every 45 seconds. It follows the filters, so picking Africa tours Africa.
-- **Action now** badges and the "Most action now" sort show which cams have movement at the moment.
+- **Main Stage** plays a live cam right on the page and tours the planet, going where it is most worth watching right now: cams with animals in view, movement, a big live audience, or a sudden jump in viewers (🔥 trending). It skips cams that show nothing (dark, empty, blank) or are off air, stays up to 3 minutes on trending or action cams, and falls back to the most-watched daytime cams every 45 seconds when it has no data. It follows the filters, so picking Africa tours Africa.
+- **Badges** on the cards: 🔥 TRENDING, ● ACTION NOW, OFF AIR NOW, plus the live viewer count. The "Most interesting now" sort uses the same score.
 - **Filters** by continent and habitat, plus "Awake now" (local time between 5 am and 8 pm), search and sorting.
 - **Wall** plays up to 9 cams at once for multicam watching or recording.
 
 ## Files
 
 - `index.html` — the whole site, no build step.
-- `activity.json` — how much is happening on each cam (0–100), rewritten every 20 minutes by `.github/workflows/activity.yml` running `tools/activity.py`. It compares each cam's live YouTube thumbnail with its previous frame and with its usual background, relative to what is normal for that cam.
+- `activity.json` — how worth watching each cam is right now, rewritten every 30 minutes by `.github/workflows/activity.yml` running `tools/activity.py`. Per cam: a 0–100 score, flags and live viewers. The score mixes: something to look at in the live thumbnail (a small CLIP image model, prompts in `tools/clip_prompts.json`, compared with the cam's own norm), movement since the last frame, live viewers, and viewers versus the cam's usual audience (spikes = trending).
 - `privacy.html` — privacy page (YouTube player, PostHog, AdSense).
 - `catalog.json` — the cam list. Each cam: `id` (YouTube video id), `n` name, `p` place, `k` country, `c` continent, `tz` IANA time zone, `ty` habitat (`safari`, `zoo`, `aqua`, `birds`, `wild`, `pets`), `ch` / `cid` channel, `w` viewers at last check, `mfk` true if YouTube marks the video Made for Kids.
 - `mfk.json` — cams YouTube marks Made for Kids, written daily by `.github/workflows/mfk.yml` running `tools/mfk.py` (needs a `YT_API_KEY` repository secret with a YouTube Data API v3 key). The site leaves these cams out, because YouTube's API policy requires tracking to be off around them.

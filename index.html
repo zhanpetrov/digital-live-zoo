@@ -120,7 +120,10 @@ select{background:var(--bg);border:1px solid var(--line);border-radius:999px;pad
 .th .ty{position:absolute;left:8px;top:8px;font-size:11px;font-weight:700;letter-spacing:.06em;background:rgba(11,18,14,.82);color:var(--sign);padding:2px 7px;border-radius:5px}
 .th .ontag{position:absolute;right:8px;top:8px;background:var(--live);color:#fff;font-weight:800;font-size:11px;letter-spacing:.12em;padding:3px 7px;border-radius:5px}
 .th .hot{position:absolute;left:8px;bottom:8px;background:var(--live);color:#fff;font-weight:800;font-size:11px;letter-spacing:.06em;padding:3px 7px;border-radius:5px}
+.th .hot.trend{background:var(--sign);color:#1b1500}
+.th .hot.off{background:rgba(11,18,14,.82);color:var(--muted)}
 .stats .hotn b{color:var(--live)}
+.stats .trn b{color:var(--sign)}
 .th .play{position:absolute;inset:auto 8px 8px auto;background:rgba(11,18,14,.82);color:var(--fg);font-size:12px;font-weight:700;padding:3px 8px;border-radius:5px}
 .enc .pl{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
 .enc h4{margin:0;font-size:15px;font-weight:700;line-height:1.2}
@@ -216,7 +219,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <span class="flabel">Find</span>
       <input class="search" id="q" type="search" placeholder="panda, eagle, Kenya, penguins…" aria-label="Search cams">
       <button class="toggle" id="awake" type="button" aria-pressed="false">Awake now</button>
-      <select id="sort" aria-label="Sort"><option value="w">Most watched</option><option value="a">Most action now</option><option value="t">Local time</option><option value="n">Name</option></select>
+      <select id="sort" aria-label="Sort"><option value="w">Most watched</option><option value="a">Most interesting now</option><option value="t">Local time</option><option value="n">Name</option></select>
       <button class="btn small" id="topWall" type="button">Wall of the top 9 here</button>
       <span class="count" id="count"></span>
     </div>
@@ -258,8 +261,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const TYPES = {safari:"Safari", zoo:"Zoos & sanctuaries", aqua:"Aquariums & ocean", birds:"Birds & nests", wild:"Forests & rivers", pets:"Farms & rescues"};
   const CONTS = ["Africa","Asia","Europe","North America","Latin America","Oceania"];
   const TOUR_MS = 45000, WALL_MAX = 9;
-  // tour pacing with activity data: stay at least MIN_MS, up to HOT_MS while the cam has action
-  const MIN_MS = 25000, HOT_MS = 180000, HOT = 55, REVISIT_MS = 10*60000;
+  // tour pacing with activity data: stay at least MIN_MS; GOOD_MS on an interesting cam, HOT_MS while it is trending or has action
+  const MIN_MS = 25000, GOOD_MS = 90000, HOT_MS = 180000, GOOD = 45, REVISIT_MS = 10*60000;
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   let CAMS = [], BYID = {};
@@ -286,20 +289,34 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const thumb = c => "https://i.ytimg.com/vi/"+c.id+"/mqdefault_live.jpg";
 
   // ---------- activity (tools/activity.py scores every cam's live thumbnail on a schedule) ----------
+  // activity.json: {cams:{id:[score 0-100, flags, live viewers]}}. Flags: t trending (viewer spike),
+  // a action (movement), e nothing to see (dark/empty/blank), x stream offline, s promo thumbnail.
   let ACT = {};
   const lastOn = {};
-  const actScore = id => { const a = ACT[id]; return a && a[1]!=="d" ? a[0] : 0; };
-  const isHot = id => actScore(id) >= HOT;
+  const actOf = id => ACT[id] || null;
+  const flagged = (id, f) => { const a = actOf(id); return !!(a && a[1] && a[1].includes(f)); };
+  const actScore = id => { const a = actOf(id); return a ? a[0] : 0; };
+  const isHot = id => flagged(id, "t") || flagged(id, "a");
+  const skipTour = id => flagged(id, "e") || flagged(id, "x") || flagged(id, "d");
   function loadActivity(){
     fetch("activity.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(a=>{
-      if(!a || Date.now() - Date.parse(a.updated) > 90*60000){ ACT = {}; }
-      else ACT = a.cams || {};
+      ACT = (!a || a.v !== 2 || Date.now() - Date.parse(a.updated) > 90*60000) ? {} : (a.cams || {});
       if(CAMS.length){ renderStats(); renderActivity(); if(state.sort==="a") applyFilters(); }
     }).catch(()=>{});
   }
   loadActivity(); setInterval(loadActivity, 4*60000);
+  function badge(id){
+    if(flagged(id, "x")) return ["off", "OFF AIR NOW"];
+    if(flagged(id, "t")) return ["trend", "🔥 TRENDING"];
+    if(flagged(id, "a")) return ["", "● ACTION NOW"];
+    return null;
+  }
   function renderActivity(){
-    Object.keys(cardEls).forEach(id=>{ const b = cardEls[id].querySelector(".hot"); if(b) b.hidden = !isHot(id); });
+    Object.keys(cardEls).forEach(id=>{
+      const el = cardEls[id], b = el.querySelector(".hot"), w = el.querySelector(".wn"), bd = badge(id), a = actOf(id);
+      if(b){ b.hidden = !bd; if(bd){ b.className = "hot "+bd[0]; b.textContent = bd[1]; } }
+      if(w && a && a[2] && !flagged(id, "x")) w.textContent = a[2].toLocaleString("en-US")+" watching now";
+    });
   }
 
   // ---------- stage player ----------
@@ -352,16 +369,22 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
   function syncShield(){ $("shield").hidden = manual && pstate(S[front]) !== 1; }   // only lifted if the browser blocks autoplay
   function markNoEmbed(id){ track("cam_embed_blocked", camProps(id)); noEmbed.add(id); try{ localStorage.setItem("zoo-noembed", JSON.stringify([...noEmbed])); }catch(e){} const el = cardEls[id]; if(el){ el.querySelector(".noembed").hidden = false; } }
-  function hotCandidates(){
+  // the best cam to go to next: most interesting right now, never one that is off air or shows nothing
+  function bestCandidates(){
     const now = Date.now();
-    return visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now) && isHot(c.id) && !(now - (lastOn[c.id]||0) < REVISIT_MS))
-      .sort((a,b)=>actScore(b.id)-actScore(a.id));
+    return visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now) && !skipTour(c.id) &&
+      actScore(c.id) >= GOOD && !(now - (lastOn[c.id]||0) < REVISIT_MS))
+      .sort((a,b)=>(isHot(b.id)-isHot(a.id)) || actScore(b.id)-actScore(a.id));
   }
-  const ACT_WHY = "Action spotted here in the last few minutes, so the stage came over.";
-  const whyFor = (c, why) => isHot(c.id) ? (why==="You skipped ahead." ? "You skipped ahead to the cam with the most action right now." : ACT_WHY) : why;
-
+  function whyFor(c, why){
+    if(!actOf(c.id) || actScore(c.id) < GOOD) return why;
+    const v = actOf(c.id)[2], vs = v ? " "+v.toLocaleString("en-US")+" people are watching." : "";
+    if(flagged(c.id, "t")) return "Trending: far more people than usual are watching this cam right now."+vs;
+    if(flagged(c.id, "a")) return "Action spotted here in the last few minutes, so the stage came over."+vs;
+    return (why==="You skipped ahead." ? "You skipped ahead to" : "Up next:")+" one of the most interesting cams right now."+vs;
+  }
   function pick(){
-    const h = hotCandidates(); if(h.length) return h[0];
+    const h = bestCandidates(); if(h.length) return h[0];
     const now = Date.now();
     const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now));
     const aw = v.filter(awakeNow);
@@ -438,13 +461,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   setInterval(()=>{
     const t = stage.id ? Date.now() - stage.since : 0;
     const hasAct = Object.keys(ACT).length > 0;
-    const limit = hasAct && isHot(stage.id) ? HOT_MS : TOUR_MS;   // stay longer while the action lasts
+    const limit = !hasAct ? TOUR_MS : isHot(stage.id) ? HOT_MS : actScore(stage.id) >= GOOD ? GOOD_MS : TOUR_MS;   // stay longer where there is more to see
     $("stProg").style.width = touring && stage.id ? Math.min(100, t/limit*100)+"%" : "0%";
     if(!$("wall").hidden || fading) return;
     if(touring && stage.id && hasAct && t >= MIN_MS && (!pend || !isHot(pend.id))){
-      // jump early when another cam has clearly more going on
-      const h = hotCandidates()[0];
-      if(h && actScore(h.id) >= actScore(stage.id) + 20){ if(pend) cancelPend(); prepare(h.id, ACT_WHY, {now:true}); }
+      // jump early when a trending or action cam has clearly more going on, or this one went blank / off air
+      const h = bestCandidates()[0];
+      if(h && ((isHot(h.id) && !isHot(stage.id) && actScore(h.id) >= actScore(stage.id) + 15) || skipTour(stage.id))){ if(pend) cancelPend(); prepare(h.id, whyFor(h, ""), {now:true}); }
     }
     if(touring && stage.id && !pend && t >= limit - PRELOAD_MS){
       const c = pick(); if(c) prepare(c.id, whyFor(c, "Touring the planet: next most-watched daytime cam in this view."));
@@ -467,7 +490,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function renderStats(){
     const aw = CAMS.filter(awakeNow).length;
     const countries = new Set(CAMS.map(c=>c.k).filter(Boolean)).size;
-    $("stats").innerHTML = `<span><b>${CAMS.length}</b> live cams</span><span><b>${new Set(CAMS.map(c=>c.c)).size}</b> continents</span><span><b>${countries}</b> countries</span><span class="aw"><b>${aw}</b> in daylight now</span>`+(Object.keys(ACT).length ? `<span class="hotn"><b>${CAMS.filter(c=>isHot(c.id)).length}</b> with action now</span>` : "");
+    $("stats").innerHTML = `<span><b>${CAMS.length}</b> live cams</span><span><b>${new Set(CAMS.map(c=>c.c)).size}</b> continents</span><span><b>${countries}</b> countries</span><span class="aw"><b>${aw}</b> in daylight now</span>`+(Object.keys(ACT).length ? `<span class="trn"><b>${CAMS.filter(c=>flagged(c.id,"t")).length}</b> trending</span><span class="hotn"><b>${CAMS.filter(c=>flagged(c.id,"a")).length}</b> with action now</span>` : "");
   }
   function renderFilters(){
     const cc = k => CAMS.filter(c=>k==="all"||c.c===k).length;
@@ -478,12 +501,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const cardEls = {};
   function cardHTML(c){
     return `<article class="enc" data-id="${c.id}">
-      <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="hot" ${isHot(c.id)?"":"hidden"}>● ACTION NOW</span><span class="play">▶ Watch</span></button>
+      <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="hot" hidden></span><span class="play">▶ Watch</span></button>
       <div class="pl">
         <h4>${esc(c.n)}</h4>
         <div class="where">${esc(c.p)}</div>
         <div class="row"><span class="clock"></span><span class="dp"></span></div>
-        <div class="row"><span>${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
+        <div class="row"><span class="wn">${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
         <div class="noembed" ${noEmbed.has(c.id)?"":"hidden"}>Plays only on YouTube</div>
         <div class="acts">
           <button class="mini" type="button" data-pick="${c.id}" aria-pressed="${picked.has(c.id)}">${picked.has(c.id)?"On wall":"Add to wall"}</button>
@@ -495,7 +518,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function renderGrid(){
     $("grid").innerHTML = CAMS.map(cardHTML).join("") + `<p class="empty" id="empty" hidden>No cams match. Try another continent or turn off “Awake now”.</p>`;
     document.querySelectorAll("#grid .enc").forEach(el=>{ cardEls[el.dataset.id] = el; if(picked.has(el.dataset.id)) el.classList.add("picked"); });
-    applyFilters(); updateClocks(); markStage();
+    renderActivity(); applyFilters(); updateClocks(); markStage();
   }
   function visible(){
     const q = state.q.trim().toLowerCase();
@@ -505,7 +528,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function sorted(list){
     const l = list.slice();
     if(state.sort==="w") l.sort((a,b)=>b.w-a.w);
-    else if(state.sort==="a") l.sort((a,b)=>actScore(b.id)-actScore(a.id) || b.w-a.w);
+    else if(state.sort==="a") l.sort((a,b)=>(skipTour(a.id)-skipTour(b.id)) || (isHot(b.id)-isHot(a.id)) || actScore(b.id)-actScore(a.id) || b.w-a.w);
     else if(state.sort==="n") l.sort((a,b)=>a.n.localeCompare(b.n));
     else l.sort((a,b)=>local(b.tz).mins-local(a.tz).mins);
     return l;

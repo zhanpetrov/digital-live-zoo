@@ -1,9 +1,10 @@
 name: Cam activity
 
-# Scores every cam's live thumbnail so the Main Stage tour can go where something is happening.
+# Scores how worth watching every cam is right now (picture, movement, live viewers, viewer spikes)
+# so the Main Stage tour goes where something is happening. See tools/activity.py.
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -16,19 +17,28 @@ concurrency:
 jobs:
   score:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q pillow
+      - run: pip install -q pillow numpy onnxruntime
+      - uses: actions/cache@v4
+        with:
+          path: .model
+          key: clip-vit-b32-vision-quantized-v1
+      - name: Download CLIP image model (first run only)
+        run: |
+          mkdir -p .model
+          [ -s .model/clip_vision.onnx ] || curl -sSfL -o .model/clip_vision.onnx \
+            https://huggingface.co/Xenova/clip-vit-base-patch32/resolve/main/onnx/vision_model_quantized.onnx
       - uses: actions/cache/restore@v4
         with:
           path: .state
           key: activity-state-${{ github.run_id }}
           restore-keys: activity-state-
-      - run: python tools/activity.py catalog.json activity.json .state
+      - run: python tools/activity.py catalog.json activity.json .state .model/clip_vision.onnx
       - uses: actions/cache/save@v4
         with:
           path: .state
