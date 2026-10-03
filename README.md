@@ -17,6 +17,15 @@ Every free live animal cam on YouTube we could find, in one zoo: safari waterhol
 
 The list is refreshed every hour: restarted streams get their new id, dead ones are dropped, and new cams are added a few times a day.
 
+## Cam pages (search)
+
+Every camera also has a permanent page, `/live/<slug>/`, plus hub pages under `/animals/`, `/places/` and `/habitats/`, so search engines can find the cams one by one. `tools/build_pages.py` writes them from `catalog.json`, and `.github/workflows/pages.yml` reruns it whenever the list or the data changes, and daily.
+
+- `data/cams.json` — one entry per camera, keyed by a slug that never changes. A restarted stream keeps its page: the new YouTube id is added to `ids`. Also holds `animals`, `species`, the written `note`, and the days it was seen live. Edit `note`, `title`, `desc` and `species` here.
+- `data/hubs.json` — titles and intro text for animal hubs.
+- A cam page is indexed only when `note_ok` is true and the cam is live; an animal hub only when `intro_ok` is true. Everything else is `noindex, follow` and stays out of `sitemap.xml`.
+- `slugs.json` maps video ids to slugs for the home page; `assets/pages.css` and `assets/pages.js` style the generated pages and fill in local time and activity.
+
 ## Ads
 
 One ad slot only, in the header: 728×90 on desktop, 468×60 on tablets, 320×50 on phones. Nothing in the player, the wall or the cam grid, and no Auto ads. It stays off until `window.ZOO_ADS` in `index.html` gets the AdSense publisher id and ad unit slot id. Open the site with `?adpreview` to see the slot with a sample.

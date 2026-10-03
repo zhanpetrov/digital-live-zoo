@@ -6,6 +6,9 @@
 <title>Digital Live Zoo</title>
 <meta name="description" content="Every free live animal cam on Earth in one zoo: safari waterholes, pandas, bears, penguins, eagles and more, live right now.">
 <meta name="google-adsense-account" content="ca-pub-5253542233607618">
+<link rel="canonical" href="https://digitallivezoo.com/">
+<meta property="og:url" content="https://digitallivezoo.com/">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Digital Live Zoo">
 <meta property="og:description" content="Hundreds of live animal cams on six continents. Watch what is awake right now.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -158,10 +161,19 @@ details ul{margin:10px 0 0;padding-left:20px;display:grid;gap:6px;max-width:78ch
 .note{color:var(--muted);font-size:13px;margin:8px 0 0;max-width:78ch}
 footer{color:var(--faint);font-size:12.5px}
 footer a{color:var(--muted)}
+.sections{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sections a{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13.5px;text-decoration:none;color:var(--muted)}
+.sections a:hover{border-color:var(--muted);color:var(--fg)}
+.enc h4 a{text-decoration:none}
+.enc h4 a:hover{text-decoration:underline}
+.browse h2{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.03em;color:var(--sign);margin:0 0 10px}
+.browse p{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:14px}
+.browse a{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sign);color:#1b1500;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:30}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Digital Live Zoo","url":"https://digitallivezoo.com/"}</script>
 <script>
 /* Header ad. Empty = no ad. After AdSense approves the site, put the publisher id ("ca-pub-…") and the ad unit's slot id here. */
 window.ZOO_ADS = {client: "ca-pub-5253542233607618", slot: ""};
@@ -178,6 +190,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <h1>Digital Live Zoo</h1>
       <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
       <div class="stats" id="stats"><span>Opening the zoo…</span></div>
+      <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a></nav>
     </div>
     <aside class="adbox" id="adbox" aria-label="Advertisement" hidden>
       <span class="adlabel">Advertisements</span>
@@ -247,6 +260,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     </ul>
     <p class="note">Every video plays from its owner’s channel through YouTube’s own player. Some owners block playback on other sites; those cams open on YouTube instead. Recording or re-editing a stream for anything public needs the cam owner’s permission.</p>
   </details>
+  <section class="browse" aria-label="Browse by animal"><h2>Live cams by animal</h2><!--hubs:start--><p><a href="/animals/backyard-birds/">Backyard birds</a><a href="/animals/storks/">Storks</a><a href="/animals/bald-eagles/">Bald eagles</a><a href="/animals/peregrine-falcons/">Peregrine falcons</a><a href="/animals/ospreys/">Ospreys</a><a href="/animals/penguins/">Penguins</a><a href="/animals/cats/">Cats and kittens</a><a href="/animals/owls/">Owls</a><a href="/animals/coral-reefs/">Coral reefs</a><a href="/animals/brown-bears/">Brown bears</a><a href="/animals/seals/">Seals and sea lions</a><a href="/animals/farm-animals/">Farm animals</a><a href="/animals/giraffes/">Giraffes</a><a href="/animals/elephants/">Elephants</a><a href="/animals/deer/">Deer</a><a href="/animals/hummingbirds/">Hummingbirds</a><a href="/animals/otters/">Otters</a><a href="/animals/great-apes/">Great apes</a><a href="/animals/bats/">Bats</a><a href="/animals/hedgehogs/">Hedgehogs</a><a href="/animals/dogs/">Puppies and dogs</a><a href="/animals/tigers/">Tigers</a><a href="/animals/goats/">Goats</a><a href="/animals/squirrels/">Squirrels</a><a href="/animals/wildebeest-migration/">Wildebeest migration</a><a href="/animals/manatees/">Manatees</a><a href="/animals/salmon/">Salmon</a><a href="/animals/puffins/">Puffins</a><a href="/animals/sharks/">Sharks</a><a href="/animals/sloths/">Sloths</a><a href="/animals/raccoons/">Raccoons</a><a href="/animals/horses/">Horses</a><a href="/animals/jellyfish/">Jellyfish</a><a href="/animals/orcas/">Orcas</a><a href="/animals/polar-bears/">Polar bears</a><a href="/animals/rhinos/">Rhinos</a><a href="/animals/wolves/">Wolves</a></p><!--hubs:end--></section>
   <footer><span id="foot"></span> · <a href="privacy.html">Privacy</a></footer>
 </div>
 
@@ -266,7 +280,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const MIN_MS = 25000, GOOD_MS = 90000, HOT_MS = 180000, GOOD = 45, REVISIT_MS = 10*60000;
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  let CAMS = [], BYID = {};
+  let CAMS = [], BYID = {}, SLUGS = {};
   const state = {cont:"all", type:"all", q:"", awake:false, sort:"w"};
   const picked = new Set(), noEmbed = new Set(), shown = {};
   try{ JSON.parse(localStorage.getItem("zoo-wall")||"[]").forEach(id=>picked.add(id)); }catch(e){}
@@ -504,7 +518,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     return `<article class="enc" data-id="${c.id}">
       <button class="th" type="button" data-stage="${c.id}" aria-label="Put ${esc(c.n)} on the Main Stage"><img loading="lazy" src="${thumb(c)}" alt=""><span class="ty">${esc(TYPES[c.ty])}</span><span class="ontag" hidden>ON STAGE</span><span class="hot" hidden></span><span class="play">▶ Watch</span></button>
       <div class="pl">
-        <h4>${esc(c.n)}</h4>
+        <h4>${SLUGS[c.id] ? `<a href="/live/${SLUGS[c.id]}/">${esc(c.n)}</a>` : esc(c.n)}</h4>
         <div class="where">${esc(c.p)}</div>
         <div class="row"><span class="clock"></span><span class="dp"></span></div>
         <div class="row"><span class="wn">${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
@@ -650,7 +664,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   // mfk.json lists cams YouTube marks Made for Kids (written by .github/workflows/mfk.yml). YouTube's API policy
   // requires tracking to be off around those videos, so they are left out of the zoo.
   const mfkList = fetch("mfk.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(m=>new Set((m && m.ids) || [])).catch(()=>new Set());
-  Promise.all([fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()), mfkList]).then(([cat, mfk])=>{
+  // slugs.json (tools/build_pages.py): video id -> permanent cam page /live/<slug>/
+  const slugList = fetch("slugs.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : {}).catch(()=>({}));
+  Promise.all([fetch("catalog.json", {cache:"no-cache"}).then(r=>r.json()), mfkList, slugList]).then(([cat, mfk, slugs])=>{
+    SLUGS = slugs || {};
     CAMS = cat.cams.filter(c=>!c.mfk && !mfk.has(c.id)); CAMS.forEach(c=>BYID[c.id]=c);
     [...picked].forEach(id=>{ if(!BYID[id]) picked.delete(id); });
     const u = new Date(cat.updated);

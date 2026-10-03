@@ -1,0 +1,36 @@
+name: Build cam pages
+
+# Turns catalog.json into the permanent /live, /animals, /places and /habitats pages, sitemaps and robots.txt.
+on:
+  push:
+    branches: [main]
+    paths: [catalog.json, mfk.json, data/cams.json, data/hubs.json, tools/build_pages.py, tools/taxonomy.py]
+  schedule:
+    - cron: "27 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/build_pages.py --dates
+      - name: Publish pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A live animals places habitats sitemaps sitemap.xml robots.txt slugs.json data index.html
+          git commit -q -m "Rebuild cam pages" || exit 0
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 7; done
+          exit 1

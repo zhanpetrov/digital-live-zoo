@@ -1,0 +1,11 @@
+{
+ "animals": {
+  "penguins": {
+   "title": "Live penguin cams: {n} cameras around the world · Digital Live Zoo",
+   "h1": "Live penguin cams",
+   "desc": "Watch {n} live penguin cams on five continents: wild colonies in South Africa and New Zealand, plus zoos and aquariums from San Francisco to Japan.",
+   "intro": "Live penguin cams on five continents: wild colonies in South Africa and New Zealand, and zoos and aquariums from San Francisco to Nagano. Nine species appear, from the little penguin, the smallest of all, to king penguins and the rare erect-crested penguin, which breeds almost only on two remote island groups south-east of New Zealand.",
+   "intro_ok": false
+  }
+ }
+}
