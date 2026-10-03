@@ -5,14 +5,14 @@
   "index": false
  },
  "/live/african-penguin-colony-stony-point/": {
-  "h": "7a32ef271505",
+  "h": "a45568c0dff3",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/african-penguin-nest-stony-point/": {
-  "h": "a3992770a78f",
+  "h": "b91125579512",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/alligator-farm-st-augustine/": {
   "h": "dcfc1df22c5a",
@@ -315,9 +315,9 @@
   "index": false
  },
  "/live/blue-penguins-oamaru/": {
-  "h": "6eda85f4c714",
+  "h": "c8e4bd742af7",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/bonobos-lola-ya-bonobo/": {
   "h": "1ec04180db27",
@@ -395,9 +395,9 @@
   "index": false
  },
  "/live/cliffside-penguin-village-komoro-zoo/": {
-  "h": "d4765eaf7440",
+  "h": "9cbbe29e47bd",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/coral-and-fish-aquarium-of-the-pacific/": {
   "h": "4cc4f3346e01",
@@ -585,9 +585,9 @@
   "index": false
  },
  "/live/erect-crested-penguins-antipodes-island/": {
-  "h": "817bc2b49b94",
+  "h": "6e0227615633",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/eurasian-eagle-owl-eifel/": {
   "h": "f013b307b774",
@@ -945,9 +945,9 @@
   "index": false
  },
  "/live/little-blue-penguin-nest-ngamotu/": {
-  "h": "dc4216df2872",
+  "h": "44802181b589",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/little-owls-bommelerwaard/": {
   "h": "417c681e33cf",
@@ -955,14 +955,14 @@
   "index": false
  },
  "/live/little-penguin-chick-new-zealand/": {
-  "h": "51ced4de870c",
+  "h": "65041208c418",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/little-penguins-burnie-penguin-centre/": {
-  "h": "c9a2fc5c45b2",
+  "h": "4724f3ef6404",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/loon-cam-lake-fairlee/": {
   "h": "dccb6374dbee",
@@ -1275,44 +1275,44 @@
   "index": false
  },
  "/live/penguin-beach-aquarium-of-the-pacific/": {
-  "h": "55edf810466d",
+  "h": "3bd0cab06eb1",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguin-pool-birdland/": {
-  "h": "d3fc1c6b7b4b",
+  "h": "d6dc8bcf78f9",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-california-academy-of-sciences/": {
-  "h": "3d4b638444c2",
+  "h": "c2611bf27650",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-melbourne-zoo/": {
-  "h": "bdef6e7d9e3f",
+  "h": "5f251eb5fcac",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-moody-gardens/": {
-  "h": "e4de1e5e5d07",
+  "h": "1e983b12deaa",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-new-england-aquarium/": {
-  "h": "4f558548b772",
+  "h": "63a583a07927",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-pittsburgh-zoo/": {
-  "h": "e778b6b697ed",
+  "h": "0fcd8e8ba6dd",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/penguins-saint-louis-zoo/": {
-  "h": "5da8bdf43893",
+  "h": "eee185945309",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/peregrine-falcons-367-collins/": {
   "h": "d2861cd0a5af",
@@ -1935,9 +1935,9 @@
   "index": false
  },
  "/live/underwater-penguins-aquarium-of-the-pacific/": {
-  "h": "00d2c221a2c3",
+  "h": "cb7be72ce12e",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/live/underwater-pier-pompano-beach/": {
   "h": "2e97e9401f56",
@@ -2045,9 +2045,9 @@
   "index": false
  },
  "/animals/penguins/": {
-  "h": "ae6e2934124d",
+  "h": "0034407a1584",
   "mod": "2026-10-03",
-  "index": false
+  "index": true
  },
  "/animals/farm-animals/": {
   "h": "66857b02c628",
