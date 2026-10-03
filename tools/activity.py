@@ -113,8 +113,10 @@ def frac_changed(a, b):
 def motion(st, img):
     """0-1: how much moved, relative to what is usual for this cam."""
     g = np.asarray(img.convert("L").resize((W, H), Image.BOX).filter(ImageFilter.GaussianBlur(1)), dtype=np.float32)
-    prev = np.array(st["prev"], dtype=np.float32).reshape(H, W) if "prev" in st else None
-    bg = np.array(st["bg"], dtype=np.float32).reshape(H, W) if "bg" in st else None
+    def arr(k):   # tolerate missing or malformed state from older versions
+        v = st.get(k)
+        return np.array(v, dtype=np.float32).reshape(H, W) if isinstance(v, list) and len(v) == W * H else None
+    prev, bg = arr("prev"), arr("bg")
     st["prev"] = g.astype(np.uint8).ravel().tolist()
     st["runs"] = st.get("runs", 0) + 1
     if g.mean() < DARK or g.std() < FLAT:
