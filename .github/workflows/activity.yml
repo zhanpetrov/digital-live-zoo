@@ -40,6 +40,7 @@ jobs:
           restore-keys: activity-state-
       - name: Score cams
         run: |
+          set -o pipefail
           python tools/activity.py catalog.json activity.json .state .model/clip_vision.onnx 2> err.txt | tee out.txt || {
             echo "::error title=activity.py failed::$(tail -c 1500 err.txt | tr '\n' '|')"; exit 1; }
           echo "::notice title=Activity::$(head -1 out.txt)"
