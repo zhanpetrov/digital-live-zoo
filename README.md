@@ -19,7 +19,7 @@ The list is refreshed every hour: restarted streams get their new id, dead ones 
 
 ## Ads
 
-One ad slot only, in the header: 728×90 on desktop, 468×60 on tablets, 320×50 on phones. Nothing in the player, the wall or the cam grid, and no Auto ads. It stays off until `window.ZOO_ADS` in `index.html` gets the AdSense publisher id and ad unit slot id. Open the site with `?adpreview` to see the slot with a sample.
+One ad slot only, in the header: 728×90 on desktop, 468×60 on tablets, 320×50 on phones. Nothing in the player, the wall or the cam grid, and no Auto ads. The AdSense code and publisher id (`ca-pub-5253542233607618`) are in the `<head>` of `index.html` for site verification, and `ads.txt` authorizes Google to sell the space. The slot stays empty until `window.ZOO_ADS.slot` in `index.html` gets the ad unit's slot id. Open the site with `?adpreview` to see the slot with a sample.
 
 ## Rights
 
