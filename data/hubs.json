@@ -6,6 +6,13 @@
    "desc": "Watch {n} live penguin cams on five continents: wild colonies in South Africa and New Zealand, plus zoos and aquariums from San Francisco to Japan.",
    "intro": "Live penguin cams on five continents: wild colonies in South Africa and New Zealand, and zoos and aquariums from San Francisco to Nagano. Nine species appear, from the little penguin, the smallest of all, to king penguins and the rare erect-crested penguin, which breeds almost only on two remote island groups south-east of New Zealand.",
    "intro_ok": true
+  },
+  "bats": {
+   "title": "Live bat cams: {n} cameras in caves, bat houses and a sanctuary · Digital Live Zoo",
+   "h1": "Live bat cams",
+   "desc": "Watch {n} live bat cams: the Carlsbad Caverns bat flight, Bracken Cave in Texas, a Florida bat house and flying foxes at a bat sanctuary.",
+   "intro": "Live bat cams from the United States: cave colonies of free-tailed bats in New Mexico and Texas, a bat house in central Florida, and fruit bats called flying foxes at a Florida sanctuary. Free-tailed bats leave their roosts around dusk, and in summer Bracken Cave in Texas holds the largest bat colony in the world, up to 20 million bats. Brazilian and Mexican free-tailed bats are two names for the same species.",
+   "intro_ok": true
   }
  }
 }
