@@ -138,7 +138,8 @@ select{background:var(--bg);border:1px solid var(--line);border-radius:999px;pad
 .mini{flex:1;border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:7px 10px;font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;text-align:center}
 .mini[aria-pressed="true"]{background:var(--sign);color:#1b1500;border-color:var(--sign)}
 .mini.stagebtn{border-color:var(--live);color:#ffc9c4}
-.noembed{font-size:11.5px;color:var(--sign)}
+.noembed{font-size:11.5px;color:var(--faint)}
+.noembed a{color:var(--muted)}
 .empty{grid-column:1/-1;color:var(--muted);padding:24px 0;text-align:center}
 
 /* wall */
@@ -221,7 +222,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <button class="btn sign" id="sound" type="button">Sound on</button>
         <button class="btn" id="tour" type="button" aria-pressed="true">Touring the planet</button>
         <button class="btn" id="next" type="button">Next cam</button>
-        <a class="btn" id="stYT" href="#" target="_blank" rel="noopener">YouTube ↗</a>
       </div>
     </div>
   </section>
@@ -339,13 +339,18 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   // back player while the current one keeps running. Only once it has been playing for a few
   // seconds (past YouTube's spinner and start-up overlays) does the front player fade away to
   // reveal it, with the sound crossfading too. The viewer never sees a black frame or a cut.
-  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000;
-  const WARM = {tour:3500, now:1500, first:800};
+  // WARM_MS: YouTube shows its title bar and logo when a video starts playing and hides them after
+  // 3 s without mouse activity, then fades them out; buffering restarts that. So a cam is only
+  // revealed after WARM_MS of unbroken playing. On desktop the next tour cam is kept warming in the
+  // back player all the time, so "Next cam" swaps at once; on phones and Data Saver it starts
+  // PRELOAD_MS before its turn.
+  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000, WARM_MS = 5000, SETTLE_MS = 3000;
+  const keepWarm = () => document.visibilityState === "visible" && !(navigator.connection && navigator.connection.saveData) && matchMedia("(min-width: 861px)").matches;
   const NO_EMBED = [100,101,150,153];
   const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
   let ytReady = false, soundOn = false, touring = true, fading = false, manual = false;
   const stage = {id:null, since:0, why:""};
-  const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, want:null, playingSince:0}));
+  const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, want:null, playingSince:0, downSince:0}));
   let front = 0, pend = null;          // pend = the cam warming up in the back player
   const skipUntil = {};
   const back = () => S[1-front];
@@ -360,7 +365,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   if(window.YT && window.YT.Player){ ytReady = true; }
 
   function loadSlot(s, id){
-    s.want = id; s.playingSince = 0;
+    s.want = id; s.playingSince = 0; s.downSince = Date.now();
     if(s.p){ if(s.ready){ s.p.mute(); s.p.loadVideoById(id); } return; }   // still booting: onReady picks up s.want
     s.p = new YT.Player("stP"+s.k, {videoId:id, playerVars:Object.assign({origin:location.origin}, PV), events:{
       onReady:e=>{ s.ready = true; e.target.mute(); if(!s.want) e.target.stopVideo(); else if(s.want !== id) e.target.loadVideoById(s.want); else e.target.playVideo(); },
@@ -370,7 +375,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
   function stopSlot(s){ s.want = null; s.playingSince = 0; try{ s.p.mute(); s.p.stopVideo(); }catch(e){} }
   function onState(s, st){
-    if(st === 1 && s.want && !s.playingSince) s.playingSince = Date.now();
+    // playingSince = start of the current unbroken stretch of playing; any buffering or pause restarts it
+    if(st === 1){ if(s.want && !s.playingSince) s.playingSince = Date.now(); }
+    else if(s.playingSince){ s.playingSince = 0; s.downSince = Date.now(); }
     if(s === S[front] && stage.id){
       if(st === 0) frontTrouble("That stream just ended, so the stage moved on.");
       syncShield();
@@ -426,7 +433,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function retry(){
     const p = pend; pend = null; stopSlot(back());
     skipUntil[p.id] = Date.now() + 10*60000;
-    if(p.user && stage.id){ toast("That cam only plays on YouTube right now. Use its YouTube ↗ button."); showTuning(); return; }
+    if(p.user && stage.id){ toast("That cam’s owner allows it on YouTube only, so it can’t play here."); showTuning(); return; }
     if(p.tries >= 4 && stage.id){ showTuning(); return; }
     const c = pick(); if(c) prepare(c.id, whyFor(c, p.user ? "Most watched cam where it is daytime right now." : p.why), {now:p.now, tries:p.tries+1});
   }
@@ -484,17 +491,17 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       const h = bestCandidates()[0];
       if(h && ((isHot(h.id) && !isHot(stage.id) && actScore(h.id) >= actScore(stage.id) + 15) || skipTour(stage.id))){ if(pend) cancelPend(); prepare(h.id, whyFor(h, ""), {now:true}); }
     }
-    if(touring && stage.id && !pend && t >= limit - PRELOAD_MS){
+    // line up the next tour cam: right away on desktop (SETTLE_MS after a switch), else PRELOAD_MS before its turn
+    if(touring && stage.id && !pend && t >= (keepWarm() ? SETTLE_MS : limit - PRELOAD_MS)){
       const c = pick(); if(c) prepare(c.id, whyFor(c, "Touring the planet: next most-watched daytime cam in this view."));
     }
     if(!pend || !pend.t0) return;
     const s = back(), now = Date.now();
     const due = !stage.id || pend.now || (touring && t >= limit);
-    const warm = !stage.id ? WARM.first : pend.now ? WARM.now : WARM.tour;
     if(manual){ if(due && s.ready && now - pend.t0 > 1500) commit(); return; }
     if(s.playingSince){
-      if(due && now - s.playingSince >= warm && pstate(s) === 1) commit();
-    } else if(now - pend.t0 > (stage.id ? LOAD_TIMEOUT : 8000)){
+      if(due && now - s.playingSince >= WARM_MS && pstate(s) === 1) commit();
+    } else if(now - s.downSince > (stage.id ? LOAD_TIMEOUT : 8000)){   // not playing for too long (never started, or stalled while waiting)
       const st = pstate(s);
       if(!stage.id && s.ready && (st === -1 || st === 5)){ manual = true; commit(); }   // autoplay blocked: hand the play button to the viewer
       else retry();
@@ -522,10 +529,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <div class="where">${esc(c.p)}</div>
         <div class="row"><span class="clock"></span><span class="dp"></span></div>
         <div class="row"><span class="wn">${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
-        <div class="noembed" ${noEmbed.has(c.id)?"":"hidden"}>Plays only on YouTube</div>
+        <div class="noembed" ${noEmbed.has(c.id)?"":"hidden"}>Its owner allows it on YouTube only · <a href="${ytUrl(c)}" target="_blank" rel="noopener">open</a></div>
         <div class="acts">
           <button class="mini" type="button" data-pick="${c.id}" aria-pressed="${picked.has(c.id)}">${picked.has(c.id)?"On wall":"Add to wall"}</button>
-          <a class="mini" href="${ytUrl(c)}" target="_blank" rel="noopener" aria-label="Open ${esc(c.n)} on YouTube">YouTube ↗</a>
         </div>
       </div>
     </article>`;
@@ -573,7 +579,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const c = BYID[stage.id]; if(!c) return;
     $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
     $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
-    $("stYT").href = ytUrl(c); $("stWhy").textContent = stage.why;
+    $("stWhy").textContent = stage.why;
     updateClocks();
   }
 

@@ -304,7 +304,7 @@ def cam_page(e, c, ctx):
     if len(e.get("seen", [])) >= 7:
         rec = f"Seen live on {len(days)} of the last 30 days. " + rec
     if c:
-        b.append(f'<p class="record">{rec}<a href="/#{vid}">Watch it on the Main Stage</a>, or <a href="https://www.youtube.com/watch?v={vid}" rel="noopener" target="_blank">open it on YouTube</a>.</p>')
+        b.append(f'<p class="record">{rec}<a href="/#{vid}">Watch it on the Main Stage</a>.</p>')
 
     # related
     rel_html = []
