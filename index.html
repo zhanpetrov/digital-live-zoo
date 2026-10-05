@@ -431,12 +431,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   // back player while the current one keeps running. Only once it has been playing for a few
   // seconds (past YouTube's spinner and start-up overlays) does the front player fade away to
   // reveal it, with the sound crossfading too. The viewer never sees a black frame or a cut.
-  // WARM_MS: YouTube shows its title bar and logo when a video starts playing and hides them after
-  // 3 s without mouse activity, then fades them out; buffering restarts that. So a cam is only
-  // revealed after WARM_MS of unbroken playing. On desktop the next tour cam is kept warming in the
+  // WARM_MS: when a video starts playing YouTube covers it with its title bar, a pause button, share
+  // icons and its logo. Measured 2026-10-05 in Chrome on macOS: they stay until 3.9 s after PLAYING and
+  // are gone by 4.2 s (two cams, same result); buffering starts them over. So a cam is only revealed
+  // after WARM_MS of unbroken playing (measured time + margin for slower computers). On desktop the next tour cam is kept warming in the
   // back player all the time, so "Next cam" swaps at once; on phones and Data Saver it starts
   // PRELOAD_MS before its turn.
-  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000, WARM_MS = 5000, SETTLE_MS = 3000;
+  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000, WARM_MS = 5500, SETTLE_MS = 3000;
   const keepWarm = () => document.visibilityState === "visible" && !(navigator.connection && navigator.connection.saveData) && matchMedia("(min-width: 861px)").matches;
   const NO_EMBED = [100,101,150,153];
   const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
