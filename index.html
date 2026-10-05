@@ -521,11 +521,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function stopSlot(s){ s.want = null; s.playingSince = 0; try{ s.p.mute(); s.p.stopVideo(); }catch(e){} }
   function onState(s, st){
     // playingSince = start of the current unbroken stretch of playing; any buffering or pause restarts it
-    if(st === 1){
-      if(s.want && !s.playingSince) s.playingSince = Date.now();
-      if(manual && s !== S[front] && s.want){ manual = false; syncShield(); }   // autoplay works (again)
-    }
+    if(st === 1){ if(s.want && !s.playingSince) s.playingSince = Date.now(); }
     else if(s.playingSince){ s.playingSince = 0; s.downSince = Date.now(); }
+    // a hidden player that buffers or plays by itself proves autoplay works (again): leave the fallback
+    if((st === 1 || st === 3) && manual && s !== S[front] && s.want){ manual = false; syncShield(); }
     if(s === S[front] && stage.id){
       if(st === 0) frontTrouble("That stream just ended, so the stage moved on.");
       syncShield();
