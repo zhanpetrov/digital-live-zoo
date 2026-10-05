@@ -1,0 +1,46 @@
+name: Learn from skips
+
+# Fits the Main Stage "boredom model" on every viewer's Next-cam presses (PostHog stage_segment
+# events) and publishes the coefficients as attention.json. See tools/attention.py.
+# Needs a POSTHOG_API_KEY repository secret (PostHog personal API key, scope query:read) and,
+# optionally, a POSTHOG_PROJECT_ID repository variable (the numeric project id).
+on:
+  schedule:
+    - cron: "47 9 * * *"     # daily, off the hour
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: attention
+  cancel-in-progress: false
+
+jobs:
+  learn:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q numpy
+      - name: Fit the model
+        env:
+          POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+          POSTHOG_PROJECT_ID: ${{ vars.POSTHOG_PROJECT_ID }}
+        run: |
+          set -o pipefail
+          python tools/attention.py catalog.json attention.json 2> err.txt | tee out.txt || {
+            echo "::error title=attention.py failed::$(tail -c 1500 err.txt | tr '\n' '|')"; exit 1; }
+          echo "::notice title=Learned::$(head -1 out.txt)"
+      - name: Publish attention.json
+        run: |
+          [ -f attention.json ] || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add attention.json
+          git commit -q -m "Update boredom model" || exit 0
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1

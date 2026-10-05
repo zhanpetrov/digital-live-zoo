@@ -254,7 +254,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     <ul>
       <li>The cams were found by searching YouTube in 14 languages. City cams, news, music loops, “cat TV” and documentary reruns were left out, so every cam here is a real live view of animals.</li>
       <li>Each cam is tagged with its place, time zone and habitat. “Awake now” keeps the cams where it is between 5 am and 8 pm locally.</li>
-      <li>The Main Stage changes every 45 seconds and follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam.</li>
+      <li>The Main Stage learns when to move on. Every press of “Next cam”, by you or anyone, teaches it how long each cam holds people; your own skips change your tour right away. It follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam.</li>
       <li>A wall plays up to 9 cams at once. Tap “Sound” on a tile to hear that one.</li>
       <li>The list is checked every hour: restarted streams get their new link, dead ones are removed, and new cams are added a few times a day.</li>
     </ul>
@@ -276,8 +276,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const TYPES = {safari:"Safari", zoo:"Zoos & sanctuaries", aqua:"Aquariums & ocean", birds:"Birds & nests", wild:"Forests & rivers", pets:"Farms & rescues"};
   const CONTS = ["Africa","Asia","Europe","North America","Latin America","Oceania"];
   const TOUR_MS = 45000, WALL_MAX = 9;
-  // tour pacing with activity data: stay at least MIN_MS; GOOD_MS on an interesting cam, HOT_MS while it is trending or has action
-  const MIN_MS = 25000, GOOD_MS = 90000, HOT_MS = 180000, GOOD = 45, REVISIT_MS = 10*60000;
+  // tour pacing: how long each cam is held comes from the boredom model below (its PRIOR is the old 45 s / 90 s on an
+  // interesting cam / 180 s while trending or with action). MIN_MS: earliest jump to a hotter cam. GOOD: activity score that counts as interesting.
+  const MIN_MS = 25000, GOOD = 45, REVISIT_MS = 10*60000;
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   let CAMS = [], BYID = {}, SLUGS = {};
@@ -334,6 +335,97 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     });
   }
 
+  // ---------- boredom model: learns when people press "Next cam" ----------
+  // A skip-hazard model (piecewise-exponential survival). The chance per second that a viewer skips is
+  //   h(t) = exp( bin[t] + act[level] + ty[habitat] + dp[daypart] + cam[id] + lv·(log10(1+viewers) − 1.5) ) × you
+  // bin[t]: how boredom grows with time on stage. The coefficients are fitted every day on all viewers'
+  // skips by tools/attention.py into attention.json; until then PRIOR reproduces the old 45/90/180 s tour.
+  // "you" is learned right here from this browser's own skips (observed ÷ expected skips, shrunk), overall,
+  // per habitat and per cam, so your own Next presses change your tour at once.
+  // The tour holds a cam until the chance you'd still be watching drops to STAY, then goes to the cam you
+  // are predicted to watch longest. Every stage visit is logged as a `stage_segment` event to learn from.
+  const BINS = [0,10,20,40,70,120,200,300], STAY = 0.6, DWELL_MIN = 20, DWELL_MAX = 240, SEG_KEEP = 400;
+  const W_END = {skip:1, pick:0.6};   // how strongly each way of leaving a cam counts as "bored of it"; others count as still watching
+  const PRIOR = {bin:BINS.map(()=>Math.log(-Math.log(STAY)/45)), act:{none:0, low:0, good:-Math.LN2, hot:-2*Math.LN2}, ty:{}, dp:{}, cam:{}, lv:0};
+  let COEF = PRIOR, ATTN = null;
+  let SEGS = []; try{ SEGS = JSON.parse(localStorage.getItem("zoo-segs")||"[]"); }catch(e){}   // [id, ty, dp, act level, viewers, from s, to s, end, unix]
+  let ME = {all:1, ty:{}, cam:{}, n:0, o:0};
+  function loadAttention(){
+    fetch("attention.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(a=>{
+      if(a && a.v === 1 && a.coef && a.coef.bin && a.coef.bin.length === BINS.length){ ATTN = a; COEF = a.coef; if(a.w) Object.assign(W_END, a.w); refitMe(); }
+    }).catch(()=>{});
+  }
+  loadAttention();
+  const actLevel = id => !Object.keys(ACT).length || !actOf(id) ? "none" : isHot(id) ? "hot" : actScore(id) >= GOOD ? "good" : "low";
+  const feat = c => ({id:c.id, ty:c.ty, dp:local(c.tz).dp, al:actLevel(c.id), v:(actOf(c.id) && actOf(c.id)[2]) || c.w || 0});
+  const featOf = s => ({id:s[0], ty:s[1], dp:s[2], al:s[3], v:s[4]});
+  function eta(f, K){ K = K || COEF; return (K.act[f.al]||0) + ((K.ty||{})[f.ty]||0) + ((K.dp||{})[f.dp]||0) + ((K.cam||{})[f.id]||0) + (K.lv||0)*(Math.log10(1+f.v)-1.5); }
+  const meMult = f => ME.all * (ME.ty[f.ty]||1) * (ME.cam[f.id]||1);
+  function cumHaz(e, a, b, K){   // expected skips between a and b seconds on stage
+    K = K || COEF; let H = 0;
+    for(let k=0; k<BINS.length; k++){ const lo = BINS[k], hi = k+1 < BINS.length ? BINS[k+1] : Infinity, o = Math.min(b,hi) - Math.max(a,lo); if(o > 0) H += o*Math.exp(K.bin[k] + e); }
+    return H;
+  }
+  function dwellFrom(e, K){   // seconds until the chance of still watching falls to STAY
+    K = K || COEF; const target = -Math.log(STAY); let H = 0;
+    for(let k=0; k<BINS.length; k++){
+      const lo = BINS[k], hi = k+1 < BINS.length ? BINS[k+1] : Infinity, r = Math.exp(K.bin[k] + e);
+      if(H + r*(hi-lo) >= target) return Math.min(DWELL_MAX, Math.max(DWELL_MIN, lo + (target-H)/r));
+      H += r*(hi-lo);
+    }
+    return DWELL_MAX;
+  }
+  function engageFrom(e){   // expected seconds watched in the first 5 minutes
+    let H = 0, T = 0;
+    for(let k=0; k<BINS.length; k++){
+      const lo = BINS[k], hi = k+1 < BINS.length ? BINS[k+1] : 300, r = Math.exp(COEF.bin[k] + e), S0 = Math.exp(-H);
+      T += S0*(1 - Math.exp(-r*(hi-lo)))/r; H += r*(hi-lo);
+    }
+    return T;
+  }
+  const dwellFor = c => { const f = feat(c); return dwellFrom(eta(f) + Math.log(meMult(f))); };
+  const engageFor = c => { const f = feat(c); return engageFrom(eta(f) + Math.log(meMult(f))); };
+  function refitMe(){
+    // observed vs expected skips in this browser: overall, then per habitat, then per cam (each shrunk toward the level above)
+    const A = 2, cl = x => Math.min(4, Math.max(0.25, x));
+    const rows = SEGS.map(s=>{ const f = featOf(s); return {f, o:W_END[s[7]]||0, e:cumHaz(eta(f), s[5], s[6])}; });
+    const sum = (l, k) => l.reduce((t,r)=>t+r[k], 0);
+    const all = cl((sum(rows,"o") + A)/(sum(rows,"e") + A)), ty = {}, cam = {};
+    const by = key => rows.reduce((m,r)=>{ (m[r.f[key]] = m[r.f[key]] || []).push(r); return m; }, {});
+    Object.entries(by("ty")).forEach(([k,l])=>{ ty[k] = cl((sum(l,"o") + A)/(sum(l,"e")*all + A)); });
+    Object.entries(by("id")).forEach(([k,l])=>{ cam[k] = cl((sum(l,"o") + A)/(sum(l,"e")*all*(ty[l[0].f.ty]||1) + A)); });
+    ME = {all, ty, cam, n:rows.length, o:sum(rows,"o")};
+  }
+  refitMe();
+  // one segment = one unbroken stretch of watching the stage cam; ends when the cam changes, the wall opens, the tab is hidden or closed
+  let seg = null;
+  function segStart(){
+    if(seg || !stage.id || document.visibilityState !== "visible" || !$("wall").hidden) return;
+    seg = {f:feat(BYID[stage.id]), act:actScore(stage.id), from:stage.watched||0, t0:Date.now(), touring, sound:soundOn};
+  }
+  function segEnd(end){
+    if(!seg) return; const s = seg; seg = null;
+    const to = s.from + (Date.now() - s.t0)/1000; stage.watched = to;
+    if(to - s.from < 1) return;
+    const row = [s.f.id, s.f.ty, s.f.dp, s.f.al, s.f.v, Math.round(s.from*10)/10, Math.round(to*10)/10, end, Date.now()/1000|0];
+    SEGS.push(row); if(SEGS.length > SEG_KEEP) SEGS = SEGS.slice(-SEG_KEEP);
+    try{ localStorage.setItem("zoo-segs", JSON.stringify(SEGS)); }catch(e){}
+    track("stage_segment", {cam_id:s.f.id, habitat:s.f.ty, continent:(BYID[s.f.id]||{}).c, daypart:s.f.dp, act_level:s.f.al, activity:s.act,
+      viewers:s.f.v, from_s:row[5], to_s:row[6], end, touring:s.touring, sound:s.sound, planned_s:Math.round(stage.dwell||0)});
+    if(W_END[end]) refitMe();
+  }
+  function learnedNote(c){
+    const f = feat(c), learned = dwellFrom(eta(f) + Math.log(meMult(f))), before = dwellFrom(eta(f, PRIOR), PRIOR);
+    if(learned >= before*1.3) return " Staying longer than usual: cams like this tend to hold attention.";
+    if(learned <= before*0.75) return " A short visit: cams like this tend to lose attention quickly.";
+    return "";
+  }
+  document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState === "visible"){ if(!seg && stage.id) stage.since = Date.now() - (stage.watched||0)*1000; segStart(); } else segEnd("hidden"); });
+  window.addEventListener("pagehide", ()=>segEnd("leave"));
+  // for checking from the console: zooModel.dwell("videoId"), zooModel.me
+  window.zooModel = {dwell:id=>BYID[id] && Math.round(dwellFor(BYID[id])), engage:id=>BYID[id] && Math.round(engageFor(BYID[id])),
+    get me(){ return ME; }, get coef(){ return COEF; }, get trained(){ return ATTN ? {updated:ATTN.updated, segments:ATTN.n_segments, viewers:ATTN.n_viewers, skips:ATTN.n_skips} : null; }, segs:()=>SEGS.slice()};
+
   // ---------- stage player ----------
   // Two YouTube players are stacked on the stage. The next cam loads and plays, muted, in the
   // back player while the current one keeps running. Only once it has been playing for a few
@@ -349,7 +441,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const NO_EMBED = [100,101,150,153];
   const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
   let ytReady = false, soundOn = false, touring = true, fading = false, manual = false;
-  const stage = {id:null, since:0, why:""};
+  const stage = {id:null, since:0, why:"", watched:0, explore:1};
   const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, want:null, playingSince:0, downSince:0}));
   let front = 0, pend = null;          // pend = the cam warming up in the back player
   const skipUntil = {};
@@ -405,22 +497,29 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     if(flagged(c.id, "a")) return "Action spotted here in the last few minutes, so the stage came over."+vs;
     return (why==="You skipped ahead." ? "You skipped ahead to" : "Up next:")+" one of the most interesting cams right now."+vs;
   }
+  // next cam: the one you are predicted to watch longest (boredom model, which already weighs activity),
+  // nudged by audience size, away from cams already shown this visit, with a little randomness to keep learning
   function pick(){
-    const h = bestCandidates(); if(h.length) return h[0];
-    const now = Date.now();
-    const v = visible().filter(c=>!noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now));
-    const aw = v.filter(awakeNow);
-    const l = (aw.length ? aw : v).sort((a,b)=>b.w-a.w).slice(0,30);
-    l.sort((a,b)=>(shown[a.id]||0)-(shown[b.id]||0) || b.w-a.w);
-    return l[0];
+    const now = Date.now(), hasAct = Object.keys(ACT).length > 0;
+    const ok = c => !noEmbed.has(c.id) && c.id!==stage.id && !(skipUntil[c.id] > now);
+    let l = visible().filter(c=>ok(c) && !skipTour(c.id) && !(now - (lastOn[c.id]||0) < REVISIT_MS));
+    if(!hasAct){ const aw = l.filter(awakeNow); if(aw.length) l = aw; }
+    if(!l.length) l = visible().filter(ok);
+    let best = null, bs = -1;
+    l.forEach(c=>{
+      const v = (actOf(c.id) && actOf(c.id)[2]) || c.w || 0;
+      const sc = engageFor(c) * (1 + 0.12*Math.log10(1+v)) * Math.exp(-(shown[c.id]||0)/300000) * (0.85 + 0.3*Math.random());
+      if(sc > bs){ bs = sc; best = c; }
+    });
+    return best;
   }
   // Ask for a cam. now=true switches as soon as it is ready; otherwise it waits for the tour's turn.
   function prepare(id, why, o){
     o = o || {};
     if(!BYID[id]) return;
     if(id === stage.id){ cancelPend(); stage.why = why; stage.since = Date.now(); renderStage(); return; }
-    if(pend && pend.id === id){ pend.now = pend.now || !!o.now; pend.user = pend.user || !!o.user; pend.why = why; showTuning(); return; }
-    pend = {id, why, now:!!o.now, user:!!o.user, tries:o.tries||0, t0:0};
+    if(pend && pend.id === id){ pend.now = pend.now || !!o.now; pend.user = pend.user || !!o.user; pend.why = why; if(o.reason) pend.reason = o.reason; showTuning(); return; }
+    pend = {id, why, now:!!o.now, user:!!o.user, tries:o.tries||0, t0:0, reason:o.reason || "tour"};
     if(ytReady && !fading) startPend();
     showTuning();
   }
@@ -435,15 +534,15 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     skipUntil[p.id] = Date.now() + 10*60000;
     if(p.user && stage.id){ toast("That cam’s owner allows it on YouTube only, so it can’t play here."); showTuning(); return; }
     if(p.tries >= 4 && stage.id){ showTuning(); return; }
-    const c = pick(); if(c) prepare(c.id, whyFor(c, p.user ? "Most watched cam where it is daytime right now." : p.why), {now:p.now, tries:p.tries+1});
+    const c = pick(); if(c) prepare(c.id, whyFor(c, p.user ? "Most watched cam where it is daytime right now." : p.why), {now:p.now, tries:p.tries+1, reason:p.reason});
   }
   function nextCam(why, o){
-    if(pend && !pend.user){ pend.now = true; pend.why = why; showTuning(); return; }   // the next one is already warming up
+    if(pend && !pend.user){ pend.now = true; pend.why = why; if(o && o.reason) pend.reason = o.reason; showTuning(); return; }   // the next one is already warming up
     const c = pick(); if(c) prepare(c.id, whyFor(c, why || "Most watched cam in this view where it is daytime."), Object.assign({now:true}, o));
   }
   function frontTrouble(why){
     // hide YouTube's error screen behind a still of the cam that is coming next
-    if(!pend) nextCam(why); else pend.now = true;
+    if(!pend) nextCam(why, {reason:"trouble"}); else { pend.now = true; pend.reason = "trouble"; }
     if(pend){ const po = $("stPoster"); po.src = posterUrl(BYID[pend.id]); po.classList.add("snap","on"); void po.offsetWidth; po.classList.remove("snap"); showTuning(); }
   }
   function showTuning(){
@@ -454,7 +553,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const p = pend; pend = null;
     const inc = back(), out = S[front];
     if(stage.id) shown[stage.id] = (shown[stage.id]||0) + Date.now() - stage.since;
-    stage.id = p.id; stage.since = Date.now(); stage.why = p.why; lastOn[p.id] = Date.now();
+    segEnd(p.reason);   // how the outgoing cam's visit ended (skip / pick / tour / …) is what the model learns from
+    stage.id = p.id; stage.since = Date.now(); stage.watched = 0; stage.explore = 0.85 + 0.45*Math.random();
+    stage.why = p.why + learnedNote(BYID[p.id]); lastOn[p.id] = Date.now();
+    segStart();
     track("cam_on_stage", Object.assign(camProps(p.id), {reason:p.why, activity:actScore(p.id)}));
     renderStage(); markStage(); showTuning();
     if(soundOn) crossVolume(out, inc);
@@ -483,13 +585,14 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   setInterval(()=>{
     const t = stage.id ? Date.now() - stage.since : 0;
     const hasAct = Object.keys(ACT).length > 0;
-    const limit = !hasAct ? TOUR_MS : isHot(stage.id) ? HOT_MS : actScore(stage.id) >= GOOD ? GOOD_MS : TOUR_MS;   // stay longer where there is more to see
+    // how long to hold this cam: learned from when people skip (activity is one of the model's inputs); explore varies it ±
+    const limit = stage.id ? (stage.dwell = dwellFor(BYID[stage.id])) * stage.explore * 1000 : TOUR_MS;
     $("stProg").style.width = touring && stage.id ? Math.min(100, t/limit*100)+"%" : "0%";
     if(!$("wall").hidden || fading) return;
     if(touring && stage.id && hasAct && t >= MIN_MS && (!pend || !isHot(pend.id))){
       // jump early when a trending or action cam has clearly more going on, or this one went blank / off air
       const h = bestCandidates()[0];
-      if(h && ((isHot(h.id) && !isHot(stage.id) && actScore(h.id) >= actScore(stage.id) + 15) || skipTour(stage.id))){ if(pend) cancelPend(); prepare(h.id, whyFor(h, ""), {now:true}); }
+      if(h && ((isHot(h.id) && !isHot(stage.id) && actScore(h.id) >= actScore(stage.id) + 15) || skipTour(stage.id))){ if(pend) cancelPend(); prepare(h.id, whyFor(h, ""), {now:true, reason:"early"}); }
     }
     // line up the next tour cam: right away on desktop (SETTLE_MS after a switch), else PRELOAD_MS before its turn
     if(touring && stage.id && !pend && t >= (keepWarm() ? SETTLE_MS : limit - PRELOAD_MS)){
@@ -603,7 +706,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     list = list.filter(c=>!noEmbed.has(c.id)).slice(0,WALL_MAX);
     if(!list.length){ toast("No cams to put on the wall"); return; }
     if(!ytReady){ toast("The player is still loading, try again in a second"); return; }
-    cancelPend(); try{ S[front].p.pauseVideo(); }catch(e){}
+    segEnd("wall"); cancelPend(); try{ S[front].p.pauseVideo(); }catch(e){}
     const cols = list.length<=1?1: list.length<=4?2:3, rows = Math.ceil(list.length/cols);
     const g = $("wallGrid");
     g.style.gridTemplateColumns = `repeat(${cols},minmax(0,1fr))`; g.style.gridTemplateRows = `repeat(${rows},minmax(0,1fr))`;
@@ -617,7 +720,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     wallPlayers.forEach(p=>{ try{ p.destroy(); }catch(e){} }); wallPlayers = [];
     $("wallGrid").innerHTML = ""; $("wall").hidden = true; document.body.style.overflow = "";
     try{ S[front].p.playVideo(); }catch(e){}
-    if(stage.id && $("stPoster").classList.contains("on")) nextCam("Back from the wall: the last cam had stopped, so here is the next one.");
+    stage.since = Date.now() - (stage.watched||0)*1000; segStart();
+    if(stage.id && $("stPoster").classList.contains("on")) nextCam("Back from the wall: the last cam had stopped, so here is the next one.", {reason:"trouble"});
   }
   function wallSound(i){
     wallPlayers.forEach((p,k)=>{ try{ k===i ? p.unMute() : p.mute(); }catch(e){} });
@@ -647,7 +751,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   // ---------- events ----------
   $("grid").addEventListener("click", e=>{
-    const s = e.target.closest("[data-stage]"); if(s){ prepare(s.dataset.stage, "You picked this cam.", {now:true, user:true}); window.scrollTo({top:0, behavior:"smooth"}); return; }
+    const s = e.target.closest("[data-stage]"); if(s){ prepare(s.dataset.stage, "You picked this cam.", {now:true, user:true, reason:"pick"}); window.scrollTo({top:0, behavior:"smooth"}); return; }
     const p = e.target.closest("[data-pick]"); if(p) togglePick(p.dataset.pick, p);
   });
   $("fCont").addEventListener("click", e=>{ const b = e.target.closest("[data-cont]"); if(!b) return; state.cont = b.dataset.cont; track("filter_changed", {filter:"continent", value:state.cont}); renderFilters(); applyFilters(); });
@@ -656,8 +760,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   $("awake").addEventListener("click", e=>{ state.awake = !state.awake; track("filter_changed", {filter:"awake", value:state.awake}); e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
   $("sort").addEventListener("change", e=>{ state.sort = e.target.value; track("filter_changed", {filter:"sort", value:state.sort}); applyFilters(); });
   $("sound").addEventListener("click", e=>{ soundOn = !soundOn; track("sound_toggled", {on:soundOn}); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; const fp = S[front].p; if(fp){ try{ if(soundOn){ fp.setVolume(100); fp.unMute(); } else fp.mute(); }catch(err){} } });
-  $("tour").addEventListener("click", e=>{ touring = !touring; track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); if(!touring && pend && !pend.now) cancelPend(); });
-  $("next").addEventListener("click", ()=>nextCam("You skipped ahead."));
+  $("tour").addEventListener("click", e=>{ segEnd(touring ? "hold" : "resume"); touring = !touring; segStart(); track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); if(!touring && pend && !pend.now) cancelPend(); });
+  $("next").addEventListener("click", ()=>nextCam("You skipped ahead.", {reason:"skip"}));
   $("topWall").addEventListener("click", ()=>{ const v = sorted(visible()).filter(c=>c.ty!=="pets" || state.type==="pets"); openWall(v.length?v:sorted(visible()), "Top cams in this view"); });
   $("wallOpen").addEventListener("click", ()=>openWall([...picked].map(id=>BYID[id]).filter(Boolean), "Your wall"));
   $("wallClear").addEventListener("click", ()=>{ picked.clear(); document.querySelectorAll("[data-pick]").forEach(b=>{ b.setAttribute("aria-pressed","false"); b.textContent = "Add to wall"; }); document.querySelectorAll(".enc.picked").forEach(el=>el.classList.remove("picked")); renderWallBar(); });
@@ -680,7 +784,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("foot").textContent = CAMS.length+" cams · list last checked "+u.toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" · built with Claude";
     renderStats(); renderFilters(); renderGrid(); renderWallBar();
     const hash = decodeURIComponent(location.hash.slice(1));
-    if(BYID[hash]) prepare(hash, "Shared link.", {now:true, user:true}); else nextCam("Most watched cam where it is daytime right now.");
+    if(BYID[hash]) prepare(hash, "Shared link.", {now:true, user:true, reason:"first"}); else nextCam("Most watched cam where it is daytime right now.", {reason:"first"});
   }).catch(()=>{ $("stats").innerHTML = "<span>The zoo’s list did not load. Reload the page.</span>"; });
   setInterval(()=>{ if(CAMS.length){ updateClocks(); renderStats(); if(state.awake) applyFilters(); } }, 60000);
 })();

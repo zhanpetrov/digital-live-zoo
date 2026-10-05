@@ -6,6 +6,7 @@ Snapshot of where things stand (2026-10-03), so the next session can pick up. Th
 - Site: single `index.html` on GitHub Pages (digitallivezoo.com), deployed straight from `main`.
 - Analytics: PostHog (US cloud), project "Digital Live Zoo", dashboard "Digital Live Zoo". Custom events: `cam_on_stage` (with `activity` score), `cam_embed_blocked`, `wall_opened`, `wall_cam_added` / `wall_cam_removed`, `filter_changed`, `search`, `sound_toggled`, `tour_toggled`.
 - Smart tour: `tools/activity.py` scores each cam (CLIP "something to look at", movement, live viewers, viewer spikes) into `activity.json`; the Main Stage tour follows it, skips blank and off-air cams, and falls back to the 45-second tour without data (data counts for up to 3 hours).
+- Learning from skips: every stage visit is logged as a PostHog `stage_segment` event (cam, habitat, daypart, activity level, viewers, seconds watched, how it ended: `skip` / `pick` / `tour` / `early` / `trouble` / `wall` / `hidden` / `leave` / `hold` / `resume` / `first`). A skip-hazard model sets how long the tour holds each cam and which cam comes next. Each browser learns its own viewer's skips (localStorage `zoo-segs`); `tools/attention.py` (daily, `attention.yml`) fits the shared model on all viewers into `attention.json`.
 - Daily cam-list refresh: a Claude routine on Zhan's Mac updates `catalog.json`. Its prompt still names the old repo `zhanpetrov8-svg/digital-live-zoo` (GitHub redirects git, so it should keep working); switching it to `zhanpetrov/digital-live-zoo` needs Zhan's approval in a session linked to the Mac. Note it writes `catalog.json` whole, so keys other tools add to it (e.g. `mfk`) must also exist in the artifact's master list.
 - Cam pages (`/live`, `/animals`, `/places`, `/habitats`) are built by `tools/build_pages.py` via `pages.yml`.
 - AdSense: verification meta tag, `ads.txt` and privacy page are live; the ad slot stays off until `window.ZOO_ADS.slot` is set.
@@ -18,7 +19,9 @@ Snapshot of where things stand (2026-10-03), so the next session can pick up. Th
 5. **Collaborator.** Invite Ilya (GitHub `Fominfo`) with Write access from Settings → Collaborators; this has to be done in the browser.
 6. **Bot-to-bot channel with Ilya's agent (Claudia).** Waiting on her script, launcher and README for review before anything is installed on the Mac; GitHub Issues on this repo is the simpler alternative.
 7. **`mfk.yml`** (Made for Kids check) does nothing until a `YT_API_KEY` repository secret is set.
+8. **`attention.yml`** (shared boredom model) does nothing until a `POSTHOG_API_KEY` repository secret is set (PostHog → Settings → Personal API keys, scope `query:read`); set the `POSTHOG_PROJECT_ID` repository variable too if `@current` is rejected. Like `activity.yml`, its schedule may need a manual or routine dispatch.
 
 ## Ideas not started
 - Vision-model captions for the top cams ("a bear is fishing").
 - A "Highlights" mode that shows only trending/action cams.
+- Video-content features for the boredom model (e.g. V-JEPA or CLIP embeddings of short clips), so it predicts boredom from what is on screen, not only from cam, habitat and activity score.
