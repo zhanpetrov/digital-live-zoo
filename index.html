@@ -443,7 +443,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
   let ytReady = false, soundOn = false, touring = true, fading = false, manual = false;
   const stage = {id:null, since:0, why:"", watched:0, explore:1};
-  const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, want:null, playingSince:0, downSince:0}));
+  const S = [0,1].map(k=>({k, el:$("stS"+k), p:null, ready:false, readyAt:0, want:null, playingSince:0, downSince:0}));
   let front = 0, pend = null;          // pend = the cam warming up in the back player
   const skipUntil = {};
   const back = () => S[1-front];
@@ -461,15 +461,28 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     s.want = id; s.playingSince = 0; s.downSince = Date.now();
     if(s.p){ if(s.ready){ s.p.mute(); s.p.loadVideoById(id); } return; }   // still booting: onReady picks up s.want
     s.p = new YT.Player("stP"+s.k, {videoId:id, playerVars:Object.assign({origin:location.origin}, PV), events:{
-      onReady:e=>{ s.ready = true; e.target.mute(); if(!s.want) e.target.stopVideo(); else if(s.want !== id) e.target.loadVideoById(s.want); else e.target.playVideo(); },
+      onReady:e=>{ s.ready = true; s.readyAt = Date.now(); e.target.mute(); if(!s.want) e.target.stopVideo(); else if(s.want !== id) e.target.loadVideoById(s.want); else e.target.playVideo(); },
       onStateChange:e=>onState(s, e.data),
-      onError:e=>onErr(s, e.data)
+      onError:e=>onErr(s, e.data),
+      onAutoplayBlocked:()=>onBlocked(s)
     }});
+  }
+  // "manual" = the browser will not start a muted video without a click (some privacy browsers, Low Power
+  // Mode). YouTube says so with onAutoplayBlocked; then the stage shows the player with its play button
+  // instead of waiting for it to warm up. It switches back as soon as a hidden player starts by itself.
+  function onBlocked(s){
+    if(manual || !pend || s !== back() || s.want !== pend.id) return;
+    manual = true;
+    if(!stage.id) commit();
+    syncShield();
   }
   function stopSlot(s){ s.want = null; s.playingSince = 0; try{ s.p.mute(); s.p.stopVideo(); }catch(e){} }
   function onState(s, st){
     // playingSince = start of the current unbroken stretch of playing; any buffering or pause restarts it
-    if(st === 1){ if(s.want && !s.playingSince) s.playingSince = Date.now(); }
+    if(st === 1){
+      if(s.want && !s.playingSince) s.playingSince = Date.now();
+      if(manual && s !== S[front] && s.want){ manual = false; syncShield(); }   // autoplay works (again)
+    }
     else if(s.playingSince){ s.playingSince = 0; s.downSince = Date.now(); }
     if(s === S[front] && stage.id){
       if(st === 0) frontTrouble("That stream just ended, so the stage moved on.");
@@ -602,12 +615,20 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     if(!pend || !pend.t0) return;
     const s = back(), now = Date.now();
     const due = !stage.id || pend.now || (touring && t >= limit);
-    if(manual){ if(due && s.ready && now - pend.t0 > 1500) commit(); return; }
+    if(manual){
+      // after the viewer has clicked play once, browsers usually allow the rest: keep asking the hidden player to start
+      if(s.ready && pstate(S[front]) === 1 && ![1,3].includes(pstate(s)) && now - (s.nudged||0) > 3000){ s.nudged = now; try{ s.p.playVideo(); }catch(e){} }
+      if(due && s.ready && now - pend.t0 > 1500) commit();
+      return;
+    }
     if(s.playingSince){
       if(due && now - s.playingSince >= WARM_MS && pstate(s) === 1) commit();
-    } else if(now - s.downSince > (stage.id ? LOAD_TIMEOUT : 8000)){   // not playing for too long (never started, or stalled while waiting)
+    } else if(now - Math.max(s.downSince, s.readyAt) > LOAD_TIMEOUT && (s.ready || now - s.downSince > 2*LOAD_TIMEOUT)){
+      // not playing for too long (never started, or stalled while waiting). Live cams can take 6-7 s to start,
+      // so this is not proof that autoplay is blocked: try another cam first. Only if the first cam's second try
+      // is also stuck unstarted, treat autoplay as blocked (browsers that don't send onAutoplayBlocked).
       const st = pstate(s);
-      if(!stage.id && s.ready && (st === -1 || st === 5)){ manual = true; commit(); }   // autoplay blocked: hand the play button to the viewer
+      if(!stage.id && s.ready && (st === -1 || st === 5) && pend.tries >= 1){ manual = true; commit(); }
       else retry();
     }
   }, 250);
