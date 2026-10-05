@@ -97,6 +97,30 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 .progress{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
 .progress b{display:block;height:100%;width:0;background:var(--sign)}
 
+/* full screen: the stage player alone on the screen (the browser's full screen, or a fixed layer on phones
+   that don't allow it), with the cam's name and the stage buttons in a bar that hides itself when idle */
+.fsbtn{position:absolute;right:12px;top:12px;z-index:6;display:inline-flex;align-items:center;gap:7px;background:rgba(5,8,6,.72);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 10px;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:opacity .4s}
+.fsbtn:hover{background:rgba(5,8,6,.92);border-color:rgba(255,255,255,.6)}
+.fsbtn svg{width:16px;height:16px;flex:0 0 auto}
+.fsbtn .x,.player.full .fsbtn .o{display:none}
+.player.full .fsbtn .x{display:inline}
+@media (max-width:520px){.player:not(.full) .fsbtn span{display:none}.player:not(.full) .fsbtn{padding:6px}}
+.player .fsbar{display:none}
+.player.full .fsbar{position:absolute;inset:auto 0 0 0;width:auto;height:auto;z-index:6;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding:56px max(22px,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));background:linear-gradient(to top,rgba(5,8,6,.9),rgba(5,8,6,.6) 55%,rgba(5,8,6,0));transition:opacity .4s}
+.fs-info{min-width:0;flex:1 1 320px;display:grid;gap:5px}
+.fs-info strong{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.6vw,52px);line-height:.95;text-transform:uppercase;text-wrap:balance}
+.fs-meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:14px;color:#cfd9cc}
+.fs-acts{display:flex;flex-wrap:wrap;gap:8px}
+.fs-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12)}
+.fs-prog i{display:block;height:100%;width:0;background:var(--sign)}
+.player.full .tag{left:max(14px,env(safe-area-inset-left));top:max(14px,env(safe-area-inset-top));transition:opacity .4s}
+.player.full .fsbtn{right:max(14px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));padding:8px 12px}
+.player.full .toast{bottom:auto;top:max(16px,env(safe-area-inset-top))}
+.player.full.idle{cursor:none}
+.player.full.idle .fsbar,.player.full.idle .fsbtn,.player.full.idle .tag{opacity:0;pointer-events:none}
+.player.cssfull{position:fixed;inset:0;z-index:40;aspect-ratio:auto;width:auto;height:auto}
+html.fslock,html.fslock body{overflow:hidden}
+
 /* filters */
 .filters{display:grid;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
 .frow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -206,6 +230,24 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <img class="poster on" id="stPoster" alt="">
       <div class="shield" id="shield" aria-hidden="true"></div>
       <span class="tag"><i></i>MAIN STAGE</span>
+      <button class="fsbtn" id="fsBtn" type="button" aria-label="Watch the Main Stage full screen" title="Full screen (F)">
+        <svg class="o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+        <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
+        <span class="o">Full screen</span><span class="x">Exit</span>
+      </button>
+      <div class="fsbar" id="fsBar">
+        <div class="fs-info">
+          <span class="eyebrow" id="fsEyebrow">On stage now</span>
+          <strong id="fsName"></strong>
+          <span class="fs-meta"><span id="fsWhere"></span><span class="clock" id="fsClock"></span><span id="fsDp"></span></span>
+        </div>
+        <div class="fs-acts">
+          <button class="btn sign" type="button" data-fs="sound" id="fsSound">Sound on</button>
+          <button class="btn" type="button" data-fs="tour" id="fsTour" aria-pressed="true">Touring</button>
+          <button class="btn" type="button" data-fs="next">Next cam</button>
+        </div>
+        <b class="fs-prog" aria-hidden="true"><i id="fsProg"></i></b>
+      </div>
     </div>
     <div class="stage-body">
       <span class="eyebrow" id="stEyebrow">On stage now</span>
@@ -602,6 +644,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     // how long to hold this cam: learned from when people skip (activity is one of the model's inputs); explore varies it ±
     const limit = stage.id ? (stage.dwell = dwellFor(BYID[stage.id])) * stage.explore * 1000 : TOUR_MS;
     $("stProg").style.width = touring && stage.id ? Math.min(100, t/limit*100)+"%" : "0%";
+    if(isFull()) syncFs();
     if(!$("wall").hidden || fading) return;
     if(touring && stage.id && hasAct && t >= MIN_MS && (!pend || !isHot(pend.id))){
       // jump early when a trending or action cam has clearly more going on, or this one went blank / off air
@@ -771,6 +814,70 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   let tt; function toast(m){ const t = $("toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(()=>t.classList.remove("on"), 2400); }
 
+  // ---------- full screen ----------
+  // The whole stage player goes full screen (both stacked YouTube players, so the crossfades keep working).
+  // Phones that can't put a page element full screen (iPhone Safari) get a fixed layer over the page instead.
+  // The cam's name and the stage buttons sit in a bar that fades out after a few idle seconds; a mouse move
+  // or a tap brings it back. Keys: F toggles, Esc leaves. Double-click on the player toggles too.
+  const PL = document.querySelector(".stage .player"), FS_IDLE_MS = 3000;
+  let fsCss = false, fsWas = false, idleT = 0;
+  function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+  function canNative(){ return !!((PL.requestFullscreen || PL.webkitRequestFullscreen) && (document.fullscreenEnabled || document.webkitFullscreenEnabled)); }
+  function isFull(){ return fsCss || fsEl() === PL; }
+  function enterFull(){
+    if(isFull() || !$("wall").hidden) return;
+    if(!canNative()){ fsCss = true; fsChanged(); return; }
+    try{
+      const r = PL.requestFullscreen ? PL.requestFullscreen({navigationUI:"hide"}) : PL.webkitRequestFullscreen();
+      if(r && r.catch) r.catch(()=>{ if(!isFull()){ fsCss = true; fsChanged(); } });   // refused: fall back to the page layer
+    }catch(e){ fsCss = true; fsChanged(); }
+  }
+  function exitFull(){
+    if(fsCss){ fsCss = false; fsChanged(); return; }
+    if(fsEl()){ try{ const r = (document.exitFullscreen || document.webkitExitFullscreen).call(document); if(r && r.catch) r.catch(()=>{}); }catch(e){} }
+  }
+  function fsChanged(){
+    const on = isFull(); if(on === fsWas) return; fsWas = on;
+    PL.classList.toggle("full", on); PL.classList.toggle("cssfull", on && fsCss);
+    document.documentElement.classList.toggle("fslock", on && fsCss);
+    $("fsBtn").setAttribute("aria-label", on ? "Leave full screen" : "Watch the Main Stage full screen");
+    $("fsBtn").title = on ? "Leave full screen (Esc)" : "Full screen (F)";
+    (on ? PL : document.body).appendChild($("toast"));   // keep messages visible on top of the full-screen player
+    clearTimeout(idleT); PL.classList.remove("idle");
+    if(on){
+      syncFs(); fsWake();
+      if(!fsCss && matchMedia("(pointer: coarse)").matches){ try{ screen.orientation.lock("landscape").catch(()=>{}); }catch(e){} }   // phones: turn to landscape like a video app
+    } else { try{ screen.orientation.unlock(); }catch(e){} }
+    track("stage_fullscreen", Object.assign(camProps(stage.id), on ? {on, mode: fsCss ? "page" : "native"} : {on}));
+  }
+  function fsWake(){
+    PL.classList.remove("idle"); clearTimeout(idleT);
+    if(isFull()) idleT = setTimeout(()=>{ if(PL.querySelector(".fsbar:hover, .fsbtn:hover, .fsbar :focus-visible, .fsbtn:focus-visible")) fsWake(); else PL.classList.add("idle"); }, FS_IDLE_MS);
+  }
+  function setTxt(id, v){ const el = $(id); if(el.textContent !== v) el.textContent = v; }
+  function syncFs(){
+    setTxt("fsEyebrow", $("stEyebrow").textContent); setTxt("fsName", $("stName").textContent);
+    setTxt("fsWhere", $("stWhere").textContent); setTxt("fsClock", $("stClock").textContent);
+    setTxt("fsDp", $("stDp").textContent); if($("fsDp").className !== $("stDp").className) $("fsDp").className = $("stDp").className;
+    setTxt("fsSound", $("sound").textContent);
+    setTxt("fsTour", touring ? "Touring" : "Staying here"); $("fsTour").setAttribute("aria-pressed", String(touring));
+    $("fsProg").style.width = $("stProg").style.width;
+  }
+  $("fsBtn").addEventListener("click", e=>{ e.stopPropagation(); isFull() ? exitFull() : enterFull(); });
+  $("fsBar").addEventListener("click", e=>{ const b = e.target.closest("[data-fs]"); if(!b) return; $(b.dataset.fs).click(); syncFs(); fsWake(); });
+  let lastPtr = "mouse";
+  PL.addEventListener("dblclick", e=>{ if(lastPtr === "touch" || e.target.closest("button")) return; isFull() ? exitFull() : enterFull(); });   // mouse only: taps toggle the bar
+  PL.addEventListener("pointermove", e=>{ if(e.pointerType !== "touch" && isFull()) fsWake(); });
+  PL.addEventListener("pointerdown", e=>{
+    lastPtr = e.pointerType;
+    if(!isFull()) return;
+    // touch: a tap on the picture shows the bar, a second tap hides it again
+    if(e.pointerType === "touch" && !e.target.closest("button") && !PL.classList.contains("idle")){ clearTimeout(idleT); PL.classList.add("idle"); }
+    else fsWake();
+  });
+  document.addEventListener("fullscreenchange", fsChanged);
+  document.addEventListener("webkitfullscreenchange", fsChanged);
+
   // ---------- events ----------
   $("grid").addEventListener("click", e=>{
     const s = e.target.closest("[data-stage]"); if(s){ prepare(s.dataset.stage, "You picked this cam.", {now:true, user:true, reason:"pick"}); window.scrollTo({top:0, behavior:"smooth"}); return; }
@@ -790,7 +897,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   $("wallClose").addEventListener("click", closeWall);
   $("wallMute").addEventListener("click", ()=>{ wallPlayers.forEach(p=>{ try{ p.mute(); }catch(e){} }); document.querySelectorAll("#wallGrid .tile").forEach(t=>t.classList.remove("sound")); });
   $("wallGrid").addEventListener("click", e=>{ const b = e.target.closest("[data-sound]"); if(b) wallSound(+b.dataset.sound); });
-  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && !$("wall").hidden) closeWall(); });
+  document.addEventListener("keydown", e=>{
+    if(e.key==="Escape" && !$("wall").hidden) closeWall();
+    else if(e.key==="Escape" && fsCss) exitFull();
+    else if((e.key==="f" || e.key==="F") && !e.metaKey && !e.ctrlKey && !e.altKey && $("wall").hidden && !(e.target.closest && e.target.closest("input,select,textarea,[contenteditable]"))){ e.preventDefault(); isFull() ? exitFull() : enterFull(); }
+    if(isFull()) fsWake();
+  });
 
   // ---------- boot ----------
   // mfk.json lists cams YouTube marks Made for Kids (written by .github/workflows/mfk.yml). YouTube's API policy
