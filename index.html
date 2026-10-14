@@ -194,6 +194,10 @@ footer a{color:var(--muted)}
 .browse h2{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.03em;color:var(--sign);margin:0 0 10px}
 .browse p{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:14px}
 .browse a{color:var(--muted)}
+.guide{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.guide h2{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.03em;color:var(--sign);margin:0 0 8px}
+.guide h3{font-size:16px;margin:16px 0 4px}
+.guide p{margin:0 0 8px;max-width:78ch;color:var(--fg)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--sign);color:#1b1500;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100% - 32px);z-index:30}
 .toast.on{opacity:1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -298,12 +302,24 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <li>Each cam is tagged with its place, time zone and habitat. “Awake now” keeps the cams where it is between 5 am and 8 pm locally.</li>
       <li>The Main Stage learns when to move on. Every press of “Next cam”, by you or anyone, teaches it how long each cam holds people; your own skips change your tour right away. It follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam.</li>
       <li>A wall plays up to 9 cams at once. Tap “Sound” on a tile to hear that one.</li>
-      <li>The list is checked every hour: restarted streams get their new link, dead ones are removed, and new cams are added a few times a day.</li>
+      <li>The list is checked every day: restarted streams get their new link, dead ones are removed, and new cams are added.</li>
     </ul>
     <p class="note">Every video plays from its owner’s channel through YouTube’s own player. Some owners block playback on other sites; those cams open on YouTube instead. Recording or re-editing a stream for anything public needs the cam owner’s permission.</p>
   </details>
   <section class="browse" aria-label="Browse by animal"><h2>Live cams by animal</h2><!--hubs:start--><p><a href="/animals/backyard-birds/">Backyard birds</a><a href="/animals/storks/">Storks</a><a href="/animals/bald-eagles/">Bald eagles</a><a href="/animals/ospreys/">Ospreys</a><a href="/animals/peregrine-falcons/">Peregrine falcons</a><a href="/animals/cats/">Cats and kittens</a><a href="/animals/owls/">Owls</a><a href="/animals/penguins/">Penguins</a><a href="/animals/coral-reefs/">Coral reefs</a><a href="/animals/brown-bears/">Brown bears</a><a href="/animals/seals/">Seals and sea lions</a><a href="/animals/farm-animals/">Farm animals</a><a href="/animals/giraffes/">Giraffes</a><a href="/animals/deer/">Deer</a><a href="/animals/hummingbirds/">Hummingbirds</a><a href="/animals/elephants/">Elephants</a><a href="/animals/great-apes/">Great apes</a><a href="/animals/bats/">Bats</a><a href="/animals/hedgehogs/">Hedgehogs</a><a href="/animals/dogs/">Puppies and dogs</a><a href="/animals/tigers/">Tigers</a><a href="/animals/goats/">Goats</a><a href="/animals/squirrels/">Squirrels</a><a href="/animals/wildebeest-migration/">Wildebeest migration</a><a href="/animals/puffins/">Puffins</a><a href="/animals/otters/">Otters</a><a href="/animals/raccoons/">Raccoons</a><a href="/animals/horses/">Horses</a><a href="/animals/manatees/">Manatees</a><a href="/animals/orcas/">Orcas</a><a href="/animals/salmon/">Salmon</a><a href="/animals/sharks/">Sharks</a><a href="/animals/wolves/">Wolves</a></p><!--hubs:end--></section>
-  <footer><span id="foot"></span> · <a href="privacy.html">Privacy</a></footer>
+  <section class="guide" aria-label="Field guide">
+    <h2>A field guide to live animal cams</h2>
+    <p>A live cam is a window, not a film: nobody edits out the quiet parts. That is what makes the moments worth it, and it is why this zoo keeps an eye on hundreds of streams at once and sends the Main Stage to the ones where something is happening. Here is what to look for, wherever you tune in.</p>
+    <h3>Nests</h3>
+    <p>Eagle, osprey, stork and falcon cams follow the breeding season. Watch for nest-building and egg-laying in late winter and spring, hatching about five weeks later, and the chicks’ first flapping “helicopter” practice just before they fledge. Between seasons, adults often still visit to repair the nest.</p>
+    <h3>Waterholes and rivers</h3>
+    <p>African waterhole cams are busiest in the dry season and in the first and last hours of light, when elephants, giraffes, zebras and antelope come to drink and predators follow. At Brooks Falls in Alaska, brown bears gather in July and September to catch salmon jumping the falls.</p>
+    <h3>Zoos, aquariums and rescues</h3>
+    <p>Zoo cams are liveliest around feeding times and in the morning, before the animals settle for the day. Aquarium and reef cams move all day long, and rescue cams for kittens, puppies and sloths are at their best at mealtimes and playtime.</p>
+    <h3>After dark</h3>
+    <p>When a cam switches to a grey infrared picture, the night shift begins: owls hunting, hedgehogs and badgers foraging, and animals at African waterholes that you will rarely see by day. Use “Awake now” to stay in daylight, or leave it off to watch the night side of the planet.</p>
+  </section>
+  <footer><span id="foot"></span> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a></footer>
 </div>
 
 <div class="wall" id="wall" hidden role="dialog" aria-label="Wall of live cams">
