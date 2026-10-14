@@ -200,14 +200,14 @@
   "index": false
  },
  "/live/bat-flight-carlsbad-caverns/": {
-  "h": "d5f62053e00e",
-  "mod": "2026-10-03",
-  "index": false
+  "h": "86da1ec8abfb",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/live/bat-house-cam-fly-by-night/": {
-  "h": "6c11c9a80b4e",
-  "mod": "2026-10-03",
-  "index": false
+  "h": "2c52403b9a35",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/live/beaver-lodge-holnicote-estate/": {
   "h": "67aa74919bdf",
@@ -325,9 +325,9 @@
   "index": false
  },
  "/live/bracken-cave-bats-texas/": {
-  "h": "836c80e70958",
-  "mod": "2026-10-03",
-  "index": false
+  "h": "cac6601745af",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/live/brooks-falls-brown-bears/": {
   "h": "62684251f6da",
@@ -680,9 +680,9 @@
   "index": false
  },
  "/live/giant-flying-foxes-lubee-bat-conservancy/": {
-  "h": "b271f24b53e2",
-  "mod": "2026-10-03",
-  "index": false
+  "h": "b2d889e395cd",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/live/giant-pandas-chengdu/": {
   "h": "1862c6011501",
@@ -1075,9 +1075,9 @@
   "index": false
  },
  "/live/mixed-flying-foxes-lubee-bat-conservancy/": {
-  "h": "7839629b0f29",
-  "mod": "2026-10-03",
-  "index": false
+  "h": "67279cb1ff3f",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/live/monterey-bay/": {
   "h": "fe45b587df3a",
@@ -2090,9 +2090,9 @@
   "index": false
  },
  "/animals/bats/": {
-  "h": "dc60c61186b5",
-  "mod": "2026-10-04",
-  "index": false
+  "h": "33e9f9bef5b1",
+  "mod": "2026-10-14",
+  "index": true
  },
  "/animals/tigers/": {
   "h": "9376ab90a919",

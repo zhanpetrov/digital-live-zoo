@@ -1126,7 +1126,10 @@
    "desc": "Watch the Carlsbad Caverns bat flight live. Several hundred thousand Brazilian free-tailed bats leave the cave around dusk, April through mid-October.",
    "src": [
     "https://www.nps.gov/cave/learn/nature/bft_bat_outflight.htm"
-   ]
+   ],
+   "started": {
+    "BwiIsjXt3KI": "2026-03-31T22:46:22Z"
+   }
   },
   {
    "slug": "bat-house-cam-fly-by-night",
@@ -1160,7 +1163,10 @@
    "desc": "Watch Brazilian free-tailed bats live in bat houses in central Florida. They leave just before sunset and swarm back just before sunrise, Eastern time.",
    "src": [
     "https://www.flybynightinc.org/batcam.html"
-   ]
+   ],
+   "started": {
+    "pC8ResqNwKc": "2026-09-28T22:57:34Z"
+   }
   },
   {
    "slug": "beaver-lodge-holnicote-estate",
@@ -1817,7 +1823,10 @@
    "desc": "Watch Bracken Cave live, summer home of up to 20 million Mexican free-tailed bats, the largest bat colony in the world.",
    "src": [
     "https://www.batcon.org/about-bats/bracken-cave-preserve/"
-   ]
+   ],
+   "started": {
+    "jrIrspc_5RI": "2026-04-07T16:39:02Z"
+   }
   },
   {
    "slug": "brooks-falls-brown-bears",
@@ -3736,7 +3745,10 @@
    "desc": "Watch giant flying foxes live at Lubee Bat Conservancy in Florida, home to more than 200 fruit bats of ten species.",
    "src": [
     "https://en.wikipedia.org/wiki/Lubee_Bat_Conservancy"
-   ]
+   ],
+   "started": {
+    "Zahk-Cm0gqk": "2026-03-30T16:24:22Z"
+   }
   },
   {
    "slug": "giant-pandas-chengdu",
@@ -5854,7 +5866,10 @@
    "desc": "Watch several species of flying foxes live at Lubee Bat Conservancy, an accredited bat sanctuary near Gainesville, Florida.",
    "src": [
     "https://en.wikipedia.org/wiki/Lubee_Bat_Conservancy"
-   ]
+   ],
+   "started": {
+    "EXSoa7sQTzQ": "2026-03-30T16:41:36Z"
+   }
   },
   {
    "slug": "monterey-bay",
