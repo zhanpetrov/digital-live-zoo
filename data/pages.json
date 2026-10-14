@@ -134,6 +134,21 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/bald-eagle-nest-little-miami-cam-3/": {
+  "h": "c6ac9105724a",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/bald-eagle-nest-pepe-and-muhlady/": {
+  "h": "7200cf3fafbc",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/bald-eagle-nest-sauces/": {
+  "h": "53dca18dca0a",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/bald-eagles-glacier-gardens/": {
   "h": "2ab17268d9df",
   "mod": "2026-10-14",
@@ -159,13 +174,23 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/bald-eagles-two-harbors/": {
+  "h": "a5039c58ee0c",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/bald-eagles-u-s-steel/": {
   "h": "9761871e33ca",
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/barn-owl-box-riet-vell-reserve/": {
+  "h": "9494cdf18fa7",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/barn-owl-box-somerset-levels/": {
-  "h": "e5c03c21406f",
+  "h": "a43cbeb88072",
   "mod": "2026-10-14",
   "index": false
  },
@@ -175,27 +200,32 @@
   "index": false
  },
  "/live/barn-owl-nest-goose-pond/": {
-  "h": "d62e335d6996",
+  "h": "986cd70cfd0d",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/barn-owl-nest-wirral-barn-owl-trust/": {
-  "h": "31219ec242c7",
+  "h": "720dbeaad4f8",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/barn-owls-and-kestrels-fotherdale/": {
-  "h": "908ef3ca445a",
+  "h": "9ed95b3018af",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/barn-owls-badgers-and-foxes-multiview/": {
+  "h": "b6ffd276ab02",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/barn-owls-florida/": {
-  "h": "9856152e6974",
+  "h": "4c71c79a5e2d",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/barn-owls-university-of-nature/": {
-  "h": "09177b15e886",
+  "h": "822453679559",
   "mod": "2026-10-14",
   "index": false
  },
@@ -226,6 +256,11 @@
  },
  "/live/bird-bath-and-hedgehog-feeder/": {
   "h": "79b2d763c662",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/bird-bath-tiszalok/": {
+  "h": "01e653696b0f",
   "mod": "2026-10-14",
   "index": false
  },
@@ -271,6 +306,11 @@
  },
  "/live/bird-feeder-makov-rescue-station/": {
   "h": "245832775a68",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/bird-feeder-mountain-nook/": {
+  "h": "82abddc6a43d",
   "mod": "2026-10-14",
   "index": false
  },
@@ -345,7 +385,7 @@
   "index": false
  },
  "/live/burrowing-owl-nest-oregon/": {
-  "h": "8c4c3135644b",
+  "h": "95872d272acc",
   "mod": "2026-10-14",
   "index": false
  },
@@ -354,8 +394,18 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/california-condors-big-sur/": {
+  "h": "2a10c4efc58e",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/camelthorn-waterhole-botswana/": {
   "h": "cb336dff16a8",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/campi-ya-kanzi-waterhole/": {
+  "h": "641c92d35fb5",
   "mod": "2026-10-14",
   "index": false
  },
@@ -394,10 +444,25 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/chinchilla-room-pet-cafe/": {
+  "h": "ce463acb9624",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/cinereous-vulture-nest-guadarrama/": {
+  "h": "d4a06aed2928",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/cliffside-penguin-village-komoro-zoo/": {
   "h": "9a5174c0e08c",
   "mod": "2026-10-14",
   "index": true
+ },
+ "/live/common-kestrel-nest-israel/": {
+  "h": "0dc3ec52ca1c",
+  "mod": "2026-10-14",
+  "index": false
  },
  "/live/coral-and-fish-aquarium-of-the-pacific/": {
   "h": "b6f576141cbc",
@@ -540,12 +605,12 @@
   "index": false
  },
  "/live/eagle-owl-box-elisabethkirche/": {
-  "h": "d8a9a454851c",
+  "h": "f61634c07082",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/eagle-owl-riga-forests/": {
-  "h": "1c80df56d8e7",
+  "h": "2c55ac0d7db5",
   "mod": "2026-10-14",
   "index": false
  },
@@ -579,6 +644,11 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/elk-country-cam-1/": {
+  "h": "80929adc9493",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/elk-country-cam-2/": {
   "h": "839afdb43224",
   "mod": "2026-10-14",
@@ -589,8 +659,13 @@
   "mod": "2026-10-14",
   "index": true
  },
+ "/live/eurasian-eagle-owl-cam-3/": {
+  "h": "0c117b588513",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/eurasian-eagle-owl-eifel/": {
-  "h": "5d9592cc6396",
+  "h": "75f589748cb4",
   "mod": "2026-10-14",
   "index": false
  },
@@ -617,6 +692,11 @@
  "/live/finch-hattons-waterhole-tsavo/": {
   "h": "066476e38320",
   "mod": "2026-10-03",
+  "index": false
+ },
+ "/live/fish-ponds-with-white-tailed-eagles/": {
+  "h": "7e52712500d3",
+  "mod": "2026-10-14",
   "index": false
  },
  "/live/floppy-and-friends-wildlife-aid/": {
@@ -656,6 +736,11 @@
  },
  "/live/fru-rauer-osprey-nest/": {
   "h": "514a3790d30f",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/fruit-feeder-canopy-lodge/": {
+  "h": "03c234105749",
   "mod": "2026-10-14",
   "index": false
  },
@@ -804,6 +889,11 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/horses-in-the-pasture-far-view/": {
+  "h": "e96e82ede835",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/horses-the-paddocks-riding-centre/": {
   "h": "8f6dc3c5c461",
   "mod": "2026-10-14",
@@ -840,7 +930,7 @@
   "index": false
  },
  "/live/iris-the-great-horned-owl/": {
-  "h": "f92fc0045a64",
+  "h": "fd5773ed7dfd",
   "mod": "2026-10-14",
   "index": false
  },
@@ -851,6 +941,11 @@
  },
  "/live/javelinas-and-birds-ash-canyon/": {
   "h": "792af1dc2a03",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/jellies-monterey-bay-aquarium/": {
+  "h": "fea2f6e23222",
   "mod": "2026-10-14",
   "index": false
  },
@@ -949,8 +1044,13 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/little-owl-nest-tiszalok/": {
+  "h": "e1631ecb7fee",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/little-owls-bommelerwaard/": {
-  "h": "f44e094e12f9",
+  "h": "c5acd694f1e0",
   "mod": "2026-10-14",
   "index": false
  },
@@ -958,6 +1058,11 @@
   "h": "5046f36f3a21",
   "mod": "2026-10-14",
   "index": true
+ },
+ "/live/little-penguin-nests-oamaru/": {
+  "h": "3509a6b0d308",
+  "mod": "2026-10-14",
+  "index": false
  },
  "/live/little-penguins-burnie-penguin-centre/": {
   "h": "6092e5166fc7",
@@ -1139,8 +1244,18 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/nest-box-uplengen/": {
+  "h": "67ba4c4188aa",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/nkorho-bush-lodge-sabi-sand/": {
   "h": "c5605db3a7ae",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/nkorho-bush-lodge-waterhole/": {
+  "h": "995f2fd5c484",
   "mod": "2026-10-14",
   "index": false
  },
@@ -1384,6 +1499,11 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/peregrine-falcons-tower-cam/": {
+  "h": "eca56cb1a208",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/peregrine-falcons-umass-amherst/": {
   "h": "9b7be7280de3",
   "mod": "2026-10-14",
@@ -1434,6 +1554,11 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/pond-makov-rescue-station/": {
+  "h": "6bbe2e1a0d9c",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/porini-rhino-camp-ol-pejeta/": {
   "h": "b41c7fd0992e",
   "mod": "2026-10-04",
@@ -1463,6 +1588,11 @@
   "h": "9c2c5dca5e6c",
   "mod": "2026-10-14",
   "index": true
+ },
+ "/live/raccoon-saloon-living-room/": {
+  "h": "7b71f3ebf2cb",
+  "mod": "2026-10-14",
+  "index": false
  },
  "/live/raccoon-saloon-pond/": {
   "h": "46f50bc8a696",
@@ -1501,6 +1631,11 @@
  },
  "/live/rescue-cats-azuki-and-friends/": {
   "h": "5a58d17fc106",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/rescue-cats-hogo-neko-no-ie/": {
+  "h": "716e602234b4",
   "mod": "2026-10-14",
   "index": false
  },
@@ -1554,6 +1689,11 @@
   "mod": "2026-10-03",
   "index": false
  },
+ "/live/saint-louis-zoo-st-louis/": {
+  "h": "bc0a6e5117fb",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/salmon-fish-cam-long-live-the-kings/": {
   "h": "5a0f0c1ede64",
   "mod": "2026-10-14",
@@ -1598,6 +1738,11 @@
   "h": "57491719d208",
   "mod": "2026-10-14",
   "index": true
+ },
+ "/live/sea-otters-vancouver-aquarium-cam-2/": {
+  "h": "3e034add617f",
+  "mod": "2026-10-14",
+  "index": false
  },
  "/live/seal-rescues-walvis-bay/": {
   "h": "601c99fa303a",
@@ -1676,6 +1821,11 @@
  },
  "/live/sheep-pasture-farm-sanctuary/": {
   "h": "43a0fcabd8c4",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/shorebird-aviary-monterey-bay-aquarium/": {
+  "h": "b5e65cad980a",
   "mod": "2026-10-14",
   "index": false
  },
@@ -1865,12 +2015,12 @@
   "index": false
  },
  "/live/tawny-owl-box-hamm/": {
-  "h": "acf130511afd",
+  "h": "c9a6cf50385c",
   "mod": "2026-10-14",
   "index": false
  },
  "/live/tawny-owls-and-badgers-ash-wood/": {
-  "h": "1272240bf5e5",
+  "h": "e3b3225c0ba8",
   "mod": "2026-10-14",
   "index": false
  },
@@ -1886,6 +2036,11 @@
  },
  "/live/the-hide-waterhole-hwange/": {
   "h": "89ddda43ddb5",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/tigers-bao-and-ming-animal-adventure-park/": {
+  "h": "ed163a2e96ed",
   "mod": "2026-10-14",
   "index": false
  },
@@ -1984,6 +2139,11 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/live/white-tailed-eagle-nest-durbe/": {
+  "h": "28bf14c374f8",
+  "mod": "2026-10-14",
+  "index": false
+ },
  "/live/wild-africa-safari-cam/": {
   "h": "86957d7d7ba3",
   "mod": "2026-10-03",
@@ -2001,6 +2161,11 @@
  },
  "/live/wolves-international-wolf-center/": {
   "h": "c1731a869a13",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/live/wolves-international-wolf-center-north/": {
+  "h": "a009458fe38e",
   "mod": "2026-10-14",
   "index": false
  },
@@ -2036,171 +2201,6 @@
  },
  "/live/zoo-pond-trevor-lovejoy/": {
   "h": "cc2c3de5d942",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/sea-otters-vancouver-aquarium-cam-2/": {
-  "h": "3e034add617f",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/jellies-monterey-bay-aquarium/": {
-  "h": "fea2f6e23222",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/shorebird-aviary-monterey-bay-aquarium/": {
-  "h": "b5e65cad980a",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/pond-makov-rescue-station/": {
-  "h": "6bbe2e1a0d9c",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/white-tailed-eagle-nest-durbe/": {
-  "h": "28bf14c374f8",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/barn-owl-box-riet-vell-reserve/": {
-  "h": "9494cdf18fa7",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/cinereous-vulture-nest-guadarrama/": {
-  "h": "d4a06aed2928",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/wolves-international-wolf-center-north/": {
-  "h": "a009458fe38e",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/raccoon-saloon-living-room/": {
-  "h": "7b71f3ebf2cb",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/rescue-cats-hogo-neko-no-ie/": {
-  "h": "716e602234b4",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/chinchilla-room-pet-cafe/": {
-  "h": "ce463acb9624",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/horses-in-the-pasture-far-view/": {
-  "h": "e96e82ede835",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bird-bath-tiszalok/": {
-  "h": "01e653696b0f",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/little-owl-nest-tiszalok/": {
-  "h": "b4ea33ee6baf",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/campi-ya-kanzi-waterhole/": {
-  "h": "641c92d35fb5",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/nkorho-bush-lodge-waterhole/": {
-  "h": "995f2fd5c484",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bald-eagle-nest-pepe-and-muhlady/": {
-  "h": "7200cf3fafbc",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bald-eagle-nest-little-miami-cam-3/": {
-  "h": "c6ac9105724a",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bald-eagles-two-harbors/": {
-  "h": "a5039c58ee0c",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bald-eagle-nest-sauces/": {
-  "h": "53dca18dca0a",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/california-condors-big-sur/": {
-  "h": "2a10c4efc58e",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/peregrine-falcons-tower-cam/": {
-  "h": "eca56cb1a208",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/elk-country-cam-1/": {
-  "h": "80929adc9493",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/fish-ponds-with-white-tailed-eagles/": {
-  "h": "7e52712500d3",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/bird-feeder-mountain-nook/": {
-  "h": "82abddc6a43d",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/barn-owls-badgers-and-foxes-multiview/": {
-  "h": "e74b341c1cbf",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/eurasian-eagle-owl-cam-3/": {
-  "h": "f8a8e4094fc8",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/nest-box-uplengen/": {
-  "h": "67ba4c4188aa",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/tigers-bao-and-ming-animal-adventure-park/": {
-  "h": "ed163a2e96ed",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/saint-louis-zoo-st-louis/": {
-  "h": "bc0a6e5117fb",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/little-penguin-nests-oamaru/": {
-  "h": "3509a6b0d308",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/fruit-feeder-canopy-lodge/": {
-  "h": "03c234105749",
-  "mod": "2026-10-14",
-  "index": false
- },
- "/live/common-kestrel-nest-israel/": {
-  "h": "0dc3ec52ca1c",
   "mod": "2026-10-14",
   "index": false
  },
@@ -2250,17 +2250,22 @@
   "index": false
  },
  "/animals/bald-eagles/": {
-  "h": "83ba76bf15c5",
+  "h": "fea4af1617cc",
   "mod": "2026-10-14",
   "index": true
  },
  "/animals/owls/": {
-  "h": "623b7f6709c9",
+  "h": "fa1f1b5529fe",
   "mod": "2026-10-14",
   "index": true
  },
  "/animals/kestrels/": {
   "h": "f99aa6d0fdc7",
+  "mod": "2026-10-14",
+  "index": false
+ },
+ "/animals/foxes/": {
+  "h": "9ffc23058b93",
   "mod": "2026-10-14",
   "index": false
  },
@@ -2285,7 +2290,7 @@
   "index": true
  },
  "/animals/coral-reefs/": {
-  "h": "acd441ca5417",
+  "h": "455c2fc26a63",
   "mod": "2026-10-14",
   "index": true
  },
@@ -2293,11 +2298,6 @@
   "h": "f0dd9a59a172",
   "mod": "2026-10-14",
   "index": true
- },
- "/animals/foxes/": {
-  "h": "9ffc23058b93",
-  "mod": "2026-10-14",
-  "index": false
  },
  "/animals/goats/": {
   "h": "c8bde4753717",
@@ -2345,12 +2345,7 @@
   "index": true
  },
  "/animals/seals/": {
-  "h": "9d1b92c92ff4",
-  "mod": "2026-10-14",
-  "index": true
- },
- "/animals/manatees/": {
-  "h": "9d36358ddaa0",
+  "h": "aa2ed3768d67",
   "mod": "2026-10-14",
   "index": true
  },
@@ -2359,8 +2354,13 @@
   "mod": "2026-10-14",
   "index": false
  },
+ "/animals/manatees/": {
+  "h": "9d36358ddaa0",
+  "mod": "2026-10-14",
+  "index": true
+ },
  "/animals/orcas/": {
-  "h": "81e0d197b81f",
+  "h": "98fd306c8847",
   "mod": "2026-10-14",
   "index": true
  },
@@ -2380,12 +2380,12 @@
   "index": true
  },
  "/animals/sharks/": {
-  "h": "0c9ea970f595",
+  "h": "6c0d7f787f2f",
   "mod": "2026-10-14",
   "index": true
  },
  "/animals/otters/": {
-  "h": "ea502469954b",
+  "h": "07cbfa05a0b4",
   "mod": "2026-10-14",
   "index": true
  },
@@ -2395,7 +2395,7 @@
   "index": true
  },
  "/animals/": {
-  "h": "cd7ac7b03527",
+  "h": "75bc8e71dc75",
   "mod": "2026-10-14",
   "index": true
  },
@@ -2565,7 +2565,7 @@
   "index": false
  },
  "/": {
-  "h": "91546098ed47",
+  "h": "61f560fbd9c3",
   "mod": "2026-10-14",
   "index": true
  }
