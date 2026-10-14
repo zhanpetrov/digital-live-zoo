@@ -189,7 +189,7 @@ TOP = ('<header class="top"><a class="logo" href="/">Digital Live Zoo</a>'
 
 def foot():
     return ('<footer class="foot"><a href="/">Watch the whole zoo</a> · <a href="/animals/">All animals</a> · '
-            '<a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a><p>Every stream plays from its owner\'s channel through YouTube\'s player. '
+            '<a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a><p>Every stream plays from its owner\'s channel through YouTube\'s player. '
             'Digital Live Zoo is not affiliated with the zoos, parks and people who run these cams.</p></footer>'
             '<script src="/assets/pages.js" defer></script></body></html>\n')
 

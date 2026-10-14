@@ -13,6 +13,223 @@
    "desc": "Watch {n} live bat cams: the Carlsbad Caverns bat flight, Bracken Cave in Texas, a Florida bat house and flying foxes at a bat sanctuary.",
    "intro": "Live bat cams from the United States: cave colonies of free-tailed bats in New Mexico and Texas, a bat house in central Florida, and fruit bats called flying foxes at a Florida sanctuary. Free-tailed bats leave their roosts around dusk, and in summer Bracken Cave in Texas holds the largest bat colony in the world, up to 20 million bats. Brazilian and Mexican free-tailed bats are two names for the same species.",
    "intro_ok": true
+  },
+  "backyard-birds": {
+   "title": "Live bird feeder cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live bird feeder cams",
+   "desc": "Watch {n} live bird feeder cams from backyards, nature centres and rescue stations in North America, Europe and Africa.",
+   "intro": "Live bird feeder cams from backyards and nature centres in the United States, Germany, Norway, the Czech Republic and South Africa. Feeders are busiest in the first hours after sunrise and again before dusk, and in winter, when natural food is scarce. Look for cardinals, blue jays and woodpeckers in North America, tits, finches and robins in Europe, and the occasional squirrel, deer or hawk drawn in by the crowd.",
+   "intro_ok": true
+  },
+  "storks": {
+   "title": "Live stork nest cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live stork nest cams",
+   "desc": "Watch {n} live white stork nest cams on rooftops and chimneys in Germany and the Czech Republic, plus a rare black stork nest in Estonia.",
+   "intro": "Live stork nest cams on church roofs, chimneys and poles across Germany and the Czech Republic, and a rare black stork nest deep in the forest of Estonia. White storks fly back from Africa in March and April, often to the same nest every year, lay two to five eggs and raise their chicks through June and July. By late August the young are gone, and most nests stay empty through the winter.",
+   "intro_ok": true
+  },
+  "bald-eagles": {
+   "title": "Live bald eagle nest cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live bald eagle nest cams",
+   "desc": "Watch {n} live bald eagle nest cams from California and Alaska to Florida, Iowa and Pittsburgh.",
+   "intro": "Live bald eagle nest cams across the United States: on the California Channel Islands and at Big Bear Lake, in Alaska, Iowa, Michigan, Ohio, Louisiana, Pittsburgh and Florida. Bald eagles reuse and add to the same nest every year, and some nests grow to weigh more than a ton. The season starts early: eggs come as soon as November in Florida and around February further north, and eaglets fledge about three months after hatching.",
+   "intro_ok": true
+  },
+  "peregrine-falcons": {
+   "title": "Live peregrine falcon cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live peregrine falcon cams",
+   "desc": "Watch {n} live peregrine falcon nest cams on city towers, bridges and cliffs in the United States, Australia and Japan.",
+   "intro": "Live peregrine falcon cams from nest boxes on office towers, city halls, a state capitol, power plants and cliffs, in the United States, Australia and Japan. Peregrines are the fastest animals on Earth, diving at more than 300 km/h on other birds. In the northern hemisphere they lay eggs in March and April; in Australia, in August and September, so somewhere in this zoo there is often a nest with chicks.",
+   "intro_ok": true
+  },
+  "ospreys": {
+   "title": "Live osprey nest cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live osprey nest cams",
+   "desc": "Watch {n} live osprey nest cams in Montana, Idaho, Pennsylvania, New Jersey, North Carolina, Florida, England, Wales and Norway.",
+   "intro": "Live osprey nest cams on platforms and poles in the United States, England, Wales and Norway. Ospreys eat almost nothing but fish, which they catch by plunging feet first into the water. Most of these birds migrate: they arrive at their nests in March and April, raise two or three chicks over the summer, and leave for the south in September, so outside the season the nests are often empty.",
+   "intro_ok": true
+  },
+  "cats": {
+   "title": "Live cat and kitten cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live cat and kitten cams",
+   "desc": "Watch {n} live cat and kitten cams from rescues and shelters in the United States, Canada, Japan, South Korea and the Netherlands.",
+   "intro": "Live cat cams from rescues, shelters and a cat island: kitten nurseries in Los Angeles, Tucson and Langley, free-roaming shelter cats in Ohio and the Netherlands, rescue rooms in Japan and South Korea. Many of these cats are waiting for adoption, and some rescues stream so that viewers can follow a litter from birth to new home. Mealtimes and play sessions with volunteers are the liveliest moments.",
+   "intro_ok": true
+  },
+  "owls": {
+   "title": "Live owl cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live owl cams",
+   "desc": "Watch {n} live owl cams: barn owl boxes, eagle-owl nests and a great horned owl, in Europe and the United States.",
+   "intro": "Live owl cams from nest boxes, barns, church towers and forests in England, the Netherlands, Germany, Italy, Latvia and the United States. Most owls are active at night, so these cams use infrared light and show a grey picture after dark; dusk is the best time to catch adults leaving to hunt or returning with prey. Barn owls can breed almost any time of year, while eagle-owls and tawny owls nest in late winter and spring.",
+   "intro_ok": true
+  },
+  "coral-reefs": {
+   "title": "Live coral reef cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live coral reef cams",
+   "desc": "Watch {n} live coral reef cams: wild reefs off Honduras and Florida, an urban reef in Miami and aquarium reefs in California and Curaçao.",
+   "intro": "Live coral reef cams on wild reefs off Utila in Honduras, on the Mesoamerican Reef, along the Florida coast and in a shipping channel in Miami, plus aquarium reefs in Long Beach and Curaçao. Reefs are busy all day: parrotfish grazing on coral, schools of grunts and snappers, rays crossing the sand and now and then a turtle or a reef shark. Wild reef cams are clearest in calm weather and bright midday light.",
+   "intro_ok": true
+  },
+  "brown-bears": {
+   "title": "Live brown bear cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live brown bear cams",
+   "desc": "Watch {n} live brown bear cams from Katmai and Anan Creek in Alaska and rescued bears in Romania and Russia.",
+   "intro": "Live brown bear cams from Brooks Falls and the Brooks River in Katmai National Park and from Anan Creek in Alaska, where bears gather to catch salmon, plus rescued bears in Romania and Russia. In Alaska the action follows the salmon: Brooks Falls is busiest in July and again in September, Anan Creek in July and August. By October the bears are at their heaviest and soon head off to their dens.",
+   "intro_ok": true
+  },
+  "seals": {
+   "title": "Live seal and sea lion cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live seal and sea lion cams",
+   "desc": "Watch {n} live seal and sea lion cams: rescue centres in the Netherlands, Namibia and Japan, wild haul-outs in Canada and Rhode Island.",
+   "intro": "Live seal cams from rescue centres in the Netherlands, Namibia and Japan, where injured and orphaned seals recover before release, and from wild beaches in British Columbia and Rhode Island. Harbour and grey seals haul out at low tide to rest and warm up, so wild cams are busiest when the water is low. Underwater cams show how agile seals are once they are back in the water.",
+   "intro_ok": true
+  },
+  "farm-animals": {
+   "title": "Live farm animal cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live farm animal cams",
+   "desc": "Watch {n} live farm animal cams: cows, sheep, goats, alpacas, ducks and chickens on farms and sanctuaries in the United States.",
+   "intro": "Live cams from farms and animal sanctuaries in the United States: cattle and sheep at Farm Sanctuary in New York, alpacas on Martha's Vineyard, goats, ducks and silkie chickens. Farm animals keep a steady routine, so feeding times in the morning and late afternoon are the best moments to tune in, and spring is the season for lambs and kids.",
+   "intro_ok": true
+  },
+  "giraffes": {
+   "title": "Live giraffe cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live giraffe cams",
+   "desc": "Watch {n} live giraffe cams from zoos in the United States, Australia and Japan.",
+   "intro": "Live giraffe cams from zoos in Colorado, South Carolina and New York, Werribee Open Range Zoo in Australia and Kumamoto Zoo in Japan. Giraffes are the tallest animals on land and sleep only a few hours a day, often standing up. Indoor barn cams are best early in the morning and in the evening, outdoor yards in the middle of the day, and some of these herds have calves.",
+   "intro_ok": true
+  },
+  "elephants": {
+   "title": "Live elephant cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live elephant cams",
+   "desc": "Watch {n} live elephant cams from wild Africa and from zoos in Japan, Hungary and Hawaii.",
+   "intro": "Live elephant cams from Kenya's Chyulu Hills and South Africa's Tembe Elephant Park, home to some of the largest tuskers alive, and from zoos in Japan, Hungary and Hawaii. Wild elephants come to water most often in the heat of the day and in the dry season, when they drink, bathe and throw mud and dust over their backs to keep cool.",
+   "intro_ok": true
+  },
+  "deer": {
+   "title": "Live deer cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live deer cams",
+   "desc": "Watch {n} live deer cams from woods and backyards in the United States and England.",
+   "intro": "Live deer cams from woods, creeks and backyards in Maine, Alabama, Oregon and the eastern United States, and a forest cam in London. Deer are most active at dawn and dusk, and in autumn the bucks grow their antlers to full size for the rut. Many of these cams also pick up foxes, raccoons, turkeys and hedgehogs.",
+   "intro_ok": true
+  },
+  "hummingbirds": {
+   "title": "Live hummingbird cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live hummingbird cams",
+   "desc": "Watch {n} live hummingbird cams from feeders in Texas and California and cloud-forest lodges in Panama, Ecuador and Peru.",
+   "intro": "Live hummingbird cams from feeders in Texas and California and from lodges in the forests of Panama, Ecuador and Peru, where dozens of species visit, including the giant hummingbird and the sword-billed hummingbird, whose bill is longer than its body. Hummingbirds feed every few minutes all day long, so these are some of the busiest cams in the zoo, especially in the morning.",
+   "intro_ok": true
+  },
+  "otters": {
+   "title": "Live otter cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live otter cams",
+   "desc": "Watch {n} live otter and sea otter cams from aquariums in California, Washington, Canada, Japan and Maryland.",
+   "intro": "Live otter cams from aquariums and museums: sea otters in Monterey, Seattle, Vancouver and Toba, and river otters in Maryland. Most of the sea otters were rescued from the wild and could not be released. Sea otters have the densest fur of any animal and spend hours grooming it; watch for them floating on their backs to eat and holding paws while they sleep.",
+   "intro_ok": true
+  },
+  "great-apes": {
+   "title": "Live great ape cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live great ape cams",
+   "desc": "Watch {n} live great ape cams: bonobos and gorillas at sanctuaries in the Democratic Republic of the Congo and chimpanzees in Japan.",
+   "intro": "Live great ape cams from sanctuaries in the Democratic Republic of the Congo, which care for orphaned bonobos and Grauer's gorillas, and from Asahiyama Zoo in Japan, where chimpanzees climb a rope area. Bonobos are found in the wild only in the Congo, and Grauer's gorillas, the largest gorillas, only in the east of the country. Morning, local time, is usually the most active.",
+   "intro_ok": true
+  },
+  "hedgehogs": {
+   "title": "Live hedgehog cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live hedgehog cams",
+   "desc": "Watch {n} live hedgehog cams from gardens and feeding stations in Germany, the Netherlands and England.",
+   "intro": "Live hedgehog cams from gardens and feeding stations in Germany, the Netherlands and England. Hedgehogs come out after dark, so these cams switch to infrared at night, and the best time to watch is from late evening until the small hours. From about November to March most hedgehogs hibernate, and the feeders go quiet until spring.",
+   "intro_ok": true
+  },
+  "dogs": {
+   "title": "Live puppy and dog cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live puppy and dog cams",
+   "desc": "Watch {n} live puppy and dog cams from service dog programs and dog rescues in the United States.",
+   "intro": "Live puppy and dog cams from programs that raise service and guide dogs in Maryland and California, a Labrador litter, and a senior dog rescue in San Francisco. The puppies spend their days playing, napping and learning to cope with new sounds and objects. Litters change every few months as puppies move on to training or new homes.",
+   "intro_ok": true
+  },
+  "tigers": {
+   "title": "Live tiger cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live tiger cams",
+   "desc": "Watch {n} live tiger cams from a big cat sanctuary in Arkansas and a zoo in Taiwan.",
+   "intro": "Live tiger cams from Turpentine Creek Wildlife Refuge in Arkansas, a sanctuary for big cats rescued from the exotic pet trade, and from a Bengal tiger habitat at Shoushan Zoo in Taiwan. Tigers sleep and rest for much of the day; look for them around feeding times and in the cooler hours, and for their love of water, which most cats avoid.",
+   "intro_ok": true
+  },
+  "goats": {
+   "title": "Live goat cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live goat cams",
+   "desc": "Watch {n} live goat cams from farms in Connecticut, Wisconsin and the eastern United States, including goats grazing on a restaurant roof.",
+   "intro": "Live goat cams from farms in Connecticut and the eastern United States and from Al Johnson's Swedish Restaurant in Sister Bay, Wisconsin, where goats graze on the grass roof in summer. Goats are curious, climb anything they can and are busiest at feeding time; spring is kidding season on the farms.",
+   "intro_ok": true
+  },
+  "squirrels": {
+   "title": "Live squirrel cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live squirrel cams",
+   "desc": "Watch {n} live squirrel cams: feeders in Japan and cams inside squirrel nest boxes in the United States.",
+   "intro": "Live squirrel cams from feeders in Karuizawa and Hokkaido in Japan, where the fluffy-eared Ezo squirrel lives, and from cameras inside squirrel nest boxes in the United States. Squirrels are active by day, busiest in the morning, and in autumn they spend hours burying food for winter. Nest box cams show litters of tiny kits in spring.",
+   "intro_ok": true
+  },
+  "wildebeest-migration": {
+   "title": "Live wildebeest migration cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live wildebeest migration cams",
+   "desc": "Watch {n} live cams on the Mara River in Kenya, where the great wildebeest migration crosses.",
+   "intro": "Live cams at two famous crossing points on the Mara River in Kenya's Maasai Mara. From about July to October, more than a million wildebeest, with zebras and gazelles, move between the Serengeti and the Mara and must cross the river, where crocodiles wait. Crossings can happen at any time of day and are impossible to predict, so the trending badge is the best sign that one is under way.",
+   "intro_ok": true
+  },
+  "manatees": {
+   "title": "Live manatee cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live manatee cams",
+   "desc": "Watch {n} live manatee cams from Florida springs and an aquarium in Japan.",
+   "intro": "Live manatee cams from warm springs in Florida, at Tarpon Springs, Homosassa Springs and Silver Springs, and from New Yashima Aquarium in Japan. In winter, when the sea cools, Florida manatees gather in springs that stay around 22 °C all year, so December to March is the best time to see them in numbers. They spend most of the day grazing and resting.",
+   "intro_ok": true
+  },
+  "salmon": {
+   "title": "Live salmon cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live salmon cams",
+   "desc": "Watch {n} live salmon cams in Alaska, Washington and Idaho.",
+   "intro": "Live salmon cams from Alaska and Washington, including an underwater cam in the Brooks River in Katmai National Park and a hatchery creek in Issaquah, plus an osprey nest in Salmon, Idaho. Salmon hatch in rivers, grow up at sea and return to the stream where they were born to spawn. The runs come in summer and autumn: July and September in Katmai, September and October around Seattle.",
+   "intro_ok": true
+  },
+  "puffins": {
+   "title": "Live puffin cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live puffin cams",
+   "desc": "Watch {n} live puffin cams from seabird islands in Maine, Wales and Norway.",
+   "intro": "Live puffin cams from seabird colonies on Seal Island in Maine, Skomer Island in Wales and Runde in Norway. Atlantic puffins spend most of the year at sea and come ashore only to breed, from about April to early August, when they nest in burrows and fly in with beaks full of small fish for their single chick. Outside that season the ledges stand empty.",
+   "intro_ok": true
+  },
+  "sharks": {
+   "title": "Live shark cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live shark cams",
+   "desc": "Watch {n} live shark cams from aquariums in California, New York and Japan.",
+   "intro": "Live shark cams from aquariums in Monterey, Long Beach, Long Island and Oarai in Japan, with sevengill, leopard, sand tiger and reef sharks. Most sharks must keep swimming to breathe, so these cams are always moving. Sand tiger sharks look fierce with their ragged teeth but are calm, slow swimmers.",
+   "intro_ok": true
+  },
+  "raccoons": {
+   "title": "Live raccoon cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live raccoon cams",
+   "desc": "Watch {n} live raccoon cams from backyards and woodsheds in the United States.",
+   "intro": "Live raccoon cams from backyards, a pond and a woodshed in the United States, including a family in Austin, Texas. Raccoons come out at dusk and forage through the night, so these cams are busiest after dark, on infrared. In spring and summer, mothers bring their kits along.",
+   "intro_ok": true
+  },
+  "horses": {
+   "title": "Live horse cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live horse cams",
+   "desc": "Watch {n} live horse cams from ranches and stables in Montana, Japan and Ireland.",
+   "intro": "Live horse cams from a ranch in Montana, a stud farm area in Hokkaido, Japan, known for raising racehorses, and a riding centre in Dublin, Ireland. Horses graze for much of the day; spring is foaling season on the farms, when mares and young foals share the pastures.",
+   "intro_ok": true
+  },
+  "orcas": {
+   "title": "Live orca cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live orca cams",
+   "desc": "Watch {n} live orca cams on Hanson Island in British Columbia, Canada.",
+   "intro": "Live orca cams run by OrcaLab, a research station on Hanson Island in British Columbia, Canada, including cams at a rubbing beach where killer whales come to rub their bodies on smooth pebbles in shallow water, both above and below the surface. Northern resident orcas visit these waters mostly in summer and early autumn, when salmon run through Johnstone Strait. Out of season, the cams show the strait and its other wildlife.",
+   "intro_ok": true
+  },
+  "wolves": {
+   "title": "Live wolf cams: {n} cameras · Digital Live Zoo",
+   "h1": "Live wolf cams",
+   "desc": "Watch {n} live wolf cams from the International Wolf Center in Minnesota and the Mission: Wolf sanctuary in Colorado.",
+   "intro": "Live wolf cams from the International Wolf Center in Ely, Minnesota, and from Mission: Wolf, a sanctuary in the mountains of Colorado for wolves and wolf-dogs that cannot live in the wild. Wolves are most active at dawn and dusk and rest through much of the day. In winter they grow thick coats and are often easier to spot against the snow.",
+   "intro_ok": true
   }
  }
 }
