@@ -1104,9 +1104,11 @@
    "animals": [
     "bats"
    ],
-   "species": [],
-   "note": "",
-   "note_ok": false,
+   "species": [
+    "Brazilian free-tailed bat"
+   ],
+   "note": "A live view at Carlsbad Caverns in New Mexico, where several hundred thousand Brazilian free-tailed bats spiral out of the cave around dusk. The outflight runs from April through mid-October and can last up to three hours; outside that season the cave is mostly quiet.",
+   "note_ok": true,
    "added": "",
    "seen": [
     "2026-10-01"
@@ -1119,7 +1121,12 @@
     "k": "USA",
     "ch": "Explore Bat Cams: Bat Caves & Flying Foxes",
     "cid": "UCs34q6yBKJD3okSRzfNV3gw"
-   }
+   },
+   "title": "Live Carlsbad Caverns bat cam: New Mexico · Digital Live Zoo",
+   "desc": "Watch the Carlsbad Caverns bat flight live. Several hundred thousand Brazilian free-tailed bats leave the cave around dusk, April through mid-October.",
+   "src": [
+    "https://www.nps.gov/cave/learn/nature/bft_bat_outflight.htm"
+   ]
   },
   {
    "slug": "bat-house-cam-fly-by-night",
@@ -1131,9 +1138,11 @@
    "animals": [
     "bats"
    ],
-   "species": [],
-   "note": "",
-   "note_ok": false,
+   "species": [
+    "Brazilian free-tailed bat"
+   ],
+   "note": "Bat houses in Osteen, central Florida, run by the nonprofit Fly By Night, with roughly 800 Brazilian free-tailed bats in each. They start leaving just before sunset and swarm back just before sunrise, Eastern time; the stream has run around the clock since 2008.",
+   "note_ok": true,
    "added": "",
    "seen": [
     "2026-10-01"
@@ -1146,7 +1155,12 @@
     "k": "USA",
     "ch": "Fly By Night, Inc.",
     "cid": "UCWYc9yqKcpu_p6xVlBsUx_A"
-   }
+   },
+   "title": "Live bat house cam: Osteen, Florida · Digital Live Zoo",
+   "desc": "Watch Brazilian free-tailed bats live in bat houses in central Florida. They leave just before sunset and swarm back just before sunrise, Eastern time.",
+   "src": [
+    "https://www.flybynightinc.org/batcam.html"
+   ]
   },
   {
    "slug": "beaver-lodge-holnicote-estate",
@@ -1781,9 +1795,11 @@
    "animals": [
     "bats"
    ],
-   "species": [],
-   "note": "",
-   "note_ok": false,
+   "species": [
+    "Mexican free-tailed bat"
+   ],
+   "note": "Bracken Cave in Texas, summer home of the largest bat colony in the world: up to 20 million Mexican free-tailed bats. Bat Conservation International bought the cave in 1992 to protect it.",
+   "note_ok": true,
    "added": "",
    "seen": [
     "2026-10-01"
@@ -1796,7 +1812,12 @@
     "k": "USA",
     "ch": "Explore Bat Cams: Bat Caves & Flying Foxes",
     "cid": "UCs34q6yBKJD3okSRzfNV3gw"
-   }
+   },
+   "title": "Live Bracken Cave bat cam: Texas · Digital Live Zoo",
+   "desc": "Watch Bracken Cave live, summer home of up to 20 million Mexican free-tailed bats, the largest bat colony in the world.",
+   "src": [
+    "https://www.batcon.org/about-bats/bracken-cave-preserve/"
+   ]
   },
   {
    "slug": "brooks-falls-brown-bears",
@@ -3696,8 +3717,8 @@
     "bats"
    ],
    "species": [],
-   "note": "",
-   "note_ok": false,
+   "note": "A roost of giant flying foxes at Lubee Bat Conservancy, north of Gainesville, Florida. Flying foxes are fruit bats; Lubee, founded in 1989, cares for more than 200 of them across ten species.",
+   "note_ok": true,
    "added": "",
    "seen": [
     "2026-10-01"
@@ -3710,7 +3731,12 @@
     "k": "USA",
     "ch": "Explore Bat Cams: Bat Caves & Flying Foxes",
     "cid": "UCs34q6yBKJD3okSRzfNV3gw"
-   }
+   },
+   "title": "Live giant flying fox cam: Lubee Bat Conservancy, Florida · Digital Live Zoo",
+   "desc": "Watch giant flying foxes live at Lubee Bat Conservancy in Florida, home to more than 200 fruit bats of ten species.",
+   "src": [
+    "https://en.wikipedia.org/wiki/Lubee_Bat_Conservancy"
+   ]
   },
   {
    "slug": "giant-pandas-chengdu",
@@ -5809,8 +5835,8 @@
     "bats"
    ],
    "species": [],
-   "note": "",
-   "note_ok": false,
+   "note": "A shared roost of several flying fox species at Lubee Bat Conservancy near Gainesville, Florida. Lubee is accredited by the Association of Zoos and Aquariums and runs breeding programs for endangered bats.",
+   "note_ok": true,
    "added": "",
    "seen": [
     "2026-10-01"
@@ -5823,7 +5849,12 @@
     "k": "USA",
     "ch": "Explore Bat Cams: Bat Caves & Flying Foxes",
     "cid": "UCs34q6yBKJD3okSRzfNV3gw"
-   }
+   },
+   "title": "Live mixed flying fox cam: Lubee Bat Conservancy, Florida · Digital Live Zoo",
+   "desc": "Watch several species of flying foxes live at Lubee Bat Conservancy, an accredited bat sanctuary near Gainesville, Florida.",
+   "src": [
+    "https://en.wikipedia.org/wiki/Lubee_Bat_Conservancy"
+   ]
   },
   {
    "slug": "monterey-bay",
