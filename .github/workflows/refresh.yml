@@ -1,0 +1,39 @@
+name: Refresh cam list
+
+# Checks every cam is still live, swaps in restarted streams, drops cams that stay off air,
+# and lists newly found live streams in data/candidates.json. See tools/refresh.py.
+on:
+  schedule:
+    - cron: "23 15 * * *"   # daily, off the top of the hour
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh
+        run: |
+          set -o pipefail
+          python tools/refresh.py 2> err.txt | tee out.txt || {
+            echo "::error title=refresh.py failed::$(tail -c 1500 err.txt | tr '\n' '|')"; exit 1; }
+          echo "::notice title=Refresh::$(grep -m1 'cams checked' out.txt)"
+      - name: Publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog.json data/refresh_state.json data/candidates.json
+          git commit -q -m "Refresh cam list ($(python -c 'import json;print(len(json.load(open("catalog.json"))["cams"]))') cams)" || exit 0
+          for i in 1 2 3; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1

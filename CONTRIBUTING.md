@@ -17,7 +17,7 @@ Welcome. A short map of the project and the few things that move on their own.
 | `activity.yml` (github-actions bot) | meant to run twice an hour (see `STATUS.md`) | `activity.json` |
 | `pages.yml` (github-actions bot) | when the catalog or `data/` changes, and daily | generated pages, sitemaps |
 | `mfk.yml` (github-actions bot) | daily, needs `YT_API_KEY` secret | `mfk.json` |
-| Claude routine on Zhan's Mac | daily | `catalog.json` |
+| `refresh.yml` (github-actions bot) | daily | `catalog.json`, `data/refresh_state.json`, `data/candidates.json` |
 
 So: `git pull --rebase` before you push, and prefer a branch + pull request for anything bigger than a small fix. GitHub Pages deploys `main` straight to https://digitallivezoo.com within about a minute.
 

@@ -17,7 +17,7 @@ Every free live animal cam on YouTube we could find, in one zoo: safari waterhol
 - `catalog.json` — the cam list. Each cam: `id` (YouTube video id), `n` name, `p` place, `k` country, `c` continent, `tz` IANA time zone, `ty` habitat (`safari`, `zoo`, `aqua`, `birds`, `wild`, `pets`), `ch` / `cid` channel, `w` viewers at last check, `mfk` true if YouTube marks the video Made for Kids.
 - `mfk.json` — cams YouTube marks Made for Kids, written daily by `.github/workflows/mfk.yml` running `tools/mfk.py` (needs a `YT_API_KEY` repository secret with a YouTube Data API v3 key). The site leaves these cams out, because YouTube's API policy requires tracking to be off around them.
 
-The list is refreshed every hour: restarted streams get their new id, dead ones are dropped, and new cams are added a few times a day.
+The list is refreshed daily by `.github/workflows/refresh.yml` running `tools/refresh.py`: it checks every cam is live, swaps in the new id when an owner restarts a stream, drops cams that stay off air three days in a row, and writes newly found live streams to `data/candidates.json`. New cams are added from that list by hand (a name, place and time zone for each), never automatically.
 
 ## Cam pages (search)
 
