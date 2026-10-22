@@ -22,6 +22,8 @@ Snapshot of where things stand (2026-10-03), so the next session can pick up. Th
 7. **`mfk.yml`** (Made for Kids check) does nothing until a `YT_API_KEY` repository secret is set.
 8. **`attention.yml`** (shared boredom model) does nothing until a `POSTHOG_API_KEY` repository secret is set (PostHog → Settings → Personal API keys, scope `query:read`); set the `POSTHOG_PROJECT_ID` repository variable too if `@current` is rejected. Like `activity.yml`, its schedule may need a manual or routine dispatch.
 
+9. **Live visitor numbers** (2026-10-22). Header widget ("people here now / visitors today / this week") and `zoo_here` heartbeat are live; the widget stays hidden until `window.ZOO_LIVE.url` in `index.html` points at the Cloudflare Worker in `tools/live-worker/`. Zhan: create a PostHog personal API key (Query: Read), create the Worker, add the key as its `POSTHOG_API_KEY` secret (steps in `tools/live-worker/README.md`), then send the Worker URL.
+
 ## Ideas not started
 - Vision-model captions for the top cams ("a bear is fishing").
 - A "Highlights" mode that shows only trending/action cams.
