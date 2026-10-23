@@ -61,9 +61,48 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 .stats{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:10px}
 .stats b{color:var(--fg);font-weight:500;font-variant-numeric:tabular-nums}
 .stats .aw b{color:var(--day)}
-.livenow{margin-top:6px}
-.livenow .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--live);margin-right:6px;vertical-align:1px;animation:livepulse 2s ease-in-out infinite}
 @keyframes livepulse{50%{opacity:.35}}
+/* live visitors card (data from tools/live-worker) */
+.live{margin-top:14px;display:grid;grid-template-columns:auto minmax(180px,1fr) auto;grid-template-areas:"now chart kpis" "top top top";gap:16px 26px;align-items:center;padding:16px 18px;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:16px;max-width:980px}
+.live-now{grid-area:now;display:grid;gap:4px;min-width:150px}
+.live-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--live);text-transform:uppercase}
+.live-tag i{position:relative;width:8px;height:8px;border-radius:50%;background:var(--live)}
+.live-tag i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--live);animation:liveping 1.8s ease-out infinite}
+@keyframes liveping{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+.live-big{display:flex;align-items:baseline;gap:10px}
+.live-big b{font-family:var(--display);font-weight:800;font-size:56px;line-height:.9;color:var(--fg);font-variant-numeric:tabular-nums}
+.live-big span{font-size:13.5px;color:var(--muted);line-height:1.25;max-width:13ch}
+.live-chart{grid-area:chart;min-width:0;display:grid;gap:5px}
+.live-chart svg{width:100%;height:58px;display:block;overflow:visible}
+.live-chart rect{fill:var(--day);opacity:.45;transition:opacity .2s}
+.live-chart rect.now{fill:var(--live);opacity:1}
+.live-chart rect:hover{opacity:1}
+.live-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.live-kpis{grid-area:kpis;display:grid;grid-template-columns:repeat(2,auto);gap:10px 22px;margin:0}
+.live-kpis div{display:grid;gap:1px}
+.live-kpis dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);order:2}
+.live-kpis dd{margin:0;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
+.live-top{grid-area:top;display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line)}
+.live-top>span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.live-chips{display:flex;gap:10px;flex-wrap:wrap;min-width:0}
+.live-chip{display:flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;background:var(--bg);border:1px solid var(--line);border-radius:999px;text-align:left;max-width:300px;transition:border-color .15s,transform .15s}
+.live-chip:hover{border-color:var(--sign);transform:translateY(-1px)}
+.live-chip img{width:46px;height:30px;object-fit:cover;border-radius:999px;flex:0 0 auto;background:var(--panel)}
+.live-chip span{display:grid;min-width:0;line-height:1.2}
+.live-chip b{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live-chip small{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.live-chip .rank{font-family:var(--display);font-weight:800;font-size:16px;color:var(--sign);flex:0 0 auto}
+@media (max-width:760px){
+  .live{grid-template-columns:1fr auto;grid-template-areas:"now kpis" "chart chart" "top top";gap:14px 16px;padding:14px}
+  .live-big b{font-size:46px}
+  .live-kpis{gap:8px 16px}.live-kpis dd{font-size:22px}
+}
+@media (max-width:440px){
+  .live{grid-template-columns:1fr;grid-template-areas:"now" "kpis" "chart" "top"}
+  .live-kpis{grid-template-columns:repeat(4,auto);justify-content:space-between}
+  .live-chip{max-width:100%;flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){.live-tag i::after{animation:none}.live-chip{transition:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:var(--panel-2);border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;text-decoration:none}
 .btn:hover{border-color:var(--muted)}
 .btn.sign{background:var(--sign);color:#1b1500;border-color:var(--sign)}
@@ -224,7 +263,23 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <h1>Digital Live Zoo</h1>
       <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
       <div class="stats" id="stats"><span>Opening the zoo…</span></div>
-      <div class="stats livenow" id="liveNow" aria-live="polite" hidden></div>
+      <section class="live" id="liveNow" aria-label="Live visitors" hidden>
+        <div class="live-now">
+          <span class="live-tag"><i aria-hidden="true"></i>Live now</span>
+          <div class="live-big" aria-live="polite"><b id="lvNow">1</b><span id="lvNowLbl">watching right now</span></div>
+        </div>
+        <div class="live-chart">
+          <svg id="lvChart" viewBox="0 0 240 58" preserveAspectRatio="none" role="img" aria-label="Visitors per hour, last 24 hours"></svg>
+          <div class="live-axis"><span id="lvAxisA">24 h ago</span><span id="lvPeak"></span><span>now</span></div>
+        </div>
+        <dl class="live-kpis">
+          <div><dt>today</dt><dd id="lvToday">0</dd></div>
+          <div><dt>this week</dt><dd id="lvWeek">0</dd></div>
+          <div><dt>hours watched</dt><dd id="lvHours">0</dd></div>
+          <div hidden><dt>countries</dt><dd id="lvCountries">0</dd></div>
+        </dl>
+        <div class="live-top" id="lvTopWrap" hidden><span>Most watched today</span><div class="live-chips" id="lvTop"></div></div>
+      </section>
       <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a></nav>
     </div>
     <aside class="adbox" id="adbox" aria-label="Advertisement" hidden>
@@ -842,18 +897,56 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     setInterval(beat, 240000);
     if(!url) return;
     const n = v => Number(v).toLocaleString("en-US");
+    const lvShown = {};
+    // count up from the last shown value so changes are visible, not just swapped
+    function setNum(id, v, dec){
+      const node = $(id), from = lvShown[id] ?? 0, to = +v || 0; lvShown[id] = to;
+      const fmt = x => dec ? x.toFixed(1) : n(Math.round(x));
+      if(from === to || matchMedia("(prefers-reduced-motion: reduce)").matches){ node.textContent = fmt(to); return; }
+      const t0 = performance.now(), dur = 700;
+      const step = t => { const k = Math.min(1, (t - t0)/dur), e = 1 - Math.pow(1-k, 3); node.textContent = fmt(from + (to-from)*e); if(k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }
+    function chart(h){
+      const max = Math.max(1, ...h), W = 240, H = 58, gap = 2, bw = W/h.length - gap;
+      const hourName = ago => { const d = new Date(Date.now() - ago*3600000); return d.toLocaleTimeString([], {hour:"numeric"}); };
+      $("lvChart").innerHTML = h.map((v, i) => {
+        const bh = v ? Math.max(3, v/max*(H-4)) : 1.5, ago = h.length-1-i;
+        return `<rect class="${ago ? "" : "now"}" x="${(i*(bw+gap)).toFixed(1)}" y="${(H-bh).toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="1.5"><title>${v} ${v === 1 ? "person" : "people"} · ${ago ? hourName(ago) : "this hour"}</title></rect>`;
+      }).join("");
+      const peak = h.indexOf(max);
+      $("lvPeak").textContent = Math.max(...h) ? `busiest: ${max} at ${hourName(h.length-1-peak)}` : "";
+    }
+    function top(list){
+      const cams = (list || []).filter(t => BYID[t.id]).slice(0, 3);
+      $("lvTopWrap").hidden = !cams.length;
+      $("lvTop").innerHTML = cams.map((t, i) => { const c = BYID[t.id];
+        return `<button type="button" class="live-chip" data-live-cam="${esc(t.id)}" title="Put ${esc(c.n)} on the Main Stage"><span class="rank">${i+1}</span><img src="https://i.ytimg.com/vi/${esc(t.id)}/mqdefault.jpg" alt="" loading="lazy" width="46" height="30"><span><b>${esc(c.n)}</b><small>${esc(c.p || c.k || "")} · ${n(t.people)} watched</small></span></button>`;
+      }).join("");
+    }
+    $("lvTop").addEventListener("click", e => {
+      const b = e.target.closest("[data-live-cam]"); if(!b) return;
+      track("live_top_pick", camProps(b.dataset.liveCam));
+      prepare(b.dataset.liveCam, "One of the most watched cams on the zoo today.", {now:true, user:true, reason:"pick"});
+      window.scrollTo({top: document.querySelector(".stage").offsetTop - 10, behavior:"smooth"});
+    });
+    let last = null;
     async function load(){
       if(document.visibilityState !== "visible") return;
       try{
         const r = await fetch(url, {cache: "no-store"});
-        if(!r.ok) return;
-        const d = await r.json();
-        if(typeof d.now !== "number") return;
-        const others = Math.max(0, d.now - 1);
-        const here = others ? `<b>${n(d.now)}</b> people here now` : `<b>You</b>’re here now`;
-        el.innerHTML = `<span><span class="dot" aria-hidden="true"></span>${here}</span><span><b>${n(d.today)}</b> visitors today</span><span><b>${n(d.week)}</b> this week</span>`;
-        el.hidden = false;
+        if(r.ok){ const d = await r.json(); if(typeof d.now === "number") last = d; }
       }catch(e){}
+      if(!last) return;
+      const d = last, here = Math.max(1, d.now);
+      setNum("lvNow", here);
+      $("lvNowLbl").textContent = here === 1 ? "watching right now (that’s you)" : "people watching right now, including you";
+      setNum("lvToday", Math.max(1, d.today)); setNum("lvWeek", Math.max(1, d.week));
+      setNum("lvHours", d.hours_week || 0, true); $("lvCountries").parentNode.hidden = !d.countries_week; if(d.countries_week) setNum("lvCountries", d.countries_week);
+      const hasChart = Array.isArray(d.hourly) && d.hourly.length; $("lvChart").parentNode.hidden = !hasChart; if(hasChart) chart(d.hourly);
+      top(d.top);
+      if(!CAMS.length) setTimeout(load, 2500);   // the cam list is still loading: fill in the top cams once it is here
+      el.hidden = false;
     }
     load(); setInterval(load, 60000);
     document.addEventListener("visibilitychange", load);

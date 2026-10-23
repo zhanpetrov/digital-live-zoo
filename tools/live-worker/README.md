@@ -1,6 +1,7 @@
 # Live visitor numbers
 
-The home page can show "● 3 people here now · 12 visitors today · 38 this week" under the header stats.
+The home page shows a "Live now" card under the header stats: people here now, a visitors-per-hour chart for the last 24 hours,
+visitors today and this week, hours watched, visitor countries, and the 3 most watched cams of the day (click one to put it on stage).
 The numbers come from PostHog, which needs a secret key, so a tiny Cloudflare Worker (`worker.js`)
 holds the key and hands the page only the totals. Answers are cached for 30 s.
 
@@ -22,4 +23,4 @@ on one cam still count as "here now".
 
 ## Privacy
 
-Only totals leave the Worker: no IDs, places or pages. The privacy page says the home page shows visitor totals.
+Only totals and YouTube video ids of the most watched cams leave the Worker: no person IDs, places or pages. The privacy page says the home page shows visitor totals.
