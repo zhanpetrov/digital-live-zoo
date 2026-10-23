@@ -9,6 +9,7 @@ Snapshot of where things stand (2026-10-03), so the next session can pick up. Th
 - Smart tour: `tools/activity.py` scores each cam (CLIP "something to look at", movement, live viewers, viewer spikes) into `activity.json`; the Main Stage tour follows it, skips blank and off-air cams, and falls back to the 45-second tour without data (data counts for up to 3 hours).
 - Learning from skips: every stage visit is logged as a PostHog `stage_segment` event (cam, habitat, daypart, activity level, viewers, seconds watched, how it ended: `skip` / `pick` / `tour` / `early` / `trouble` / `wall` / `hidden` / `leave` / `hold` / `resume` / `first`). A skip-hazard model sets how long the tour holds each cam and which cam comes next. Each browser learns its own viewer's skips (localStorage `zoo-segs`); `tools/attention.py` (daily, `attention.yml`) fits the shared model on all viewers into `attention.json`.
 - Daily cam-list refresh: `.github/workflows/refresh.yml` (`tools/refresh.py`) since 2026-10-14. The old Claude routine on Zhan's Mac ("Digital Live Zoo daily refresh") is disabled: it had not updated the list since 2026-10-01 and used a stale artifact copy as its master list. Its prompt still names the old repo `zhanpetrov8-svg/digital-live-zoo` (GitHub redirects git, so it should keep working); switching it to `zhanpetrov/digital-live-zoo` needs Zhan's approval in a session linked to the Mac. Note it writes `catalog.json` whole, so keys other tools add to it (e.g. `mfk`) must also exist in the artifact's master list.
+- Live visitor numbers (since 2026-10-23): header widget reads the Cloudflare Worker `zoo-live` at https://zoo-live.zhanpetrov8.workers.dev (Zhan's Cloudflare account, code in `tools/live-worker/`), which queries PostHog with the `POSTHOG_API_KEY` Worker secret and caches 30 s. Page polls once a minute; `zoo_here` heartbeat every 4 min.
 - Cam pages (`/live`, `/animals`, `/places`, `/habitats`) are built by `tools/build_pages.py` via `pages.yml`.
 - AdSense: verification meta tag, `ads.txt` and privacy page are live; the ad slot stays off until `window.ZOO_ADS.slot` is set.
 
@@ -22,7 +23,6 @@ Snapshot of where things stand (2026-10-03), so the next session can pick up. Th
 7. **`mfk.yml`** (Made for Kids check) does nothing until a `YT_API_KEY` repository secret is set.
 8. **`attention.yml`** (shared boredom model) does nothing until a `POSTHOG_API_KEY` repository secret is set (PostHog → Settings → Personal API keys, scope `query:read`); set the `POSTHOG_PROJECT_ID` repository variable too if `@current` is rejected. Like `activity.yml`, its schedule may need a manual or routine dispatch.
 
-9. **Live visitor numbers** (2026-10-22). Header widget ("people here now / visitors today / this week") and `zoo_here` heartbeat are live; the widget stays hidden until `window.ZOO_LIVE.url` in `index.html` points at the Cloudflare Worker in `tools/live-worker/`. Zhan: create a PostHog personal API key (Query: Read), create the Worker, add the key as its `POSTHOG_API_KEY` secret (steps in `tools/live-worker/README.md`), then send the Worker URL.
 
 ## Ideas not started
 - Vision-model captions for the top cams ("a bear is fishing").
