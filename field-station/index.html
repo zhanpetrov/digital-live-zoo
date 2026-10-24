@@ -98,7 +98,7 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 @media (max-width:980px){.stage{grid-template-columns:minmax(0,1fr)}}
 .view{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line)}
 @media (max-width:620px){.view{aspect-ratio:4/5;border-radius:14px}}
-#pano,.yt{position:absolute;inset:0;width:100%;height:100%;border:0}
+#pano,.yt,#ytBox{position:absolute;inset:0;width:100%;height:100%;border:0}
 /* binocular lens: darkened edges, a focus ring in the middle that fills while you hold steady */
 .lens{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 0 33%,rgba(0,0,0,.18) 45%,rgba(0,0,0,.62) 70%)}
 .ring{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;pointer-events:none}
@@ -110,6 +110,12 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .arrow{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
 .arrow span{position:absolute;left:-14px;top:-118px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--sign);color:#1d2a20;font-weight:800;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
 .found-pin{width:22px;height:22px;border-radius:50%;border:3px solid var(--sign);background:rgba(242,194,48,.25);box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.look{position:absolute;right:10px;bottom:56px;display:grid;grid-template-columns:repeat(4,auto);gap:6px;z-index:3}
+.look button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(11,18,14,.75);color:#fff;font-size:14px}
+.look .tilt{grid-column:1/-1;width:auto;border-radius:999px;font-weight:700;font-size:13px}
+.appbtn{position:absolute;left:10px;right:10px;top:10px;z-index:3;display:grid;gap:2px;background:var(--sign);color:#1d2a20;text-decoration:none;border-radius:12px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.appbtn b{font-size:15px}
+.appbtn span{font-size:12.5px;line-height:1.35}
 .view .credit{position:absolute;right:10px;bottom:10px;font-size:11px;color:#dfe6dc;background:rgba(11,18,14,.7);border-radius:6px;padding:3px 8px;max-width:70%}
 .view .credit a{color:#fff}
 .livebox{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,#1d3024,#0b120e 70%)}
@@ -341,7 +347,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     renderStop(true); window.scrollTo({top: 0});
   }
   $("backBtn").addEventListener("click", () => { teardown(); run = null; $("runV").hidden = true; $("homeV").hidden = false; renderHome(); });
-  function teardown(){ cancelAnimationFrame(loop); if(viewer){ try{ viewer.destroy(); }catch(e){} viewer = null; } $("view").innerHTML = ""; }
+  function teardown(){
+    cancelAnimationFrame(loop); if(viewer){ try{ viewer.destroy(); }catch(e){} viewer = null; }
+    if(ytPlayer){ try{ ytPlayer.destroy(); }catch(e){} ytPlayer = null; }
+    tiltOn = false; window.removeEventListener("deviceorientation", onTilt);
+    $("view").innerHTML = "";
+  }
 
   function dots(){
     $("dots").innerHTML = run.x.stops.map((s, k) => `<i class="${k < run.i ? "done" : k === run.i ? "now" : ""}" title="${esc(s.title)}"></i>`).join("");
@@ -469,10 +480,63 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
 
   // ---------- stop type 2: watch a 360° video, answer field questions ----------
-  function buildWatch(s){
-    const src = `https://www.youtube.com/embed/${s.yt}?playsinline=1&rel=0&modestbranding=1`;
-    $("view").innerHTML = `<iframe class="yt" src="${src}" title="${esc(s.title)}, 360° video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  // 360° videos play in YouTube's player. It lets you look around on computers and Android, but iPhone and iPad
+  // Safari show 360° videos flat: there the stage offers the YouTube app, which does full 360° with drag and tilt.
+  const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  let ytApi = null, ytPlayer = null, tiltOn = false;
+  function loadYT(){
+    if(ytApi) return ytApi;
+    ytApi = new Promise(res => {
+      if(window.YT && YT.Player) return res();
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => { if(prev) prev(); res(); };
+      const sc = document.createElement("script"); sc.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(sc);
+    });
+    return ytApi;
   }
+  function buildWatch(s){
+    const app = `https://www.youtube.com/watch?v=${s.yt}`;
+    $("view").innerHTML = `<div class="yt" id="ytBox"></div>
+      <div class="look" id="look" hidden>
+        <button type="button" data-look="left" aria-label="Look left">◀</button><button type="button" data-look="up" aria-label="Look up">▲</button>
+        <button type="button" data-look="down" aria-label="Look down">▼</button><button type="button" data-look="right" aria-label="Look right">▶</button>
+        <button type="button" data-look="tilt" class="tilt" hidden>Tilt to look</button>
+      </div>
+      <a class="appbtn" id="appBtn" href="${app}" target="_blank" rel="noopener" ${IOS ? "" : "hidden"}>
+        <b>Look around in the YouTube app ↗</b><span>${IOS ? "On iPhone and iPad, 360° only works in the YouTube app. Watch there, then come back for the questions." : "Your browser shows this video flat. The YouTube app lets you look all around."}</span></a>`;
+    loadYT().then(() => {
+      if(!$("ytBox")) return;
+      ytPlayer = new YT.Player("ytBox", {videoId: s.yt, playerVars: {playsinline: 1, rel: 0, modestbranding: 1},
+        events: {onStateChange: e => { if(e.data === 1) setTimeout(check360, 1200); }}});
+    });
+    const check360 = () => {
+      let p = null; try{ p = ytPlayer && ytPlayer.getSphericalProperties && ytPlayer.getSphericalProperties(); }catch(e){}
+      const sph = p && typeof p.yaw === "number";
+      if($("look")) $("look").hidden = !sph;
+      if($("appBtn")) $("appBtn").hidden = sph && !IOS;
+      const tb = document.querySelector("[data-look=tilt]");
+      if(tb) tb.hidden = !(sph && "DeviceOrientationEvent" in window && matchMedia("(pointer: coarse)").matches);
+      track("fs_video360", {yt: s.yt, sph: !!sph, ios: IOS});
+    };
+  }
+  function turn(dyaw, dpitch){
+    try{
+      const p = ytPlayer.getSphericalProperties(); if(!p || typeof p.yaw !== "number") return;
+      ytPlayer.setSphericalProperties({yaw: (p.yaw + dyaw + 360) % 360, pitch: Math.max(-89, Math.min(89, p.pitch + dpitch))});
+    }catch(e){}
+  }
+  let tiltBase = null;
+  function onTilt(e){
+    if(!tiltOn || e.alpha == null) return;
+    if(!tiltBase) tiltBase = {a: e.alpha, b: e.beta};
+    try{ ytPlayer.setSphericalProperties({yaw: (tiltBase.a - e.alpha + 360) % 360, pitch: Math.max(-89, Math.min(89, (e.beta - tiltBase.b)))}); }catch(err){}
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-look]"); if(!b || !ytPlayer) return;
+    const k = b.dataset.look;
+    if(k === "tilt"){ tiltOn = !tiltOn; tiltBase = null; b.textContent = tiltOn ? "Stop tilting" : "Tilt to look"; if(tiltOn) window.addEventListener("deviceorientation", onTilt); else window.removeEventListener("deviceorientation", onTilt); return; }
+    turn(k === "left" ? -30 : k === "right" ? 30 : 0, k === "up" ? 20 : k === "down" ? -20 : 0);
+  });
   function pickOf(v){ return Array.isArray(v) ? v : (v[mode] || v.junior); }
   function ansOf(q){ return typeof q.a === "number" ? q.a : (q.a[mode] ?? q.a.junior); }
   function journalWatch(s){
