@@ -67,9 +67,18 @@
    "lat": 42.963,
    "lon": -85.668
   },
+  "baby-sloths-sloth-rescue": {
+   "lat": 10.02,
+   "lon": -84.05,
+   "in": "shelter"
+  },
   "backyard-raccoon-family-austin": {
    "lat": 30.265,
    "lon": -97.747
+  },
+  "backyard-wildlife-ohio": {
+   "lat": 41.24,
+   "lon": -81.55
   },
   "badgers-badgerwood": {
    "lat": 53.316,
@@ -94,6 +103,14 @@
   "bald-eagle-nest-kisatchie": {
    "lat": 31.634,
    "lon": -92.504
+  },
+  "bald-eagle-nest-little-miami": {
+   "lat": 39.37,
+   "lon": -84.21
+  },
+  "bald-eagle-nest-little-miami-cam-3": {
+   "lat": 39.37,
+   "lon": -84.21
   },
   "bald-eagle-nest-sauces": {
    "lat": 34.018,
@@ -139,13 +156,25 @@
    "lat": 52.282,
    "lon": 6.422
   },
+  "barn-owl-nest-goose-pond": {
+   "lat": 38.993,
+   "lon": -87.185
+  },
   "barn-owl-nest-wirral-barn-owl-trust": {
    "lat": 53.341,
    "lon": -3.05
   },
+  "barn-owls-and-kestrels-fotherdale": {
+   "lat": 54.039,
+   "lon": -0.716
+  },
   "barn-owls-badgers-and-foxes-multiview": {
    "lat": 53.316,
    "lon": -1.727
+  },
+  "bat-flight-carlsbad-caverns": {
+   "lat": 32.175,
+   "lon": -104.444
   },
   "beaver-lodge-holnicote-estate": {
    "lat": 51.21,
@@ -172,6 +201,10 @@
    "lat": 45.35,
    "lon": -69.051
   },
+  "bird-feeder-and-wildlife-boston-area": {
+   "lat": 42.53,
+   "lon": -71.03
+  },
   "bird-feeder-by-day-hedgehogs-by-night": {
    "lat": 53.307,
    "lon": 7.765
@@ -184,9 +217,29 @@
    "lat": 60.872,
    "lon": 10.504
   },
+  "bird-feeder-grundautal": {
+   "lat": 50.221,
+   "lon": 9.123
+  },
+  "bird-feeder-illinois": {
+   "lat": 42.03,
+   "lon": -88.08
+  },
   "bird-feeder-makov-rescue-station": {
    "lat": 49.855,
    "lon": 16.191
+  },
+  "bird-feeder-mountain-nook": {
+   "lat": 49.69,
+   "lon": 19.19
+  },
+  "bird-feeder-ohio": {
+   "lat": 41.24,
+   "lon": -81.55
+  },
+  "bird-feeder-south-africa": {
+   "lat": -25.75,
+   "lon": 28.19
   },
   "bison-calving-plains-grasslands-national-park": {
    "lat": 49.113,
@@ -204,6 +257,10 @@
    "lat": -4.32,
    "lon": 15.311
   },
+  "bracken-cave-bats-texas": {
+   "lat": 29.687,
+   "lon": -98.352
+  },
   "brooks-falls-brown-bears": {
    "lat": 58.555,
    "lon": -155.778
@@ -216,6 +273,10 @@
    "lat": 51.43,
    "lon": 23.18
   },
+  "burrowing-owl-nest-oregon": {
+   "lat": 45.84,
+   "lon": -119.4
+  },
   "california-condor-sanctuary-san-simeon": {
    "lat": 35.618,
    "lon": -121.14
@@ -223,6 +284,10 @@
   "california-condors-big-sur": {
    "lat": 36.144,
    "lon": -121.565
+  },
+  "camelthorn-waterhole-botswana": {
+   "lat": -20.979,
+   "lon": 25.118
   },
   "campi-ya-kanzi-waterhole": {
    "lat": -2.683,
@@ -293,6 +358,10 @@
    "lat": 16.101,
    "lon": -86.895
   },
+  "creek-water-tank-chiricahua-mountains": {
+   "lat": 31.914,
+   "lon": -109.141
+  },
   "croc-rock-forest-cam-foxes-hedgehogs-deer": {
    "lat": 51.507,
    "lon": -0.128
@@ -308,6 +377,10 @@
   "decorah-eagles-north-nest": {
    "lat": 43.304,
    "lon": -91.786
+  },
+  "deer-and-wildlife-cam": {
+   "lat": 36.07,
+   "lon": -79.95
   },
   "deer-creek-roseburg": {
    "lat": 43.217,
@@ -369,6 +442,10 @@
    "lat": 21.305,
    "lon": -157.856
   },
+  "elephants-tembe-elephant-park": {
+   "lat": -26.965,
+   "lon": 32.465
+  },
   "elk-cam-gaylord": {
    "lat": 45.028,
    "lon": -84.675
@@ -384,6 +461,14 @@
   "erect-crested-penguins-antipodes-island": {
    "lat": -49.686,
    "lon": 178.768
+  },
+  "eurasian-eagle-owl-cam-3": {
+   "lat": 50.39,
+   "lon": 7.01
+  },
+  "eurasian-eagle-owl-eifel": {
+   "lat": 50.39,
+   "lon": 7.01
   },
   "eustis-wildlife-cam": {
    "lat": 45.217,
@@ -401,6 +486,10 @@
    "lat": -2.992,
    "lon": 38.461
   },
+  "fish-ponds-with-white-tailed-eagles": {
+   "lat": 51.633,
+   "lon": 22.78
+  },
   "floppy-and-friends-wildlife-aid": {
    "lat": 51.296,
    "lon": -0.329
@@ -409,9 +498,35 @@
    "lat": 49.689,
    "lon": 19.203
   },
+  "forest-stream-wildlife-morten-hilmer": {
+   "lat": 57.05,
+   "lon": 9.92
+  },
   "forest-wildlife-matra": {
    "lat": 47.886,
    "lon": 19.951
+  },
+  "founders-lodge-eastern-cape": {
+   "lat": -33.45,
+   "lon": 26.086
+  },
+  "friends-of-felines-kabana": {
+   "lat": 41.28,
+   "lon": -84.36,
+   "in": "shelter"
+  },
+  "friends-of-felines-rescue": {
+   "lat": 41.28,
+   "lon": -84.36,
+   "in": "shelter"
+  },
+  "fru-rauer-osprey-nest": {
+   "lat": 59.3,
+   "lon": 11.2
+  },
+  "fruit-feeder-canopy-lodge": {
+   "lat": 8.624,
+   "lon": -80.139
   },
   "full-house-puppy-cam": {
    "lat": 39.18,
@@ -421,6 +536,10 @@
   "garden-wildlife-pretoria": {
    "lat": -25.746,
    "lon": 28.188
+  },
+  "giant-and-sword-billed-hummingbirds": {
+   "lat": -13.31,
+   "lon": -72.12
   },
   "giant-flying-foxes-lubee-bat-conservancy": {
    "lat": 29.75,
@@ -473,9 +592,22 @@
    "lat": -37.923,
    "lon": 144.663
   },
+  "goat-barn-syman-says-farms": {
+   "lat": 41.49,
+   "lon": -72.27,
+   "in": "barn"
+  },
   "goats-on-the-roof-al-johnsons": {
    "lat": 45.188,
    "lon": -87.122
+  },
+  "grace-gorillas-eastern-dr-congo": {
+   "lat": -0.256,
+   "lon": 29.0
+  },
+  "grauers-gorillas-forest-corridor": {
+   "lat": -0.256,
+   "lon": 29.0
   },
   "guide-dog-nursery-guide-dogs-of-america": {
    "lat": 34.316,
@@ -552,6 +684,10 @@
    "lon": -118.192,
    "in": "aquarium"
   },
+  "kalahari-desert": {
+   "lat": -24.427,
+   "lon": 18.104
+  },
   "kats-river-view-katmai": {
    "lat": 58.555,
    "lon": -155.778
@@ -591,6 +727,10 @@
    "lat": -25.175,
    "lon": 27.064
   },
+  "las-raices-ranch-12-cams": {
+   "lat": 27.76,
+   "lon": -99.33
+  },
   "lentorre-kenya": {
    "lat": 0.279,
    "lon": 37.516
@@ -618,6 +758,10 @@
   "little-owls-bommelerwaard": {
    "lat": 51.78,
    "lon": 5.225
+  },
+  "little-penguin-chick-new-zealand": {
+   "lat": -40.987,
+   "lon": 173.849
   },
   "little-penguin-nests-oamaru": {
    "lat": -45.1,
@@ -668,6 +812,10 @@
    "lat": 29.217,
    "lon": -82.058
   },
+  "mansur-the-bear-4-cams": {
+   "lat": 54.469,
+   "lon": 36.071
+  },
   "manton-bay-ospreys-close-up": {
    "lat": 52.656,
    "lon": -0.622
@@ -708,6 +856,10 @@
    "lat": 28.234,
    "lon": -177.368
   },
+  "mississippi-river-flyway-upper-mississippi": {
+   "lat": 43.9,
+   "lon": -91.27
+  },
   "mixed-flying-foxes-lubee-bat-conservancy": {
    "lat": 29.75,
    "lon": -82.42
@@ -720,6 +872,10 @@
    "lat": 36.618,
    "lon": -121.902,
    "in": "aquarium"
+  },
+  "mountain-bird-feeder-southern-alberta": {
+   "lat": 51.09,
+   "lon": -115.36
   },
   "mountain-goats-mendenhall-glacier": {
    "lat": 58.302,
@@ -815,6 +971,10 @@
    "lat": 47.439,
    "lon": -114.172
   },
+  "osprey-nest-achieva": {
+   "lat": 28.03,
+   "lon": -82.77
+  },
   "osprey-nest-charlo": {
    "lat": 47.439,
    "lon": -114.172
@@ -863,6 +1023,10 @@
    "lat": 38.335,
    "lon": -76.463,
    "in": "aquarium"
+  },
+  "outdoor-cat-area-syman-says-farms": {
+   "lat": 41.49,
+   "lon": -72.27
   },
   "pacific-flyway-sacramento-national-wildlife-refuge": {
    "lat": 39.411,
@@ -915,9 +1079,17 @@
    "lat": -33.282,
    "lon": 149.097
   },
+  "peregrine-falcons-castle-rock": {
+   "lat": 44.05,
+   "lon": -91.64
+  },
   "peregrine-falcons-harvard": {
    "lat": 42.366,
    "lon": -71.104
+  },
+  "peregrine-falcons-iatan": {
+   "lat": 39.45,
+   "lon": -94.98
   },
   "peregrine-falcons-manchester": {
    "lat": 42.996,
@@ -967,9 +1139,21 @@
    "lat": 41.5,
    "lon": -5.75
   },
+  "peregrine-lookout-great-spirit-bluff": {
+   "lat": 43.88,
+   "lon": -91.33
+  },
+  "peregrine-nest-great-spirit-bluff": {
+   "lat": 43.88,
+   "lon": -91.33
+  },
   "philippine-eagles-davao": {
    "lat": 7.065,
    "lon": 125.608
+  },
+  "pixcams-wildlife-cam-2": {
+   "lat": 40.35,
+   "lon": -79.45
   },
   "polar-bear-kansas-city-zoo": {
    "lat": 39.1,
@@ -1069,6 +1253,10 @@
    "lat": 38.625,
    "lon": -90.19
   },
+  "salmon-fish-cam-long-live-the-kings": {
+   "lat": 47.463,
+   "lon": -123.116
+  },
   "salmon-run-issaquah-hatchery": {
    "lat": 47.535,
    "lon": -122.043
@@ -1077,6 +1265,10 @@
    "lat": 36.313,
    "lon": 140.575,
    "in": "aquarium"
+  },
+  "sea-lion-beach-british-columbia": {
+   "lat": 50.573,
+   "lon": -126.746
   },
   "sea-nettle-jellyfish-nmmba": {
    "lat": 22.046,
@@ -1205,18 +1397,46 @@
    "lat": 26.641,
    "lon": -81.872
   },
+  "spa-storks-bad-konigshofen": {
+   "lat": 50.3,
+   "lon": 10.47
+  },
   "spider-crabs-monterey-bay-aquarium": {
    "lat": 36.618,
    "lon": -121.902,
    "in": "aquarium"
   },
+  "stork-cam-mainburg": {
+   "lat": 48.64,
+   "lon": 11.78
+  },
   "stork-chimney-bohuslavice": {
    "lat": 50.561,
    "lon": 15.913
   },
+  "stork-nest-alfeld": {
+   "lat": 51.987,
+   "lon": 9.825
+  },
+  "stork-nest-bad-salzungen": {
+   "lat": 50.81,
+   "lon": 10.23
+  },
   "stork-nest-fohrste": {
    "lat": 51.987,
    "lon": 9.825
+  },
+  "stork-nest-hedeper": {
+   "lat": 52.04,
+   "lon": 10.75
+  },
+  "stork-nest-hungen": {
+   "lat": 50.47,
+   "lon": 8.9
+  },
+  "stork-nest-kirchzarten": {
+   "lat": 47.96,
+   "lon": 7.95
   },
   "stork-nest-kolbermoor": {
    "lat": 47.856,
@@ -1226,9 +1446,29 @@
    "lat": 48.821,
    "lon": 12.051
   },
+  "stork-nest-leutershausen": {
+   "lat": 49.3,
+   "lon": 10.41
+  },
+  "stork-nest-lindheim": {
+   "lat": 50.29,
+   "lon": 8.98
+  },
   "stork-nest-mlade-buky": {
    "lat": 50.607,
    "lon": 15.833
+  },
+  "stork-nest-mlynicky-dvur": {
+   "lat": 50.004,
+   "lon": 16.746
+  },
+  "stork-nest-near-sokoka": {
+   "lat": 53.41,
+   "lon": 23.5
+  },
+  "stork-nest-pasieka": {
+   "lat": 52.245,
+   "lon": 19.592
   },
   "stork-nest-penafiel": {
    "lat": 41.62,
@@ -1250,6 +1490,10 @@
    "lat": 49.855,
    "lon": 16.191
   },
+  "syman-says-farms-cam-3": {
+   "lat": 41.49,
+   "lon": -72.27
+  },
   "tarpon-feeding-dock-islamorada": {
    "lat": 24.924,
    "lon": -80.628
@@ -1257,6 +1501,10 @@
   "tau-game-lodge-madikwe": {
    "lat": -25.355,
    "lon": 26.531
+  },
+  "tawny-owls-and-badgers-ash-wood": {
+   "lat": 54.039,
+   "lon": -0.716
   },
   "tembe-elephants-tembe-elephant-park": {
    "lat": -26.965,
@@ -1299,6 +1547,10 @@
   "tropical-fruit-feeder-canopy-lodge": {
    "lat": 8.624,
    "lon": -80.139
+  },
+  "tropical-hummingbirds-canopy-lodge": {
+   "lat": 9.08,
+   "lon": -79.66
   },
   "tropical-reef-aquarium-of-the-pacific": {
    "lat": 33.769,
@@ -1360,6 +1612,14 @@
   "wolves-international-wolf-center-north": {
    "lat": 47.902,
    "lon": -91.857
+  },
+  "wolves-mission-wolf-shamans-rock": {
+   "lat": 37.963,
+   "lon": -105.215
+  },
+  "wolves-mission-wolf-zeabs-den": {
+   "lat": 37.963,
+   "lon": -105.215
   },
   "wombat-satsukiyama-zoo": {
    "lat": 34.822,
