@@ -131,6 +131,14 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 .facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:14px;margin:0}
 .facts dt{color:var(--faint);font-weight:600}
 .facts dd{margin:0;min-width:0}
+/* weather near the cam (assets/wx.js) */
+.wx-main{display:block}
+.wx-main .wi{margin-right:4px}
+.wx-sub,.wx-note{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
+.wx-sub a{color:var(--muted)}
+.wx-note{color:var(--night)}
+.enc .wx{white-space:nowrap;color:var(--fg);margin-left:6px}
+.fs-meta .wx{white-space:nowrap}
 .why{font-size:13px;color:var(--muted);margin:0}
 .clock{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .dp{display:inline-flex;align-items:center;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
@@ -304,7 +312,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <div class="fs-info">
           <span class="eyebrow" id="fsEyebrow">On stage now</span>
           <strong id="fsName"></strong>
-          <span class="fs-meta"><span id="fsWhere"></span><span class="clock" id="fsClock"></span><span id="fsDp"></span></span>
+          <span class="fs-meta"><span id="fsWhere"></span><span class="clock" id="fsClock"></span><span id="fsDp"></span><span class="wx" id="fsWx"></span></span>
         </div>
         <div class="fs-acts">
           <button class="btn sign" type="button" data-fs="sound" id="fsSound">Sound on</button>
@@ -320,6 +328,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <dl class="facts">
         <dt>Where</dt><dd id="stWhere"></dd>
         <dt>Local time</dt><dd><span class="clock" id="stClock"></span> <span id="stDp"></span></dd>
+        <dt id="stWxL" hidden>Weather</dt><dd id="stWx" hidden></dd>
         <dt>Habitat</dt><dd id="stType"></dd>
         <dt>Watching</dt><dd id="stWatch"></dd>
       </dl>
@@ -389,6 +398,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<script src="assets/wx.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 (function(){
@@ -771,7 +781,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <div class="pl">
         <h4>${SLUGS[c.id] ? `<a href="/live/${SLUGS[c.id]}/">${esc(c.n)}</a>` : esc(c.n)}</h4>
         <div class="where">${esc(c.p)}</div>
-        <div class="row"><span class="clock"></span><span class="dp"></span></div>
+        <div class="row"><span><span class="clock"></span><span class="wx"></span></span><span class="dp"></span></div>
         <div class="row"><span class="wn">${c.w ? c.w.toLocaleString("en-US")+" watching" : "a few watching"}</span><span>${esc(c.ch)}</span></div>
         <div class="noembed" ${noEmbed.has(c.id)?"":"hidden"}>Its owner allows it on YouTube only · <a href="${ytUrl(c)}" target="_blank" rel="noopener">open</a></div>
         <div class="acts">
@@ -783,7 +793,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function renderGrid(){
     $("grid").innerHTML = CAMS.map(cardHTML).join("") + `<p class="empty" id="empty" hidden>No cams match. Try another continent or turn off “Awake now”.</p>`;
     document.querySelectorAll("#grid .enc").forEach(el=>{ cardEls[el.dataset.id] = el; if(picked.has(el.dataset.id)) el.classList.add("picked"); });
-    renderActivity(); applyFilters(); updateClocks(); markStage();
+    renderActivity(); applyFilters(); updateClocks(); markStage(); renderWx();
   }
   function visible(){
     const q = state.q.trim().toLowerCase();
@@ -824,8 +834,30 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
     $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
     $("stWhy").textContent = stage.why;
-    updateClocks();
+    updateClocks(); renderWx();
   }
+
+  // ---------- weather near the cams (assets/wx.js: MET Norway via the zoo-live Worker) ----------
+  function renderWx(){
+    const W = window.ZooWx; if(!W) return;
+    const r = stage.id ? W.at(SLUGS[stage.id]) : null, dd = $("stWx");
+    const show = !!(r && r.w && r.d);
+    dd.hidden = $("stWxL").hidden = !show;
+    if(show){
+      const w = r.w, bits = [W.wind(w.ws) && ("Wind " + W.wind(w.ws) + (W.dir(w.wd) ? " " + W.dir(w.wd) : "")), "Updated " + W.ago(w.got)].filter(Boolean);
+      dd.innerHTML = `<span class="wx-main"><span class="wi" aria-hidden="true">${r.d.icon}</span>${esc(r.d.text)} · ${W.temp(w.t, true)}</span>`
+        + `<span class="wx-sub">${esc(bits.join(" · "))} · ${W.credit}</span>`
+        + (r.place.in ? `<span class="wx-note">${esc(W.note(r.place))}</span>` : "");
+      dd.dataset.short = r.d.icon + " " + W.temp(w.t);
+    }
+    CAMS.forEach(c => {
+      const el = cardEls[c.id]; if(!el) return;
+      const x = W.at(SLUGS[c.id]), span = el.querySelector(".wx");
+      if(x && x.w && x.d){ span.textContent = x.d.icon + " " + W.temp(x.w.t); span.title = x.d.text + (x.place.in ? " · " + W.note(x.place) : ""); }
+      else { span.textContent = ""; span.removeAttribute("title"); }
+    });
+  }
+  if(window.ZooWx) ZooWx.onChange(renderWx);
 
   // ---------- wall ----------
   let wallPlayers = [];
@@ -1000,6 +1032,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     setTxt("fsEyebrow", $("stEyebrow").textContent); setTxt("fsName", $("stName").textContent);
     setTxt("fsWhere", $("stWhere").textContent); setTxt("fsClock", $("stClock").textContent);
     setTxt("fsDp", $("stDp").textContent); if($("fsDp").className !== $("stDp").className) $("fsDp").className = $("stDp").className;
+    setTxt("fsWx", $("stWx").hidden ? "" : ($("stWx").dataset.short || ""));
     setTxt("fsSound", $("sound").textContent);
     setTxt("fsTour", touring ? "Touring" : "Staying here"); $("fsTour").setAttribute("aria-pressed", String(touring));
     $("fsProg").style.width = $("stProg").style.width;

@@ -68,3 +68,12 @@ h2{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;margi
 .foot p{margin:8px 0 0;max-width:80ch}
 @media (max-width:520px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cb{padding:8px 10px 10px}.cb b{font-size:14px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* weather near the cam (assets/wx.js) */
+.wx-main{display:block;font-weight:600}
+.wx-sub,.wx-note{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.wx-sub a{color:var(--muted)}
+.wx-note{color:var(--night,#7aa2ff)}
+.wx-next{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+.wx-h{display:grid;justify-items:center;gap:1px;min-width:52px;padding:5px 6px;border:1px solid var(--line);border-radius:10px;font-size:13px;font-variant-numeric:tabular-nums}
+.wx-h small{font-size:11px;color:var(--faint)}
+.wx-main span[aria-hidden]{margin-right:4px}

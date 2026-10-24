@@ -14,8 +14,20 @@
 //   today  = people since midnight Pacific time; week = last 7 days
 //   hourly = people per hour for the last 24 hours, oldest first, the current hour last
 //   top    = the 3 cams most people had on stage in the last 24 hours (YouTube video ids only)
+//
+// Weather (GET /weather): current conditions and the next 6 hours for every camera place, from MET Norway
+// (api.met.no, free incl. commercial use, credit "MET Norway" on the site). A Cron Trigger (every 2 minutes)
+// refreshes up to 24 places per run, oldest first, so each place is re-fetched every 15 to 30 minutes; the
+// results live in the Workers KV namespace bound as WX. Places come from https://digitallivezoo.com/data/geo.json,
+// rounded to 2 decimals (about 1 km) so cams at the same place share one forecast.
+//
 // Answers are cached for 30 seconds, so PostHog sees at most 2 queries a minute
 // however many people have the page open.
+
+const GEO_URL = "https://digitallivezoo.com/data/geo.json";
+const MET_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact";
+const UA = "DigitalLiveZoo/1.0 (+https://digitallivezoo.com)";   // MET Norway requires a User-Agent that identifies the site
+const WX_BATCH = 24, WX_MIN = 15 * 60000, WX_MAX = 30 * 60000, WX_CACHE_SECONDS = 120;
 
 const ORIGINS = ["https://digitallivezoo.com", "https://www.digitallivezoo.com"];
 const CACHE_SECONDS = 30;
@@ -62,6 +74,7 @@ export default {
   async fetch(req, env, ctx) {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors(req) });
     if (req.method !== "GET") return new Response("Method not allowed", { status: 405 });
+    if (new URL(req.url).pathname === "/weather") return weather(req, env, ctx);
 
     const cache = caches.default;
     const key = new Request(new URL("/live.json", req.url).toString());
@@ -105,7 +118,75 @@ export default {
     for (const [k, v] of Object.entries(cors(req))) out.headers.set(k, v);
     return out;
   },
+
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(refreshWeather(env));
+  },
 };
+
+const wxKey = (lat, lon) => (+lat).toFixed(2) + "," + (+lon).toFixed(2);
+
+async function refreshWeather(env) {
+  if (!env.WX) return;
+  const g = await fetch(GEO_URL, { cf: { cacheTtl: 900 } });
+  if (!g.ok) return;
+  const geo = await g.json();
+  const keys = [...new Set(Object.values(geo.places || {}).filter(p => typeof p.lat === "number").map(p => wxKey(p.lat, p.lon)))];
+  const store = (await env.WX.get("wx", "json")) || { v: 1, w: {} };
+  const live = new Set(keys);
+  for (const k of Object.keys(store.w)) if (!live.has(k)) delete store.w[k];   // no cam there any more
+  const now = Date.now();
+  const due = keys.filter(k => !store.w[k] || now >= store.w[k].exp)
+    .sort((a, b) => ((store.w[a] || {}).got || 0) - ((store.w[b] || {}).got || 0))
+    .slice(0, WX_BATCH);
+  if (!due.length) return;
+  await Promise.all(due.map(async k => {
+    try { store.w[k] = await met(k); }
+    catch (e) { if (store.w[k]) store.w[k].exp = now + WX_MIN; }   // keep the old reading, try again later
+  }));
+  store.at = new Date().toISOString();
+  await env.WX.put("wx", JSON.stringify(store));
+}
+
+async function met(k) {
+  const [lat, lon] = k.split(",");
+  const r = await fetch(`${MET_URL}?lat=${lat}&lon=${lon}`, { headers: { "User-Agent": UA } });
+  if (!r.ok) throw new Error(String(r.status));
+  const d = await r.json();
+  const ts = (d.properties && d.properties.timeseries) || [];
+  const hour = Date.now() - 3600000;
+  const i0 = Math.max(0, ts.findIndex(t => Date.parse(t.time) > hour));
+  const sym = t => ((t.data.next_1_hours || t.data.next_6_hours || {}).summary || {}).symbol_code || "";
+  const cur = ts[i0];
+  if (!cur) throw new Error("no data");
+  const x = cur.data.instant.details;
+  const now = Date.now(), expires = Date.parse(r.headers.get("expires") || "") || 0;
+  return {
+    t: x.air_temperature, s: sym(cur), ws: x.wind_speed, wd: x.wind_from_direction, h: x.relative_humidity,
+    p: ((cur.data.next_1_hours || {}).details || {}).precipitation_amount ?? null,
+    n: ts.slice(i0 + 1, i0 + 7).map(t => [t.time, t.data.instant.details.air_temperature, sym(t)]),
+    got: now, exp: Math.min(now + WX_MAX, Math.max(now + WX_MIN, expires)),
+  };
+}
+
+async function weather(req, env, ctx) {
+  if (!env.WX) return json({ error: "not configured" }, 503, req);
+  const cache = caches.default;
+  const key = new Request(new URL("/weather.json", req.url).toString());
+  let res = await cache.match(key);
+  if (!res) {
+    const store = (await env.WX.get("wx", "json")) || { w: {} };
+    const w = {};
+    for (const [k, v] of Object.entries(store.w || {})) w[k] = { t: v.t, s: v.s, ws: v.ws, wd: v.wd, h: v.h, p: v.p, n: v.n, got: v.got };
+    res = new Response(JSON.stringify({ at: store.at || null, credit: "MET Norway", w }), {
+      headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${WX_CACHE_SECONDS}` },
+    });
+    ctx.waitUntil(cache.put(key, res.clone()));
+  }
+  const out = new Response(res.body, res);
+  for (const [k, v] of Object.entries(cors(req))) out.headers.set(k, v);
+  return out;
+}
 
 function json(obj, status, req) {
   return new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", ...cors(req) } });

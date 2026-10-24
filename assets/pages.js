@@ -45,3 +45,43 @@
     });
   }).catch(function(){});
 })();
+
+// Weather near the cam and sunrise / sunset (assets/wx.js: MET Norway via the zoo-live Worker, coordinates in /data/geo.json).
+(function(){
+  var W = window.ZooWx; if(!W) return;
+  function each(sel, fn){ var els = document.querySelectorAll(sel); for(var i = 0; i < els.length; i++) fn(els[i]); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
+  function row(el, show){ var dd = el.parentNode, dt = dd && dd.previousElementSibling; if(dd) dd.hidden = !show; if(dt) dt.hidden = !show; }
+  function clock(d, tz, hourOnly){ try{ return d.toLocaleTimeString([], hourOnly ? {timeZone: tz, hour: "numeric"} : {timeZone: tz, hour: "numeric", minute: "2-digit"}); }catch(e){ return ""; } }
+  function render(){
+    each("[data-wx]", function(el){
+      var r = W.at(el.getAttribute("data-wx")), tz = el.getAttribute("data-wx-tz");
+      if(!r){ row(el, false); return; }
+      row(el, true);
+      if(!r.w || !r.d){ el.textContent = "No recent reading for this spot"; return; }
+      var w = r.w, extra = [];
+      if(W.wind(w.ws)) extra.push("Wind " + W.wind(w.ws) + (W.dir(w.wd) ? " from the " + W.dir(w.wd) : ""));
+      if(typeof w.h === "number") extra.push("Humidity " + Math.round(w.h) + "%");
+      if(typeof w.p === "number" && w.p > 0) extra.push(w.p + " mm in the next hour");
+      var next = (w.n || []).map(function(h){
+        var d = W.describe(h[2]);
+        return '<span class="wx-h"><small>' + esc(clock(new Date(h[0]), tz, true)) + '</small><span aria-hidden="true">' + (d ? d.icon : "") + '</span>' + esc(W.temp(h[1])) + '</span>';
+      }).join("");
+      el.innerHTML = '<span class="wx-main"><span aria-hidden="true">' + r.d.icon + '</span> ' + esc(r.d.text) + " · " + esc(W.temp(w.t, true)) + '</span>'
+        + '<span class="wx-sub">' + esc(extra.join(" · ")) + '</span>'
+        + (next ? '<span class="wx-next" aria-label="Next hours">' + next + '</span>' : "")
+        + '<span class="wx-sub">Updated ' + esc(W.ago(w.got)) + ' · data ' + W.credit + '</span>'
+        + (r.place.in ? '<span class="wx-note">' + esc(W.note(r.place)) + '</span>' : "");
+    });
+    each("[data-sun]", function(el){
+      var r = W.at(el.getAttribute("data-sun")), tz = el.getAttribute("data-wx-tz");
+      if(!r){ row(el, false); return; }
+      row(el, true);
+      var s = W.sun(r.place.lat, r.place.lon, new Date());
+      el.textContent = s.polar === "day" ? "The sun does not set today" : s.polar === "night" ? "The sun does not rise today" :
+        "☀ " + clock(s.rise, tz) + " · ☾ " + clock(s.set, tz) + " (local time)";
+    });
+  }
+  W.onChange(render);
+  W.ready.then(render);
+})();
