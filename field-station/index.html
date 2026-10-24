@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Field Station · Digital Live Zoo</title>
-<meta name="description" content="Expeditions into 360° VR wildlife camps: spot elephants, giraffes and clues from sunrise to sunset in Kids and Adults editions, then check live animal cams right now.">
+<meta name="description" content="Bilingual (English & Russian) 360° VR wildlife camps with Studio ElevenLabs narration: spot elephants, giraffes and clues from sunrise to sunset in Kids and Adults editions, then check live animal cams.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://digitallivezoo.com/field-station/">
-<meta property="og:title" content="Field Station · Digital Live Zoo">
-<meta property="og:description" content="Embedded 360° VR wildlife camps on site (no YouTube redirect): sunrise-to-sunset safari quests for Kids and Adults, synced with live weather and real animal cams.">
+<meta property="og:title" content="Field Station · Digital Live Zoo (EN / RU)">
+<meta property="og:description" content="Embedded 360° VR wildlife camps on site (no YouTube redirect): sunrise-to-sunset safari quests for Kids and Adults in English & Russian with Studio ElevenLabs narration.">
 <meta property="og:image" content="https://digitallivezoo.com/field-station/img/safari-camp.jpg">
 <meta property="og:url" content="https://digitallivezoo.com/field-station/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0b120e">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Caveat:wght@600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Caveat:wght@600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Oswald:wght@700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
 <style>
 /* Field Station: the zoo's dark night-green world for the scenes, and a paper field journal beside them.
@@ -25,8 +25,8 @@
   --fg:#e7eee4; --muted:#93a598; --faint:#5e7163;
   --sign:#f2c230; --live:#ff4a3d; --day:#9fd36b; --night:#7aa2ff;
   --paper:#f1f0e6; --paper-line:#dcdccb; --ink:#1d2a20; --ink-soft:#56614f; --mark:#c7392e;
-  --display:"Big Shoulders Stencil Display","Arial Narrow",Impact,sans-serif;
-  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Big Shoulders Stencil Display","Oswald","Arial Narrow",Impact,sans-serif;
+  --body:"Figtree","Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --hand:"Caveat","Bradley Hand","Segoe Print",cursive;
   color-scheme:dark;
@@ -42,12 +42,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* top bar */
-.bar{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;padding-block:14px;border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;padding-block:14px;border-bottom:1px solid var(--line)}
 .bar .home{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
 .bar .home:hover{color:var(--fg)}
 .word{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);margin-right:auto}
+.sw-group{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
 .mode{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
-.mode button{border:0;background:transparent;border-radius:999px;padding:5px 13px;font-weight:700;font-size:13px;color:var(--muted);transition:background .15s,color .15s}
+.mode button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;color:var(--muted);transition:background .15s,color .15s;white-space:nowrap}
 .mode button[aria-pressed="true"]{background:var(--sign);color:#1d2a20}
 .mode-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
 
@@ -55,17 +56,17 @@ button{font:inherit;color:inherit;cursor:pointer}
 .home-v{display:grid;gap:40px;padding-block:30px 60px}
 .hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:end}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,9vw,110px);line-height:.85;margin:0;text-transform:uppercase;color:var(--sign)}
-.hero p{margin:12px 0 0;color:var(--muted);max-width:58ch;font-size:16px}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(48px,8.2vw,104px);line-height:.88;margin:0;text-transform:uppercase;color:var(--sign)}
+.hero p{margin:12px 0 0;color:var(--muted);max-width:60ch;font-size:16px}
 .passport{background:var(--paper);color:var(--ink);border-radius:16px;padding:16px 18px;display:grid;gap:10px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 26px}
 .pp-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
-.pp-top b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.pp-top b{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .pp-top span{font-family:var(--hand);font-size:22px;color:var(--mark)}
 .stamps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 @media (max-width:420px){.stamps{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.stamp{aspect-ratio:1;max-width:100%;border:2px dashed var(--paper-line);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);padding:5px;line-height:1.15}
+.stamp{aspect-ratio:1;max-width:100%;border:2px dashed var(--paper-line);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);padding:5px;line-height:1.15;overflow-wrap:anywhere}
 .stamp.got{border:3px solid var(--mark);color:var(--mark);transform:rotate(-8deg);font-weight:500;background:rgba(199,57,46,.06)}
-.stamp.got small{display:block;font-size:7.5px;margin-top:2px}
+.stamp.got small{display:block;font-size:7px;margin-top:2px}
 .sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .sec-h h2{font-family:var(--display);font-weight:800;font-size:34px;margin:0;text-transform:uppercase}
 .sec-h span{color:var(--muted);font-size:14px}
@@ -76,16 +77,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ex .th img{width:100%;height:100%;object-fit:cover;display:block}
 .ex .th.night{background:radial-gradient(circle at 72% 32%,#f1f0e6 0 9px,rgba(241,240,230,.25) 10px,transparent 26px),radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 40% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 58% 52%,#fff,transparent),radial-gradient(1px 1px at 85% 70%,#fff,transparent),radial-gradient(1px 1px at 12% 72%,#fff,transparent),linear-gradient(180deg,#0a1530,#132a20)}
 .ex .tag{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,18,14,.84);border-radius:999px;padding:3px 9px}
-.ex .vrtag{position:absolute;right:10px;top:10px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--sign);color:#1d2a20;border-radius:999px;padding:3px 8px}
+.ex .vrtag{position:absolute;right:10px;top:10px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--sign);color:#1d2a20;border-radius:999px;padding:3px 8px}
 .ex .bd{display:grid;gap:6px;padding:14px 16px 16px;align-content:start}
-.ex h3{margin:0;font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase}
+.ex h3{margin:0;font-family:var(--display);font-weight:800;font-size:27px;line-height:1.03;text-transform:uppercase}
 .ex p{margin:0;color:var(--muted);font-size:14px}
 .ex .go{margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sign)}
 button.ex{cursor:pointer;transition:border-color .15s,transform .15s}
 button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .ex.soon{opacity:.62}
 .ex.soon .go{color:var(--faint)}
-.credits{font-size:12.5px;color:var(--faint);max-width:84ch}
+.credits{font-size:12.5px;color:var(--faint);max-width:86ch}
 .credits a{color:var(--muted)}
 
 /* expedition run */
@@ -97,7 +98,7 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .dots i{width:28px;height:6px;border-radius:3px;background:var(--line)}
 .dots i.done{background:var(--day)}
 .dots i.now{background:var(--sign)}
-.stage{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 395px;gap:16px;align-items:start}
 @media (max-width:980px){.stage{grid-template-columns:minmax(0,1fr)}}
 .view{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line)}
 @media (max-width:620px){.view{aspect-ratio:4/5;border-radius:14px}}
@@ -115,13 +116,13 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .dlz360-top{position:absolute;left:10px;right:10px;top:10px;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;pointer-events:none;transition:opacity .35s}
 .dlz360-compass{background:rgba(11,18,14,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--sign)}
 .dlz360-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.dlz360-badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;background:rgba(11,18,14,.82);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:3px 9px;color:var(--fg)}
+.dlz360-badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:rgba(11,18,14,.82);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:3px 9px;color:var(--fg)}
 .dlz360-live-pill{background:rgba(242,194,48,.92);color:#1d2a20;border-color:var(--sign);font-weight:700}
 .dlz360-ed-pill{color:var(--day);border-color:rgba(159,211,107,.45)}
-.dlz360-bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:7;display:grid;justify-items:center;gap:5px;text-align:center;background:rgba(11,18,14,.88);border:2px solid var(--sign);border-radius:18px;padding:16px 22px;color:var(--fg);max-width:min(360px,calc(100% - 28px));box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.dlz360-bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:7;display:grid;justify-items:center;gap:5px;text-align:center;background:rgba(11,18,14,.88);border:2px solid var(--sign);border-radius:18px;padding:16px 22px;color:var(--fg);max-width:min(380px,calc(100% - 28px));box-shadow:0 16px 40px rgba(0,0,0,.6)}
 .dlz360-bigplay:hover{background:#121d17;transform:translate(-50%,-50%) scale(1.02)}
 .dlz360-bigplay-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--sign);color:#1d2a20;font-size:20px;font-weight:800}
-.dlz360-bigplay b{font-family:var(--display);font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);line-height:1}
+.dlz360-bigplay b{font-family:var(--display);font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);line-height:1.05}
 .dlz360-bigplay small{font-size:12.5px;color:var(--muted);line-height:1.35}
 .dlz360-bot{position:absolute;left:0;right:0;bottom:0;z-index:6;display:grid;gap:6px;padding:24px 10px 10px;background:linear-gradient(to top,rgba(6,11,8,.92),rgba(6,11,8,.55) 62%,transparent);transition:opacity .35s}
 .dlz360-chapters{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
@@ -136,6 +137,7 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .dlz360-btn{border:1px solid rgba(255,255,255,.24);background:rgba(11,18,14,.8);color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;line-height:1.2}
 .dlz360-btn:hover{border-color:var(--sign)}
 .dlz360-btn[aria-pressed="true"]{background:var(--sign);color:#1d2a20;border-color:var(--sign)}
+.dlz360-lang{border-color:rgba(242,194,48,.5);color:var(--sign)}
 .dlz360-time{font-family:var(--mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;padding-inline:4px}
 .dlz360-full.dlz360-idle .dlz360-bot,.dlz360-full.dlz360-idle .dlz360-top{opacity:0;pointer-events:none}
 .lens-toggle{position:absolute;left:10px;top:44px;z-index:6;border:1px solid rgba(255,255,255,.25);background:rgba(11,18,14,.78);color:var(--fg);border-radius:999px;padding:4px 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em}
@@ -148,7 +150,7 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .ring .bgc{fill:none;stroke:rgba(255,255,255,.55);stroke-width:2}
 .ring .fg{fill:none;stroke:var(--sign);stroke-width:5;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240}
 .ring::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgba(255,255,255,.8)}
-.aim{position:absolute;left:50%;top:calc(50% + 52px);transform:translateX(-50%);font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;background:rgba(11,18,14,.82);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none;max-width:90%;overflow:hidden;text-overflow:ellipsis}
+.aim{position:absolute;left:50%;top:calc(50% + 52px);transform:translateX(-50%);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;background:rgba(11,18,14,.82);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none;max-width:90%;overflow:hidden;text-overflow:ellipsis}
 .arrow{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
 .arrow span{position:absolute;left:-14px;top:-114px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--sign);color:#1d2a20;font-weight:800;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
 .found-pin{width:22px;height:22px;border-radius:50%;border:3px solid var(--sign);background:rgba(242,194,48,.28);box-shadow:0 0 0 3px rgba(0,0,0,.4)}
@@ -165,20 +167,20 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .livebox .lt{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--live);display:inline-flex;gap:8px;align-items:center}
 .livebox .lt i{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,74,61,.6);animation:ping 1.8s ease-out infinite}
 @keyframes ping{100%{box-shadow:0 0 0 14px rgba(255,74,61,0)}}
-.livebox h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:.95;margin:8px 0 6px;text-transform:uppercase}
+.livebox h3{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.8vw,54px);line-height:.98;margin:8px 0 6px;text-transform:uppercase}
 .livebox .clock{font-family:var(--mono);font-size:clamp(40px,6vw,64px);color:var(--sign);line-height:1}
-.livebox .sub{color:var(--muted);margin-top:8px;max-width:48ch}
+.livebox .sub{color:var(--muted);margin-top:8px;max-width:52ch}
 .livebox .sunrow{font-family:var(--mono);font-size:12px;color:var(--day);margin-top:6px}
 .livebox .watchhere{margin-top:14px;border:1px solid var(--sign);background:rgba(242,194,48,.14);color:var(--sign);border-radius:999px;padding:8px 16px;font-weight:700;font-size:13.5px}
 .livebox .watchhere:hover{background:var(--sign);color:#1d2a20}
 
 /* the field journal */
 .journal{background:var(--paper);color:var(--ink);border-radius:18px;padding:18px 18px 20px;display:grid;gap:13px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 28px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-.j-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0}
-.journal h3{margin:0;font-family:var(--display);font-weight:800;font-size:30px;line-height:.95;text-transform:uppercase;color:var(--ink)}
+.j-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.journal h3{margin:0;font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase;color:var(--ink)}
 .j-intro{margin:0;font-size:14.5px}
 .wx-box{border:1.5px dashed var(--ink-soft);border-radius:10px;padding:8px 11px;background:rgba(29,42,32,.04);font-size:12.5px;display:grid;gap:2px}
-.wx-box b{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.wx-box b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .wx-box span{color:var(--ink-soft)}
 .tasks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .tasks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;font-size:14px}
@@ -187,10 +189,10 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .tasks li.ok{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--mark)}
 .tasks li.cur{font-weight:700}
 .card{border:2px solid var(--ink);border-radius:12px;padding:11px 13px;background:var(--paper);display:grid;gap:5px;position:relative}
-.card b{font-size:15px}
+.card b{font-size:15px;padding-right:64px}
 .card p{margin:0;font-size:14px}
 .card .sci{font-style:italic;color:var(--ink-soft);font-size:12.5px}
-.card .hand{position:absolute;right:12px;top:6px;font-family:var(--hand);font-size:24px;color:var(--mark);transform:rotate(-6deg)}
+.card .hand{position:absolute;right:12px;top:6px;font-family:var(--hand);font-size:23px;color:var(--mark);transform:rotate(-6deg)}
 .q{display:grid;gap:7px}
 .q > b{font-size:14.5px}
 .opts{display:grid;gap:6px}
@@ -208,8 +210,8 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .why{font-size:12.5px;color:var(--ink-soft)}
 .hintb{border:0;background:transparent;color:var(--ink-soft);text-decoration:underline;font-size:13px;padding:0;justify-self:start}
 .done-box{display:grid;gap:10px;justify-items:start}
-.big-stamp{width:150px;height:150px;border:4px solid var(--mark);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--mark);font-family:var(--display);font-weight:800;font-size:24px;line-height:.95;text-transform:uppercase;transform:rotate(-10deg);padding:14px;animation:stampin .5s cubic-bezier(.2,1.6,.4,1)}
-.big-stamp small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;margin-top:6px}
+.big-stamp{width:154px;height:154px;border:4px solid var(--mark);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--mark);font-family:var(--display);font-weight:800;font-size:22px;line-height:1;text-transform:uppercase;transform:rotate(-10deg);padding:14px;overflow-wrap:anywhere;animation:stampin .5s cubic-bezier(.2,1.6,.4,1)}
+.big-stamp small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;margin-top:6px}
 @keyframes stampin{from{transform:rotate(-10deg) scale(1.8);opacity:0}}
 @media (prefers-reduced-motion:reduce){.big-stamp,.livebox .lt i{animation:none}button.ex{transition:none}}
 .pnlm-load-box{background:rgba(11,18,14,.85)!important}
@@ -222,31 +224,40 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 <body>
 <div class="wrap">
   <header class="bar">
-    <a class="home" href="/">← Digital Live Zoo</a>
-    <span class="word">Field Station</span>
-    <span class="mode-l" id="modeL">Edition</span>
-    <div class="mode" role="group" aria-labelledby="modeL">
-      <button type="button" data-mode="junior" aria-pressed="true">Kids · Junior</button>
-      <button type="button" data-mode="pro" aria-pressed="false">Adults · Pro</button>
+    <a class="home" href="/" id="homeLink">← Digital Live Zoo</a>
+    <span class="word" id="wordTitle">Field Station</span>
+    <div class="sw-group">
+      <span class="mode-l" id="langL">Language</span>
+      <div class="mode lang-sw" role="group" aria-labelledby="langL">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+    </div>
+    <div class="sw-group">
+      <span class="mode-l" id="modeL">Edition</span>
+      <div class="mode ed-sw" role="group" aria-labelledby="modeL">
+        <button type="button" data-mode="junior" aria-pressed="true" id="btnJunior">Kids · Junior</button>
+        <button type="button" data-mode="pro" aria-pressed="false" id="btnPro">Adults · Pro</button>
+      </div>
     </div>
   </header>
 
   <main class="home-v" id="homeV">
     <section class="hero">
       <div>
-        <h1>Field Station</h1>
-        <p>Step inside 360° VR wildlife camps right on this page — no YouTube app needed. Spot elephants, giraffes, zebras and solar clues from sunrise to sunset, switch anytime between our 6-minute <b>Kids</b> and <b>Adults</b> editions, then check live weather and real 24/7 waterhole cams.</p>
+        <h1 id="heroTitle">Field Station</h1>
+        <p id="heroDesc"></p>
       </div>
-      <div class="passport" aria-label="Your passport">
-        <div class="pp-top"><b>Explorer passport</b><span id="rank">Cub</span></div>
+      <div class="passport" id="passportBox" aria-label="Your passport">
+        <div class="pp-top"><b id="ppLabel">Explorer passport</b><span id="rank">Cub</span></div>
         <div class="stamps" id="stamps"></div>
       </div>
     </section>
     <section style="display:grid;gap:16px">
-      <div class="sec-h"><h2>Expeditions</h2><span>Savanna 360° Camp, Elephants &amp; Giraffes 360°, and Waterhole are open now.</span></div>
+      <div class="sec-h"><h2 id="expSecTitle">Expeditions</h2><span id="expSecSub"></span></div>
       <div class="exps" id="exps"></div>
     </section>
-    <p class="credits">Embedded 360° VR Safari Camps play directly on Digital Live Zoo (WebGL spherical HLS, Kids &amp; Adults editions, synced with live MET Norway weather and local sunrise/sunset). 360° Quiver Tree photo: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0. Additional Waterhole videos stream from National Geographic and Wildlife Protection Solutions. Your progress stays in this browser.</p>
+    <p class="credits" id="creditsLine"></p>
   </main>
 
   <main class="run-v" id="runV" hidden>
@@ -275,300 +286,985 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     get(k, d){ try{ const v = localStorage.getItem("fs-" + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
     set(k, v){ try{ localStorage.setItem("fs-" + k, JSON.stringify(v)); }catch(e){} }
   };
-  let mode = store.get("mode", "junior");
-  const T = x => (x && typeof x === "object" && !Array.isArray(x)) ? (x[mode] || x.junior) : x;
 
-  const SAFARI_STREAMS = {
-    junior: { hls: "streams/safari-kids/index.m3u8", label: "Kids Edition · Ranger Guide (5:51)" },
-    pro:    { hls: "streams/safari-adults/index.m3u8", label: "Adults Edition · Field Biologist (5:51)" }
+  const urlLang = new URLSearchParams(location.search).get("lang");
+  const defaultLang = (urlLang === "ru" || urlLang === "en")
+    ? urlLang
+    : (/^ru\b/i.test(navigator.language || "") ? "ru" : "en");
+  let lang = store.get("lang", defaultLang);
+  if(urlLang === "ru" || urlLang === "en"){ lang = urlLang; store.set("lang", lang); }
+  if(lang !== "ru" && lang !== "en") lang = "en";
+
+  let mode = store.get("mode", "junior");
+  if(mode !== "junior" && mode !== "pro") mode = "junior";
+
+  // Recursively resolves {en, ru} and {junior, pro} in any nesting order
+  function R(v){
+    if(v == null || typeof v !== "object" || Array.isArray(v)) return v;
+    if("en" in v || "ru" in v) return R(v[lang] !== undefined ? v[lang] : v.en);
+    if("junior" in v || "pro" in v) return R(v[mode] !== undefined ? v[mode] : v.junior);
+    return v;
+  }
+
+  const UI = {
+    en: {
+      docTitle: "Field Station · Digital Live Zoo",
+      homeLink: "← Digital Live Zoo",
+      word: "Field Station",
+      langLabel: "Language",
+      modeLabel: "Edition",
+      btnJunior: "Kids · Junior",
+      btnPro: "Adults · Pro",
+      heroTitle: "Field Station",
+      heroDesc: "Step inside 360° VR wildlife camps right on this page — no YouTube app needed. Listen to Studio ElevenLabs guides in <b>English</b> or <b>Russian</b> across our 6-minute <b>Kids</b> and <b>Adults</b> editions, spot elephants &amp; giraffes from sunrise to sunset, then check real 24/7 live cams.",
+      passportAria: "Your passport",
+      ppLabel: "Explorer passport",
+      expTitle: "Expeditions",
+      expSub: "Savanna 360° Camp, Elephants & Giraffes 360°, and Waterhole are open now (English & Russian).",
+      credits: 'Embedded 360° VR Safari Camps play directly on Digital Live Zoo (WebGL spherical HLS, Studio ElevenLabs voices in English &amp; Russian for Kids &amp; Adults, synced with live MET Norway weather and local sunrise/sunset). 360° Quiver Tree photo: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0. Additional Waterhole videos stream from National Geographic and Wildlife Protection Solutions. Your progress stays in this browser.',
+      backStation: "← Station",
+      stopsAria: "Stops",
+      donePlayAgain: "Done · play again",
+      stopsCount: n => `${n} stops`,
+      comingSoon: "Coming soon",
+      startExp: "Start expedition →",
+      beingPrepared: "Being prepared",
+      stopWord: n => `Stop ${n}`,
+      vrCampMeta: m => `Embedded 360° VR Camp · ${m === "junior" ? "Kids" : "Adults"} · EN/RU`,
+      finishExpBtn: "Finish expedition",
+      nextStopBtn: "Next stop →",
+      findAllWhy: "Find everything on the list first",
+      completeTasksWhy: "Complete the tasks & questions first",
+      spotCluesWhy: "Spot the 360° clues in the video first",
+      answerFieldWhy: "Answer the field question first",
+      answerQsWhy: "Answer the questions first",
+      predictLiveWhy: "Predict who is at the live cam first",
+      expCompleteBadge: "Expedition complete",
+      stampAdded: "Stamp added to your Explorer Passport.",
+      journalCompleteMeta: "Field journal · expedition complete",
+      finishIntro: rk => `You logged the 360° camp clues, checked the live solar & weather telemetry, and answered every field question. Your rank: <b>${esc(rk)}</b>.`,
+      backToStationBtn: "Back to the station",
+      photo360Credit: "360° photo:",
+      lookAround: "Look around",
+      holdSteady: "Hold steady…",
+      holdSteadyOn: name => `Hold steady on ${name}…`,
+      logged: "Logged!",
+      tapOrHoldJr: "Tap it, or hold it in the circle",
+      tapOrHoldPro: "Tap or centre a feature",
+      allFound: "All found",
+      foundFlash: name => `Found: ${name}`,
+      nothingThere: "Nothing on your list there. Keep looking!",
+      foundEverythingHere: "You found everything here!",
+      showWayHint: "Show me which way to look",
+      showArrowHint: "Show directional hint arrow",
+      nOfMFound: (a, b) => `${a} of ${b} found`,
+      nOfMClues: (a, b) => `${a} of ${b} 360° clues logged`,
+      handFound: "found it!",
+      handSpotted: "spotted!",
+      handYes: "Yes!",
+      handNo: "Not quite.",
+      skipStop: "Skip this stop",
+      keepPanning: "Keep panning 360° — more wildlife nearby!",
+      drag360Jr: "Drag 360° · tap or hold in circle",
+      drag360Pro: "Pan 360° · tap or centre target",
+      all360Logged: "All 360° targets logged · explore freely!",
+      dragOrTilt: "Drag or tilt 360°",
+      clean360: "🔭 Clean 360° View",
+      showBinos: "🔭 Show Binoculars",
+      sunriseSetLine: (r, s) => `Sunrise ${r} · Sunset ${s}`,
+      nightStatus: (pl, tm) => `🌙 Now at ${pl}: ${tm} (after sunset) — exploring today's recorded Sunrise & Sunset 360° watches`,
+      dayStatus: (pl, tm, ph) => `☀️ Live station time at ${pl}: ${tm} (${ph})`,
+      checkingWx: "Checking live MET Norway station weather…",
+      wantOnsiteTitle: "Want full 360° right here on this page?",
+      wantOnsiteSub: "Mobile browsers show YouTube 360° flat — open our embedded On-Site 360° Safari Player without leaving Digital Live Zoo.",
+      playOnsiteBtn: "Play in On-Site 360° →",
+      tiltLook: "Tilt to look",
+      stopTilt: "Stop tilting",
+      video360By: by => `360° video by ${by}`,
+      liveRightNow: "Live right now",
+      sunRowLive: (r, s) => `🌅 Sunrise ${r} · 🌇 Sunset ${s}`,
+      watchLiveHere: "▶ Watch live cam right here",
+      liveCamMeta: "Live cam",
+      openMainStage: "Also open on Main Stage ↗",
+      nightWord: "🌙 night",
+      dayWord: "☀️ daytime",
+      localWord: "local",
+      windWord: "wind",
+      hudNight: "🌙 Night",
+      hudDay: "☀️ Day",
+      phases: { sunrise: "sunrise", day: "day", sunset: "sunset", night: "night" }
+    },
+    ru: {
+      docTitle: "Полевая станция · Digital Live Zoo",
+      homeLink: "← Живой Цифровой Зоопарк",
+      word: "Полевая станция",
+      langLabel: "Язык",
+      modeLabel: "Версия",
+      btnJunior: "Дети · Юниор",
+      btnPro: "Взрослые · Про",
+      heroTitle: "Полевая станция",
+      heroDesc: "Погружайтесь в 360° VR-лагеря дикой природы прямо на этой странице — без перехода в YouTube. Слушайте студийную озвучку ElevenLabs на <b>русском</b> или <b>английском</b> в 6-минутных версиях для <b>детей</b> и <b>взрослых</b>, ищите слонов и жирафов от рассвета до заката и проверяйте реальные живые камеры 24/7.",
+      passportAria: "Паспорт исследователя",
+      ppLabel: "Паспорт исследователя",
+      expTitle: "Экспедиции",
+      expSub: "Сафари-лагерь 360°, Слоны и жирафы 360° и Водопой открыты прямо сейчас (RU / EN).",
+      credits: 'Встроенные 360° VR сафари-лагеря воспроизводятся прямо на Digital Live Zoo (сферический WebGL HLS, студийные голоса ElevenLabs на русском и английском для детей и взрослых, синхронизация с живой погодой MET Norway, рассветом и закатом). Панорама Колчанного леса 360°: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0. Дополнительные ролики «Водопоя»: National Geographic и Wildlife Protection Solutions. Ваш прогресс сохраняется в браузере.',
+      backStation: "← На станцию",
+      stopsAria: "Этапы",
+      donePlayAgain: "Пройдено · ещё раз",
+      stopsCount: n => `${n} ${n === 1 ? "этап" : (n >= 2 && n <= 4 ? "этапа" : "этапов")}`,
+      comingSoon: "Скоро",
+      startExp: "Начать экспедицию →",
+      beingPrepared: "Готовится к запуску",
+      stopWord: n => `Этап ${n}`,
+      vrCampMeta: m => `Встроенный 360° VR-лагерь · ${m === "junior" ? "Дети" : "Взрослые"} · RU/EN`,
+      finishExpBtn: "Завершить экспедицию",
+      nextStopBtn: "Дальше →",
+      findAllWhy: "Сначала найдите все объекты из списка",
+      completeTasksWhy: "Сначала выполните задания и ответьте на вопросы",
+      spotCluesWhy: "Сначала найдите все 360°-подсказки на видео",
+      answerFieldWhy: "Сначала ответьте на полевой вопрос",
+      answerQsWhy: "Сначала ответьте на вопросы",
+      predictLiveWhy: "Сначала угадайте, кто сейчас у живой камеры",
+      expCompleteBadge: "Экспедиция завершена",
+      stampAdded: "Печать добавлена в ваш Паспорт исследователя.",
+      journalCompleteMeta: "Полевой дневник · экспедиция завершена",
+      finishIntro: rk => `Вы нашли все 360°-подсказки в лагере, сверили живую погоду и солнце и ответили на все полевые вопросы. Ваше звание: <b>${esc(rk)}</b>.`,
+      backToStationBtn: "Вернуться на станцию",
+      photo360Credit: "Фото 360°:",
+      lookAround: "Осмотритесь вокруг",
+      holdSteady: "Удерживайте в круге…",
+      holdSteadyOn: name => `Держите в фокусе: ${name}…`,
+      logged: "Записано!",
+      tapOrHoldJr: "Нажмите или удерживайте в круге",
+      tapOrHoldPro: "Нажмите или наведите перекрестие",
+      allFound: "Всё найдено",
+      foundFlash: name => `Найдено: ${name}`,
+      nothingThere: "Здесь нет объекта из списка — ищите дальше!",
+      foundEverythingHere: "Вы уже нашли здесь всё!",
+      showWayHint: "Подсказать направление",
+      showArrowHint: "Показать стрелку-подсказку",
+      nOfMFound: (a, b) => `Найдено: ${a} из ${b}`,
+      nOfMClues: (a, b) => `Отмечено 360°-целей: ${a} из ${b}`,
+      handFound: "найдено!",
+      handSpotted: "есть!",
+      handYes: "Верно!",
+      handNo: "Почти.",
+      skipStop: "Пропустить этап",
+      keepPanning: "Вращайте обзор 360° — животные рядом!",
+      drag360Jr: "Вращайте 360° · нажмите или держите в круге",
+      drag360Pro: "Обзор 360° · нажмите или удерживайте цель",
+      all360Logged: "Все 360°-цели отмечены · свободный обзор!",
+      dragOrTilt: "Вращайте обзор 360°",
+      clean360: "🔭 Чистый обзор 360°",
+      showBinos: "🔭 Включить бинокль",
+      sunriseSetLine: (r, s) => `Рассвет ${r} · Закат ${s}`,
+      nightStatus: (pl, tm) => `🌙 Сейчас (${pl}): ${tm} (после заката) — смотрим записи рассвета и заката в 360°`,
+      dayStatus: (pl, tm, ph) => `☀️ Местное время (${pl}): ${tm} (${ph})`,
+      checkingWx: "Загружаем живую погоду станции MET Norway…",
+      wantOnsiteTitle: "Хотите полный обзор 360° прямо здесь?",
+      wantOnsiteSub: "Мобильные браузеры показывают YouTube плоско — откройте наш встроенный 360° сафари-плеер, не покидая сайт.",
+      playOnsiteBtn: "Включить встроенный 360° →",
+      tiltLook: "Гироскоп 360°",
+      stopTilt: "Выкл. гироскоп",
+      video360By: by => `Видео 360°: ${by}`,
+      liveRightNow: "Прямой эфир сейчас",
+      sunRowLive: (r, s) => `🌅 Рассвет ${r} · 🌇 Закат ${s}`,
+      watchLiveHere: "▶ Смотреть живую камеру здесь",
+      liveCamMeta: "Живая камера",
+      openMainStage: "Открыть на Главной сцене ↗",
+      nightWord: "🌙 ночь",
+      dayWord: "☀️ день",
+      localWord: "местн.",
+      windWord: "ветер",
+      hudNight: "🌙 Ночь",
+      hudDay: "☀️ День",
+      phases: { sunrise: "рассвет", day: "день", sunset: "закат", night: "ночь" }
+    }
+  };
+  const S = () => UI[lang] || UI.en;
+
+  const WX_RU = {
+    "Clear sky": "Ясно",
+    "Fair": "Малооблачно",
+    "Partly cloudy": "Переменная облачность",
+    "Cloudy": "Облачно",
+    "Fog": "Туман",
+    "Light rain": "Небольшой дождь",
+    "Rain": "Дождь",
+    "Heavy rain": "Сильный дождь",
+    "Light rain showers": "Кратковременный дождь",
+    "Rain showers": "Ливень",
+    "Heavy rain showers": "Сильный ливень",
+    "Thunderstorm": "Гроза",
+    "Light snow": "Небольшой снег",
+    "Snow": "Снег"
   };
 
-  const SAFARI_CHAPTERS = [
-    { time: 0,   label: "🌅 Sunrise · 06:08" },
-    { time: 88,  label: "🌤️ Savanna Breeze · 24°C" },
-    { time: 175, label: "✨ Golden Hour · 17:35" },
-    { time: 262, label: "🌇 Sunset Dusk · 18:19" }
-  ];
+  const MASTER_HLS = "streams/safari-v2/master.m3u8";
+  const SAFARI_STREAMS = {
+    en_junior: { track: "en_junior", hls: "streams/safari-v2/en_junior.m3u8", label: "EN · Kids · Anna (5:51)" },
+    en_pro:    { track: "en_pro",    hls: "streams/safari-v2/en_pro.m3u8",    label: "EN · Adults · George (5:51)" },
+    ru_junior: { track: "ru_junior", hls: "streams/safari-v2/ru_junior.m3u8", label: "RU · Дети · Настя (5:51)" },
+    ru_pro:    { track: "ru_pro",    hls: "streams/safari-v2/ru_pro.m3u8",    label: "RU · Взрослые · Глеб (5:51)" }
+  };
+  function activeStream(){
+    return SAFARI_STREAMS[lang + "_" + mode] || SAFARI_STREAMS.en_junior;
+  }
 
-  // ---------- expeditions ----------
+  const SAFARI_CHAPTERS = {
+    en: [
+      { time: 0,   label: "🌅 Sunrise · 06:08" },
+      { time: 88,  label: "🌤️ Savanna Breeze · 24°C" },
+      { time: 175, label: "✨ Golden Hour · 17:35" },
+      { time: 262, label: "🌇 Sunset Dusk · 18:19" }
+    ],
+    ru: [
+      { time: 0,   label: "🌅 Рассвет · 06:08" },
+      { time: 88,  label: "🌤️ Бриз саванны · 24°C" },
+      { time: 175, label: "✨ Золотой час · 17:35" },
+      { time: 262, label: "🌇 Закат · 18:19" }
+    ]
+  };
+
+  // ---------- expeditions (full EN + RU, Kids + Adults) ----------
   const EXPS = [
-    {id:"safari-camp", name:"Savanna 360° Camp", img:"img/safari-camp.jpg", open:true, vrBadge:"360° VR Camp · 5:51", featured:true,
-     blurb:"Chyulu Hills & Amboseli waterhole from 06:08 sunrise to 18:19 sunset. Spot elephants, giraffes & zebras in our embedded 360° player (Kids & Adults editions), then check the live cam.",
+    {id:"safari-camp",
+     name:{en:"Savanna 360° Camp", ru:"Сафари-лагерь 360°"},
+     img:"img/safari-camp.jpg", open:true,
+     vrBadge:{en:"360° VR · EN/RU · 5:51", ru:"360° VR · RU/EN · 5:51"},
+     featured:true,
+     blurb:{
+       en:"Chyulu Hills & Amboseli waterhole from 06:08 sunrise to 18:19 sunset. Spot elephants, giraffes & zebras with Studio ElevenLabs narration (EN/RU, Kids & Adults), then check the live cam.",
+       ru:"Водопой Чьюлу-Хиллс и Амбосели от рассвета 06:08 до заката 18:19. Ищите слонов, жирафов и зебр со студийной озвучкой ElevenLabs (RU/EN, для детей и взрослых) и включайте живую камеру."
+     },
      stops:[
-      {type:"camp360", title:"Sunrise Watch: First Light at the Pan", place:"Chyulu Hills / Amboseli, Kenya",
+      {type:"camp360",
+       title:{en:"Sunrise Watch: First Light at the Pan", ru:"Рассветная вахта: Первые лучи у водопоя"},
+       place:{en:"Chyulu Hills / Amboseli, Kenya", ru:"Чьюлу-Хиллс / Амбосели, Кения"},
        slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
        poster:"scenes/safari-sunrise.jpg", startAt:0, yaw:10, pitch:0,
-       chapters:SAFARI_CHAPTERS,
        intro:{
-         junior:"Welcome to our 6-minute 360° Safari Camp! Press Enter Camp, listen to your Kenyan Ranger guide, and drag or tilt all 360° around the misty sunrise waterhole to tap or centre every animal and clue on your list.",
-         pro:"Chyulu Hills waterhole hide, 06:08 EAT sunrise watch. Stream plays natively in WebGL 360° with East African ethologist log. Pan the full horizon to log all four dawn survey targets, then complete the crepuscular observation."
+         en:{
+           junior:"Welcome to our 6-minute 360° Safari Camp! Press Enter Camp, listen to your ElevenLabs guide, and drag or tilt all 360° around the misty sunrise waterhole to spot every animal and clue.",
+           pro:"Chyulu Hills waterhole hide, 06:08 EAT sunrise watch. Stream plays natively in WebGL 360° with Studio ElevenLabs narration. Pan the full horizon to log all four dawn survey targets, then complete the crepuscular observation."
+         },
+         ru:{
+           junior:"Добро пожаловать в наш 6-минутный 360° сафари-лагерь! Нажмите «Войти в лагерь», слушайте рассказчика ElevenLabs и вращайте камеру на все 360° вокруг утреннего водопоя, чтобы найти всех зверей и подсказки!",
+           pro:"Скрадок у водопоя Чьюлу-Хиллс, рассветная вахта 06:08 EAT. Сферическое видео WebGL 360° со студийной озвучкой ElevenLabs. Просканируйте горизонт, отметьте четыре утренних объекта и ответьте на контрольный вопрос."
+         }
        },
        targets:[
         {id:"ele_dawn", yaw:68, pitch:-15, tol:17,
-         task:{junior:"Spot the elephant mom, auntie and tiny baby calf drinking", pro:"Log the Loxodonta africana matriarch, allomother & calf at the bank"},
-         name:"African bush elephant family", sci:"Loxodonta africana",
-         fact:{junior:"See how the baby calf stays right between the two big elephants? Elephant moms and aunties form a protective circle around calves at waterholes so lions cannot sneak close!",
-               pro:"Matriarchal family units maintain tight flank-shadowing around young calves when approaching open water at dawn, where tall grass transitions to exposed clay shoreline."}},
+         task:{
+           en:{junior:"Spot the elephant mom, auntie and tiny baby calf drinking", pro:"Log the Loxodonta africana matriarch, allomother & calf at the bank"},
+           ru:{junior:"Найдите маму-слониху, тётю и маленького слонёнка у воды", pro:"Отметьте матриарха Loxodonta africana, алломать и слонёнка у кромки воды"}
+         },
+         name:{en:"African bush elephant family", ru:"Семья саванных слонов"},
+         sci:{en:"Loxodonta africana", ru:"Loxodonta africana"},
+         fact:{
+           en:{
+             junior:"See how the baby calf stays right between the two big elephants? Elephant moms and aunties form a protective circle around calves at waterholes so lions cannot sneak close!",
+             pro:"Matriarchal family units maintain tight flank-shadowing around young calves when approaching open water at dawn, where tall grass transitions to exposed clay shoreline."
+           },
+           ru:{
+             junior:"Видите, как малыш держится прямо между двумя взрослыми слонихами? Мамы и тёти окружают слонят живым щитом у открытой воды, чтобы львы не смогли подобраться близко!",
+             pro:"Матриархальные группы выстраивают плотное боковое прикрытие вокруг телят до двух лет при выходе на открытый глинистый берег на рассвете, когда сумеречные хищники ещё активны."
+           }
+         }},
         {id:"gir_dawn", yaw:-52, pitch:-3, tol:17,
-         task:{junior:"Find the two tall Maasai giraffes by the umbrella trees", pro:"Log the two Maasai giraffes (Giraffa tippelskirchi) along the acacia line"},
-         name:"Maasai giraffes at first light", sci:"Giraffa tippelskirchi",
-         fact:{junior:"Giraffes are the watchtowers of the savanna! Because their eyes sit up to 5 metres high, other animals watch giraffes to see if danger is nearby.",
-               pro:"Standing 4.5 to 5.5 metres tall, Maasai giraffes scan open sightlines for several minutes at dawn before splaying their forelegs to drink — the moment of peak predation risk."}},
+         task:{
+           en:{junior:"Find the two tall Maasai giraffes by the umbrella trees", pro:"Log the two Maasai giraffes (Giraffa tippelskirchi) along the acacia line"},
+           ru:{junior:"Найдите двух высоких масайских жирафов у зонтичных акаций", pro:"Отметьте пару масайских жирафов (Giraffa tippelskirchi) у линии акаций"}
+         },
+         name:{en:"Maasai giraffes at first light", ru:"Масайские жирафы на рассвете"},
+         sci:{en:"Giraffa tippelskirchi", ru:"Giraffa tippelskirchi"},
+         fact:{
+           en:{
+             junior:"Giraffes are the watchtowers of the savanna! Because their eyes sit up to 5 metres high, other animals watch giraffes to see if danger is nearby.",
+             pro:"Standing 4.5 to 5.5 metres tall, Maasai giraffes scan open sightlines for several minutes at dawn before splaying their forelegs to drink — the moment of peak predation risk."
+           },
+           ru:{
+             junior:"Жирафы — настоящие сторожевые башни саванны! Их глаза находятся на высоте пяти метров, поэтому зебры и антилопы следят за жирафами, чтобы вовремя заметить опасность.",
+             pro:"При росте до 5,5 метров масайские жирафы подолгу сканируют открытую равнину перед водопоем: широко расставляя передние ноги у воды, жираф становится наиболее уязвим для засады львов."
+           }
+         }},
         {id:"sun_east", yaw:-152, pitch:16, tol:18,
-         task:{junior:"Turn around and find the pink-gold sunrise in the clouds", pro:"Log the eastern sunrise glow & partly-cloudy dawn cumulus layer"},
-         name:"Equatorial sunrise (06:08 EAT)", sci:"Partly cloudy dawn · ~17°C",
-         fact:{junior:"Near the equator in Kenya, the sun rises right around 6 o'clock almost every morning of the year! Cool mornings are prime time for animals to visit water.",
-               pro:"At 2.7° south latitude, sunrise varies by barely 15 minutes across the year (~06:08 EAT in late October). Scattered morning stratocumulus moderates early radiant heating."}},
+         task:{
+           en:{junior:"Turn around and find the pink-gold sunrise in the clouds", pro:"Log the eastern sunrise glow & partly-cloudy dawn cumulus layer"},
+           ru:{junior:"Обернитесь и найдите розово-золотой рассвет в облаках", pro:"Отметьте восточную зарю и утреннюю кучевую облачность"}
+         },
+         name:{en:"Equatorial sunrise (06:08 EAT)", ru:"Экваториальный рассвет (06:08 EAT)"},
+         sci:{en:"Partly cloudy dawn · ~17°C", ru:"Переменная облачность · ~17°C"},
+         fact:{
+           en:{
+             junior:"Near the equator in Kenya, the sun rises right around 6 o'clock almost every morning of the year! Cool mornings are prime time for animals to visit water.",
+             pro:"At 2.7° south latitude, sunrise varies by barely 15 minutes across the year (~06:08 EAT in late October). Scattered morning stratocumulus moderates early radiant heating."
+           },
+           ru:{
+             junior:"Рядом с экватором в Кении солнце встаёт около шести утра круглый год! Прохладный рассвет — любимое время зверей для утреннего водопоя.",
+             pro:"На широте 2,7° ю. ш. время восхода почти неизменно весь год (~06:08 EAT). Утренняя слоисто-кучевая облачность смягчает ранний радиационный прогрев саванны."
+           }
+         }},
         {id:"mist_pan", yaw:-18, pitch:-24, tol:17,
-         task:{junior:"Find the cool morning mist floating on the waterhole", pro:"Log the thermal evaporation mist across the waterhole surface"},
-         name:"Dawn waterhole mist", sci:"Radiative night cooling over warm pan water",
-         fact:{junior:"At night the desert and savanna air gets chilly, while the pond stays warm from yesterday's sun — making ghostly mist float right over the water at sunrise!",
-               pro:"Clear nocturnal skies cool the savanna boundary layer to ~15–17°C while shallow clay-pan water retains daytime heat, producing thin steam-fog wisps until morning wind mixes the air."}}
+         task:{
+           en:{junior:"Find the cool morning mist floating on the waterhole", pro:"Log the thermal evaporation mist across the waterhole surface"},
+           ru:{junior:"Найдите прохладную утреннюю дымку над зеркалом воды", pro:"Отметьте туман испарения над тёплой поверхностью водопоя"}
+         },
+         name:{en:"Dawn waterhole mist", ru:"Рассветная дымка над водой"},
+         sci:{en:"Radiative night cooling over warm pan water", ru:"Радиационное ночное выхолаживание над тёплой водой"},
+         fact:{
+           en:{
+             junior:"At night the savanna air gets chilly, while the pond stays warm from yesterday's sun — making ghostly mist float right over the water at sunrise!",
+             pro:"Clear nocturnal skies cool the savanna boundary layer to ~15–17°C while shallow clay-pan water retains daytime heat, producing thin steam-fog wisps until morning wind mixes the air."
+           },
+           ru:{
+             junior:"Ночью воздух саванны остывает, а вода в пруду хранит вчерашнее солнечное тепло — поэтому на рассвете над водой стелется сказочный лёгкий туман!",
+             pro:"Ночное выхолаживание опускает температуру приземного воздуха до 15–17°C, тогда как глинистое мелководье удерживает дневное тепло, формируя тонкую дымку испарения до усиления ветра."
+           }
+         }}
        ],
        questions:[
-        {q:{junior:"Why does the baby elephant walk tucked right between its mom and auntie?", pro:"What drives tight calf-flanking as an elephant family approaches a dawn waterhole?"},
+        {q:{
+           en:{junior:"Why does the baby elephant walk tucked right between its mom and auntie?", pro:"What drives tight calf-flanking as an elephant family approaches a dawn waterhole?"},
+           ru:{junior:"Почему маленький слонёнок идёт прямо между мамой и тётей-слонихой?", pro:"Чем обусловлено плотное боковое прикрытие телёнка при подходе семьи слонов к рассветному водопою?"}
+         },
          opts:{
-           junior:["To stay out of the mud","So the big adults shield it from lions and hyenas","Because baby elephants cannot swim"],
-           pro:["Dominance competition over mineral mud","Anti-predator perimeter defense while crepuscular carnivores are still active","Thermoregulation against morning mist"]
+           en:{
+             junior:["To stay out of the mud","So the big adults shield it from lions and hyenas","Because baby elephants cannot swim"],
+             pro:["Dominance competition over mineral mud","Anti-predator perimeter defense while crepuscular carnivores are still active","Thermoregulation against morning mist"]
+           },
+           ru:{
+             junior:["Чтобы не испачкать ноги в глине","Взрослые слонихи закрывают малыша от львов и гиен","Потому что слонята боятся воды"],
+             pro:["Конкуренция за минеральные соли на мелководье","Защитный периметр против сумеречных хищников на открытом берегу","Терморегуляция в утреннем тумане"]
+           }
          },
          a:1,
-         fact:{junior:"Adult elephants are too big for lions, so keeping the calf in the middle keeps it safe while everyone gets a morning drink!",
-               pro:"Lions and spotted hyenas remain active through civil twilight and sunrise; allomothers and the matriarch bracket calves under two years old at exposed water points."}}
+         fact:{
+           en:{
+             junior:"Adult elephants are too big for lions, so keeping the calf in the middle keeps it safe while everyone gets a morning drink!",
+             pro:"Lions and spotted hyenas remain active through civil twilight and sunrise; allomothers and the matriarch bracket calves under two years old at exposed water points."
+           },
+           ru:{
+             junior:"Взрослые слоны не по зубам львам, поэтому в центре семьи малыш в полной безопасности, пока все пьют утреннюю воду!",
+             pro:"Львы и пятнистые гиены сохраняют охотничью активность в сумерках и на рассвете, поэтому матриарх и алломатери всегда прикрывают маленьких слонят у открытых водоёмов."
+           }
+         }}
        ]},
-      {type:"camp360", title:"Savanna Breeze: Mud Baths & Canopy Browsers", place:"Chyulu Hills, Kenya",
+      {type:"camp360",
+       title:{en:"Savanna Breeze: Mud Baths & Canopy Browsers", ru:"Бриз саванны: Грязевой душ и кроны акаций"},
+       place:{en:"Chyulu Hills, Kenya", ru:"Чьюлу-Хиллс, Кения"},
        slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
        poster:"scenes/safari-daylight.jpg", startAt:88, yaw:-22, pitch:-4,
-       chapters:SAFARI_CHAPTERS,
        intro:{
-         junior:"It is mid-morning now — 24°C with fluffy white clouds and a warm breeze! Look around the busy waterhole in 360° to spot who is splashing, who is catching bugs, and who is munching treetops.",
-         pro:"Mid-morning watch (~24°C, partly cloudy fair-weather cumulus, 17 km/h ESE breeze). Survey niche partitioning and thermoregulation across four species sharing the pan."
+         en:{
+           junior:"It is mid-morning now — 24°C with fluffy white clouds and a warm breeze! Look around the busy waterhole in 360° to spot who is splashing, who is catching bugs, and who is munching treetops.",
+           pro:"Mid-morning watch (~24°C, partly cloudy fair-weather cumulus, 17 km/h ESE breeze). Survey niche partitioning and thermoregulation across four species sharing the pan."
+         },
+         ru:{
+           junior:"Наступило тёплое утро — 24°C, пушистые облака и свежий ветерок! Осмотрите оживлённый водопой на 360°: найдите, кто устраивает душ, кто ловит кузнечиков, а кто обедает на верхушках деревьев.",
+           pro:"Утренняя смена (~24°C, кучевая облачность хорошей погоды, юго-восточный бриз 17 км/ч). Изучите разделение экологических ниш и терморегуляцию четырёх видов у одного водоёма."
+         }
        },
        targets:[
         {id:"ele_spray", yaw:-30, pitch:-11, tol:17,
-         task:{junior:"Spot the big elephant spraying a shower of water over its back", pro:"Log the trunk-spraying thermoregulation behaviour in the pan"},
-         name:"Elephant mud & water shower", sci:"Evaporative cooling & UV barrier",
-         fact:{junior:"Splash! An elephant's trunk holds up to 8 litres of water at once. Spraying muddy water works as air-conditioning AND sunscreen!",
-               pro:"Wrinkled epidermis retains 5 to 10 times more water than smooth skin; trunk-sprayed water and red clay provide prolonged evaporative heat loss without sweat glands."}},
+         task:{
+           en:{junior:"Spot the big elephant spraying a shower of water over its back", pro:"Log the trunk-spraying thermoregulation behaviour in the pan"},
+           ru:{junior:"Найдите слона, который окатывает спину фонтаном воды из хобота", pro:"Отметьте терморегуляторное окатывание водой у слонов на мелководье"}
+         },
+         name:{en:"Elephant mud & water shower", ru:"Водный и грязевой душ слонов"},
+         sci:{en:"Evaporative cooling & UV barrier", ru:"Испарительное охлаждение и защита от УФ-лучей"},
+         fact:{
+           en:{
+             junior:"Splash! An elephant's trunk holds up to 8 litres of water at once. Spraying muddy water works as air-conditioning AND sunscreen!",
+             pro:"Wrinkled epidermis retains 5 to 10 times more water than smooth skin; trunk-sprayed water and red clay provide prolonged evaporative heat loss without sweat glands."
+           },
+           ru:{
+             junior:"Плюх! Хобот слона вмещает сразу восемь литров воды. Прохладный душ с красной глиной работает и как кондиционер, и как солнезащитный крем!",
+             pro:"Сеть микротрещин эпидермиса удерживает в 5–10 раз больше влаги, чем гладкая кожа, обеспечивая длительное испарительное охлаждение при отсутствии потовых желёз."
+           }
+         }},
         {id:"egrets", yaw:-68, pitch:-20, tol:15,
-         task:{junior:"Find the white cattle egrets walking on the red-earth bank", pro:"Log the commensal cattle egrets (Bubulcus ibis) on the shoreline"},
-         name:"Cattle egrets", sci:"Bubulcus ibis",
-         fact:{junior:"Cattle egrets follow big animals like elephants and zebras because heavy footsteps scare tasty grasshoppers right out of the grass!",
-               pro:"Foraging alongside megaherbivores increases egret insect-capture rates by up to 3x while cutting energy spent flushing prey."}},
+         task:{
+           en:{junior:"Find the white cattle egrets walking on the red-earth bank", pro:"Log the commensal cattle egrets (Bubulcus ibis) on the shoreline"},
+           ru:{junior:"Найдите белых египетских цапель на краснозёмном берегу", pro:"Отметьте комменсальных египетских цапель (Bubulcus ibis) у уреза воды"}
+         },
+         name:{en:"Cattle egrets", ru:"Египетские цапли"},
+         sci:{en:"Bubulcus ibis", ru:"Bubulcus ibis"},
+         fact:{
+           en:{
+             junior:"Cattle egrets follow big animals like elephants and zebras because heavy footsteps scare tasty grasshoppers right out of the grass!",
+             pro:"Foraging alongside megaherbivores increases egret insect-capture rates by up to 3x while cutting energy spent flushing prey."
+           },
+           ru:{
+             junior:"Белые цапли шагают рядом со слонами и зебрами, потому что тяжёлые шаги великанов выпугивают из травы вкусных кузнечиков и жуков!",
+             pro:"Кормление рядом с крупными копытными и хоботными повышает эффективность добычи насекомых цаплями почти втрое при минимальных энергозатратах."
+           }
+         }},
         {id:"gir_browse", yaw:55, pitch:-2, tol:17,
-         task:{junior:"Find the giraffes munching high leaves in the green acacia tree", pro:"Log canopy-stratified giraffe browsing on Vachellia tortilis"},
-         name:"Umbrella thorn browsing", sci:"Vachellia tortilis · upper-canopy guild",
-         fact:{junior:"Acacia trees have sharp thorns, but giraffes have tough lips and a 45-centimetre purple tongue that wraps right around the leaves!",
-               pro:"Feeding 3 to 5 metres above ground eliminates competition with zebras and impalas, while tough prehensile tongues strip foliage between paired stipular spines."}},
+         task:{
+           en:{junior:"Find the giraffes munching high leaves in the green acacia tree", pro:"Log canopy-stratified giraffe browsing on Vachellia tortilis"},
+           ru:{junior:"Найдите жирафов, которые щиплют листья на высокой кроне акации", pro:"Отметьте верхнеярусное питание жирафов в кронах Vachellia tortilis"}
+         },
+         name:{en:"Umbrella thorn browsing", ru:"Питание в кронах зонтичной акации"},
+         sci:{en:"Vachellia tortilis · upper-canopy guild", ru:"Vachellia tortilis · верхний трофический ярус"},
+         fact:{
+           en:{
+             junior:"Acacia trees have sharp thorns, but giraffes have tough lips and a 45-centimetre purple tongue that wraps right around the leaves!",
+             pro:"Feeding 3 to 5 metres above ground eliminates competition with zebras and impalas, while tough prehensile tongues strip foliage between paired stipular spines."
+           },
+           ru:{
+             junior:"У акации колючие шипы, но у жирафа плотные губы и длинный фиолетовый язык в 45 сантиметров, который ловко срывает сочные листья!",
+             pro:"Кормление на высоте 3–5 метров полностью исключает пищевую конкуренцию с зебрами и антилопами, а цепкий ороговевший язык обходит парные шипы акации."
+           }
+         }},
         {id:"zebras_day", yaw:-112, pitch:-9, tol:16,
-         task:{junior:"Look left to spot the striped Plains zebras grazing", pro:"Log the peripheral Plains zebra herd (Equus quagga)"},
-         name:"Plains zebras", sci:"Equus quagga",
-         fact:{junior:"Zebras love hanging out near giraffes! Zebras have great hearing and smell, while tall giraffes have super-high eyesight — together they make an early-warning team.",
-               pro:"Mixed-species associations pair zebra olfactory/auditory acuity with giraffe elevated visual range, measurably lowering per-individual vigilance cost."}}
+         task:{
+           en:{junior:"Look left to spot the striped Plains zebras grazing", pro:"Log the peripheral Plains zebra herd (Equus quagga)"},
+           ru:{junior:"Повернитесь налево и найдите пасущихся полосатых зебр", pro:"Отметьте периферийный табун бурчелловых зебр (Equus quagga)"}
+         },
+         name:{en:"Plains zebras", ru:"Саванные (бурчелловы) зебры"},
+         sci:{en:"Equus quagga", ru:"Equus quagga"},
+         fact:{
+           en:{
+             junior:"Zebras love hanging out near giraffes! Zebras have great hearing and smell, while tall giraffes have super-high eyesight — together they make an early-warning team.",
+             pro:"Mixed-species associations pair zebra olfactory/auditory acuity with giraffe elevated visual range, measurably lowering per-individual vigilance cost."
+           },
+           ru:{
+             junior:"Зебры любят держаться рядом с жирафами! У зебр чуткий слух и нюх, а у высоких жирафов отличный обзор сверху — вместе они замечают любую опасность.",
+             pro:"Смешанные скопления объединяют острый слух и обоняние зебр с высотным обзором жирафов, заметно снижая индивидуальные затраты времени на настороженность."
+           }
+         }}
        ],
        questions:[
-        {q:{junior:"Why do cattle egrets walk right beside elephants and zebras?", pro:"How does the elephant–giraffe–zebra–egret waterhole assemblage reduce competition and risk?"},
+        {q:{
+           en:{junior:"Why do cattle egrets walk right beside elephants and zebras?", pro:"How does the elephant–giraffe–zebra–egret waterhole assemblage reduce competition and risk?"},
+           ru:{junior:"Зачем белые цапли ходят прямо рядом со слонами и зебрами?", pro:"Как сообщество слонов, жирафов, зебр и цапель у водопоя снижает конкуренцию и риск хищничества?"}
+         },
          opts:{
-           junior:["They ask the elephants for water","Big footsteps scare up insects for the birds to eat","They are guarding the waterhole"],
-           pro:["All four species eat identical short grass","Vertical feeding stratification plus shared multi-sensory predator vigilance","Egrets chase away lions at midday"]
+           en:{
+             junior:["They ask the elephants for water","Big footsteps scare up insects for the birds to eat","They are guarding the waterhole"],
+             pro:["All four species eat identical short grass","Vertical feeding stratification plus shared multi-sensory predator vigilance","Egrets chase away lions at midday"]
+           },
+           ru:{
+             junior:["Они просят у слонов воду","Шаги крупных зверей выпугивают насекомых из травы прямо к птицам","Цапли охраняют водопой"],
+             pro:["Все четыре вида питаются одной и той же низкой травой","Вертикальное разделение ярусов питания плюс общая многоканальная защита от хищников","Цапли отгоняют львов в полдень"]
+           }
          },
          a:1,
-         fact:{junior:"Every big step stirs up crickets, beetles and frogs — an easy lunch for a clever egret!",
-               pro:"Browsers (giraffes) use high acacia crowns, grazers (zebras) crop bunch grasses, elephants process coarse browse/water, and egrets exploit flushed arthropods while sharing alarm cues."}}
+         fact:{
+           en:{
+             junior:"Every big step stirs up crickets, beetles and frogs — an easy lunch for a clever egret!",
+             pro:"Browsers (giraffes) use high acacia crowns, grazers (zebras) crop bunch grasses, elephants process coarse browse/water, and egrets exploit flushed arthropods while sharing alarm cues."
+           },
+           ru:{
+             junior:"Каждый шаг слона или зебры поднимает из травы кузнечиков и жуков — отличный обед для сообразительной цапли!",
+             pro:"Жирафы используют верхний ярус акаций, зебры стригут злаки, слоны перерабатывают грубые корма, а цапли ловят вспугнутых насекомых при общем обмене сигналами тревоги."
+           }
+         }}
        ]},
-      {type:"camp360", title:"Golden Hour to Sunset Dusk (Full 5:51 Camp)", place:"Serengeti & Chyulu Hills",
+      {type:"camp360",
+       title:{en:"Golden Hour to Sunset Dusk (Full 5:51 Camp)", ru:"От золотого часа до заката (Полный лагерь 5:51)"},
+       place:{en:"Serengeti & Chyulu Hills", ru:"Серенгети и Чьюлу-Хиллс"},
        slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
        poster:"scenes/safari-sunset.jpg", startAt:262, yaw:45, pitch:-2, autoSolar:false,
-       chapters:SAFARI_CHAPTERS,
        intro:{
-         junior:"Sunset at 18:19! The sky glows fiery orange and the pond turns into a mirror. Spot the three dusk clues — and use the chapter buttons anytime to jump between Sunrise, Daytime, Golden Hour and Sunset!",
-         pro:"Sunset dusk watch (18:19 EAT). Convective wind drops and crepuscular transition begins. Log the three dusk bearings, or use the timeline chapters to compare all four watches across the full 5:51 stream."
+         en:{
+           junior:"Sunset at 18:19! The sky glows fiery orange and the pond turns into a mirror. Spot the three dusk clues — and use the chapter buttons anytime to jump between Sunrise, Daytime, Golden Hour and Sunset!",
+           pro:"Sunset dusk watch (18:19 EAT). Convective wind drops and crepuscular transition begins. Log the three dusk bearings, or use the timeline chapters to compare all four watches across the full 5:51 stream."
+         },
+         ru:{
+           junior:"Закат в 18:19! Небо сияет медным золотом, а пруд стал гладким как зеркало. Найдите три вечерние подсказки — и переключайте главы внизу плеера, чтобы сравнить рассвет, день, золотой час и закат!",
+           pro:"Закатная вахта (18:19 EAT). Конвективный ветер стихает, начинается сумеречная смена фауны. Отметьте три вечерних ориентира или переключайте главы таймлайна на протяжении всех 5 минут 51 секунды."
+         }
        },
        targets:[
         {id:"sun_west", yaw:92, pitch:5, tol:17,
-         task:{junior:"Find the glowing orange sunset on the horizon", pro:"Log the western solar azimuth (~092° grid / Copper dusk horizon)"},
-         name:"Savanna sunset (18:19 EAT)", sci:"Crepuscular transition · wind drop",
-         fact:{junior:"As the sun sinks, daytime heat fades away and the wind calms down. Soon the stars will come out and night animals will take over the waterhole!",
-               pro:"As surface heating ceases at sunset, turbulent boundary-layer gusts collapse within minutes, shifting acoustic propagation so low-frequency lion and elephant calls carry kilometres."}},
+         task:{
+           en:{junior:"Find the glowing orange sunset on the horizon", pro:"Log the western solar azimuth (~092° grid / Copper dusk horizon)"},
+           ru:{junior:"Найдите сияющий медно-оранжевый закат у горизонта", pro:"Отметьте закатное солнце у горизонта (~092° сферической сетки)"}
+         },
+         name:{en:"Savanna sunset (18:19 EAT)", ru:"Закат в саванне (18:19 EAT)"},
+         sci:{en:"Crepuscular transition · wind drop", ru:"Сумеречный переход · затихание ветра"},
+         fact:{
+           en:{
+             junior:"As the sun sinks, daytime heat fades away and the wind calms down. Soon the stars will come out and night animals will take over the waterhole!",
+             pro:"As surface heating ceases at sunset, turbulent boundary-layer gusts collapse within minutes, shifting acoustic propagation so low-frequency lion and elephant calls carry kilometres."
+           },
+           ru:{
+             junior:"Когда солнце садится, дневной зной спадает, а ветер стихает. Совсем скоро зажгутся звёзды, и к водопою выйдут ночные звери!",
+             pro:"С прекращением прогрева почвы на закате турбулентные порывы ветра стихают за считанные минуты, и инфразвуковые переклички слонов и рык львов разносятся на многие километры."
+           }
+         }},
         {id:"ele_dusk", yaw:5, pitch:-12, tol:17,
-         task:{junior:"Spot the elephant mom and calf taking their quiet evening drink", pro:"Log the dusk matriarch & calf drinking before withdrawing to bush cover"},
-         name:"Last drink before dark", sci:"Evening hydration & bush withdrawal",
-         fact:{junior:"One big evening drink before bedtime — then the mom leads her calf into thick bushes before night-hunting lions arrive at the water!",
-               pro:"Family herds with small calves typically complete evening water intake around sunset and move away from open pans before peak nocturnal lion activity."}},
+         task:{
+           en:{junior:"Spot the elephant mom and calf taking their quiet evening drink", pro:"Log the dusk matriarch & calf drinking before withdrawing to bush cover"},
+           ru:{junior:"Найдите слониху со слонёнком на тихом вечернем водопое", pro:"Отметьте матриарха с телёнком перед уходом от открытой воды в буш"}
+         },
+         name:{en:"Last drink before dark", ru:"Вечерний водопой перед темнотой"},
+         sci:{en:"Evening hydration & bush withdrawal", ru:"Вечерняя гидратация и отход в укрытия"},
+         fact:{
+           en:{
+             junior:"One big evening drink before bedtime — then the mom leads her calf into thick bushes before night-hunting lions arrive at the water!",
+             pro:"Family herds with small calves typically complete evening water intake around sunset and move away from open pans before peak nocturnal lion activity."
+           },
+           ru:{
+             junior:"Большой глоток прохладной воды перед сном — и мама уводит малыша в густые заросли до того, как к воде выйдут ночные охотники-львы!",
+             pro:"Семейные группы с маленькими слонятами обычно завершают водопой на закате и отходят от открытых плёсов до пика ночной активности львиных прайдов."
+           }
+         }},
         {id:"gir_dusk", yaw:74, pitch:-2, tol:17,
-         task:{junior:"Find the two giraffes glowing against the sunset sky", pro:"Log the rim-lit giraffe pair moving toward open night-roost grassland"},
-         name:"Giraffes in sunset rim-light", sci:"Nocturnal open-plain positioning",
-         fact:{junior:"Did you know giraffes barely sleep? At night they only nap for a few minutes at a time so they stay safe!",
-               pro:"Total giraffe REM sleep averages under 30 minutes per 24 hours in short bouts; at dusk they favour open plains with wide visibility over dense ambush cover."}}
+         task:{
+           en:{junior:"Find the two giraffes glowing against the sunset sky", pro:"Log the rim-lit giraffe pair moving toward open night-roost grassland"},
+           ru:{junior:"Найдите двух жирафов в золотом контровом свете заката", pro:"Отметьте пару жирафов, выходящих на открытую равнину на ночёвку"}
+         },
+         name:{en:"Giraffes in sunset rim-light", ru:"Силуэты жирафов в лучах заката"},
+         sci:{en:"Nocturnal open-plain positioning", ru:"Ночной выбор открытых травянистых участков"},
+         fact:{
+           en:{
+             junior:"Did you know giraffes barely sleep? At night they only nap for a few minutes at a time so they stay safe!",
+             pro:"Total giraffe REM sleep averages under 30 minutes per 24 hours in short bouts; at dusk they favour open plains with wide visibility over dense ambush cover."
+           },
+           ru:{
+             junior:"Знаете ли вы, что жирафы почти не спят? Ночью они дремлют всего по несколько минут за раз, чтобы всегда быть начеку!",
+             pro:"Суммарный глубокий сон жирафа составляет менее 30 минут в сутки короткими эпизодами; в сумерках они уходят из густых зарослей на открытые равнины с хорошим обзором."
+           }
+         }}
        ],
        questions:[
-        {q:{junior:"What happens at a real African waterhole right after sunset?", pro:"Why does wildlife composition at East African waterholes shift sharply after 18:30 local time?"},
+        {q:{
+           en:{junior:"What happens at a real African waterhole right after sunset?", pro:"Why does wildlife composition at East African waterholes shift sharply after 18:30 local time?"},
+           ru:{junior:"Что происходит у настоящего африканского водопоя сразу после заката?", pro:"Почему видовой состав у водопоев Восточной Африки резко меняется после 18:30 местного времени?"}
+         },
          opts:{
-           junior:["Every animal goes home to sleep until morning","Daytime families head to safety while night hunters like lions and hyenas wake up","It starts snowing"],
-           pro:["Water freezes overnight on the savanna","Vulnerable diurnal families & browsers depart open pans as nocturnal ambush predators and scavengers become active","Elephants never move after sunset"]
+           en:{
+             junior:["Every animal goes home to sleep until morning","Daytime families head to safety while night hunters like lions and hyenas wake up","It starts snowing"],
+             pro:["Water freezes overnight on the savanna","Vulnerable diurnal families & browsers depart open pans as nocturnal ambush predators and scavengers become active","Elephants never move after sunset"]
+           },
+           ru:{
+             junior:["Все звери ложатся спать до утра","Дневные семьи уходят в безопасные места, а на смену выходят львы, гиены и ночные звери","Начинается снегопад"],
+             pro:["Вода замерзает к полуночи","Дневные стада с молодняком покидают открытый берег с выходом ночных засадных хищников","Слоны полностью неподвижны после заката"]
+           }
          },
          a:1,
-         fact:{junior:"Waterholes have a day shift and a night shift! Now let's check the real live waterhole camera in Kenya to see which shift is on right now.",
-               pro:"Crepuscular and nocturnal partitioning defines live African cams: diurnal herds dominate daylight/dusk, while infrared night feeds reveal hyenas, lions, porcupines and genets."}}
+         fact:{
+           en:{
+             junior:"Waterholes have a day shift and a night shift! Now let's check the real live waterhole camera in Kenya to see which shift is on right now.",
+             pro:"Crepuscular and nocturnal partitioning defines live African cams: diurnal herds dominate daylight/dusk, while infrared night feeds reveal hyenas, lions, porcupines and genets."
+           },
+           ru:{
+             junior:"У водопоя есть дневная и ночная смены! Давайте прямо сейчас проверим настоящую живую камеру в Кении и узнаем, чья смена идёт в эту минуту.",
+             pro:"Суточное разделение определяет картинку живых камер Африки: днём у воды держатся стада травоядных, а ночью инфракрасный эфир фиксирует гиен, львов, дикобразов и генет."
+           }
+         }}
        ]},
-      {type:"live", title:"Live check: Elephant Plain, ol Donyo", place:"Chyulu Hills, Kenya", slug:"elephant-plain-ol-donyo-lodge", fallbackId:"XsOU8JnEpNM", tz:"Africa/Nairobi",
-       speciesDay:{junior:"African elephants, Maasai giraffes, zebras or impalas visiting the plain", pro:"African bush elephants, Maasai giraffes, Plains zebras & fringe-eared oryx"},
-       speciesNight:{junior:"Spotted hyenas, lions, genets or night-drinking bull elephants on infrared cam", pro:"Bull elephants, spotted hyenas, lions or large-spotted genets on the infrared feed"},
+      {type:"live",
+       title:{en:"Live check: Elephant Plain, ol Donyo", ru:"Прямой эфир: Слоновья равнина, ol Donyo"},
+       place:{en:"Chyulu Hills, Kenya", ru:"Чьюлу-Хиллс, Кения"},
+       slug:"elephant-plain-ol-donyo-lodge", fallbackId:"XsOU8JnEpNM", tz:"Africa/Nairobi",
+       speciesDay:{
+         en:{junior:"African elephants, Maasai giraffes, zebras or impalas visiting the plain", pro:"African bush elephants, Maasai giraffes, Plains zebras & fringe-eared oryx"},
+         ru:{junior:"Африканские слоны, масайские жирафы, зебры или антилопы импала", pro:"Саванные слоны, масайские жирафы, бурчелловы зебры и кистеухие ориксы"}
+       },
+       speciesNight:{
+         en:{junior:"Spotted hyenas, lions, genets or night-drinking bull elephants on infrared cam", pro:"Bull elephants, spotted hyenas, lions or large-spotted genets on the infrared feed"},
+         ru:{junior:"Пятнистые гиены, львы, генеты или взрослые слоны в ночном инфракрасном эфире", pro:"Одиночные слоны-самцы, пятнистые гиены, львы или генеты на инфракрасной камере"}
+       },
        factDay:{
-         junior:"Elephant Plain at ol Donyo Lodge sits right below Mount Kilimanjaro in Kenya! During daylight hours, big elephant families, zebras and giraffes walk right past the sunken hide.",
-         pro:"Ol Donyo's open waterhole faces Mount Kilimanjaro across the Chyulu–Amboseli corridor. Daylight brings matriarchal elephant herds, giraffes and plains game; wind and cloud cover come live from MET Norway."
+         en:{
+           junior:"Elephant Plain at ol Donyo Lodge sits right below Mount Kilimanjaro in Kenya! During daylight hours, big elephant families, zebras and giraffes walk right past the sunken hide.",
+           pro:"Ol Donyo's open waterhole faces Mount Kilimanjaro across the Chyulu–Amboseli corridor. Daylight brings matriarchal elephant herds, giraffes and plains game; wind and cloud cover come live from MET Norway."
+         },
+         ru:{
+           junior:"Слоновья равнина ol Donyo расположена прямо у подножия Килиманджаро в Кении! Днём мимо подземного скрадка проходят большие семьи слонов, жирафы и зебры.",
+           pro:"Открытый водопой ol Donyo лежит в коридоре Чьюлу — Амбосели с видом на Килиманджаро. Днём сюда приходят семейные стада слонов, жирафы и равнинные копытные; метеоданные поступают в реальном времени от MET Norway."
+         }
        },
        factNight:{
-         junior:"When it is nighttime in Kenya, the camera uses special infrared night-vision! Adult bull elephants still rumble in to drink under the stars, and hyenas and lions patrol the plain.",
-         pro:"After 18:19 EAT sunset, ol Donyo switches to low-light/infrared imaging: solitary bull elephants frequently drink after dark alongside spotted hyenas and prides moving along the waterhole track."
+         en:{
+           junior:"When it is nighttime in Kenya, the camera uses special infrared night-vision! Adult bull elephants still rumble in to drink under the stars, and hyenas and lions patrol the plain.",
+           pro:"After 18:19 EAT sunset, ol Donyo switches to low-light/infrared imaging: solitary bull elephants frequently drink after dark alongside spotted hyenas and prides moving along the waterhole track."
+         },
+         ru:{
+           junior:"Когда в Кении наступает ночь, камера включает инфракрасное ночное видение! Под звёздами к воде приходят огромные взрослые слоны, а равнину патрулируют гиены и львы.",
+           pro:"После заката в 18:19 EAT камера ol Donyo переходит в инфракрасный режим: ночью у воды часто пьют взрослые слоны-самцы, а вдоль троп выходят пятнистые гиены и львиные прайды."
+         }
        },
-       intro:{junior:"You explored our 360° camp from sunrise to sunset — now check the real live weather, sun schedule, and live camera at ol Donyo in Kenya right now!", pro:"Cross-check our 360° sunrise/sunset watches against real-time MET Norway telemetry and solar phase at ol Donyo Lodge right now, then open the live stream in-page."}}
+       intro:{
+         en:{junior:"You explored our 360° camp from sunrise to sunset — now check the real live weather, sun schedule, and live camera at ol Donyo in Kenya right now!", pro:"Cross-check our 360° sunrise/sunset watches against real-time MET Norway telemetry and solar phase at ol Donyo Lodge right now, then open the live stream in-page."},
+         ru:{junior:"Вы изучили наш 360°-лагерь от рассвета до заката — а теперь проверьте настоящую погоду, солнце и живую веб-камеру ol Donyo в Кении прямо сейчас!", pro:"Сопоставьте наши 360°-наблюдения с реальной телеметрией MET Norway и фазой солнца в ol Donyo Lodge в эту минуту, а затем откройте живую трансляцию прямо на странице."}
+       }}
      ]},
 
-    {id:"giraffe-elephant-hide", name:"Elephants & Giraffes 360°", img:"img/safari-sunset.jpg", open:true, vrBadge:"Kids & Adults · 5:51",
-     blurb:"A continuous 6-minute VR safari hide synced to real African sun & weather. Switch live between Kids Ranger & Adults Biologist audio, then check the Serengeti live.",
+    {id:"giraffe-elephant-hide",
+     name:{en:"Elephants & Giraffes 360°", ru:"Слоны и жирафы 360°"},
+     img:"img/safari-sunset.jpg", open:true,
+     vrBadge:{en:"EN & RU · 5:51", ru:"RU и EN · 5:51"},
+     blurb:{
+       en:"A continuous 6-minute VR safari hide synced to real African sun & weather. Switch live between English & Russian Studio ElevenLabs voices (Kids & Adults), then check the Serengeti live.",
+       ru:"Непрерывный 6-минутный 360° VR-скрадок, синхронизированный с солнцем и погодой Восточной Африки. Мгновенно переключайте русскую и английскую озвучку ElevenLabs и проверяйте живой Серенгети."
+     },
      stops:[
-      {type:"camp360", title:"Full 6-Minute 360° Safari Hide (Sun-Synced)", place:"East African Savanna Corridor",
+      {type:"camp360",
+       title:{en:"Full 6-Minute 360° Safari Hide (Sun-Synced)", ru:"Полный 6-минутный 360° скрадок (по солнцу Африки)"},
+       place:{en:"East African Savanna Corridor", ru:"Саванный коридор Восточной Африки"},
        slug:"serengeti-explorer", tz:"Africa/Dar_es_Salaam",
        poster:"scenes/safari-daylight.jpg", startAt:0, autoSolar:true, yaw:-15, pitch:-3,
-       chapters:SAFARI_CHAPTERS,
        intro:{
-         junior:"This stop automatically checks the sun and weather in Tanzania right now! Press Enter Camp, click Clean 360° View if you want to explore freely for all 6 minutes, and answer two safari mysteries.",
-         pro:"Continuous 5m 51s spherical hide automatically cued to East Africa's solar window (or full dawn-to-dusk archive when night). Toggle Kids/Adults edition in the top bar anytime while watching."
+         en:{
+           junior:"This stop automatically checks the sun and weather in Tanzania right now! Press Enter Camp, click Clean 360° View to explore freely in Russian or English, and answer two safari mysteries.",
+           pro:"Continuous 5m 51s spherical hide automatically cued to East Africa's solar window. Switch between English & Russian or Kids & Adults anytime with zero video interruption."
+         },
+         ru:{
+           junior:"Этот скрадок сам проверяет солнце и погоду в Танзании прямо сейчас! Нажмите «Войти в лагерь», включайте «Чистый обзор 360°», переключайте русский и английский голос на лету и разгадайте две загадки саванны.",
+           pro:"Непрерывный сферический поток (5 мин 51 с), автоматически выставляемый по текущей фазе солнца в Восточной Африке. Переключайте язык (RU/EN) и версию (Дети/Взрослые) без прерывания видео."
+         }
        },
        targets:[
         {id:"hide_water", yaw:-18, pitch:-22, tol:19,
-         task:{junior:"Centre the waterhole in your binoculars (or tap the water)", pro:"Log the central clay-pan water source"},
-         name:"Seasonal savanna clay pan", sci:"Keystone dry-season water point",
-         fact:{junior:"In the dry season, one small waterhole like this keeps hundreds of elephants, giraffes, zebras and birds alive!",
-               pro:"Impermeable clay pans concentrate wildlife within a 15–25 km foraging radius during East Africa's dry months, making stationary waterhole hides ideal ethological observatories."}}
+         task:{
+           en:{junior:"Centre the waterhole in your binoculars (or tap the water)", pro:"Log the central clay-pan water source"},
+           ru:{junior:"Наведите бинокль на водопой (или нажмите на воду)", pro:"Отметьте центральное глинистое блюдце водопоя"}
+         },
+         name:{en:"Seasonal savanna clay pan", ru:"Сезонный водопой саванны"},
+         sci:{en:"Keystone dry-season water point", ru:"Ключевой источник воды сухого сезона"},
+         fact:{
+           en:{
+             junior:"In the dry season, one small waterhole like this keeps hundreds of elephants, giraffes, zebras and birds alive!",
+             pro:"Impermeable clay pans concentrate wildlife within a 15–25 km foraging radius during East Africa's dry months, making stationary waterhole hides ideal ethological observatories."
+           },
+           ru:{
+             junior:"В сухой сезон даже один такой водопой спасает от жажды сотни слонов, жирафов, зебр, антилоп и птиц!",
+             pro:"Водоупорные глинистые котловины стягивают фауну с радиуса 15–25 км в засушливые месяцы, делая стационарные скрадки идеальными точками этологического мониторинга."
+           }
+         }}
        ],
        questions:[
-        {q:{junior:"How much water can one grown-up African elephant drink in a single day?", pro:"Why must giraffe herds remain vigilant before splaying their forelegs to drink?"},
+        {q:{
+           en:{junior:"How much water can one grown-up African elephant drink in a single day?", pro:"Why must giraffe herds remain vigilant before splaying their forelegs to drink?"},
+           ru:{junior:"Сколько воды может выпить один взрослый африканский слон за день?", pro:"Почему жирафы особенно долго осматриваются перед тем, как наклониться к воде?"}
+         },
          opts:{
-           junior:["One small cup","About 200 litres — a whole bathtub!","They never drink water"],
-           pro:["Water damages their hooves","Splaying forelegs lowers the head 2+ metres, creating a slow recovery window vulnerable to lion ambush","Giraffes cannot see across flat water"]
+           en:{
+             junior:["One small cup","About 200 litres — a whole bathtub!","They never drink water"],
+             pro:["Water damages their hooves","Splaying forelegs lowers the head 2+ metres, creating a slow recovery window vulnerable to lion ambush","Giraffes cannot see across flat water"]
+           },
+           ru:{
+             junior:["Один маленький стакан","Около 200 литров — целую ванну!","Слоны вообще не пьют воду"],
+             pro:["Вода размягчает их копыта","Широко расставленные передние ноги замедляют рывок при атаке львов из засады","Жирафы не видят отражения в воде"]
+           }
          },
          a:1,
-         fact:{junior:"Up to 200 litres a day! That is why elephant families always remember where every waterhole is.",
-               pro:"Because a giraffe's neck is shorter than its forelegs, it must splay or bend its front knees to reach ground water, relying on jugular valves to regulate cranial blood pressure and herd sentinels to watch for lions."}},
-        {q:{junior:"If you switch between Sunrise (06:08) and Sunset (18:19) in the player, how does the sky and wind change?", pro:"Comparing the 06:08 sunrise and 18:19 sunset watches, what meteorological shift occurs at dusk?"},
+         fact:{
+           en:{
+             junior:"Up to 200 litres a day! That is why elephant families always remember where every waterhole is.",
+             pro:"Because a giraffe's neck is shorter than its forelegs, it must splay or bend its front knees to reach ground water, relying on jugular valves to regulate cranial blood pressure and herd sentinels to watch for lions."
+           },
+           ru:{
+             junior:"До 200 литров в день! Именно поэтому старейшая слониха-матриарх десятилетиями помнит дорогу к каждому водопою.",
+             pro:"Шея жирафа короче его передних ног, поэтому для питья ему приходится широко расставлять ноги; клапаны ярёмных вен защищают мозг от перепада давления, пока дозорные следят за хищниками."
+           }
+         }},
+        {q:{
+           en:{junior:"If you switch between Sunrise (06:08) and Sunset (18:19) in the player, how does the sky and wind change?", pro:"Comparing the 06:08 sunrise and 18:19 sunset watches, what meteorological shift occurs at dusk?"},
+           ru:{junior:"Если переключить главы между Рассветом (06:08) и Закатом (18:19), как меняются небо и вода?", pro:"Какой метеорологический переход наблюдается между рассветной (06:08) и закатной (18:19) вахтами?"}
+         },
          opts:{
-           junior:["Sunrise has cool mist on the pond, daytime has a breezy blue sky, and sunset turns calm and mirror-gold","It rains non-stop all day","The sun stays in the exact same spot"],
-           pro:["Wind peaks at midnight","Dawn features radiative mist, midday builds convective cumulus & breeze, and dusk collapses wind into mirror-still twilight","Humidity hits 100% at noon"]
+           en:{
+             junior:["Sunrise has cool mist on the pond, daytime has a breezy blue sky, and sunset turns calm and mirror-gold","It rains non-stop all day","The sun stays in the exact same spot"],
+             pro:["Wind peaks at midnight","Dawn features radiative mist, midday builds convective cumulus & breeze, and dusk collapses wind into mirror-still twilight","Humidity hits 100% at noon"]
+           },
+           ru:{
+             junior:["На рассвете над водой туман, днём голубое небо и ветерок, а на закате вода становится зеркально-золотой и тихой","Весь день идёт проливной дождь","Солнце стоит на одном месте"],
+             pro:["Пик ветра приходится на полночь","Рассвет даёт дымку испарения, день — кучевые облака и бриз, а закат гасит конвекцию до зеркального штиля","В полдень влажность достигает 100%"]
+           }
          },
          a:0,
-         fact:{junior:"Spot on! Checking sunrise, clouds, breeze and sunset is how real wildlife rangers read the savanna.",
-               pro:"Solar heating drives the diurnal cycle: dawn steam-mist gives way to midday cumulus mixing (~15–20 km/h wind) before radiative decoupling calms the pan at sunset."}}
+         fact:{
+           en:{
+             junior:"Spot on! Checking sunrise, clouds, breeze and sunset is how real wildlife rangers read the savanna.",
+             pro:"Solar heating drives the diurnal cycle: dawn steam-mist gives way to midday cumulus mixing (~15–20 km/h wind) before radiative decoupling calms the pan at sunset."
+           },
+           ru:{
+             junior:"Точно в цель! Настоящие рейнджеры саванны читают природу именно по солнцу, облакам, ветру и воде.",
+             pro:"Солнечный прогрев управляет суточным циклом: утренняя дымка сменяется дневным конвективным перемешиванием (бриз 15–20 км/ч), а к закату ветер затихает."
+           }
+         }}
        ]},
-      {type:"live", title:"Live check: Serengeti Explorer", place:"Serengeti, Tanzania", slug:"serengeti-explorer", fallbackId:"BmOLK7LTKbY", tz:"Africa/Dar_es_Salaam",
-       speciesDay:{junior:"Zebras, giraffes, elephants or antelopes crossing the Serengeti plain", pro:"Plains zebras, Maasai giraffes, elephants, Thomson's gazelles or topi"},
-       speciesNight:{junior:"Lions, spotted hyenas or night-grazing hippos and zebras", pro:"Nocturnal prides, spotted hyenas, jackals or night-moving herbivores"},
+      {type:"live",
+       title:{en:"Live check: Serengeti Explorer", ru:"Прямой эфир: Серенгети Эксплорер"},
+       place:{en:"Serengeti, Tanzania", ru:"Серенгети, Танзания"},
+       slug:"serengeti-explorer", fallbackId:"BmOLK7LTKbY", tz:"Africa/Dar_es_Salaam",
+       speciesDay:{
+         en:{junior:"Zebras, giraffes, elephants or antelopes crossing the Serengeti plain", pro:"Plains zebras, Maasai giraffes, elephants, Thomson's gazelles or topi"},
+         ru:{junior:"Зебры, жирафы, слоны или антилопы на бескрайней равнине Серенгети", pro:"Бурчелловы зебры, масайские жирафы, слоны, газели Томсона или топи"}
+       },
+       speciesNight:{
+         en:{junior:"Lions, spotted hyenas or night-grazing hippos and zebras", pro:"Nocturnal prides, spotted hyenas, jackals or night-moving herbivores"},
+         ru:{junior:"Львы, пятнистые гиены или пасущиеся ночью зебры и бегемоты", pro:"Ночные прайды львов, пятнистые гиены, шакалы и травоядные у воды"}
+       },
        factDay:{
-         junior:"The Serengeti means 'endless plains'! In daytime, herds of zebras, antelopes, giraffes and elephants wander past this real camera in Tanzania.",
-         pro:"Located in central Serengeti (1.96°S, 34.77°E), sunrise is ~06:21 EAT and sunset ~18:31 EAT. Daytime visibility spans open short- and medium-grass plains."
+         en:{
+           junior:"The Serengeti means 'endless plains'! In daytime, herds of zebras, antelopes, giraffes and elephants wander past this real camera in Tanzania.",
+           pro:"Located in central Serengeti (1.96°S, 34.77°E), sunrise is ~06:21 EAT and sunset ~18:31 EAT. Daytime visibility spans open short- and medium-grass plains."
+         },
+         ru:{
+           junior:"Слово «Серенгети» на языке масаев означает «бескрайние равнины»! Днём мимо этой камеры в Танзании проходят табуны зебр, антилоп, жирафов и слонов.",
+           pro:"Камера расположена в центральном Серенгети (1,96° ю. ш., 34,77° в. д.), рассвет около 06:21 EAT, закат около 18:31 EAT. Дневной обзор охватывает злаковые равнины."
+         }
        },
        factNight:{
-         junior:"It is dark on the Serengeti plains right now! Listen and watch closely on the live night camera for glowing eyes or lion roars.",
-         pro:"After 18:31 EAT sunset in Tanzania, temperatures cool from ~25°C toward ~20°C under partly cloudy skies as lions and hyenas patrol waterhole approaches."
+         en:{
+           junior:"It is dark on the Serengeti plains right now! Listen and watch closely on the live night camera for glowing eyes or lion roars.",
+           pro:"After 18:31 EAT sunset in Tanzania, temperatures cool from ~25°C toward ~20°C under partly cloudy skies as lions and hyenas patrol waterhole approaches."
+         },
+         ru:{
+           junior:"Сейчас над равнинами Серенгети ночь! Присмотритесь и прислушайтесь к ночному прямому эфиру: можно заметить светящиеся глаза или услышать львов.",
+           pro:"После заката в 18:31 EAT температура в Серенгети плавно опускается с ~25°C к ~20°C, а тропы к воде патрулируют львы и пятнистые гиены."
+         }
        },
-       intro:{junior:"Now check the real clock, sunrise, sunset and weather in the Serengeti right now!", pro:"Inspect live MET Norway weather and solar state at Serengeti Explorer right now, then open the live stream."}}
+       intro:{
+         en:{junior:"Now check the real clock, sunrise, sunset and weather in the Serengeti right now!", pro:"Inspect live MET Norway weather and solar state at Serengeti Explorer right now, then open the live stream."},
+         ru:{junior:"А теперь проверьте точное местное время, рассвет, закат и погоду в Серенгети прямо сейчас!", pro:"Проверьте текущую сводку MET Norway и положение солнца в Серенгети и откройте прямой эфир."}
+       }}
      ]},
 
-    {id:"waterhole", name:"Waterhole", img:"img/quiver.jpg", open:true,
-     blurb:"Namibian desert quiver trees, Botswana's flooded delta, lions at rest. Ends at a live waterhole in the Namib.",
+    {id:"waterhole",
+     name:{en:"Waterhole", ru:"Водопой Намиба и Окаванго"},
+     img:"img/quiver.jpg", open:true,
+     blurb:{
+       en:"Namibian desert quiver trees, Botswana's flooded delta, lions at rest. Ends at a live waterhole in the Namib.",
+       ru:"Колчанные деревья пустыни Намиб, разливы дельты Окаванго в Ботсване и прайд отдыхающих львов. Финал — живая камера в Намибе."
+     },
      stops:[
-      {type:"spot", title:"Quiver Tree Forest", place:"Near Keetmanshoop, Namibia",
+      {type:"spot",
+       title:{en:"Quiver Tree Forest", ru:"Лес колчанных деревьев"},
+       place:{en:"Near Keetmanshoop, Namibia", ru:"Окрестности Китмансхупа, Намибия"},
        pano:"scenes/quiver.jpg", yaw:-37, pitch:4,
        credit:'<a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0',
-       intro:{junior:"Drag to look around (or tilt your phone). When you see something on your list, tap it. You can also hold it in the circle until the ring fills up.",
-              pro:"Survey the site. Tap a feature, or centre it in the lens and hold steady to log it. Hints only on request."},
+       intro:{
+         en:{junior:"Drag to look around (or tilt your phone). When you see something on your list, tap it. You can also hold it in the circle until the ring fills up.",
+             pro:"Survey the site. Tap a feature, or centre it in the lens and hold steady to log it. Hints only on request."},
+         ru:{junior:"Вращайте панораму мышью или пальцем. Когда увидите объект из списка, нажмите на него или удерживайте в круге бинокля, пока кольцо не заполнится.",
+             pro:"Осмотрите участок. Нажмите на объект или удерживайте его в центре визира для записи в журнал. Подсказки — по запросу."}
+       },
        targets:[
         {id:"tree", yaw:-37.3, pitch:22, tol:11,
-         task:{junior:"Find the biggest quiver tree", pro:"Log the largest Aloidendron dichotomum"},
-         name:"Quiver tree", sci:"Aloidendron dichotomum",
-         fact:{junior:"It is not really a tree: it is a giant aloe! Its trunk is spongy and stores water, and the white powder on its branches reflects the hot sun. San hunters hollowed out its light branches to make quivers for their arrows.",
-               pro:"A tree aloe of southern Namibia and the Northern Cape. The fibrous trunk stores water and the branches carry a reflective white bloom. Long-term surveys found populations dying back in the hotter north of the range and holding up in the south and on higher ground, one of the first plants shown shifting its range as the climate warms."}},
+         task:{en:{junior:"Find the biggest quiver tree", pro:"Log the largest Aloidendron dichotomum"},
+               ru:{junior:"Найдите самое большое колчанное дерево", pro:"Отметьте крупнейший экземпляр Aloidendron dichotomum"}},
+         name:{en:"Quiver tree", ru:"Колчанное дерево"},
+         sci:{en:"Aloidendron dichotomum", ru:"Aloidendron dichotomum"},
+         fact:{
+           en:{junior:"It is not really a tree: it is a giant aloe! Its trunk is spongy and stores water, and the white powder on its branches reflects the hot sun. San hunters hollowed out its light branches to make quivers for their arrows.",
+               pro:"A tree aloe of southern Namibia and the Northern Cape. The fibrous trunk stores water and the branches carry a reflective white bloom. Long-term surveys found populations dying back in the hotter north of the range and holding up in the south and on higher ground, one of the first plants shown shifting its range as the climate warms."},
+           ru:{junior:"На самом деле это не дерево, а гигантское алоэ! Его губчатый ствол запасает воду, а белый налёт на ветвях отражает палящее солнце. Охотники бушмены делали из его лёгких ветвей колчаны для стрел.",
+               pro:"Древовидное алоэ юга Намибии. Волокнистый ствол накапливает влагу, а белый восковой налёт на коре отражает солнечную радиацию — один из классических видов-индикаторов смещения ареалов при потеплении климата."}
+         }},
         {id:"rocks", yaw:-147.8, pitch:-15.5, tol:12,
-         task:{junior:"Find the pile of black rocks", pro:"Log the dark boulder field"},
-         name:"Dolerite boulders", sci:"Karoo dolerite, about 180 million years old",
-         fact:{junior:"These black rocks were hot liquid rock long ago, before dinosaurs like T. rex lived. They soak up the sun and stay warm, so lizards and rock hyraxes (dassies) love to sit on them.",
-               pro:"Jurassic dolerite intruded as the Karoo basalts erupted, then weathered into rounded boulders. The dark rock heats fast and holds heat into the night, a key microhabitat for basking reptiles and for rock hyraxes, which regulate body temperature poorly and rely on sun-warmed rock."}},
+         task:{en:{junior:"Find the pile of black rocks", pro:"Log the dark boulder field"},
+               ru:{junior:"Найдите россыпь чёрных валунов", pro:"Отметьте выход тёмных долеритовых валунов"}},
+         name:{en:"Dolerite boulders", ru:"Долеритовые валуны"},
+         sci:{en:"Karoo dolerite, about 180 million years old", ru:"Долерит Карру, возраст ~180 млн лет"},
+         fact:{
+           en:{junior:"These black rocks were hot liquid rock long ago, before dinosaurs like T. rex lived. They soak up the sun and stay warm, so lizards and rock hyraxes (dassies) love to sit on them.",
+               pro:"Jurassic dolerite intruded as the Karoo basalts erupted, then weathered into rounded boulders. The dark rock heats fast and holds heat into the night, a key microhabitat for basking reptiles and for rock hyraxes, which regulate body temperature poorly and rely on sun-warmed rock."},
+           ru:{junior:"Этим чёрным камням 180 миллионов лет — они застыли из раскалённой магмы ещё до появления тираннозавров! Камни долго хранят тепло солнца, и на них обожают греться ящерицы и скалистые даманы.",
+               pro:"Юрские долериты выветрились в округлые тёмные глыбы, аккумулирующие тепло до глубокой ночи — ключевой микробиотоп для рептилий и капских даманов."}
+         }},
         {id:"grass", yaw:72, pitch:-25.8, tol:12,
-         task:{junior:"Find a green plant on the ground", pro:"Log the perennial grass tuft"},
-         name:"Desert grass", sci:"A drought-tolerant bunch grass",
-         fact:{junior:"Grass in the desert! Its roots spread out wide just under the ground to catch every drop of rain. After a storm the whole plain can turn green for a few weeks.",
-               pro:"Desert bunch grasses survive on shallow, wide root systems that capture brief rain pulses, and go dormant between them. They are the base of the food web here: insects, rodents, oryx and springbok all depend on them."}},
+         task:{en:{junior:"Find a green plant on the ground", pro:"Log the perennial grass tuft"},
+               ru:{junior:"Найдите зелёный кустик травы на земле", pro:"Отметьте дерновину многолетнего пустынного злака"}},
+         name:{en:"Desert grass", ru:"Пустынный злак"},
+         sci:{en:"A drought-tolerant bunch grass", ru:"Засухоустойчивый дерновинный злак"},
+         fact:{
+           en:{junior:"Grass in the desert! Its roots spread out wide just under the ground to catch every drop of rain. After a storm the whole plain can turn green for a few weeks.",
+               pro:"Desert bunch grasses survive on shallow, wide root systems that capture brief rain pulses, and go dormant between them. They are the base of the food web here: insects, rodents, oryx and springbok all depend on them."},
+           ru:{junior:"Трава посреди пустыни! Её корни широко расходятся прямо под поверхностью, чтобы поймать каждую каплю редкого дождя.",
+               pro:"Пустынные дерновинные злаки перехватывают краткие импульсы осадков широкой поверхностной корневой системой и служат основой пищевой цепи для ориксов и спрингбоков."}
+         }},
         {id:"sun", yaw:-172.3, pitch:25.7, tol:13,
-         task:{junior:"Find the sun", pro:"Log the sun's position"},
-         name:"Low sun, long shadows", sci:"Late afternoon",
-         fact:{junior:"The sun is low and the shadows are long, so it is late afternoon. In the hot middle of the day most desert animals hide in the shade. They come out to eat and drink when it cools down, so waterholes are busiest at dawn and dusk.",
-               pro:"Long shadows put this in the late afternoon. Many arid-zone mammals are crepuscular: they avoid the midday heat load and forage and drink in the cooler hours, which is why waterhole cams are busiest around sunrise and sunset."}},
+         task:{en:{junior:"Find the sun", pro:"Log the sun's position"},
+               ru:{junior:"Найдите солнце в небе", pro:"Отметьте высоту солнца"}},
+         name:{en:"Low sun, long shadows", ru:"Низкое солнце и длинные тени"},
+         sci:{en:"Late afternoon", ru:"Предвечерние часы"},
+         fact:{
+           en:{junior:"The sun is low and the shadows are long, so it is late afternoon. In the hot middle of the day most desert animals hide in the shade. They come out to eat and drink when it cools down, so waterholes are busiest at dawn and dusk.",
+               pro:"Long shadows put this in the late afternoon. Many arid-zone mammals are crepuscular: they avoid the midday heat load and forage and drink in the cooler hours, which is why waterhole cams are busiest around sunrise and sunset."},
+           ru:{junior:"Солнце уже низко, а тени длинные — значит, близится вечер. В полуденный зной звери прячутся в тени и выходят к водопоям на рассвете и закате.",
+               pro:"Длинные тени указывают на предзакатные часы: большинство млекопитающих аридной зоны избегают полуденного перегрева и концентрируются у воды в сумерках."}
+         }},
         {id:"forest", yaw:128.6, pitch:5.1, tol:11,
-         task:{junior:"Find the forest on the horizon", pro:"Log the stand on the horizon"},
-         name:"The Quiver Tree Forest", sci:"About 250 trees, protected since 1955",
-         fact:{junior:"Quiver trees usually grow alone, far apart. Here about 250 of them grow together, so people call it a forest. It has been a protected national monument since 1955.",
-               pro:"Unusually dense for a species that normally grows scattered: roughly 250 trees on the Gariganus farm, a national monument since 1955. Stands like this help researchers track age structure and die-off over decades."}}
+         task:{en:{junior:"Find the forest on the horizon", pro:"Log the stand on the horizon"},
+               ru:{junior:"Найдите рощу деревьев на горизонте", pro:"Отметьте основную рощу на горизонте"}},
+         name:{en:"The Quiver Tree Forest", ru:"Роща колчанных деревьев"},
+         sci:{en:"About 250 trees, protected since 1955", ru:"Около 250 деревьев, памятник природы с 1955 года"},
+         fact:{
+           en:{junior:"Quiver trees usually grow alone, far apart. Here about 250 of them grow together, so people call it a forest. It has been a protected national monument since 1955.",
+               pro:"Unusually dense for a species that normally grows scattered: roughly 250 trees on the Gariganus farm, a national monument since 1955. Stands like this help researchers track age structure and die-off over decades."},
+           ru:{junior:"Обычно такие деревья растут поодиночке, но здесь собралось сразу около 250 стволов — целый сказочный лес, охраняемый с 1955 года!",
+               pro:"Необычно плотная популяция из ~250 взрослых особей на ферме Гариганус позволяет ботаникам отслеживать возрастную структуру вида на протяжении десятилетий."}
+         }}
        ]},
-      {type:"watch", title:"Elephants at a waterhole", place:"Southern Africa", yt:"1vt9OpFx070", by:"Wildlife Protection Solutions",
+      {type:"watch",
+       title:{en:"Elephants at a waterhole", ru:"Слоны у водопоя"},
+       place:{en:"Southern Africa", ru:"Южная Африка"},
+       yt:"1vt9OpFx070", by:"Wildlife Protection Solutions",
        onsiteCamp:{poster:"scenes/safari-daylight.jpg", startAt:88, yaw:-28, pitch:-8},
-       intro:{junior:"Press play, then drag the video to look all around you — or switch to our On-Site 360° Player if your phone shows YouTube flat!", pro:"Play, then pan the full sphere (or switch to our embedded WebGL 360° camp on iOS/mobile): note how the herd is spaced and what each animal is doing."},
+       intro:{
+         en:{junior:"Press play, then drag the video to look all around you — or switch to our On-Site 360° Player if your phone shows YouTube flat!", pro:"Play, then pan the full sphere (or switch to our embedded WebGL 360° camp on iOS/mobile): note how the herd is spaced and what each animal is doing."},
+         ru:{junior:"Нажмите пуск и вращайте видео вокруг себя — или переключитесь на наш встроенный 360°-плеер с озвучкой ElevenLabs!", pro:"Запустите ролик и осмотрите полную сферу (или включите наш встроенный WebGL 360°-лагерь на телефоне): обратите внимание на дистанцию внутри стада."}
+       },
        questions:[
-        {q:{junior:"Why do elephants throw mud and water over their skin?", pro:"Why do elephants coat themselves in mud?"},
-         opts:["To clean their tusks","Sunscreen and to stay cool","To scare away lions"], a:1,
-         fact:{junior:"Elephants have no sweat glands like ours. A coat of mud works like sunscreen, keeps insects off, and cools them as it dries.",
-               pro:"With few sweat glands, elephants rely on evaporation from wetted skin; the cracked skin surface holds moisture, and dried mud blocks UV and biting insects."}},
-        {q:{junior:"How much water can one adult elephant drink in a day?", pro:"Big ears help elephants…"},
-         opts:{junior:["About 2 litres","About 20 litres","Up to 200 litres"], pro:["Hear lions far away","Lose heat","Store water"]},
+        {q:{en:{junior:"Why do elephants throw mud and water over their skin?", pro:"Why do elephants coat themselves in mud?"},
+            ru:{junior:"Зачем слоны обливают кожу водой и грязью?", pro:"Какую роль играет грязевая корка на коже слонов?"}},
+         opts:{
+           en:["To clean their tusks","Sunscreen and to stay cool","To scare away lions"],
+           ru:["Чтобы почистить бивни","Защита от солнца, насекомых и перегрева","Чтобы отпугивать львов"]
+         }, a:1,
+         fact:{
+           en:{junior:"Elephants have no sweat glands like ours. A coat of mud works like sunscreen, keeps insects off, and cools them as it dries.",
+               pro:"With few sweat glands, elephants rely on evaporation from wetted skin; the cracked skin surface holds moisture, and dried mud blocks UV and biting insects."},
+           ru:{junior:"У слонов нет потовых желёз, как у людей. Слой влажной глины охлаждает кожу, защищает от солнца и отпугивает насекомых.",
+               pro:"Испарение влаги из сети кожных складок отводит тепло, а высохшая глина экранирует ультрафиолет и защищает от кровососущих насекомых."}
+         }},
+        {q:{en:{junior:"How much water can one adult elephant drink in a day?", pro:"Big ears help elephants…"},
+            ru:{junior:"Сколько воды может выпить взрослый слон за сутки?", pro:"Огромные уши помогают африканским слонам прежде всего…"}},
+         opts:{
+           en:{junior:["About 2 litres","About 20 litres","Up to 200 litres"], pro:["Hear lions far away","Lose heat","Store water"]},
+           ru:{junior:["Около 2 литров","Около 20 литров","До 200 литров"], pro:["Ловить эхо в пещерах","Отдавать лишнее тепло","Запасать воду"]}
+         },
          a:{junior:2, pro:1},
-         fact:{junior:"Up to about 200 litres, more than a bathtub! That is why elephants never stay far from water in the dry season.",
-               pro:"Both, but mainly heat. The ears are full of blood vessels; flapping them cools the blood, which can be several degrees cooler when it returns to the body."}}
+         fact:{
+           en:{junior:"Up to about 200 litres, more than a bathtub! That is why elephants never stay far from water in the dry season.",
+               pro:"Both, but mainly heat. The ears are full of blood vessels; flapping them cools the blood, which can be several degrees cooler when it returns to the body."},
+           ru:{junior:"До 200 литров — больше полной ванны! Поэтому в засуху слоны не уходят далеко от воды.",
+               pro:"Ушные раковины пронизаны густой сетью сосудов: обмахиваясь ушами, слон охлаждает возвращающуюся венозную кровь на несколько градусов."}
+         }}
        ]},
-      {type:"watch", title:"The Okavango Delta", place:"Botswana", yt:"HI7mTIxNotQ", by:"National Geographic",
+      {type:"watch",
+       title:{en:"The Okavango Delta", ru:"Дельта Окаванго"},
+       place:{en:"Botswana", ru:"Ботсвана"},
+       yt:"HI7mTIxNotQ", by:"National Geographic",
        onsiteCamp:{poster:"scenes/safari-sunrise.jpg", startAt:0, yaw:60, pitch:-10},
-       intro:{junior:"A river that never reaches the sea! Watch the elephants walk through the delta and look all around.", pro:"Watch for how the herd uses the channels, and look for other species in the frame."},
+       intro:{
+         en:{junior:"A river that never reaches the sea! Watch the elephants walk through the delta and look all around.", pro:"Watch for how the herd uses the channels, and look for other species in the frame."},
+         ru:{junior:"Удивительная река, которая никогда не впадает в море! Посмотрите в 360°, как слоны идут по протокам дельты.", pro:"Проследите, как стадо использует русловые протоки и какие ещё виды держатся рядом."}
+       },
        questions:[
-        {q:{junior:"The Okavango floods in the dry season, when it hardly rains. Where does the water come from?", pro:"The Okavango's flood peaks in the dry winter months. Why?"},
-         opts:["From the sea","From rain in the mountains of Angola, months earlier","From underground lakes"], a:1,
-         fact:{junior:"The rain falls far away in Angola. The water flows slowly for months and arrives just when the land is driest, so animals come from all around.",
-               pro:"Summer rain on the Angolan highlands takes roughly four months to travel down the river and spread across the flat delta, so the flood peaks in the dry season, exactly when surrounding water sources fail."}}
+        {q:{en:{junior:"The Okavango floods in the dry season, when it hardly rains. Where does the water come from?", pro:"The Okavango's flood peaks in the dry winter months. Why?"},
+            ru:{junior:"Окаванго разливается в сухой сезон, когда дождей почти нет. Откуда берётся вода?", pro:"Почему пик паводка в дельте Окаванго приходится на сухие зимние месяцы?"}},
+         opts:{
+           en:["From the sea","From rain in the mountains of Angola, months earlier","From underground lakes"],
+           ru:["Из океана","От летних дождей в горах Анголы, выпавших за несколько месяцев до этого","Из подземных гейзеров"]
+         }, a:1,
+         fact:{
+           en:{junior:"The rain falls far away in Angola. The water flows slowly for months and arrives just when the land is driest, so animals come from all around.",
+               pro:"Summer rain on the Angolan highlands takes roughly four months to travel down the river and spread across the flat delta, so the flood peaks in the dry season, exactly when surrounding water sources fail."},
+           ru:{junior:"Дожди выпадают далеко в горах Анголы, и вода медленно течёт четыре месяца — приходя в пустыню Калахари как раз в разгар засухи!",
+               pro:"Волна летних дождей с Ангольского нагорья идёт по пологому руслу около четырёх месяцев, превращая внутреннюю дельту в оазис посреди сухого сезона."}
+         }}
        ]},
-      {type:"watch", title:"Lions at rest", place:"Africa", yt:"sPyAQQklc1s", by:"National Geographic",
+      {type:"watch",
+       title:{en:"Lions at rest", ru:"Львиный прайд на отдыхе"},
+       place:{en:"Africa", ru:"Африка"},
+       yt:"sPyAQQklc1s", by:"National Geographic",
        onsiteCamp:{poster:"scenes/safari-sunset.jpg", startAt:262, yaw:40, pitch:-4},
-       intro:{junior:"Lions all around you! Turn slowly and count them.", pro:"Pan the full sphere and note the pride's resting positions."},
+       intro:{
+         en:{junior:"Lions all around you! Turn slowly and count them.", pro:"Pan the full sphere and note the pride's resting positions."},
+         ru:{junior:"Львы прямо вокруг вас! Медленно поверните камеру и посчитайте их.", pro:"Осмотрите полную сферу и обратите внимание на расположение прайда в тени."}
+       },
        questions:[
-        {q:{junior:"How long do lions sleep or rest each day?", pro:"Lions rest for most of the day. About how long?"},
-         opts:["About 4 hours","About 8 hours","16 to 20 hours"], a:2,
-         fact:{junior:"Up to 20 hours! Hunting takes a lot of energy, so they save it in the hot daytime and hunt mostly at night.",
-               pro:"Around 16 to 20 hours. Short, high-energy hunts, mostly at night, are paid for with long rests through the heat of the day."}},
-        {q:{junior:"When are lions most likely to visit the waterhole?", pro:"When are lions most likely to hunt near water?"},
-         opts:["At midday, in the heat","At dusk and at night","Only when it rains"], a:1,
-         fact:{junior:"At dusk and at night, when it is cool and when other animals come to drink.", pro:"Dusk and night: prey congregates at water as it cools, and darkness favours the ambush hunter."}}
+        {q:{en:{junior:"How long do lions sleep or rest each day?", pro:"Lions rest for most of the day. About how long?"},
+            ru:{junior:"Сколько часов в сутки львы спят или отдыхают?", pro:"Какую часть суток львы проводят в покое и сне?"}},
+         opts:{
+           en:["About 4 hours","About 8 hours","16 to 20 hours"],
+           ru:["Около 4 часов","Около 8 часов","От 16 до 20 часов"]
+         }, a:2,
+         fact:{
+           en:{junior:"Up to 20 hours! Hunting takes a lot of energy, so they save it in the hot daytime and hunt mostly at night.",
+               pro:"Around 16 to 20 hours. Short, high-energy hunts, mostly at night, are paid for with long rests through the heat of the day."},
+           ru:{junior:"До 20 часов в сутки! Охота требует огромных сил, поэтому днём в жару львы берегут энергию, а охотятся в сумерках и ночью.",
+               pro:"От 16 до 20 часов: энергозатратные ночные охоты компенсируются длительным покоем в дневную жару."}
+         }},
+        {q:{en:{junior:"When are lions most likely to visit the waterhole?", pro:"When are lions most likely to hunt near water?"},
+            ru:{junior:"В какое время львы чаще всего приходят к водопою?", pro:"В какое время суток наиболее вероятна охота львов у воды?"}},
+         opts:{
+           en:["At midday, in the heat","At dusk and at night","Only when it rains"],
+           ru:["В самый жаркий полдень","В сумерках и ночью","Только во время грозы"]
+         }, a:1,
+         fact:{
+           en:{junior:"At dusk and at night, when it is cool and when other animals come to drink.", pro:"Dusk and night: prey congregates at water as it cools, and darkness favours the ambush hunter."},
+           ru:{junior:"На закате и ночью — когда спадает жара и к воде подходят другие звери.", pro:"В сумерках и ночью темнота даёт преимущество засадному хищнику у троп водопоя."}
+         }}
        ]},
-      {type:"live", title:"Live check: Namib waterhole", place:"Garub, Namibia", slug:"namib-desert-waterhole", fallbackId:"ydYDqZQpim8", tz:"Africa/Windhoek",
-       intro:{junior:"This waterhole is real, and it is live right now. What is happening there?", pro:"Use the live data to predict what the cam shows, then check."}}
+      {type:"live",
+       title:{en:"Live check: Namib waterhole", ru:"Прямой эфир: Водопой в пустыне Намиб"},
+       place:{en:"Garub, Namibia", ru:"Гаруб, Намибия"},
+       slug:"namib-desert-waterhole", fallbackId:"ydYDqZQpim8", tz:"Africa/Windhoek",
+       intro:{
+         en:{junior:"This waterhole is real, and it is live right now. What is happening there?", pro:"Use the live data to predict what the cam shows, then check."},
+         ru:{junior:"Этот водопой в пустыне Намиб работает в прямом эфире прямо сейчас! Угадайте, кто приходит сюда в этот час.", pro:"Используйте местное время и погоду, чтобы спрогнозировать посетителей водопоя, а затем проверьте живую камеру."}
+       }}
      ]},
 
-    {id:"reef", name:"Coral reef", img:"img/heron.jpg", blurb:"Great Barrier Reef bommies and a Red Sea dive. Ends at the Utila reef cams."},
-    {id:"coast", name:"Penguin coast", img:"img/texel.jpg", blurb:"Penguins in Africa and footprints on a Dutch beach. Ends at the Stony Point colony."},
-    {id:"polar", name:"Polar", img:"img/abisko.jpg", blurb:"Seals, king penguins and polar bears. Ends at the Cape Churchill cam."},
-    {id:"rainforest", name:"Rainforest", img:"img/amazon.jpg", blurb:"From the forest floor to the canopy. Ends with the GRACE gorillas live."},
-    {id:"night", name:"Night shift", img:null, blurb:"Only opens when it is night at the cams: bats, owls and badgers."}
+    {id:"reef", name:{en:"Coral reef", ru:"Коралловый риф"}, img:"img/heron.jpg",
+     blurb:{en:"Great Barrier Reef bommies and a Red Sea dive. Ends at the Utila reef cams.", ru:"Коралловые сады Большого Барьерного рифа и Красного моря с выходом на живые подводные камеры."}},
+    {id:"coast", name:{en:"Penguin coast", ru:"Берег пингвинов"}, img:"img/texel.jpg",
+     blurb:{en:"Penguins in Africa and footprints on a Dutch beach. Ends at the Stony Point colony.", ru:"Африканские пингвины и следы на песчаных дюнах. Финал — живая колония Стоуни-Пойнт."}},
+    {id:"polar", name:{en:"Polar", ru:"Полярный круг"}, img:"img/abisko.jpg",
+     blurb:{en:"Seals, king penguins and polar bears. Ends at the Cape Churchill cam.", ru:"Тюлени, королевские пингвины и белые медведи с выходом на камеру мыса Черчилл."}},
+    {id:"rainforest", name:{en:"Rainforest", ru:"Тропический лес"}, img:"img/amazon.jpg",
+     blurb:{en:"From the forest floor to the canopy. Ends with the GRACE gorillas live.", ru:"От лесной подстилки до полога джунглей и живой камеры горилл GRACE."}},
+    {id:"night", name:{en:"Night shift", ru:"Ночная смена"}, img:null,
+     blurb:{en:"Only opens when it is night at the cams: bats, owls and badgers.", ru:"Открывается, когда у камер наступает ночь: совы, барсуки и летучие мыши."}}
   ];
-  const RANKS = [[0,"Cub"],[1,"Tracker"],[2,"Ranger"],[4,"Senior Ranger"],[6,"Field Scientist"]];
 
-  // ---------- station home ----------
+  const RANKS = {
+    en: [[0,"Cub"],[1,"Tracker"],[2,"Ranger"],[4,"Senior Ranger"],[6,"Field Scientist"]],
+    ru: [[0,"Львёнок"],[1,"Следопыт"],[2,"Рейнджер"],[4,"Старший рейнджер"],[6,"Полевой биолог"]]
+  };
+  function currentRank(count){
+    const list = RANKS[lang] || RANKS.en;
+    return list.filter(r => count >= r[0]).pop()[1];
+  }
+
+  // ---------- chrome & home rendering ----------
+  function renderChrome(){
+    const s = S();
+    document.documentElement.lang = lang;
+    document.title = s.docTitle;
+    $("homeLink").textContent = s.homeLink;
+    $("wordTitle").textContent = s.word;
+    $("langL").textContent = s.langLabel;
+    $("modeL").textContent = s.modeLabel;
+    $("btnJunior").textContent = s.btnJunior;
+    $("btnPro").textContent = s.btnPro;
+    $("heroTitle").textContent = s.heroTitle;
+    $("heroDesc").innerHTML = s.heroDesc;
+    $("passportBox").setAttribute("aria-label", s.passportAria);
+    $("ppLabel").textContent = s.ppLabel;
+    $("expSecTitle").textContent = s.expTitle;
+    $("expSecSub").textContent = s.expSub;
+    $("creditsLine").innerHTML = s.credits;
+    $("backBtn").textContent = s.backStation;
+    $("dots").setAttribute("aria-label", s.stopsAria);
+    document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    document.querySelectorAll("[data-mode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+  }
+
   function renderHome(){
+    const s = S();
     const got = store.get("stamps", {});
     const n = Object.keys(got).length;
-    $("rank").textContent = RANKS.filter(r => n >= r[0]).pop()[1];
+    $("rank").textContent = currentRank(n);
     $("stamps").innerHTML = EXPS.map(x => got[x.id]
-      ? `<div class="stamp got">${esc(x.name)}<small>${esc(got[x.id])}</small></div>`
-      : `<div class="stamp">${esc(x.name)}</div>`).join("");
+      ? `<div class="stamp got">${esc(R(x.name))}<small>${esc(got[x.id])}</small></div>`
+      : `<div class="stamp">${esc(R(x.name))}</div>`).join("");
     $("exps").innerHTML = EXPS.map(x => {
       const th = x.img ? `<img src="${x.img}" alt="" loading="lazy" width="480" height="240">` : "";
-      const tag = x.open ? (got[x.id] ? "Done · play again" : `${x.stops.length} stops`) : "Coming soon";
-      const vr = x.vrBadge ? `<span class="vrtag">${esc(x.vrBadge)}</span>` : "";
-      let inner = `<span class="th">${th}<span class="tag">${tag}</span>${vr}</span><span class="bd"><h3>${esc(x.name)}</h3><p>${esc(x.blurb)}</p><span class="go">${x.open ? "Start expedition →" : "Being prepared"}</span></span>`;
+      const tag = x.open ? (got[x.id] ? s.donePlayAgain : s.stopsCount(x.stops.length)) : s.comingSoon;
+      const vr = x.vrBadge ? `<span class="vrtag">${esc(R(x.vrBadge))}</span>` : "";
+      let inner = `<span class="th">${th}<span class="tag">${esc(tag)}</span>${vr}</span><span class="bd"><h3>${esc(R(x.name))}</h3><p>${esc(R(x.blurb))}</p><span class="go">${esc(x.open ? s.startExp : s.beingPrepared)}</span></span>`;
       if(!x.img) inner = inner.replace('<span class="th">', '<span class="th night">');
       const cls = "ex" + (x.featured ? " featured" : "");
       return x.open ? `<button type="button" class="${cls}" data-exp="${x.id}">${inner}</button>` : `<div class="ex soon">${inner}</div>`;
@@ -576,28 +1272,82 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
   $("exps").addEventListener("click", e => { const b = e.target.closest("[data-exp]"); if(b) start(b.dataset.exp); });
 
-  // ---------- field level (Kids · Junior vs Adults · Pro) ----------
+  // ---------- language & edition switching ----------
   let run = null, viewer = null, campPlayer = null, loop = 0;
 
-  function setMode(m){
-    mode = m; store.set("mode", m);
-    document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
-    track("fs_mode", {mode: m});
-    if(campPlayer){
-      const ed = SAFARI_STREAMS[m] || SAFARI_STREAMS.junior;
-      campPlayer.setSource({ hlsSrc: ed.hls, preserveTime: true, editionLabel: ed.label });
+  function syncActiveCampAudioAndText(){
+    if(!campPlayer) return;
+    const ed = activeStream();
+    campPlayer.setSource({
+      masterHlsSrc: MASTER_HLS,
+      hlsSrc: ed.hls,
+      audioTrackName: ed.track,
+      preserveTime: true,
+      editionLabel: ed.label,
+      lang: lang,
+      chapters: SAFARI_CHAPTERS[lang]
+    });
+    if(run && run.x && run.i < run.x.stops.length){
+      const stp = run.x.stops[run.i];
+      if(stp && stp.slug && stp.tz){
+        campPlayer.setTelemetry(solarTelemetry(stp.slug, stp.tz).hud);
+      }
+      const lt = campPlayer.wrap.querySelector(".lens-toggle");
+      if(lt) lt.textContent = run.cleanLens ? S().showBinos : S().clean360;
+      (stp.targets || []).forEach(t => { if(run.found[t.id]) pinCamp(stp, t); });
     }
-    if(run) renderStop(false);
   }
-  document.querySelectorAll(".mode button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
-  document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+
+  function refreshActiveRunLocale(){
+    if(!run) return;
+    $("runName").textContent = R(run.x.name);
+    if(run.i >= run.x.stops.length){
+      renderFinishScreen();
+      return;
+    }
+    const stp = run.x.stops[run.i];
+    if(stp.type === "live" && $("liveBoxCard")){
+      updateLiveBoxLocale(stp);
+    }
+    if(stp.type === "watch" && $("appBtn")){
+      const s = S();
+      const bEl = $("appBtn").querySelector("b"), spEl = $("appBtn").querySelector("span"), btn = $("useOnsiteBtn");
+      if(bEl) bEl.textContent = s.wantOnsiteTitle;
+      if(spEl) spEl.textContent = s.wantOnsiteSub;
+      if(btn) btn.textContent = s.playOnsiteBtn;
+    }
+    renderStop(false);
+  }
+
+  function setLang(l){
+    if(l !== "en" && l !== "ru") return;
+    lang = l; store.set("lang", l);
+    renderChrome();
+    renderHome();
+    track("fs_lang", {lang: l, mode});
+    syncActiveCampAudioAndText();
+    refreshActiveRunLocale();
+  }
+
+  function setMode(m){
+    if(m !== "junior" && m !== "pro") return;
+    mode = m; store.set("mode", m);
+    renderChrome();
+    renderHome();
+    track("fs_mode", {mode: m, lang});
+    syncActiveCampAudioAndText();
+    refreshActiveRunLocale();
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  document.querySelectorAll("[data-mode]").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
 
   // ---------- running an expedition ----------
   function start(id){
     const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
     run = {x, i:0, found:{}, answered:{}, cleanLens:false};
-    $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = x.name;
-    track("fs_start", {exp: id, mode});
+    $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = R(x.name);
+    track("fs_start", {exp: id, mode, lang});
     renderStop(true); window.scrollTo({top: 0});
   }
   $("backBtn").addEventListener("click", () => { teardown(); run = null; $("runV").hidden = true; $("homeV").hidden = false; renderHome(); });
@@ -611,7 +1361,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
 
   function dots(){
-    $("dots").innerHTML = run.x.stops.map((s, k) => `<i class="${k < run.i ? "done" : k === run.i ? "now" : ""}" title="${esc(s.title)}"></i>`).join("");
+    $("dots").innerHTML = run.x.stops.map((s, k) => `<i class="${k < run.i ? "done" : k === run.i ? "now" : ""}" title="${esc(R(s.title))}"></i>`).join("");
   }
   function renderStop(rebuild){
     const s = run.x.stops[run.i];
@@ -622,38 +1372,46 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     journals[s.type](s);
   }
   function nextBtn(ok, whyText){
+    const s = S();
     const last = run.i === run.x.stops.length - 1;
-    const msg = whyText || (run.x.stops[run.i].type === "spot" ? "Find everything on the list first" : "Complete the tasks & questions first");
-    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button>${ok ? "" : `<span class="why">${esc(msg)}</span>`}</div>`;
+    const msg = whyText || (run.x.stops[run.i].type === "spot" ? s.findAllWhy : s.completeTasksWhy);
+    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${esc(last ? s.finishExpBtn : s.nextStopBtn)}</button>${ok ? "" : `<span class="why">${esc(msg)}</span>`}</div>`;
   }
   $("journal").addEventListener("click", e => {
     if(e.target.id === "nextBtn"){ advance(); return; }
     if(e.target.id === "hintBtn"){ run.hint = true; e.target.remove(); return; }
-    if(e.target.id === "skipBtn"){ track("fs_skip", {exp: run.x.id, stop: run.i, mode}); advance(); return; }
+    if(e.target.id === "skipBtn"){ track("fs_skip", {exp: run.x.id, stop: run.i, mode, lang}); advance(); return; }
     const o = e.target.closest("[data-q]"); if(o) answer(+o.dataset.q, +o.dataset.o);
   });
   function advance(){
-    track("fs_stop_done", {exp: run.x.id, stop: run.i, mode});
+    track("fs_stop_done", {exp: run.x.id, stop: run.i, mode, lang});
     if(run.i < run.x.stops.length - 1){ run.i++; run.hint = false; renderStop(true); $("view").scrollIntoView({behavior:"smooth", block:"start"}); }
     else finish();
   }
+  function renderFinishScreen(){
+    const s = S();
+    const got = store.get("stamps", {});
+    const d = got[run.x.id] || new Date().toLocaleDateString(lang === "ru" ? "ru-RU" : "en-GB", {day:"numeric", month:"short", year:"numeric"});
+    const n = Object.keys(got).length, rk = currentRank(n);
+    $("view").innerHTML = `<div class="livebox"><div><span class="lt">${esc(s.expCompleteBadge)}</span><h3>${esc(R(run.x.name))}</h3><div class="sub">${esc(s.stampAdded)}</div></div></div>`;
+    $("journal").innerHTML = `<p class="j-k">${esc(s.journalCompleteMeta)}</p>
+      <div class="done-box"><div class="big-stamp">${esc(R(run.x.name))}<small>${esc(d)}</small></div>
+      <p class="j-intro">${s.finishIntro(rk)}</p>
+      <div class="j-actions"><button class="btn main" type="button" id="toStation">${esc(s.backToStationBtn)}</button></div></div>`;
+    $("toStation").addEventListener("click", () => $("backBtn").click());
+  }
   function finish(){
     const got = store.get("stamps", {});
-    const d = new Date().toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"});
+    const d = new Date().toLocaleDateString(lang === "ru" ? "ru-RU" : "en-GB", {day:"numeric", month:"short", year:"numeric"});
     got[run.x.id] = d; store.set("stamps", got);
-    track("fs_finish", {exp: run.x.id, mode});
+    track("fs_finish", {exp: run.x.id, mode, lang});
     teardown(); run.i = run.x.stops.length; dots();
-    $("view").innerHTML = `<div class="livebox"><div><span class="lt">Expedition complete</span><h3>${esc(run.x.name)}</h3><div class="sub">Stamp added to your Explorer Passport.</div></div></div>`;
-    const n = Object.keys(got).length, rank = RANKS.filter(r => n >= r[0]).pop()[1];
-    $("journal").innerHTML = `<p class="j-k">Field journal · expedition complete</p>
-      <div class="done-box"><div class="big-stamp">${esc(run.x.name)}<small>${esc(d)}</small></div>
-      <p class="j-intro">You logged the 360° camp clues, checked the live solar &amp; weather telemetry, and answered every field question. Your rank: <b>${esc(rank)}</b>.</p>
-      <div class="j-actions"><button class="btn main" type="button" id="toStation">Back to the station</button></div></div>`;
-    $("toStation").addEventListener("click", () => $("backBtn").click());
+    renderFinishScreen();
   }
 
   // ---------- solar, sunrise/sunset & MET Norway weather helper ----------
   function solarTelemetry(slug, tz){
+    const s = S();
     const W = window.ZooWx, now = new Date();
     const fmt = d => d.toLocaleTimeString("en-GB", {timeZone: tz, hour: "2-digit", minute: "2-digit"});
     const time = fmt(now);
@@ -675,8 +1433,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         phase = night ? "night" : "day";
       }
       if(r.w && r.d){
-        wx = `${r.d.icon} ${r.d.text} · ${W.temp(r.w.t, true)} · wind ${W.wind(r.w.ws)}`;
-        hud = `${time} local · ${r.d.icon} ${W.temp(r.w.t, false)}`;
+        const skyTxt = lang === "ru" ? (WX_RU[r.d.text] || r.d.text) : r.d.text;
+        let windTxt = W.wind(r.w.ws);
+        if(lang === "ru") windTxt = windTxt.replace("km/h", "км/ч").replace("mph", "миль/ч");
+        wx = `${r.d.icon} ${skyTxt} · ${W.temp(r.w.t, true)} · ${s.windWord} ${windTxt}`;
+        hud = `${time} ${s.localWord} · ${r.d.icon} ${W.temp(r.w.t, false)}`;
       }
     }
     if(night === null){
@@ -684,8 +1445,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       night = h < 6 || h >= 19;
       phase = (h >= 5 && h <= 7) ? "sunrise" : (h >= 17 && h < 19) ? "sunset" : (night ? "night" : "day");
     }
-    if(!hud) hud = `${time} local · ${night ? "🌙 Night" : "☀️ Day"}`;
-    return {time, night, phase, riseStr, setStr, wx, hud};
+    if(!hud) hud = `${time} ${s.localWord} · ${night ? s.hudNight : s.hudDay}`;
+    return {time, night, phase, phaseLoc: s.phases[phase] || phase, riseStr, setStr, wx, hud};
   }
 
   // ---------- stop type 1: spot it in a 360° photo (Pannellum) ----------
@@ -697,8 +1458,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function buildSpot(s){
     $("view").innerHTML = `<div id="pano"></div><div class="lens"></div>
       <div class="ring"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="bgc" cx="42" cy="42" r="38"/><circle class="fg" id="ringFg" cx="42" cy="42" r="38"/></svg></div>
-      <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">Look around</div>
-      <div class="credit">360° photo: ${s.credit}</div>`;
+      <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">${esc(S().lookAround)}</div>
+      <div class="credit">${esc(S().photo360Credit)} ${s.credit}</div>`;
     viewer = pannellum.viewer("pano", {type:"equirectangular", panorama:s.pano, autoLoad:true, yaw:s.yaw, pitch:s.pitch, hfov:95,
       minHfov:40, maxHfov:110, showFullscreenCtrl:true, showZoomCtrl:true, compass:false, keyboardZoom:true, mouseZoom:true, friction:0.2});
     s.targets.forEach(t => { if(run.found[t.id]) pin(t); });
@@ -707,6 +1468,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const step = () => {
       loop = requestAnimationFrame(step);
       if(!viewer || !viewer.isLoaded || !viewer.isLoaded()) return;
+      const ui = S();
       const y = viewer.getYaw(), p = viewer.getPitch();
       const open = s.targets.filter(t => !run.found[t.id]);
       let near = null, nd = 999;
@@ -717,11 +1479,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         if(holdId !== near.id){ holdId = near.id; holdStart = performance.now(); }
         const k = Math.min(1, (performance.now() - holdStart) / 1100);
         fg.style.strokeDashoffset = String(C * (1 - k));
-        aim.textContent = k < 1 ? "Hold steady…" : "Logged!";
+        aim.textContent = k < 1 ? ui.holdSteady : ui.logged;
         if(k >= 1){ found(s, near); holdId = null; }
       } else {
         holdId = null; fg.style.strokeDashoffset = String(C);
-        if(!(+aim.dataset.until > Date.now())) aim.textContent = open.length ? (mode === "junior" ? "Tap it, or hold it in the circle" : "Tap or centre a feature") : "All found";
+        if(!(+aim.dataset.until > Date.now())) aim.textContent = open.length ? (mode === "junior" ? ui.tapOrHoldJr : ui.tapOrHoldPro) : ui.allFound;
       }
       if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
         let dy = ((near.yaw - y + 540) % 360) - 180, dp = near.pitch - p;
@@ -738,11 +1500,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       down = null;
       if(moved > 10 || !quick || e.target.closest(".pnlm-controls-container")) return;
       let c; try{ c = viewer.mouseEventToCoords(e); }catch(err){ return; }
+      const ui = S();
       const open = s.targets.filter(t => !run.found[t.id]);
       let best = null, bd = 999;
       open.forEach(t => { const d = angDist(c[1], c[0], t.yaw, t.pitch); if(d < bd){ bd = d; best = t; } });
-      if(best && bd < best.tol * 1.6){ found(s, best); flash("Found: " + best.name); }
-      else flash(open.length ? "Nothing on your list there. Keep looking!" : "You found everything here!");
+      if(best && bd < best.tol * 1.6){ found(s, best); flash(ui.foundFlash(R(best.name))); }
+      else flash(open.length ? ui.nothingThere : ui.foundEverythingHere);
     });
   }
   function flash(msg){
@@ -750,31 +1513,32 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     a.textContent = msg; a.dataset.until = String(Date.now() + 1800);
   }
   function pin(t){
-    try{ viewer.addHotSpot({id:t.id, pitch:t.pitch, yaw:t.yaw, cssClass:"found-pin", createTooltipFunc:(div) => { div.title = t.name; },
+    try{ viewer.addHotSpot({id:t.id, pitch:t.pitch, yaw:t.yaw, cssClass:"found-pin", createTooltipFunc:(div) => { div.title = R(t.name); },
       clickHandlerFunc:() => { run.last = t.id; journalSpot(run.x.stops[run.i]); }}); }catch(e){}
   }
   function found(s, t){
     run.found[t.id] = true; run.last = t.id; pin(t);
-    track("fs_found", {exp: run.x.id, target: t.id, mode});
+    track("fs_found", {exp: run.x.id, target: t.id, mode, lang});
     journalSpot(s);
   }
   function journalSpot(s){
+    const ui = S();
     const all = s.targets.every(t => run.found[t.id]);
     const last = run.last && s.targets.find(t => t.id === run.last && run.found[t.id]);
-    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
-      <p class="j-intro">${esc(T(s.intro))}</p>
-      <ul class="tasks">${s.targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(T(t.task))}</li>`).join("")}</ul>
-      ${mode === "pro" && !run.hint && !all ? `<button class="hintb" type="button" id="hintBtn">Show me which way to look</button>` : ""}
-      <p class="j-k">${s.targets.filter(t => run.found[t.id]).length} of ${s.targets.length} found</p>
-      ${last ? `<div class="card"><span class="hand">found it!</span><b>${esc(last.name)}</b><span class="sci">${esc(last.sci)}</span><p>${esc(T(last.fact))}</p></div>` : ""}
+    $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(R(s.place))}</p><h3>${esc(R(s.title))}</h3>
+      <p class="j-intro">${esc(R(s.intro))}</p>
+      <ul class="tasks">${s.targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(R(t.task))}</li>`).join("")}</ul>
+      ${mode === "pro" && !run.hint && !all ? `<button class="hintb" type="button" id="hintBtn">${esc(ui.showWayHint)}</button>` : ""}
+      <p class="j-k">${esc(ui.nOfMFound(s.targets.filter(t => run.found[t.id]).length, s.targets.length))}</p>
+      ${last ? `<div class="card"><span class="hand">${esc(ui.handFound)}</span><b>${esc(R(last.name))}</b><span class="sci">${esc(R(last.sci))}</span><p>${esc(R(last.fact))}</p></div>` : ""}
       ${nextBtn(all)}
-      ${all ? "" : `<button class="hintb" type="button" id="skipBtn">Skip this stop</button>`}`;
+      ${all ? "" : `<button class="hintb" type="button" id="skipBtn">${esc(ui.skipStop)}</button>`}`;
   }
 
   // ---------- stop type 1B: embedded on-site 360° VR video camp (DLZ360Player) ----------
   function buildCamp360(s){
     const st = solarTelemetry(s.slug, s.tz);
-    const ed = SAFARI_STREAMS[mode] || SAFARI_STREAMS.junior;
+    const ed = activeStream();
     let initTime = s.startAt || 0;
     if(s.autoSolar){
       if(st.phase === "sunrise") initTime = 0;
@@ -787,33 +1551,41 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const C = 2 * Math.PI * 38;
 
     campPlayer = new window.DLZ360Player($("view"), {
+      masterHlsSrc: MASTER_HLS,
       hlsSrc: ed.hls,
+      audioTrackName: ed.track,
       poster: s.poster || "scenes/safari-sunrise.jpg",
+      lang: lang,
       yaw: s.yaw ?? 0,
       pitch: s.pitch ?? 0,
       hfov: 90,
       startTime: initTime,
       loop: true,
       autoplay: false,
-      chapters: s.chapters || SAFARI_CHAPTERS,
+      chapters: SAFARI_CHAPTERS[lang],
       editionLabel: ed.label,
       telemetryText: st.hud,
+      onToggleLang(){
+        setLang(lang === "en" ? "ru" : "en");
+      },
       onTapSphere(tapYaw, tapPitch){
         if(!targets.length) return;
+        const ui = S();
         const open = targets.filter(t => !run.found[t.id]);
         let best = null, bd = 999;
         open.forEach(t => { const d = angDist(tapYaw, tapPitch, t.yaw, t.pitch); if(d < bd){ bd = d; best = t; } });
         if(best && bd < best.tol * 1.65){
           foundCampTarget(s, best);
-          flash("Found: " + best.name);
+          flash(ui.foundFlash(R(best.name)));
         } else if(open.length){
-          flash("Keep panning 360° — more wildlife nearby!");
+          flash(ui.keepPanning);
         }
       },
       onFrame(pl){
         if(!targets.length || run.cleanLens) return;
         const fg = $("ringFg"), aim = $("aim"), arrow = $("arrow");
         if(!fg) return;
+        const ui = S();
         const y = pl.getYaw(), p = pl.getPitch();
         const open = targets.filter(t => !run.found[t.id]);
         let near = null, nd = 999;
@@ -822,14 +1594,14 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
           if(holdId !== near.id){ holdId = near.id; holdStart = performance.now(); }
           const k = Math.min(1, (performance.now() - holdStart) / 950);
           fg.style.strokeDashoffset = String(C * (1 - k));
-          aim.textContent = k < 1 ? "Hold steady on " + near.name + "…" : "Logged!";
+          aim.textContent = k < 1 ? ui.holdSteadyOn(R(near.name)) : ui.logged;
           if(k >= 1){ foundCampTarget(s, near); holdId = null; }
         } else {
           holdId = null; fg.style.strokeDashoffset = String(C);
           if(!(+aim.dataset.until > Date.now())){
             aim.textContent = open.length
-              ? (mode === "junior" ? "Drag 360° · tap or hold in circle" : "Pan 360° · tap or centre target")
-              : "All 360° targets logged · explore freely!";
+              ? (mode === "junior" ? ui.drag360Jr : ui.drag360Pro)
+              : ui.all360Logged;
           }
         }
         if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
@@ -850,15 +1622,15 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     if(targets.length){
       campPlayer.overlayLayer.innerHTML = `<div class="lens" id="campLens"></div>
         <div class="ring" id="campRing"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="bgc" cx="42" cy="42" r="38"/><circle class="fg" id="ringFg" cx="42" cy="42" r="38"/></svg></div>
-        <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">Drag or tilt 360°</div>`;
+        <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">${esc(S().dragOrTilt)}</div>`;
       const toggleBtn = document.createElement("button");
       toggleBtn.type = "button";
       toggleBtn.className = "lens-toggle";
-      toggleBtn.textContent = "🔭 Clean 360° View";
+      toggleBtn.textContent = S().clean360;
       toggleBtn.addEventListener("click", () => {
         run.cleanLens = !run.cleanLens;
         campPlayer.overlayLayer.hidden = run.cleanLens;
-        toggleBtn.textContent = run.cleanLens ? "🔭 Show Binoculars" : "🔭 Clean 360° View";
+        toggleBtn.textContent = run.cleanLens ? S().showBinos : S().clean360;
       });
       campPlayer.wrap.appendChild(toggleBtn);
       targets.forEach(t => { if(run.found[t.id]) pinCamp(s, t); });
@@ -871,12 +1643,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         journalCamp360(s);
       }
     });
-    track("fs_camp360", {exp: run.x.id, stop: run.i, mode, phase: st.phase});
+    track("fs_camp360", {exp: run.x.id, stop: run.i, mode, lang, phase: st.phase});
   }
 
   function pinCamp(s, t){
     if(!campPlayer) return;
-    campPlayer.addPin(t.id, t.yaw, t.pitch, t.name, () => {
+    campPlayer.addPin(t.id, t.yaw, t.pitch, R(t.name), () => {
       run.last = t.id;
       journalCamp360(s);
     });
@@ -885,10 +1657,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     if(run.found[t.id]) return;
     run.found[t.id] = true; run.last = t.id;
     pinCamp(s, t);
-    track("fs_found", {exp: run.x.id, target: t.id, mode, inVideo: true});
+    track("fs_found", {exp: run.x.id, target: t.id, mode, lang, inVideo: true});
     journalCamp360(s);
   }
   function journalCamp360(s){
+    const ui = S();
     const st = solarTelemetry(s.slug, s.tz);
     const targets = s.targets || [];
     const questions = s.questions || [];
@@ -897,21 +1670,22 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const done = allTargets && allQs;
     const last = run.last && targets.find(t => t.id === run.last && run.found[t.id]);
 
-    const sunLine = (st.riseStr && st.setStr) ? `Sunrise ${st.riseStr} · Sunset ${st.setStr}` : "";
+    const sunLine = (st.riseStr && st.setStr) ? ui.sunriseSetLine(st.riseStr, st.setStr) : "";
+    const placeName = R(s.place);
     const statusNote = st.night
-      ? `🌙 Now at ${s.place}: ${st.time} (after sunset) — exploring today's recorded Sunrise & Sunset 360° watches`
-      : `☀️ Live station time at ${s.place}: ${st.time} (${st.phase})`;
+      ? ui.nightStatus(placeName, st.time)
+      : ui.dayStatus(placeName, st.time, st.phaseLoc);
 
     const wxHtml = `<div class="wx-box">
       <b>${esc(statusNote)}</b>
-      <span>${esc([sunLine, st.wx].filter(Boolean).join(" · ") || "Checking live MET Norway station weather…")}</span>
+      <span>${esc([sunLine, st.wx].filter(Boolean).join(" · ") || ui.checkingWx)}</span>
     </div>`;
 
     const tasksHtml = targets.length ? `
-      <ul class="tasks">${targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(T(t.task))}</li>`).join("")}</ul>
-      ${mode === "pro" && !run.hint && !allTargets ? `<button class="hintb" type="button" id="hintBtn">Show directional hint arrow</button>` : ""}
-      <p class="j-k">${targets.filter(t => run.found[t.id]).length} of ${targets.length} 360° clues logged</p>
-      ${last ? `<div class="card"><span class="hand">spotted!</span><b>${esc(last.name)}</b><span class="sci">${esc(last.sci)}</span><p>${esc(T(last.fact))}</p></div>` : ""}
+      <ul class="tasks">${targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(R(t.task))}</li>`).join("")}</ul>
+      ${mode === "pro" && !run.hint && !allTargets ? `<button class="hintb" type="button" id="hintBtn">${esc(ui.showArrowHint)}</button>` : ""}
+      <p class="j-k">${esc(ui.nOfMClues(targets.filter(t => run.found[t.id]).length, targets.length))}</p>
+      ${last ? `<div class="card"><span class="hand">${esc(ui.handSpotted)}</span><b>${esc(R(last.name))}</b><span class="sci">${esc(R(last.sci))}</span><p>${esc(R(last.fact))}</p></div>` : ""}
     ` : "";
 
     const qsHtml = questions.map((q, k) => {
@@ -921,19 +1695,19 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         const cls = got === undefined ? "" : (j === a ? "right" : (j === got ? "wrong" : ""));
         return `<button type="button" data-q="${k}" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
       }).join("");
-      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
-      return `<div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
+      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${esc(got === a ? ui.handYes : ui.handNo)}</span>${esc(R(q.fact))}</p>`;
+      return `<div class="q"><b>${esc(R(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
     }).join("");
 
-    const whyMsg = !allTargets ? "Spot the 360° clues in the video first" : "Answer the field question first";
-    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · Embedded 360° VR Camp · ${mode === "junior" ? "Kids" : "Adults"}</p>
-      <h3>${esc(s.title)}</h3>
+    const whyMsg = !allTargets ? ui.spotCluesWhy : ui.answerFieldWhy;
+    $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(ui.vrCampMeta(mode))}</p>
+      <h3>${esc(R(s.title))}</h3>
       ${wxHtml}
-      <p class="j-intro">${esc(T(s.intro))}</p>
+      <p class="j-intro">${esc(R(s.intro))}</p>
       ${tasksHtml}
       ${qsHtml}
       ${nextBtn(done, whyMsg)}
-      ${done ? "" : `<button class="hintb" type="button" id="skipBtn">Skip this stop</button>`}`;
+      ${done ? "" : `<button class="hintb" type="button" id="skipBtn">${esc(ui.skipStop)}</button>`}`;
   }
 
   // ---------- stop type 2: external YouTube 360° video with On-Site WebGL 360° fallback ----------
@@ -952,18 +1726,24 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function switchWatchToOnsite(s){
     if(ytPlayer){ try{ ytPlayer.destroy(); }catch(e){} ytPlayer = null; }
     $("view").innerHTML = "";
-    const ed = SAFARI_STREAMS[mode] || SAFARI_STREAMS.junior;
+    const ed = activeStream();
     const oc = s.onsiteCamp || {poster:"scenes/safari-daylight.jpg", startAt:88, yaw:0, pitch:0};
     campPlayer = new window.DLZ360Player($("view"), {
+      masterHlsSrc: MASTER_HLS,
       hlsSrc: ed.hls,
+      audioTrackName: ed.track,
       poster: oc.poster,
+      lang: lang,
       yaw: oc.yaw,
       pitch: oc.pitch,
       hfov: 90,
       loop: true,
       autoplay: true,
-      chapters: SAFARI_CHAPTERS,
-      editionLabel: ed.label
+      chapters: SAFARI_CHAPTERS[lang],
+      editionLabel: ed.label,
+      onToggleLang(){
+        setLang(lang === "en" ? "ru" : "en");
+      }
     });
     if(oc.startAt > 0){
       campPlayer.video.addEventListener("loadedmetadata", function sk(){
@@ -971,18 +1751,19 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         campPlayer.seekTo(oc.startAt);
       });
     }
-    track("fs_onsite360_fallback", {yt: s.yt, mode});
+    track("fs_onsite360_fallback", {yt: s.yt, mode, lang});
   }
   function buildWatch(s){
+    const ui = S();
     $("view").innerHTML = `<div class="yt" id="ytBox"></div>
       <div class="look" id="look" hidden>
         <button type="button" data-look="left" aria-label="Look left">◀</button><button type="button" data-look="up" aria-label="Look up">▲</button>
         <button type="button" data-look="down" aria-label="Look down">▼</button><button type="button" data-look="right" aria-label="Look right">▶</button>
-        <button type="button" data-look="tilt" class="tilt" hidden>Tilt to look</button>
+        <button type="button" data-look="tilt" class="tilt" hidden>${esc(ui.tiltLook)}</button>
       </div>
       <div class="appbtn" id="appBtn" ${IOS ? "" : "hidden"}>
-        <div><b>Want full 360° right here on this page?</b><span>Mobile browsers show YouTube 360° flat — open our embedded On-Site 360° Safari Player without leaving Digital Live Zoo.</span></div>
-        <button type="button" id="useOnsiteBtn">Play in On-Site 360° →</button>
+        <div><b>${esc(ui.wantOnsiteTitle)}</b><span>${esc(ui.wantOnsiteSub)}</span></div>
+        <button type="button" id="useOnsiteBtn">${esc(ui.playOnsiteBtn)}</button>
       </div>`;
     const ub = $("useOnsiteBtn");
     if(ub) ub.addEventListener("click", () => switchWatchToOnsite(s));
@@ -1016,12 +1797,16 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   document.addEventListener("click", e => {
     const b = e.target.closest("[data-look]"); if(!b || !ytPlayer) return;
     const k = b.dataset.look;
-    if(k === "tilt"){ tiltOn = !tiltOn; tiltBase = null; b.textContent = tiltOn ? "Stop tilting" : "Tilt to look"; if(tiltOn) window.addEventListener("deviceorientation", onTilt); else window.removeEventListener("deviceorientation", onTilt); return; }
+    if(k === "tilt"){ tiltOn = !tiltOn; tiltBase = null; b.textContent = tiltOn ? S().stopTilt : S().tiltLook; if(tiltOn) window.addEventListener("deviceorientation", onTilt); else window.removeEventListener("deviceorientation", onTilt); return; }
     turn(k === "left" ? -30 : k === "right" ? 30 : 0, k === "up" ? 20 : k === "down" ? -20 : 0);
   });
-  function pickOf(v){ return Array.isArray(v) ? v : (v[mode] || v.junior); }
+  function pickOf(v){
+    const r = R(v);
+    return Array.isArray(r) ? r : [];
+  }
   function ansOf(q){ return typeof q.a === "number" ? q.a : (q.a[mode] ?? q.a.junior); }
   function journalWatch(s){
+    const ui = S();
     const qs = s.questions.map((q, k) => {
       const key = run.i + ":" + k + ":" + mode, got = run.answered[key];
       const opts = pickOf(q.opts), a = ansOf(q);
@@ -1029,40 +1814,56 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         const cls = got === undefined ? "" : (j === a ? "right" : (j === got ? "wrong" : ""));
         return `<button type="button" data-q="${k}" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
       }).join("");
-      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
-      return `<div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
+      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${esc(got === a ? ui.handYes : ui.handNo)}</span>${esc(R(q.fact))}</p>`;
+      return `<div class="q"><b>${esc(R(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
     }).join("");
     const done = s.questions.every((q, k) => run.answered[run.i + ":" + k + ":" + mode] !== undefined);
-    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · ${esc(s.place)} · 360° video by ${esc(s.by)}</p><h3>${esc(s.title)}</h3>
-      <p class="j-intro">${esc(T(s.intro))}</p>${qs}${nextBtn(done, "Answer the questions first")}`;
+    $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(R(s.place))} · ${esc(ui.video360By(s.by))}</p><h3>${esc(R(s.title))}</h3>
+      <p class="j-intro">${esc(R(s.intro))}</p>${qs}${nextBtn(done, ui.answerQsWhy)}`;
   }
   function answer(k, o){
     const s = run.x.stops[run.i];
-    if(s.type === "live"){ run.answered["live:" + run.i + ":" + mode] = o; track("fs_answer", {exp: run.x.id, stop: run.i, q: "live", ok: o === run.liveA}); journalLive(s); return; }
+    if(s.type === "live"){ run.answered["live:" + run.i + ":" + mode] = o; track("fs_answer", {exp: run.x.id, stop: run.i, q: "live", ok: o === run.liveA, lang}); journalLive(s); return; }
     const key = run.i + ":" + k + ":" + mode; if(run.answered[key] !== undefined) return;
     run.answered[key] = o;
-    track("fs_answer", {exp: run.x.id, stop: run.i, q: k, ok: o === ansOf(s.questions[k]), mode});
+    track("fs_answer", {exp: run.x.id, stop: run.i, q: k, ok: o === ansOf(s.questions[k]), mode, lang});
     if(s.type === "camp360") journalCamp360(s);
     else journalWatch(s);
   }
 
   // ---------- stop type 3: live check at a real cam (with embedded in-page stream preview!) ----------
   let liveTick = 0;
-  function buildLive(s){
+  function cleanLiveHeading(s){
+    return R(s.title).replace(/^Live check:\s*/i, "").replace(/^Прямой эфир:\s*/i, "");
+  }
+  function updateLiveBoxLocale(s){
+    const ui = S();
     const st = solarTelemetry(s.slug, s.tz);
-    const sunInfo = (st.riseStr && st.setStr) ? `<div class="sunrow" id="lvSun">🌅 Sunrise ${esc(st.riseStr)} · 🌇 Sunset ${esc(st.setStr)}</div>` : `<div class="sunrow" id="lvSun"></div>`;
+    const lt = $("liveBoxCard") && $("liveBoxCard").querySelector(".lt");
+    const h3 = $("liveBoxCard") && $("liveBoxCard").querySelector("h3");
+    const sub = $("lvSub"), sr = $("lvSun"), wb = $("watchLiveInline");
+    if(lt) lt.innerHTML = `<i aria-hidden="true"></i>${esc(ui.liveRightNow)}`;
+    if(h3) h3.textContent = cleanLiveHeading(s);
+    if(sub) sub.textContent = `${R(s.place)} · ${st.night ? ui.nightWord : ui.dayWord}${st.wx ? " · " + st.wx : ""}`;
+    if(sr) sr.textContent = (st.riseStr && st.setStr) ? ui.sunRowLive(st.riseStr, st.setStr) : "";
+    if(wb) wb.textContent = ui.watchLiveHere;
+  }
+  function buildLive(s){
+    const ui = S();
+    const st = solarTelemetry(s.slug, s.tz);
+    const sunInfo = (st.riseStr && st.setStr) ? `<div class="sunrow" id="lvSun">${esc(ui.sunRowLive(st.riseStr, st.setStr))}</div>` : `<div class="sunrow" id="lvSun"></div>`;
     $("view").innerHTML = `<div class="livebox" id="liveBoxCard"><div>
-      <span class="lt"><i aria-hidden="true"></i>Live right now</span>
-      <h3>${esc(s.title.replace("Live check: ", ""))}</h3>
+      <span class="lt"><i aria-hidden="true"></i>${esc(ui.liveRightNow)}</span>
+      <h3>${esc(cleanLiveHeading(s))}</h3>
       <div class="clock" id="lvClock">${esc(st.time)}</div>
-      <div class="sub" id="lvSub">${esc(s.place)} · ${st.night ? "🌙 night" : "☀️ daytime"}${st.wx ? " · " + esc(st.wx) : ""}</div>
+      <div class="sub" id="lvSub">${esc(R(s.place))} · ${st.night ? ui.nightWord : ui.dayWord}${st.wx ? " · " + esc(st.wx) : ""}</div>
       ${sunInfo}
-      <button type="button" class="watchhere" id="watchLiveInline">▶ Watch live cam right here</button>
+      <button type="button" class="watchhere" id="watchLiveInline">${esc(ui.watchLiveHere)}</button>
     </div></div>`;
     $("watchLiveInline").addEventListener("click", () => {
       const vid = run.liveId || s.fallbackId;
-      $("view").innerHTML = `<iframe id="liveEmbed" src="https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(s.title)}"></iframe>`;
-      track("fs_live_inline", {slug: s.slug, id: vid, mode});
+      $("view").innerHTML = `<iframe id="liveEmbed" src="https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(R(s.title))}"></iframe>`;
+      track("fs_live_inline", {slug: s.slug, id: vid, mode, lang});
     });
     clearInterval(liveTick);
     liveTick = setInterval(() => { const c = $("lvClock"); if(!c){ clearInterval(liveTick); return; } c.textContent = solarTelemetry(s.slug, s.tz).time; }, 20000);
@@ -1072,48 +1873,76 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     }).catch(() => {});
     if(window.ZooWx) ZooWx.ready.then(() => {
       if(run && run.x.stops[run.i] === s){
-        const st2 = solarTelemetry(s.slug, s.tz);
-        const sub = $("lvSub"), sr = $("lvSun");
-        if(sub) sub.textContent = `${s.place} · ${st2.night ? "🌙 night" : "☀️ daytime"}${st2.wx ? " · " + st2.wx : ""}`;
-        if(sr && st2.riseStr && st2.setStr) sr.textContent = `🌅 Sunrise ${st2.riseStr} · 🌇 Sunset ${st2.setStr}`;
+        updateLiveBoxLocale(s);
         journalLive(s);
       }
     });
   }
   function journalLive(s){
+    const ui = S();
     const st = solarTelemetry(s.slug, s.tz);
-    const dayOpt = s.speciesDay ? T(s.speciesDay) : "Wild horses, oryx or ostriches coming to drink";
-    const nightOpt = s.speciesNight ? T(s.speciesNight) : "Spotted hyenas or jackals checking the water";
+    const placeName = R(s.place);
+    const defaultDayOpt = lang === "ru"
+      ? "Дикие лошади Намиба, ориксы или страусы у поилки"
+      : "Wild horses, oryx or ostriches coming to drink";
+    const defaultNightOpt = lang === "ru"
+      ? "Пятнистые гиены или чепрачные шакалы у воды"
+      : "Spotted hyenas or jackals checking the water";
+    const dayOpt = s.speciesDay ? R(s.speciesDay) : defaultDayOpt;
+    const nightOpt = s.speciesNight ? R(s.speciesNight) : defaultNightOpt;
     const dayFact = s.factDay || {
-      junior:"The famous wild horses of the Namib drink here, and so do oryx (gemsbok) and ostriches. They can go a long time without water, but they come back to this trough again and again.",
-      pro:"The feral horses of Garub, descended from horses left in the area in the early 1900s, depend on this trough; gemsbok (oryx) and ostriches use it too. Visits cluster in the cooler morning and late afternoon."
+      en:{
+        junior:"The famous wild horses of the Namib drink here, and so do oryx (gemsbok) and ostriches. They can go a long time without water, but they come back to this trough again and again.",
+        pro:"The feral horses of Garub, descended from horses left in the area in the early 1900s, depend on this trough; gemsbok (oryx) and ostriches use it too. Visits cluster in the cooler morning and late afternoon."
+      },
+      ru:{
+        junior:"Сюда приходят пить знаменитые дикие лошади пустыни Намиб, длиннорогие ориксы и страусы! В пустыне мало воды, поэтому все они возвращаются к этому источнику.",
+        pro:"Одичавшие лошади Гаруба, живущие в Намибе с начала XX века, зависят от этого источника наряду с сернобыками-ориксами и страусами; пик посещений приходится на утро и предзакатные часы."
+      }
     };
     const nightFact = s.factNight || {
-      junior:"Hyenas and jackals are night hunters. At Garub they even wait near the water for the wild horses. Look for glowing eyes on the night camera!",
-      pro:"Spotted hyenas are the main nocturnal visitors at Garub and a known predator of the feral horses' foals; black-backed jackals scavenge around the trough. The infrared camera shows them as pale shapes with bright eyeshine."
+      en:{
+        junior:"Hyenas and jackals are night hunters. At Garub they even wait near the water for the wild horses. Look for glowing eyes on the night camera!",
+        pro:"Spotted hyenas are the main nocturnal visitors at Garub and a known predator of the feral horses' foals; black-backed jackals scavenge around the trough. The infrared camera shows them as pale shapes with bright eyeshine."
+      },
+      ru:{
+        junior:"Гиены и шакалы — ночные охотники! В Гарубе они часто проверяют воду в темноте. Ищите светящиеся глаза на ночной камере!",
+        pro:"Пятнистые гиены и чепрачные шакалы — главные ночные посетители Гаруба; инфракрасная подсветка камеры показывает их светлыми силуэтами с ярким отблеском глаз."
+      }
     };
     const q = st.night
-      ? {q:{junior:`It is ${st.time} and dark at ${s.place}. Who is most likely on the live camera right now?`, pro:`Local time ${st.time} (after ${st.setStr || "sunset"}). Which visitors does this live cam most likely show?`},
-         opts:["Nobody: every animal sleeps all night", nightOpt, "Polar bears and penguins"], a:1,
-         fact:nightFact}
-      : {q:{junior:`It is ${st.time} and daytime at ${s.place}. Who is most likely visiting right now?`, pro:`Local time ${st.time} (between ${st.riseStr || "sunrise"} and ${st.setStr || "sunset"}). Which diurnal visitors are expected?`},
-         opts:["Penguins on sea ice", dayOpt, "Nobody: waterholes stay empty all day"], a:1,
-         fact:dayFact};
+      ? {q:{
+           en:{junior:`It is ${st.time} and dark at ${placeName}. Who is most likely on the live camera right now?`, pro:`Local time ${st.time} (after ${st.setStr || "sunset"}). Which visitors does this live cam most likely show?`},
+           ru:{junior:`Сейчас ${st.time}, в районе «${placeName}» темно. Кого вероятнее всего увидеть на живой камере?`, pro:`Местное время ${st.time} (после заката ${st.setStr || ""}). Какие виды наиболее вероятны в ночном эфире?`}
+         },
+         opts: lang === "ru"
+           ? ["Никого: ночью абсолютно все звери спят", nightOpt, "Белых медведей и пингвинов"]
+           : ["Nobody: every animal sleeps all night", nightOpt, "Polar bears and penguins"],
+         a:1, fact:nightFact}
+      : {q:{
+           en:{junior:`It is ${st.time} and daytime at ${placeName}. Who is most likely visiting right now?`, pro:`Local time ${st.time} (between ${st.riseStr || "sunrise"} and ${st.setStr || "sunset"}). Which diurnal visitors are expected?`},
+           ru:{junior:`Сейчас ${st.time}, в районе «${placeName}» светлый день. Кто скорее всего подходит к воде?`, pro:`Местное время ${st.time} (между рассветом ${st.riseStr || ""} и закатом ${st.setStr || ""}). Какие дневные посетители ожидаемы?`}
+         },
+         opts: lang === "ru"
+           ? ["Пингвины на льдинах", dayOpt, "Никого: днём к воде никто никогда не подходит"]
+           : ["Penguins on sea ice", dayOpt, "Nobody: waterholes stay empty all day"],
+         a:1, fact:dayFact};
     run.liveA = q.a;
     const got = run.answered["live:" + run.i + ":" + mode];
     const bt = q.opts.map((o, j) => {
       const cls = got === undefined ? "" : (j === q.a ? "right" : (j === got ? "wrong" : ""));
       return `<button type="button" data-q="0" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
     }).join("");
-    const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === q.a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
+    const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${esc(got === q.a ? ui.handYes : ui.handNo)}</span>${esc(R(q.fact))}</p>`;
     const link = `/#${run.liveId || s.fallbackId}`;
-    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · Live cam · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
-      <p class="j-intro">${esc(T(s.intro))}</p>
-      <div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>
-      ${got !== undefined ? `<div class="j-actions"><a class="btn" id="liveLink" href="${link}" target="_blank" rel="noopener">Also open on Main Stage ↗</a></div>` : ""}
-      ${nextBtn(got !== undefined, "Predict who is at the live cam first")}`;
+    $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(ui.liveCamMeta)} · ${esc(placeName)}</p><h3>${esc(R(s.title))}</h3>
+      <p class="j-intro">${esc(R(s.intro))}</p>
+      <div class="q"><b>${esc(R(q.q))}</b><div class="opts">${bt}</div>${fb}</div>
+      ${got !== undefined ? `<div class="j-actions"><a class="btn" id="liveLink" href="${link}" target="_blank" rel="noopener">${esc(ui.openMainStage)}</a></div>` : ""}
+      ${nextBtn(got !== undefined, ui.predictLiveWhy)}`;
   }
 
+  renderChrome();
   renderHome();
 })();
 </script>

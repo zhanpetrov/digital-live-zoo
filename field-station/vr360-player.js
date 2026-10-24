@@ -1,13 +1,13 @@
 /**
  * DLZ360Player — Embedded On-Site WebGL 360° Equirectangular VR Video Player for Digital Live Zoo
  *
- * Solves the YouTube 360° off-site redirect problem:
- * - Renders equirectangular 360°×180° video (HLS .m3u8 or progressive .mp4) directly inside a WebGL UV sphere
- *   on digitallivezoo.com — works natively on iPhone Safari, iPad Safari, Android Chrome, macOS/Windows desktop,
+ * - Renders equirectangular 360°×180° video (multi-audio HLS .m3u8 or progressive .mp4) directly inside a WebGL
+ *   UV sphere on digitallivezoo.com — works natively on iPhone Safari, iPad Safari, Android Chrome, macOS/Windows,
  *   and VR headsets without ever leaving the website.
- * - Exposes exact spherical coordinates (yaw ∈ [-180, 180], pitch ∈ [-85, 85], hfov ∈ [38, 110]),
- *   screenToCoords(clientX, clientY) raycasting, and coordsToScreen(yaw, pitch) 3D pin projection
- *   so Field Station quests can run live interactive animal/clue spotting directly inside moving 360° video.
+ * - Supports instant zero-frame-drop switching across 4 ElevenLabs Studio audio tracks
+ *   (English Kids, English Adults, Russian Kids, Russian Adults) via HLS alternate audio renditions.
+ * - Exposes exact spherical coordinates (yaw ∈ [-180, 180], pitch ∈ [-85, 85], hfov ∈ [38, 108]),
+ *   screenToCoords(clientX, clientY) raycasting, and coordsToScreen(yaw, pitch) 3D pin projection.
  */
 (function () {
   "use strict";
@@ -15,6 +15,37 @@
   const DEG2RAD = Math.PI / 180;
   const RAD2DEG = 180 / Math.PI;
   const HLS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js";
+
+  const I18N = {
+    en: {
+      ariaApp: "Interactive 360 degree wildlife camp player. Drag or use arrow keys to look around.",
+      vrBadge: "360° VR CAMP",
+      enterTitle: "Enter 360° Safari Camp",
+      enterSub: "ElevenLabs Studio Guide (EN / RU) · Stays right here on Digital Live Zoo · Drag, pinch or tilt 360°",
+      play: "▶ Play",
+      pause: "❚❚ Pause",
+      sound: "🔊 Sound",
+      unmute: "🔇 Unmute",
+      tilt: "📱 Tilt 360°",
+      tilting: "📱 Tilting",
+      langBtn: "🌐 EN · RU",
+      dirs: ["N", "NE", "E 🌅", "SE", "S", "SW", "W 🌇", "NW"],
+    },
+    ru: {
+      ariaApp: "Интерактивный 360-градусный плеер сафари-лагеря. Вращайте мышью, пальцем или клавишами со стрелками.",
+      vrBadge: "360° VR-ЛАГЕРЬ",
+      enterTitle: "Войти в 360° сафари-лагерь",
+      enterSub: "Студийная озвучка ElevenLabs (RU / EN) · Прямо на сайте без перехода в YouTube · Обзор 360°",
+      play: "▶ Пуск",
+      pause: "❚❚ Пауза",
+      sound: "🔊 Звук",
+      unmute: "🔇 Вкл. звук",
+      tilt: "📱 Наклон 360°",
+      tilting: "📱 Гироскоп",
+      langBtn: "🌐 RU · EN",
+      dirs: ["С", "СВ", "В 🌅", "ЮВ", "Ю", "ЮЗ", "З 🌇", "СЗ"],
+    },
+  };
 
   let hlsPromise = null;
   function ensureHlsJs() {
@@ -36,7 +67,7 @@
   }
 
   function wrapYaw(y) {
-    let w = ((y + 180) % 360 + 360) % 360 - 180;
+    let w = (((y + 180) % 360) + 360) % 360 - 180;
     return w === -180 ? 180 : w;
   }
 
@@ -54,13 +85,13 @@
     const indices = [];
 
     for (let lat = 0; lat <= latSegs; lat++) {
-      const v = lat / latSegs; // 0 = top (+90° zenith), 1 = bottom (-90° nadir)
+      const v = lat / latSegs;
       const phi = (0.5 - v) * Math.PI;
       const cosPhi = Math.cos(phi);
       const sinPhi = Math.sin(phi);
 
       for (let lon = 0; lon <= lonSegs; lon++) {
-        const u = lon / lonSegs; // 0 = -180°, 0.5 = 0° center, 1 = +180°
+        const u = lon / lonSegs;
         const lam = (u - 0.5) * 2 * Math.PI;
         const x = cosPhi * Math.sin(lam);
         const y = sinPhi;
@@ -141,9 +172,12 @@
       this.root = typeof container === "string" ? document.getElementById(container) : container;
       this.opts = Object.assign(
         {
+          masterHlsSrc: "",
           hlsSrc: "",
+          audioTrackName: "",
           mp4Src: "",
           poster: "",
+          lang: "en",
           yaw: 0,
           pitch: 2,
           hfov: 90,
@@ -160,10 +194,12 @@
           onFrame: null,
           onTapSphere: null,
           onTimeChapter: null,
+          onToggleLang: null,
         },
         opts || {}
       );
 
+      this.lang = this.opts.lang === "ru" ? "ru" : "en";
       this.yaw = this.opts.yaw;
       this.pitch = this.opts.pitch;
       this.hfov = this.opts.hfov;
@@ -176,6 +212,7 @@
       this.gyroEnabled = false;
       this.gyroBase = null;
       this.hls = null;
+      this._loadedMasterUrl = "";
       this.pins = new Map();
       this.keys = new Set();
       this.idleTimer = 0;
@@ -184,28 +221,36 @@
       this._initWebGL();
       this._bindEvents();
       this.setSource({
+        masterHlsSrc: this.opts.masterHlsSrc,
         hlsSrc: this.opts.hlsSrc,
+        audioTrackName: this.opts.audioTrackName,
         mp4Src: this.opts.mp4Src,
         poster: this.opts.poster,
         startTime: this.opts.startTime,
         editionLabel: this.opts.editionLabel,
+        lang: this.lang,
+        chapters: this.opts.chapters,
       });
       this._tick = this._tick.bind(this);
       this.raf = requestAnimationFrame(this._tick);
     }
 
+    _L() {
+      return I18N[this.lang] || I18N.en;
+    }
+
     _buildDOM() {
+      const L = this._L();
       this.wrap = document.createElement("div");
       this.wrap.className = "dlz360-wrap";
       this.wrap.tabIndex = 0;
       this.wrap.setAttribute("role", "application");
-      this.wrap.setAttribute("aria-label", "Interactive 360 degree wildlife camp player. Drag or use arrow keys to look around.");
+      this.wrap.setAttribute("aria-label", L.ariaApp);
 
       this.canvas = document.createElement("canvas");
       this.canvas.className = "dlz360-canvas";
       this.wrap.appendChild(this.canvas);
 
-      // Poster layer before first video frame decodes
       this.posterEl = document.createElement("img");
       this.posterEl.className = "dlz360-poster";
       this.posterEl.alt = "";
@@ -213,17 +258,14 @@
       else this.posterEl.src = this.opts.poster;
       this.wrap.appendChild(this.posterEl);
 
-      // 3D Pins container (above canvas, below HUD controls)
       this.pinLayer = document.createElement("div");
       this.pinLayer.className = "dlz360-pins";
       this.wrap.appendChild(this.pinLayer);
 
-      // Overlay slot for Field Station binocular lens / focus ring / hint arrow
       this.overlayLayer = document.createElement("div");
       this.overlayLayer.className = "dlz360-overlay";
       this.wrap.appendChild(this.overlayLayer);
 
-      // Top HUD: 360° Compass + Live Solar/Weather Badge
       this.topHud = document.createElement("div");
       this.topHud.className = "dlz360-top";
       this.topHud.innerHTML = `
@@ -232,29 +274,29 @@
           <span class="dlz360-compass-readout">000° N</span>
         </div>
         <div class="dlz360-badges">
-          <span class="dlz360-badge dlz360-live-pill">360° VR CAMP</span>
+          <span class="dlz360-badge dlz360-live-pill">${L.vrBadge}</span>
           <span class="dlz360-badge dlz360-ed-pill" ${this.opts.editionLabel ? "" : "hidden"}>${this.opts.editionLabel || ""}</span>
           <span class="dlz360-badge dlz360-wx-pill" ${this.opts.telemetryText ? "" : "hidden"}>${this.opts.telemetryText || ""}</span>
         </div>
       `;
-      this.compassTrack = this.topHud.querySelector(".dlz360-compass-track");
       this.compassReadout = this.topHud.querySelector(".dlz360-compass-readout");
+      this.vrPill = this.topHud.querySelector(".dlz360-live-pill");
       this.edPill = this.topHud.querySelector(".dlz360-ed-pill");
       this.wxPill = this.topHud.querySelector(".dlz360-wx-pill");
       this.wrap.appendChild(this.topHud);
 
-      // Big Center Play Prompt (when paused at start)
       this.bigPlay = document.createElement("button");
       this.bigPlay.type = "button";
       this.bigPlay.className = "dlz360-bigplay";
       this.bigPlay.innerHTML = `
         <span class="dlz360-bigplay-ic">▶</span>
-        <b>Enter 360° Safari Camp</b>
-        <small>Stays right here on Digital Live Zoo · Drag, pinch or tilt to look all 360° around</small>
+        <b class="dlz360-bp-t">${L.enterTitle}</b>
+        <small class="dlz360-bp-s">${L.enterSub}</small>
       `;
+      this.bpTitle = this.bigPlay.querySelector(".dlz360-bp-t");
+      this.bpSub = this.bigPlay.querySelector(".dlz360-bp-s");
       this.wrap.appendChild(this.bigPlay);
 
-      // Bottom Transport + Chapters + VR Look Controls
       this.botHud = document.createElement("div");
       this.botHud.className = "dlz360-bot";
       this.botHud.innerHTML = `
@@ -263,11 +305,12 @@
           <input type="range" class="dlz360-scrub" min="0" max="1000" value="0" step="1" aria-label="Seek timeline">
         </div>
         <div class="dlz360-ctrl-row">
-          <button type="button" class="dlz360-btn dlz360-play" aria-label="Play or pause">▶ Play</button>
-          <button type="button" class="dlz360-btn dlz360-mute" aria-label="Mute or unmute">${this.opts.muted ? "🔇 Muted" : "🔊 Sound"}</button>
+          <button type="button" class="dlz360-btn dlz360-play">${L.play}</button>
+          <button type="button" class="dlz360-btn dlz360-mute">${this.opts.muted ? L.unmute : L.sound}</button>
+          <button type="button" class="dlz360-btn dlz360-lang" ${typeof this.opts.onToggleLang === "function" ? "" : "hidden"}>${L.langBtn}</button>
           <span class="dlz360-time">0:00 / 0:00</span>
           <div class="dlz360-spacer"></div>
-          <button type="button" class="dlz360-btn dlz360-gyro" hidden aria-pressed="false">📱 Tilt 360°</button>
+          <button type="button" class="dlz360-btn dlz360-gyro" hidden aria-pressed="false">${L.tilt}</button>
           <button type="button" class="dlz360-btn dlz360-zout" title="Zoom out" aria-label="Zoom out">−</button>
           <button type="button" class="dlz360-btn dlz360-zin" title="Zoom in" aria-label="Zoom in">+</button>
           <button type="button" class="dlz360-btn dlz360-recenter" title="Reset view center" aria-label="Center view">⌖</button>
@@ -278,6 +321,7 @@
       this.scrubEl = this.botHud.querySelector(".dlz360-scrub");
       this.playBtn = this.botHud.querySelector(".dlz360-play");
       this.muteBtn = this.botHud.querySelector(".dlz360-mute");
+      this.langBtn = this.botHud.querySelector(".dlz360-lang");
       this.timeEl = this.botHud.querySelector(".dlz360-time");
       this.gyroBtn = this.botHud.querySelector(".dlz360-gyro");
       this.fsBtn = this.botHud.querySelector(".dlz360-fs");
@@ -287,7 +331,6 @@
       this._renderChapters();
       this.wrap.appendChild(this.botHud);
 
-      // Hidden HTML5 video source
       this.video = document.createElement("video");
       this.video.playsInline = true;
       this.video.setAttribute("playsinline", "");
@@ -298,6 +341,20 @@
       this.video.muted = !!this.opts.muted;
 
       this.root.appendChild(this.wrap);
+      this.root._dlz360 = this;
+    }
+
+    _syncLocaleTexts() {
+      const L = this._L();
+      this.wrap.setAttribute("aria-label", L.ariaApp);
+      this.vrPill.textContent = L.vrBadge;
+      this.bpTitle.textContent = L.enterTitle;
+      this.bpSub.textContent = L.enterSub;
+      this.playBtn.textContent = this.video.paused ? L.play : L.pause;
+      this._syncAudioBtn();
+      this.langBtn.textContent = L.langBtn;
+      this.gyroBtn.textContent = this.gyroEnabled ? L.tilting : L.tilt;
+      this._updateCompass();
     }
 
     _renderChapters() {
@@ -358,7 +415,6 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-      // 1x1 dark placeholder pixel
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([14, 24, 18, 255]));
 
       this.uRight = gl.getUniformLocation(prog, "u_right");
@@ -369,7 +425,6 @@
       this.uReady = gl.getUniformLocation(prog, "u_ready");
       gl.uniform1f(this.uReady, 0.0);
 
-      // Load poster into WebGL sphere immediately so user can look around in 360° even BEFORE pressing play!
       if (this.opts.poster) {
         const img = new Image();
         img.crossOrigin = "anonymous";
@@ -386,10 +441,35 @@
       }
     }
 
-    setSource({ hlsSrc, mp4Src, poster, preserveTime, startTime, editionLabel }) {
-      const targetTime = preserveTime ? (this.video.currentTime || 0) : (typeof startTime === "number" ? startTime : 0);
+    _selectHlsAudioTrack(trackName) {
+      if (!this.hls || !trackName) return false;
+      const tracks = this.hls.audioTracks || [];
+      if (!tracks.length) return false;
+      const idx = tracks.findIndex((t) => t.name === trackName);
+      if (idx >= 0) {
+        if (this.hls.audioTrack !== idx) {
+          this.hls.audioTrack = idx;
+        }
+        return true;
+      }
+      return false;
+    }
+
+    setSource({ masterHlsSrc, hlsSrc, audioTrackName, mp4Src, preserveTime, startTime, editionLabel, lang, chapters }) {
+      const targetTime = preserveTime ? this.video.currentTime || 0 : typeof startTime === "number" ? startTime : 0;
       const wasPlaying = preserveTime ? !this.video.paused : !!this.opts.autoplay;
 
+      if (lang) {
+        this.lang = lang === "ru" ? "ru" : "en";
+        this._syncLocaleTexts();
+      }
+      if (chapters) {
+        this.opts.chapters = chapters;
+        this._renderChapters();
+      }
+      if (audioTrackName !== undefined) {
+        this.opts.audioTrackName = audioTrackName;
+      }
       if (editionLabel !== undefined) {
         this.opts.editionLabel = editionLabel;
         if (editionLabel) {
@@ -400,11 +480,24 @@
         }
       }
 
+      // Fast path on hls.js: if masterHlsSrc is already loaded, switch audio rendition in-place with 0ms video drop!
+      if (
+        preserveTime &&
+        this.hls &&
+        masterHlsSrc &&
+        this._loadedMasterUrl === masterHlsSrc &&
+        audioTrackName &&
+        this._selectHlsAudioTrack(audioTrackName)
+      ) {
+        return;
+      }
+
       if (this.hls) {
         try {
           this.hls.destroy();
         } catch (e) {}
         this.hls = null;
+        this._loadedMasterUrl = "";
       }
 
       const finishAttach = () => {
@@ -421,37 +514,56 @@
       };
 
       const canNativeHls =
-        hlsSrc &&
+        (hlsSrc || masterHlsSrc) &&
         (this.video.canPlayType("application/vnd.apple.mpegurl") ||
           this.video.canPlayType("application/x-mpegURL"));
 
-      if (hlsSrc && canNativeHls) {
-        this.video.src = hlsSrc;
+      const attachNativeHls = () => {
+        this.video.src = hlsSrc || masterHlsSrc;
         finishAttach();
-      } else if (hlsSrc) {
+      };
+
+      if (masterHlsSrc || hlsSrc) {
+        const srcToLoad = masterHlsSrc || hlsSrc;
         ensureHlsJs().then((Hls) => {
           if (this.destroyed) return;
-          if (Hls && Hls.isSupported()) {
+          if (Hls && Hls.isSupported() && masterHlsSrc) {
             const hls = new Hls({
               maxBufferLength: 30,
               enableWorker: true,
               startPosition: targetTime > 0 ? targetTime : -1,
             });
             this.hls = hls;
-            hls.loadSource(hlsSrc);
+            this._loadedMasterUrl = srcToLoad;
+            hls.loadSource(srcToLoad);
             hls.attachMedia(this.video);
+            hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, () => {
+              if (this.opts.audioTrackName) {
+                this._selectHlsAudioTrack(this.opts.audioTrackName);
+              }
+            });
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              if (this.opts.audioTrackName) {
+                this._selectHlsAudioTrack(this.opts.audioTrackName);
+              }
               if (targetTime > 0) this.video.currentTime = targetTime;
               if (wasPlaying) this.play();
             });
             hls.on(Hls.Events.ERROR, (_ev, data) => {
-              if (data && data.fatal && mp4Src && this.video.src !== mp4Src) {
+              if (data && data.fatal) {
                 hls.destroy();
                 this.hls = null;
-                this.video.src = mp4Src;
-                finishAttach();
+                this._loadedMasterUrl = "";
+                if (canNativeHls) attachNativeHls();
+                else if (mp4Src && this.video.src !== mp4Src) {
+                  this.video.src = mp4Src;
+                  finishAttach();
+                }
               }
             });
+          } else if (canNativeHls) {
+            // Native iOS Safari fallback: per-track playlist (hlsSrc) has chosen ElevenLabs rendition as DEFAULT=YES
+            attachNativeHls();
           } else if (mp4Src) {
             this.video.src = mp4Src;
             finishAttach();
@@ -477,7 +589,6 @@
       const p = this.video.play();
       if (p && p.catch) {
         p.catch(() => {
-          // If unmuted autoplay blocked, retry muted
           this.video.muted = true;
           this._syncAudioBtn();
           this.video.play().catch(() => {});
@@ -583,12 +694,16 @@
     }
 
     addPin(id, yaw, pitch, label, onClick) {
-      if (this.pins.has(id)) return;
+      if (this.pins.has(id)) {
+        const existing = this.pins.get(id);
+        existing.el.title = label || id;
+        return;
+      }
       const el = document.createElement("button");
       el.type = "button";
       el.className = "found-pin dlz360-pin";
       el.title = label || id;
-      el.setAttribute("aria-label", "Found: " + (label || id));
+      el.setAttribute("aria-label", label || id);
       if (onClick) {
         el.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -605,7 +720,8 @@
     }
 
     _syncAudioBtn() {
-      this.muteBtn.textContent = this.video.muted ? "🔇 Unmute" : "🔊 Sound";
+      const L = this._L();
+      this.muteBtn.textContent = this.video.muted ? L.unmute : L.sound;
     }
 
     _wakeHud() {
@@ -646,11 +762,12 @@
     }
 
     _toggleGyro() {
+      const L = this._L();
       if (this.gyroEnabled) {
         this.gyroEnabled = false;
         this.gyroBase = null;
         this.gyroBtn.setAttribute("aria-pressed", "false");
-        this.gyroBtn.textContent = "📱 Tilt 360°";
+        this.gyroBtn.textContent = L.tilt;
         window.removeEventListener("deviceorientation", this._onDeviceOrientation);
         return;
       }
@@ -658,7 +775,7 @@
         this.gyroEnabled = true;
         this.gyroBase = null;
         this.gyroBtn.setAttribute("aria-pressed", "true");
-        this.gyroBtn.textContent = "📱 Tilting";
+        this.gyroBtn.textContent = this._L().tilting;
         window.addEventListener("deviceorientation", this._onDeviceOrientation);
       };
       if (
@@ -800,6 +917,12 @@
         this._syncAudioBtn();
       });
 
+      this.langBtn.addEventListener("click", () => {
+        if (typeof this.opts.onToggleLang === "function") {
+          this.opts.onToggleLang();
+        }
+      });
+
       this.botHud.querySelector(".dlz360-zin").addEventListener("click", () => {
         this.hfov = clamp(this.hfov - 10, this.opts.minHfov, this.opts.maxHfov);
       });
@@ -831,11 +954,11 @@
 
       this.video.addEventListener("play", () => {
         this.bigPlay.hidden = true;
-        this.playBtn.textContent = "❚❚ Pause";
+        this.playBtn.textContent = this._L().pause;
         this._wakeHud();
       });
       this.video.addEventListener("pause", () => {
-        this.playBtn.textContent = "▶ Play";
+        this.playBtn.textContent = this._L().play;
         this.wrap.classList.remove("dlz360-idle");
       });
 
@@ -869,7 +992,7 @@
 
     _updateCompass() {
       const brg = ((Math.round(this.yaw) % 360) + 360) % 360;
-      const dirs = ["N", "NE", "E 🌅", "SE", "S", "SW", "W 🌇", "NW"];
+      const dirs = this._L().dirs;
       const dir = dirs[Math.round(brg / 45) % 8];
       this.compassReadout.textContent = String(brg).padStart(3, "0") + "° " + dir;
     }
@@ -905,7 +1028,6 @@
       if (this.destroyed) return;
       this.raf = requestAnimationFrame(this._tick);
 
-      // Keyboard smooth pan
       if (this.keys.size) {
         const spd = 1.6;
         if (this.keys.has("ArrowLeft") || this.keys.has("KeyA")) this.yaw = wrapYaw(this.yaw - spd);
@@ -953,7 +1075,6 @@
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.idxBuf);
       gl.drawElements(gl.TRIANGLES, this.indexCount, gl.UNSIGNED_SHORT, 0);
 
-      // Project 3D spherical pins onto DOM overlay
       if (this.pins.size) {
         this.pins.forEach((p) => {
           const s = this.coordsToScreen(p.yaw, p.pitch);
