@@ -969,7 +969,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         const r = await fetch(url, {cache: "no-store"});
         if(r.ok){ const d = await r.json(); if(typeof d.now === "number") last = d; }
       }catch(e){}
-      if(!last) return;
+      if(!last){ setTimeout(load, 15000); return; }   // first answer failed: try again soon, not in a minute
       const d = last, here = Math.max(1, d.now);
       setNum("lvNow", here);
       $("lvNowLbl").textContent = here === 1 ? "watching right now (that’s you)" : "people watching right now, including you";

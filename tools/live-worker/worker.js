@@ -21,7 +21,7 @@
 // results live in the Workers KV namespace bound as WX. Places come from https://digitallivezoo.com/data/geo.json,
 // rounded to 2 decimals (about 1 km) so cams at the same place share one forecast.
 //
-// Answers are cached for 30 seconds, so PostHog sees at most 2 queries a minute
+// Answers are cached for 60 seconds, so PostHog sees at most one round of queries a minute
 // however many people have the page open.
 
 const GEO_URL = "https://digitallivezoo.com/data/geo.json";
@@ -30,7 +30,7 @@ const UA = "DigitalLiveZoo/1.0 (+https://digitallivezoo.com)";   // MET Norway r
 const WX_BATCH = 24, WX_MIN = 15 * 60000, WX_MAX = 30 * 60000, WX_CACHE_SECONDS = 120;
 
 const ORIGINS = ["https://digitallivezoo.com", "https://www.digitallivezoo.com"];
-const CACHE_SECONDS = 30;
+const CACHE_SECONDS = 60;
 
 const SQL = `
 SELECT
@@ -92,8 +92,17 @@ export default {
         if (!r.ok) throw new Error(String(r.status));
         return (await r.json()).results || [];
       };
+      // when PostHog does not answer, hand out the last good numbers (kept an hour) instead of an error
+      const lastKey = new Request(new URL("/live-last.json", req.url).toString());
       let main;
-      try { main = await ask(SQL, "zoo live widget"); } catch (e) { return json({ error: "analytics unavailable" }, 502, req); }
+      try { main = await ask(SQL, "zoo live widget"); }
+      catch (e) {
+        const last = await cache.match(lastKey);
+        if (!last) return json({ error: "analytics unavailable" }, 502, req);
+        const out = new Response(last.body, { headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
+        for (const [k, v] of Object.entries(cors(req))) out.headers.set(k, v);
+        return out;
+      }
       // the chart and the top cams are extras: if either query fails the totals still go out
       const [hourlyRows, topRows] = await Promise.all([
         ask(SQL_HOURLY, "zoo live widget hourly").catch(() => []),
@@ -112,6 +121,7 @@ export default {
         headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_SECONDS}` },
       });
       ctx.waitUntil(cache.put(key, res.clone()));
+      ctx.waitUntil(cache.put(lastKey, new Response(JSON.stringify(body), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=3600" } })));
     }
 
     const out = new Response(res.body, res);

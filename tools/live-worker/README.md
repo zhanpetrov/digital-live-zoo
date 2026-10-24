@@ -3,7 +3,7 @@
 The home page shows a "Live now" card under the header stats: people here now, a visitors-per-hour chart for the last 24 hours,
 visitors today and this week, hours watched, visitor countries, and the 3 most watched cams of the day (click one to put it on stage).
 The numbers come from PostHog, which needs a secret key, so a tiny Cloudflare Worker (`worker.js`)
-holds the key and hands the page only the totals. Answers are cached for 30 s.
+holds the key and hands the page only the totals. Answers are cached for 60 s; if PostHog fails to answer, the last good numbers are served.
 
 The page side is already live in `index.html` and stays hidden until `window.ZOO_LIVE.url` is set.
 It also sends a `zoo_here` heartbeat every 4 minutes while the tab is visible, so people who stay
