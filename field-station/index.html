@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Field Station · Digital Live Zoo</title>
+<meta name="description" content="Expeditions into 360° wild places: find animals and clues, answer field questions, then check what is happening right now on live animal cams.">
+<!-- test page: not linked from the home page yet and kept out of search until it is -->
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0b120e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Caveat:wght@600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<style>
+/* Field Station: the zoo's dark night-green world for the scenes, and a paper field journal beside them.
+   One deliberate look (like the rest of the site), so no light/dark switch. */
+:root{
+  --bg:#0b120e; --panel:#121d17; --panel-2:#18261e; --line:#24362b;
+  --fg:#e7eee4; --muted:#93a598; --faint:#5e7163;
+  --sign:#f2c230; --live:#ff4a3d; --day:#9fd36b; --night:#7aa2ff;
+  --paper:#f1f0e6; --paper-line:#dcdccb; --ink:#1d2a20; --ink-soft:#56614f; --mark:#c7392e;
+  --display:"Big Shoulders Stencil Display","Arial Narrow",Impact,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --hand:"Caveat","Bradley Hand","Segoe Print",cursive;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--sign);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.bar{display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap;padding-block:14px;border-bottom:1px solid var(--line)}
+.bar .home{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.bar .home:hover{color:var(--fg)}
+.word{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);margin-right:auto}
+.mode{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
+.mode button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;color:var(--muted)}
+.mode button[aria-pressed="true"]{background:var(--sign);color:#1d2a20}
+.mode-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+
+/* station home */
+.home-v{display:grid;gap:40px;padding-block:30px 60px}
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:end}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,9vw,110px);line-height:.85;margin:0;text-transform:uppercase;color:var(--sign)}
+.hero p{margin:12px 0 0;color:var(--muted);max-width:56ch;font-size:16px}
+.passport{background:var(--paper);color:var(--ink);border-radius:16px;padding:16px 18px;display:grid;gap:10px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 26px}
+.pp-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.pp-top b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.pp-top span{font-family:var(--hand);font-size:22px;color:var(--mark)}
+.stamps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.stamps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.stamp{aspect-ratio:1;max-width:100%;border:2px dashed var(--paper-line);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:6px;line-height:1.15}
+.stamp.got{border:3px solid var(--mark);color:var(--mark);transform:rotate(-8deg);font-weight:500;background:rgba(199,57,46,.06)}
+.stamp.got small{display:block;font-size:8px;margin-top:2px}
+.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sec-h h2{font-family:var(--display);font-weight:800;font-size:34px;margin:0;text-transform:uppercase}
+.sec-h span{color:var(--muted);font-size:14px}
+.exps{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.ex{display:grid;grid-template-rows:auto 1fr;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;padding:0}
+.ex .th{position:relative;aspect-ratio:2/1;max-width:100%;background:var(--panel-2)}
+.ex .th img{width:100%;height:100%;object-fit:cover;display:block}
+.ex .th.night{background:radial-gradient(circle at 72% 32%,#f1f0e6 0 9px,rgba(241,240,230,.25) 10px,transparent 26px),radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 40% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 58% 52%,#fff,transparent),radial-gradient(1px 1px at 85% 70%,#fff,transparent),radial-gradient(1px 1px at 12% 72%,#fff,transparent),linear-gradient(180deg,#0a1530,#132a20)}
+.ex .tag{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,18,14,.8);border-radius:999px;padding:3px 9px}
+.ex .bd{display:grid;gap:6px;padding:14px 16px 16px;align-content:start}
+.ex h3{margin:0;font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase}
+.ex p{margin:0;color:var(--muted);font-size:14px}
+.ex .go{margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sign)}
+button.ex{cursor:pointer;transition:border-color .15s,transform .15s}
+button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
+.ex.soon{opacity:.62}
+.ex.soon .go{color:var(--faint)}
+.credits{font-size:12.5px;color:var(--faint);max-width:80ch}
+.credits a{color:var(--muted)}
+
+/* expedition run */
+.run-v{display:grid;gap:14px;padding-block:16px 40px}
+.run-h{display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap}
+.back{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13.5px}
+.run-h h2{font-family:var(--display);font-weight:800;font-size:30px;margin:0;text-transform:uppercase;margin-right:auto}
+.dots{display:flex;gap:6px;align-items:center}
+.dots i{width:28px;height:6px;border-radius:3px;background:var(--line)}
+.dots i.done{background:var(--day)}
+.dots i.now{background:var(--sign)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+@media (max-width:980px){.stage{grid-template-columns:minmax(0,1fr)}}
+.view{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line)}
+@media (max-width:620px){.view{aspect-ratio:4/5;border-radius:14px}}
+#pano,.yt{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* binocular lens: darkened edges, a focus ring in the middle that fills while you hold steady */
+.lens{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 0 33%,rgba(0,0,0,.18) 45%,rgba(0,0,0,.62) 70%)}
+.ring{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;pointer-events:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .bgc{fill:none;stroke:rgba(255,255,255,.55);stroke-width:2}
+.ring .fg{fill:none;stroke:var(--sign);stroke-width:5;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240}
+.ring::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgba(255,255,255,.8)}
+.aim{position:absolute;left:50%;top:calc(50% + 54px);transform:translateX(-50%);font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:rgba(11,18,14,.78);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none}
+.arrow{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.arrow span{position:absolute;left:-14px;top:-118px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--sign);color:#1d2a20;font-weight:800;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.found-pin{width:22px;height:22px;border-radius:50%;border:3px solid var(--sign);background:rgba(242,194,48,.25);box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.view .credit{position:absolute;right:10px;bottom:10px;font-size:11px;color:#dfe6dc;background:rgba(11,18,14,.7);border-radius:6px;padding:3px 8px;max-width:70%}
+.view .credit a{color:#fff}
+.livebox{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,#1d3024,#0b120e 70%)}
+.livebox .lt{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--live);display:inline-flex;gap:8px;align-items:center}
+.livebox .lt i{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,74,61,.6);animation:ping 1.8s ease-out infinite}
+@keyframes ping{100%{box-shadow:0 0 0 14px rgba(255,74,61,0)}}
+.livebox h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:.95;margin:8px 0 6px;text-transform:uppercase}
+.livebox .clock{font-family:var(--mono);font-size:clamp(40px,6vw,64px);color:var(--sign);line-height:1}
+.livebox .sub{color:var(--muted);margin-top:8px}
+
+/* the field journal */
+.journal{background:var(--paper);color:var(--ink);border-radius:18px;padding:18px 18px 20px;display:grid;gap:14px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 28px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.j-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.journal h3{margin:0;font-family:var(--display);font-weight:800;font-size:30px;line-height:.95;text-transform:uppercase;color:var(--ink)}
+.j-intro{margin:0;font-size:15px}
+.tasks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tasks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;font-size:14.5px}
+.tasks li::before{content:"";width:16px;height:16px;margin-top:3px;border:2px solid var(--ink-soft);border-radius:4px}
+.tasks li.ok::before{background:var(--ink);border-color:var(--ink);box-shadow:inset 0 0 0 3px var(--paper)}
+.tasks li.ok{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--mark)}
+.tasks li.cur{font-weight:700}
+.card{border:2px solid var(--ink);border-radius:12px;padding:12px 14px;background:var(--paper);display:grid;gap:6px;position:relative}
+.card b{font-size:15.5px}
+.card p{margin:0;font-size:14.5px}
+.card .sci{font-style:italic;color:var(--ink-soft);font-size:13px}
+.card .hand{position:absolute;right:12px;top:6px;font-family:var(--hand);font-size:24px;color:var(--mark);transform:rotate(-6deg)}
+.q{display:grid;gap:8px}
+.q > b{font-size:15px}
+.opts{display:grid;gap:6px}
+.opts button{text-align:left;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:10px;padding:8px 12px;font-weight:600;font-size:14px}
+.opts button:hover{background:rgba(29,42,32,.06)}
+.opts button.right{background:#dfeccf;border-color:#3f7a22}
+.opts button.wrong{background:#f4d9d4;border-color:var(--mark);text-decoration:line-through}
+.opts button:disabled{cursor:default}
+.fb{margin:0;font-size:14px}
+.fb .hand{font-family:var(--hand);font-size:22px;color:var(--mark);margin-right:4px}
+.j-actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block}
+.btn.main{background:var(--ink);color:var(--paper)}
+.btn:disabled{opacity:.4;cursor:default}
+.hintb{border:0;background:transparent;color:var(--ink-soft);text-decoration:underline;font-size:13px;padding:0;justify-self:start}
+.done-box{display:grid;gap:10px;justify-items:start}
+.big-stamp{width:150px;height:150px;border:4px solid var(--mark);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--mark);font-family:var(--display);font-weight:800;font-size:24px;line-height:.95;text-transform:uppercase;transform:rotate(-10deg);padding:14px;animation:stampin .5s cubic-bezier(.2,1.6,.4,1)}
+.big-stamp small{display:block;font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;margin-top:6px}
+@keyframes stampin{from{transform:rotate(-10deg) scale(1.8);opacity:0}}
+@media (prefers-reduced-motion:reduce){.big-stamp,.livebox .lt i{animation:none}button.ex{transition:none}}
+.pnlm-load-box{background:rgba(11,18,14,.85)!important}
+</style>
+<script>
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"https://us.i.posthog.com", defaults:"2025-05-24", person_profiles:"identified_only"});
+</script>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <a class="home" href="/">← Digital Live Zoo</a>
+    <span class="word">Field Station</span>
+    <span class="mode-l" id="modeL">Field level</span>
+    <div class="mode" role="group" aria-labelledby="modeL">
+      <button type="button" data-mode="junior" aria-pressed="true">Junior</button>
+      <button type="button" data-mode="pro" aria-pressed="false">Pro</button>
+    </div>
+  </header>
+
+  <main class="home-v" id="homeV">
+    <section class="hero">
+      <div>
+        <h1>Field Station</h1>
+        <p>Pick an expedition. Look around real wild places in 360°, find what lives there, answer the field questions, then check on the animals live, right now. Junior keeps it simple and gives you hints; Pro gives you the science.</p>
+      </div>
+      <div class="passport" aria-label="Your passport">
+        <div class="pp-top"><b>Explorer passport</b><span id="rank">Cub</span></div>
+        <div class="stamps" id="stamps"></div>
+      </div>
+    </section>
+    <section style="display:grid;gap:16px">
+      <div class="sec-h"><h2>Expeditions</h2><span>Waterhole is open. The others are being prepared.</span></div>
+      <div class="exps" id="exps"></div>
+    </section>
+    <p class="credits">360° photo: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Quiver Tree Forest</a> by Reinhard Kraasch, CC BY-SA 4.0. 360° videos play from their owners' YouTube channels: National Geographic and Wildlife Protection Solutions. Weather near the live cam: MET Norway. Your progress stays in this browser.</p>
+  </main>
+
+  <main class="run-v" id="runV" hidden>
+    <div class="run-h">
+      <button class="back" type="button" id="backBtn">← Station</button>
+      <h2 id="runName"></h2>
+      <div class="dots" id="dots" aria-label="Stops"></div>
+    </div>
+    <div class="stage">
+      <div class="view" id="view"></div>
+      <aside class="journal" id="journal" aria-live="polite"></aside>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+<script src="/assets/wx.js"></script>
+<script>
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const track = (ev, p) => { try{ window.posthog && posthog.capture(ev, p || {}); }catch(e){} };
+  const store = {
+    get(k, d){ try{ const v = localStorage.getItem("fs-" + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+    set(k, v){ try{ localStorage.setItem("fs-" + k, JSON.stringify(v)); }catch(e){} }
+  };
+  let mode = store.get("mode", "junior");
+  const T = x => (x && typeof x === "object" && !Array.isArray(x)) ? (x[mode] || x.junior) : x;   // text for the field level
+
+  // ---------- expeditions ----------
+  const EXPS = [
+    {id:"waterhole", name:"Waterhole", img:"img/quiver.jpg", open:true,
+     blurb:"Namibian desert, Botswana's flooded delta, lions at rest. Ends at a live waterhole in the Namib.",
+     stops:[
+      {type:"spot", title:"Quiver Tree Forest", place:"Near Keetmanshoop, Namibia",
+       pano:"scenes/quiver.jpg", yaw:-37, pitch:4,
+       credit:'<a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0',
+       intro:{junior:"Drag to look around (or tilt your phone). When something on your list is in the middle of the lens, hold still until the ring fills up.",
+              pro:"Survey the site. Centre each feature in the lens and hold steady to log it. Hints only on request."},
+       targets:[
+        {id:"tree", yaw:-37.3, pitch:22, tol:11,
+         task:{junior:"Find the biggest quiver tree", pro:"Log the largest Aloidendron dichotomum"},
+         name:"Quiver tree", sci:"Aloidendron dichotomum",
+         fact:{junior:"It is not really a tree: it is a giant aloe! Its trunk is spongy and stores water, and the white powder on its branches reflects the hot sun. San hunters hollowed out its light branches to make quivers for their arrows.",
+               pro:"A tree aloe of southern Namibia and the Northern Cape. The fibrous trunk stores water and the branches carry a reflective white bloom. Long-term surveys found populations dying back in the hotter north of the range and holding up in the south and on higher ground, one of the first plants shown shifting its range as the climate warms."}},
+        {id:"rocks", yaw:-147.8, pitch:-15.5, tol:12,
+         task:{junior:"Find the pile of black rocks", pro:"Log the dark boulder field"},
+         name:"Dolerite boulders", sci:"Karoo dolerite, about 180 million years old",
+         fact:{junior:"These black rocks were hot liquid rock long ago, before dinosaurs like T. rex lived. They soak up the sun and stay warm, so lizards and rock hyraxes (dassies) love to sit on them.",
+               pro:"Jurassic dolerite intruded as the Karoo basalts erupted, then weathered into rounded boulders. The dark rock heats fast and holds heat into the night, a key microhabitat for basking reptiles and for rock hyraxes, which regulate body temperature poorly and rely on sun-warmed rock."}},
+        {id:"grass", yaw:72, pitch:-25.8, tol:12,
+         task:{junior:"Find a green plant on the ground", pro:"Log the perennial grass tuft"},
+         name:"Desert grass", sci:"A drought-tolerant bunch grass",
+         fact:{junior:"Grass in the desert! Its roots spread out wide just under the ground to catch every drop of rain. After a storm the whole plain can turn green for a few weeks.",
+               pro:"Desert bunch grasses survive on shallow, wide root systems that capture brief rain pulses, and go dormant between them. They are the base of the food web here: insects, rodents, oryx and springbok all depend on them."}},
+        {id:"sun", yaw:-172.3, pitch:25.7, tol:13,
+         task:{junior:"Find the sun", pro:"Log the sun's position"},
+         name:"Low sun, long shadows", sci:"Late afternoon",
+         fact:{junior:"The sun is low and the shadows are long, so it is late afternoon. In the hot middle of the day most desert animals hide in the shade. They come out to eat and drink when it cools down, so waterholes are busiest at dawn and dusk.",
+               pro:"Long shadows put this in the late afternoon. Many arid-zone mammals are crepuscular: they avoid the midday heat load and forage and drink in the cooler hours, which is why waterhole cams are busiest around sunrise and sunset."}},
+        {id:"forest", yaw:128.6, pitch:5.1, tol:11,
+         task:{junior:"Find the forest on the horizon", pro:"Log the stand on the horizon"},
+         name:"The Quiver Tree Forest", sci:"About 250 trees, protected since 1955",
+         fact:{junior:"Quiver trees usually grow alone, far apart. Here about 250 of them grow together, so people call it a forest. It has been a protected national monument since 1955.",
+               pro:"Unusually dense for a species that normally grows scattered: roughly 250 trees on the Gariganus farm, a national monument since 1955. Stands like this help researchers track age structure and die-off over decades."}}
+       ]},
+      {type:"watch", title:"Elephants at a waterhole", place:"Southern Africa", yt:"1vt9OpFx070", by:"Wildlife Protection Solutions",
+       intro:{junior:"Press play, then drag the video to look all around you. The elephants are behind you too!", pro:"Play, then pan the full sphere: note how the herd is spaced and what each animal is doing."},
+       questions:[
+        {q:{junior:"Why do elephants throw mud and water over their skin?", pro:"Why do elephants coat themselves in mud?"},
+         opts:["To clean their tusks","Sunscreen and to stay cool","To scare away lions"], a:1,
+         fact:{junior:"Elephants have no sweat glands like ours. A coat of mud works like sunscreen, keeps insects off, and cools them as it dries.",
+               pro:"With few sweat glands, elephants rely on evaporation from wetted skin; the cracked skin surface holds moisture, and dried mud blocks UV and biting insects."}},
+        {q:{junior:"How much water can one adult elephant drink in a day?", pro:"Big ears help elephants…"},
+         opts:{junior:["About 2 litres","About 20 litres","Up to 200 litres"], pro:["Hear lions far away","Lose heat","Store water"]},
+         a:{junior:2, pro:1},
+         fact:{junior:"Up to about 200 litres, more than a bathtub! That is why elephants never stay far from water in the dry season.",
+               pro:"Both, but mainly heat. The ears are full of blood vessels; flapping them cools the blood, which can be several degrees cooler when it returns to the body."}}
+       ]},
+      {type:"watch", title:"The Okavango Delta", place:"Botswana", yt:"HI7mTIxNotQ", by:"National Geographic",
+       intro:{junior:"A river that never reaches the sea! Watch the elephants walk through the delta and look all around.", pro:"Watch for how the herd uses the channels, and look for other species in the frame."},
+       questions:[
+        {q:{junior:"The Okavango floods in the dry season, when it hardly rains. Where does the water come from?", pro:"The Okavango's flood peaks in the dry winter months. Why?"},
+         opts:["From the sea","From rain in the mountains of Angola, months earlier","From underground lakes"], a:1,
+         fact:{junior:"The rain falls far away in Angola. The water flows slowly for months and arrives just when the land is driest, so animals come from all around.",
+               pro:"Summer rain on the Angolan highlands takes roughly four months to travel down the river and spread across the flat delta, so the flood peaks in the dry season, exactly when surrounding water sources fail."}}
+       ]},
+      {type:"watch", title:"Lions at rest", place:"Africa", yt:"sPyAQQklc1s", by:"National Geographic",
+       intro:{junior:"Lions all around you! Turn slowly and count them.", pro:"Pan the full sphere and note the pride's resting positions."},
+       questions:[
+        {q:{junior:"How long do lions sleep or rest each day?", pro:"Lions rest for most of the day. About how long?"},
+         opts:["About 4 hours","About 8 hours","16 to 20 hours"], a:2,
+         fact:{junior:"Up to 20 hours! Hunting takes a lot of energy, so they save it in the hot daytime and hunt mostly at night.",
+               pro:"Around 16 to 20 hours. Short, high-energy hunts, mostly at night, are paid for with long rests through the heat of the day."}},
+        {q:{junior:"When are lions most likely to visit the waterhole?", pro:"When are lions most likely to hunt near water?"},
+         opts:["At midday, in the heat","At dusk and at night","Only when it rains"], a:1,
+         fact:{junior:"At dusk and at night, when it is cool and when other animals come to drink.", pro:"Dusk and night: prey congregates at water as it cools, and darkness favours the ambush hunter."}}
+       ]},
+      {type:"live", title:"Live check: Namib waterhole", place:"Garub, Namibia", slug:"namib-desert-waterhole", fallbackId:"ydYDqZQpim8", tz:"Africa/Windhoek",
+       intro:{junior:"This waterhole is real, and it is live right now. What is happening there?", pro:"Use the live data to predict what the cam shows, then check."}}
+     ]},
+    {id:"reef", name:"Coral reef", img:"img/heron.jpg", blurb:"Great Barrier Reef bommies and a Red Sea dive. Ends at the Utila reef cams."},
+    {id:"coast", name:"Penguin coast", img:"img/texel.jpg", blurb:"Penguins in Africa and footprints on a Dutch beach. Ends at the Stony Point colony."},
+    {id:"polar", name:"Polar", img:"img/abisko.jpg", blurb:"Seals, king penguins and polar bears. Ends at the Cape Churchill cam."},
+    {id:"rainforest", name:"Rainforest", img:"img/amazon.jpg", blurb:"From the forest floor to the canopy. Ends with the GRACE gorillas live."},
+    {id:"night", name:"Night shift", img:null, blurb:"Only opens when it is night at the cams: bats, owls and badgers."}
+  ];
+  const RANKS = [[0,"Cub"],[1,"Tracker"],[3,"Ranger"],[6,"Field Scientist"]];
+
+  // ---------- station home ----------
+  function renderHome(){
+    const got = store.get("stamps", {});
+    const n = Object.keys(got).length;
+    $("rank").textContent = RANKS.filter(r => n >= r[0]).pop()[1];
+    $("stamps").innerHTML = EXPS.map(x => got[x.id]
+      ? `<div class="stamp got">${esc(x.name)}<small>${esc(got[x.id])}</small></div>`
+      : `<div class="stamp">${esc(x.name)}</div>`).join("");
+    $("exps").innerHTML = EXPS.map(x => {
+      const th = x.img ? `<img src="${x.img}" alt="" loading="lazy" width="480" height="240">` : "";
+      const tag = x.open ? (got[x.id] ? "Done · play again" : `${x.stops.length} stops`) : "Coming soon";
+      let inner = `<span class="th">${th}<span class="tag">${tag}</span></span><span class="bd"><h3>${esc(x.name)}</h3><p>${esc(x.blurb)}</p><span class="go">${x.open ? "Start expedition →" : "Being prepared"}</span></span>`;
+      if(!x.img) inner = inner.replace('<span class="th">', '<span class="th night">');
+      return x.open ? `<button type="button" class="ex" data-exp="${x.id}">${inner}</button>` : `<div class="ex soon">${inner}</div>`;
+    }).join("");
+  }
+  $("exps").addEventListener("click", e => { const b = e.target.closest("[data-exp]"); if(b) start(b.dataset.exp); });
+
+  // ---------- field level ----------
+  function setMode(m){
+    mode = m; store.set("mode", m);
+    document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
+    track("fs_mode", {mode: m});
+    if(run) renderStop(false);
+  }
+  document.querySelectorAll(".mode button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
+  document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+
+  // ---------- running an expedition ----------
+  let run = null, viewer = null, loop = 0;
+  function start(id){
+    const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
+    run = {x, i:0, found:{}, answered:{}};
+    $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = x.name;
+    track("fs_start", {exp: id, mode});
+    renderStop(true); window.scrollTo({top: 0});
+  }
+  $("backBtn").addEventListener("click", () => { teardown(); run = null; $("runV").hidden = true; $("homeV").hidden = false; renderHome(); });
+  function teardown(){ cancelAnimationFrame(loop); if(viewer){ try{ viewer.destroy(); }catch(e){} viewer = null; } $("view").innerHTML = ""; }
+
+  function dots(){
+    $("dots").innerHTML = run.x.stops.map((s, k) => `<i class="${k < run.i ? "done" : k === run.i ? "now" : ""}" title="${esc(s.title)}"></i>`).join("");
+  }
+  // rebuild = load the scene again (new stop); otherwise only the journal text changes (field level switch)
+  function renderStop(rebuild){
+    const s = run.x.stops[run.i];
+    dots();
+    if(rebuild){ teardown(); ({spot: buildSpot, watch: buildWatch, live: buildLive})[s.type](s); }
+    ({spot: journalSpot, watch: journalWatch, live: journalLive})[s.type](s);
+  }
+  function nextBtn(ok){
+    const last = run.i === run.x.stops.length - 1;
+    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button></div>`;
+  }
+  $("journal").addEventListener("click", e => {
+    if(e.target.id === "nextBtn"){ advance(); return; }
+    if(e.target.id === "hintBtn"){ run.hint = true; e.target.remove(); return; }
+    const o = e.target.closest("[data-q]"); if(o) answer(+o.dataset.q, +o.dataset.o);
+  });
+  function advance(){
+    track("fs_stop_done", {exp: run.x.id, stop: run.i, mode});
+    if(run.i < run.x.stops.length - 1){ run.i++; run.hint = false; renderStop(true); $("view").scrollIntoView({behavior:"smooth", block:"start"}); }
+    else finish();
+  }
+  function finish(){
+    const got = store.get("stamps", {});
+    const d = new Date().toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric"});
+    got[run.x.id] = d; store.set("stamps", got);
+    track("fs_finish", {exp: run.x.id, mode});
+    teardown(); run.i = run.x.stops.length; dots();
+    $("view").innerHTML = `<div class="livebox"><div><span class="lt">Expedition complete</span><h3>${esc(run.x.name)}</h3><div class="sub">Stamp added to your passport.</div></div></div>`;
+    const n = Object.keys(got).length, rank = RANKS.filter(r => n >= r[0]).pop()[1];
+    $("journal").innerHTML = `<p class="j-k">Field journal · expedition complete</p>
+      <div class="done-box"><div class="big-stamp">${esc(run.x.name)}<small>${esc(d)}</small></div>
+      <p class="j-intro">You found every clue and answered every field question. Your rank: <b>${esc(rank)}</b>.</p>
+      <div class="j-actions"><button class="btn main" type="button" id="toStation">Back to the station</button></div></div>`;
+    $("toStation").addEventListener("click", () => $("backBtn").click());
+  }
+
+  // ---------- stop type 1: spot it in a 360° photo ----------
+  const R2D = 180 / Math.PI;
+  function angDist(y1, p1, y2, p2){
+    const r = Math.PI / 180, c = Math.sin(p1*r)*Math.sin(p2*r) + Math.cos(p1*r)*Math.cos(p2*r)*Math.cos((y1 - y2)*r);
+    return Math.acos(Math.max(-1, Math.min(1, c))) * R2D;
+  }
+  function buildSpot(s){
+    $("view").innerHTML = `<div id="pano"></div><div class="lens"></div>
+      <div class="ring"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="bgc" cx="42" cy="42" r="38"/><circle class="fg" id="ringFg" cx="42" cy="42" r="38"/></svg></div>
+      <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">Look around</div>
+      <div class="credit">360° photo: ${s.credit}</div>`;
+    viewer = pannellum.viewer("pano", {type:"equirectangular", panorama:s.pano, autoLoad:true, yaw:s.yaw, pitch:s.pitch, hfov:95,
+      minHfov:40, maxHfov:110, showFullscreenCtrl:true, showZoomCtrl:true, compass:false, keyboardZoom:true, mouseZoom:true, friction:0.2});
+    s.targets.forEach(t => { if(run.found[t.id]) pin(t); });
+    let holdId = null, holdStart = 0;
+    const C = 2 * Math.PI * 38;
+    const step = () => {
+      loop = requestAnimationFrame(step);
+      if(!viewer || !viewer.isLoaded || !viewer.isLoaded()) return;
+      const y = viewer.getYaw(), p = viewer.getPitch();
+      const open = s.targets.filter(t => !run.found[t.id]);
+      let near = null, nd = 999;
+      open.forEach(t => { const d = angDist(y, p, t.yaw, t.pitch); if(d < nd){ nd = d; near = t; } });
+      const fg = $("ringFg"), aim = $("aim"), arrow = $("arrow");
+      if(!fg) return;
+      if(near && nd < near.tol){
+        if(holdId !== near.id){ holdId = near.id; holdStart = performance.now(); }
+        const k = Math.min(1, (performance.now() - holdStart) / 1100);
+        fg.style.strokeDashoffset = String(C * (1 - k));
+        aim.textContent = k < 1 ? "Hold steady…" : "Logged!";
+        if(k >= 1){ found(s, near); holdId = null; }
+      } else {
+        holdId = null; fg.style.strokeDashoffset = String(C);
+        aim.textContent = open.length ? "Look around" : "All found";
+      }
+      // hint arrow toward the nearest unfound target: always for Junior, after "Hint" for Pro
+      if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
+        let dy = ((near.yaw - y + 540) % 360) - 180, dp = near.pitch - p;
+        const ang = Math.atan2(dy, dp) * R2D;
+        arrow.hidden = false; arrow.style.transform = `rotate(${ang}deg)`;
+      } else arrow.hidden = true;
+    };
+    loop = requestAnimationFrame(step);
+  }
+  function pin(t){
+    try{ viewer.addHotSpot({id:t.id, pitch:t.pitch, yaw:t.yaw, cssClass:"found-pin", createTooltipFunc:(div) => { div.title = t.name; }}); }catch(e){}
+  }
+  function found(s, t){
+    run.found[t.id] = true; run.last = t.id; pin(t);
+    track("fs_found", {exp: run.x.id, target: t.id, mode});
+    journalSpot(s);
+  }
+  function journalSpot(s){
+    const all = s.targets.every(t => run.found[t.id]);
+    const last = run.last && s.targets.find(t => t.id === run.last && run.found[t.id]);
+    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
+      <p class="j-intro">${esc(T(s.intro))}</p>
+      <ul class="tasks">${s.targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(T(t.task))}</li>`).join("")}</ul>
+      ${mode === "pro" && !run.hint && !all ? `<button class="hintb" type="button" id="hintBtn">Show me which way to look</button>` : ""}
+      ${last ? `<div class="card"><span class="hand">found it!</span><b>${esc(last.name)}</b><span class="sci">${esc(last.sci)}</span><p>${esc(T(last.fact))}</p></div>` : ""}
+      ${nextBtn(all)}`;
+  }
+
+  // ---------- stop type 2: watch a 360° video, answer field questions ----------
+  function buildWatch(s){
+    const src = `https://www.youtube.com/embed/${s.yt}?playsinline=1&rel=0&modestbranding=1`;
+    $("view").innerHTML = `<iframe class="yt" src="${src}" title="${esc(s.title)}, 360° video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  }
+  function pickOf(v){ return Array.isArray(v) ? v : (v[mode] || v.junior); }
+  function ansOf(q){ return typeof q.a === "number" ? q.a : (q.a[mode] ?? q.a.junior); }
+  function journalWatch(s){
+    const qs = s.questions.map((q, k) => {
+      const key = run.i + ":" + k + ":" + mode, got = run.answered[key];
+      const opts = pickOf(q.opts), a = ansOf(q);
+      const bt = opts.map((o, j) => {
+        const cls = got === undefined ? "" : (j === a ? "right" : (j === got ? "wrong" : ""));
+        return `<button type="button" data-q="${k}" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
+      }).join("");
+      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
+      return `<div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
+    }).join("");
+    const done = s.questions.every((q, k) => run.answered[run.i + ":" + k + ":" + mode] !== undefined);
+    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · ${esc(s.place)} · 360° video by ${esc(s.by)}</p><h3>${esc(s.title)}</h3>
+      <p class="j-intro">${esc(T(s.intro))}</p>${qs}${nextBtn(done)}`;
+  }
+  function answer(k, o){
+    const s = run.x.stops[run.i];
+    if(s.type === "live"){ run.answered["live:" + mode] = o; track("fs_answer", {exp: run.x.id, stop: run.i, q: "live", ok: o === run.liveA}); journalLive(s); return; }
+    const key = run.i + ":" + k + ":" + mode; if(run.answered[key] !== undefined) return;
+    run.answered[key] = o;
+    track("fs_answer", {exp: run.x.id, stop: run.i, q: k, ok: o === ansOf(s.questions[k]), mode});
+    journalWatch(s);
+  }
+
+  // ---------- stop type 3: live check at a real cam ----------
+  let liveTick = 0;
+  function liveState(s){
+    const W = window.ZooWx, now = new Date();
+    const time = now.toLocaleTimeString("en-GB", {timeZone: s.tz, hour: "2-digit", minute: "2-digit"});
+    let night = null, wx = "";
+    const r = W && W.at(s.slug);
+    if(r && r.place){
+      const sun = W.sun(r.place.lat, r.place.lon, now);
+      night = sun.polar ? sun.polar === "night" : !(now >= sun.rise && now < sun.set);
+      if(r.w && r.d) wx = `${r.d.icon} ${r.d.text} · ${W.temp(r.w.t, true)} · wind ${W.wind(r.w.ws)}`;
+    }
+    if(night === null){ const h = +time.slice(0, 2); night = h < 6 || h >= 19; }
+    return {time, night, wx};
+  }
+  function buildLive(s){
+    const st = liveState(s);
+    $("view").innerHTML = `<div class="livebox"><div><span class="lt"><i aria-hidden="true"></i>Live now</span><h3>${esc(s.title.replace("Live check: ", ""))}</h3>
+      <div class="clock" id="lvClock">${esc(st.time)}</div><div class="sub" id="lvSub">${esc(s.place)} · ${st.night ? "night" : "daytime"}${st.wx ? " · " + esc(st.wx) : ""}</div></div></div>`;
+    clearInterval(liveTick);
+    liveTick = setInterval(() => { const c = $("lvClock"); if(!c){ clearInterval(liveTick); return; } c.textContent = liveState(s).time; }, 20000);
+    // the cam's current YouTube id (owners restart streams, the slug stays the same)
+    run.liveId = s.fallbackId;
+    fetch("/slugs.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(m => {
+      if(!m) return; const id = Object.keys(m).find(k => m[k] === s.slug); if(id){ run.liveId = id; const a = $("liveLink"); if(a) a.href = "/#" + id; }
+    }).catch(() => {});
+    if(window.ZooWx) ZooWx.ready.then(() => { if(run && run.x.stops[run.i] === s){ const st2 = liveState(s); const sub = $("lvSub"); if(sub) sub.textContent = `${s.place} · ${st2.night ? "night" : "daytime"}${st2.wx ? " · " + st2.wx : ""}`; journalLive(s); } });
+  }
+  function journalLive(s){
+    const st = liveState(s);
+    const q = st.night
+      ? {q:{junior:`It is ${st.time} and dark at this waterhole. Who is most likely to visit now?`, pro:`Local time ${st.time}, after sunset. Which visitors does the cam most likely show?`},
+         opts:["Nobody: every animal is asleep","Spotted hyenas or jackals checking the water","Wild horses grazing in the midday sun"], a:1,
+         fact:{junior:"Hyenas and jackals are night hunters. At Garub they even wait near the water for the wild horses. Look for glowing eyes on the night camera!",
+               pro:"Spotted hyenas are the main nocturnal visitors at Garub and a known predator of the feral horses' foals; black-backed jackals scavenge around the trough. The infrared camera shows them as pale shapes with bright eyeshine."}}
+      : {q:{junior:`It is ${st.time} and daytime at this waterhole. Who is most likely to visit now?`, pro:`Local time ${st.time}, daylight. Which visitors does the cam most likely show?`},
+         opts:["Penguins","Wild horses, oryx or ostriches coming to drink","Nobody: it is far too hot for anything"], a:1,
+         fact:{junior:"The famous wild horses of the Namib drink here, and so do oryx (gemsbok) and ostriches. They can go a long time without water, but they come back to this trough again and again.",
+               pro:"The feral horses of Garub, descended from horses left in the area in the early 1900s, depend on this trough; gemsbok (oryx) and ostriches use it too. Visits cluster in the cooler morning and late afternoon."}};
+    run.liveA = q.a;
+    const got = run.answered["live:" + mode];
+    const bt = q.opts.map((o, j) => {
+      const cls = got === undefined ? "" : (j === q.a ? "right" : (j === got ? "wrong" : ""));
+      return `<button type="button" data-q="0" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
+    }).join("");
+    const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === q.a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
+    const link = `/#${run.liveId || s.fallbackId}`;
+    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · live · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
+      <p class="j-intro">${esc(T(s.intro))}</p>
+      <div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>
+      ${got !== undefined ? `<div class="j-actions"><a class="btn" id="liveLink" href="${link}" target="_blank" rel="noopener">Check it live on the Main Stage ↗</a></div>` : ""}
+      ${nextBtn(got !== undefined)}`;
+  }
+
+  renderHome();
+})();
+</script>
+</body>
+</html>
