@@ -63,8 +63,12 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 .hero{flex:1 1 640px;min-width:0;display:grid;grid-template-columns:minmax(0,1.35fr) auto auto;grid-template-areas:"brand now kpis" "brand chart chart";gap:16px 30px;align-items:center;padding:22px 24px;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:20px}
 .hero-brand{grid-area:brand;min-width:0}
 .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.2vw,74px);line-height:.9;letter-spacing:.02em;margin:0;color:var(--sign);text-transform:uppercase}
-.hero-brand p{margin:10px 0 0;color:var(--muted);max-width:60ch;font-size:14.5px}
-.hero-brand .sections{margin-top:14px}
+/* intro under the Main Stage: what the zoo is, cam counts, browse links */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 28px;align-items:center;padding:4px 2px}
+.intro p{margin:0;color:var(--muted);max-width:68ch;font-size:14.5px;grid-row:span 2}
+.intro .stats{margin:0;justify-content:flex-end}
+.intro .sections{margin:0;justify-content:flex-end}
+@media (max-width:900px){.intro{grid-template-columns:minmax(0,1fr)}.intro p{grid-row:auto}.intro .stats,.intro .sections{justify-content:flex-start}}
 .live-now{grid-area:now;display:grid;gap:4px;min-width:150px;align-self:end}
 .live-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--live);text-transform:uppercase}
 .live-tag i{position:relative;width:8px;height:8px;border-radius:50%;background:var(--live)}
@@ -91,6 +95,35 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
   .live-big b{font-size:48px}
   .live-kpis{grid-template-columns:repeat(4,auto);justify-content:space-between;gap:8px 12px}.live-kpis dd{font-size:21px}
 }
+/* zoo map (MapLibre + OpenFreeMap tiles, loaded when it scrolls into view) */
+.zoomap{display:grid;gap:12px}
+.map-wrap{position:relative;height:440px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0d1511}
+#map{position:absolute;inset:0}
+.map-wait{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+@media (max-width:700px){.map-wrap{height:330px;border-radius:14px}}
+.map-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:12.5px;color:var(--muted)}
+.map-legend li{display:inline-flex;align-items:center;gap:6px}
+.map-legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.map-legend .k-stage{background:var(--live);box-shadow:0 0 0 3px rgba(255,74,61,.35)}
+.map-legend .map-count{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+.stage-pin{width:16px;height:16px;border-radius:50%;background:var(--live);border:2px solid #fff;box-shadow:0 0 0 0 rgba(255,74,61,.7);animation:pinpulse 1.8s ease-out infinite}
+@keyframes pinpulse{0%{box-shadow:0 0 0 0 rgba(255,74,61,.7)}100%{box-shadow:0 0 0 18px rgba(255,74,61,0)}}
+@media (prefers-reduced-motion:reduce){.stage-pin{animation:none}}
+.maplibregl-popup-content{background:var(--panel-2)!important;color:var(--fg);border:1px solid var(--line);border-radius:12px!important;padding:10px 12px!important;font-family:var(--body);box-shadow:0 10px 30px rgba(0,0,0,.45)!important}
+.maplibregl-popup-tip{border-top-color:var(--panel-2)!important;border-bottom-color:var(--panel-2)!important}
+.maplibregl-popup-close-button{color:var(--muted);font-size:18px;padding:0 6px}
+.mp{display:grid;gap:3px;min-width:180px;max-width:250px}
+.mp b{font-size:14px;line-height:1.2}
+.mp small{color:var(--muted);font-size:12px}
+.mp button{margin-top:6px;justify-self:start;background:var(--sign);color:#1d2a20;border:0;border-radius:999px;padding:5px 12px;font-weight:700;font-size:12.5px}
+.mp-list{display:grid;gap:2px;max-height:220px;overflow:auto;margin-top:4px}
+.mp-list button{margin:0;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:8px;text-align:left;font-weight:600;padding:5px 8px;justify-self:stretch}
+.mp-list button:hover{border-color:var(--sign)}
+.maplibregl-ctrl-group{background:var(--panel-2)!important;border:1px solid var(--line)}
+.maplibregl-ctrl-group button+button{border-top:1px solid var(--line)!important}
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon{filter:invert(1)}
+.maplibregl-ctrl-attrib{background:rgba(11,18,14,.75)!important;color:var(--faint)}
+.maplibregl-ctrl-attrib a{color:var(--muted)!important}
 /* most watched today: a row of cards under the Main Stage */
 .topcams{display:grid;gap:12px}
 .topcams-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
@@ -277,9 +310,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     <section class="hero" id="liveNow" aria-label="Digital Live Zoo">
       <div class="hero-brand">
         <h1>Digital Live Zoo</h1>
-        <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
-        <div class="stats" id="stats"><span>Opening the zoo…</span></div>
-        <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a></nav>
       </div>
       <div class="live-now" data-live hidden>
         <span class="live-tag"><i aria-hidden="true"></i>Live now</span>
@@ -348,9 +378,25 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     </div>
   </section>
 
+  <section class="intro" aria-label="About the zoo">
+    <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
+    <div class="stats" id="stats"><span>Opening the zoo…</span></div>
+    <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a></nav>
+  </section>
+
   <section class="topcams" id="lvTopWrap" aria-labelledby="topcamsH" hidden>
     <div class="topcams-head"><h2 id="topcamsH">Most watched today</h2><span>What people on the zoo watched most in the last 24 hours. Pick one to put it on the Main Stage.</span></div>
     <div class="topcams-grid" id="lvTop"></div>
+  </section>
+
+  <section class="zoomap" id="zooMap" aria-labelledby="mapH">
+    <div class="topcams-head"><h2 id="mapH">Zoo map</h2><span>Every cam on the planet. The shaded half of the world is in night right now. Pick a dot to put that cam on the Main Stage.</span></div>
+    <div class="map-wrap"><div id="map" role="region" aria-label="Map of the cams"></div><p class="map-wait" id="mapWait">Loading the map…</p></div>
+    <ul class="map-legend" aria-label="Map key">
+      <li><i class="k-stage"></i>On stage</li><li><i style="background:var(--day)"></i>Daytime</li><li><i style="background:var(--night)"></i>Night</li>
+      <li><i style="background:var(--live)"></i>Action now</li><li><i style="background:var(--sign)"></i>Trending</li><li><i style="background:var(--faint)"></i>Off air</li>
+      <li class="map-count" id="mapCount"></li>
+    </ul>
   </section>
 
   <section class="filters" aria-label="Filters">
@@ -826,6 +872,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     grid.appendChild($("empty")); $("empty").hidden = vis.length>0;
     $("count").textContent = vis.length+" of "+CAMS.length;
     $("topWall").disabled = !vis.length;
+    mapRefresh();
   }
   function updateClocks(){
     CAMS.forEach(c=>{
@@ -845,7 +892,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
     $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
     $("stWhy").textContent = stage.why;
-    updateClocks(); renderWx(); if(refreshTop) refreshTop();
+    updateClocks(); renderWx(); if(refreshTop) refreshTop(); mapFollow();
   }
 
   // ---------- weather near the cams (assets/wx.js: MET Norway via the zoo-live Worker) ----------
@@ -1064,6 +1111,111 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   });
   document.addEventListener("fullscreenchange", fsChanged);
   document.addEventListener("webkitfullscreenchange", fsChanged);
+
+  // ---------- zoo map ----------
+  // MapLibre GL (cdnjs) with OpenFreeMap's free dark tiles, loaded only when the map scrolls into view.
+  // Dots come from data/geo.json (via assets/wx.js), coloured like the rest of the zoo; the night side of the
+  // planet is shaded and redrawn every few minutes. A dot click puts that cam on the Main Stage.
+  const MAPLIBRE = "https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/";
+  const MP = {map: null, ready: false, pin: null, touched: 0, popup: null};
+  const DOT = {trend: "#f2c230", action: "#ff4a3d", off: "#5e7163", night: "#7aa2ff", day: "#9fd36b"};
+  function camState(c){ return flagged(c.id, "x") ? "off" : flagged(c.id, "t") ? "trend" : flagged(c.id, "a") ? "action" : (local(c.tz).dp === "night" ? "night" : "day"); }
+  function mapPoints(){
+    const W = window.ZooWx, feats = [], list = visible();
+    if(W) list.forEach(c => { const p = W.place(SLUGS[c.id]); if(p) feats.push({type: "Feature", geometry: {type: "Point", coordinates: [p.lon, p.lat]}, properties: {id: c.id, st: camState(c)}}); });
+    $("mapCount").textContent = `${feats.length} of ${list.length} cams on the map`;
+    return {type: "FeatureCollection", features: feats};
+  }
+  // the night half of the planet as a polygon (low-precision sun position, plenty for a world map)
+  function nightShape(date){
+    const rad = Math.PI/180, d = date.valueOf()/864e5 - 10957.5;
+    const g = (357.529 + 0.98560028*d)*rad, q = 280.459 + 0.98564736*d;
+    const L = (q + 1.915*Math.sin(g) + 0.02*Math.sin(2*g))*rad, e = (23.439 - 0.00000036*d)*rad;
+    const ra = Math.atan2(Math.cos(e)*Math.sin(L), Math.cos(L));
+    let dec = Math.asin(Math.sin(e)*Math.sin(L)); if(Math.abs(dec) < 1e-4) dec = 1e-4;
+    const gmst = ((18.697374558 + 24.06570982441908*d) % 24 + 24) % 24 * 15;
+    const sunLon = ((ra/rad - gmst) % 360 + 540) % 360 - 180;
+    const pts = [];
+    for(let lon = -180; lon <= 180; lon += 2) pts.push([lon, Math.atan(-Math.cos((lon - sunLon)*rad)/Math.tan(dec))/rad]);
+    const pole = dec > 0 ? -90 : 90;
+    return {type: "Feature", properties: {}, geometry: {type: "Polygon", coordinates: [[...pts, [180, pole], [-180, pole], pts[0]]]}};
+  }
+  function mapPopup(lngLat, ids){
+    const W = window.ZooWx;
+    const line = id => { const c = BYID[id], x = W && W.at(SLUGS[id]), t = local(c.tz);
+      return `${t.s} local${x && x.w && x.d ? " · " + x.d.icon + " " + W.temp(x.w.t) : ""}`; };
+    const html = ids.length === 1
+      ? (() => { const c = BYID[ids[0]]; return `<div class="mp"><b>${esc(c.n)}</b><small>${esc(c.p)}</small><small>${esc(line(c.id))}</small><button type="button" data-map-cam="${esc(c.id)}">${c.id === stage.id ? "On stage now" : "Put on stage"}</button></div>`; })()
+      : `<div class="mp"><b>${ids.length} cams here</b><div class="mp-list">${ids.slice(0, 30).map(id => `<button type="button" data-map-cam="${esc(id)}">${esc(BYID[id].n)}<br><small>${esc(line(id))}</small></button>`).join("")}</div></div>`;
+    if(MP.popup) MP.popup.remove();
+    MP.popup = new maplibregl.Popup({closeButton: true, maxWidth: "270px", offset: 10}).setLngLat(lngLat).setHTML(html).addTo(MP.map);
+  }
+  function mapFollow(){
+    if(!MP.ready || !stage.id) return;
+    const p = window.ZooWx && ZooWx.place(SLUGS[stage.id]);
+    if(!p){ MP.pin.remove(); return; }
+    MP.pin.setLngLat([p.lon, p.lat]).addTo(MP.map);
+    // glide to the new cam unless the visitor moved the map in the last minute
+    if(Date.now() - MP.touched > 60000) MP.map.easeTo({center: [p.lon, p.lat], duration: 1600});
+  }
+  function mapRefresh(){ if(MP.ready){ MP.map.getSource("cams").setData(mapPoints()); MP.map.getSource("night").setData(nightShape(new Date())); } }
+  function mapInit(){
+    const css = document.createElement("link"); css.rel = "stylesheet"; css.href = MAPLIBRE + "maplibre-gl.min.css"; document.head.appendChild(css);
+    const js = document.createElement("script"); js.src = MAPLIBRE + "maplibre-gl.min.js";
+    js.onerror = () => { $("mapWait").textContent = "The map could not load. The cams all still work above."; };
+    js.onload = () => {
+      const sp = stage.id && window.ZooWx && ZooWx.place(SLUGS[stage.id]);
+      const m = MP.map = new maplibregl.Map({container: "map", style: "https://tiles.openfreemap.org/styles/dark",
+        center: sp ? [sp.lon, sp.lat] : [10, 25], zoom: innerWidth < 700 ? 0.6 : 1.35, minZoom: 0.4, maxZoom: 13,
+        cooperativeGestures: true, attributionControl: {compact: true}, renderWorldCopies: false});
+      m.addControl(new maplibregl.NavigationControl({showCompass: false}), "top-right");
+      ["dragstart", "zoomstart", "wheel", "touchstart"].forEach(ev => m.on(ev, e => { if(e.originalEvent) MP.touched = Date.now(); }));
+      m.once("style.load", () => {   // not "load": that waits for every tile, the dots can go on as soon as the style is in
+        // tint the basemap to the zoo's greens
+        try{ m.setPaintProperty("background", "background-color", "#1c2b22"); m.setPaintProperty("water", "fill-color", "#0a1219"); }catch(e){}
+        m.addSource("night", {type: "geojson", data: nightShape(new Date())});
+        m.addLayer({id: "night", type: "fill", source: "night", paint: {"fill-color": "#000510", "fill-opacity": 0.5}});
+        m.addSource("cams", {type: "geojson", data: mapPoints(), cluster: true, clusterRadius: 34, clusterMaxZoom: 11});
+        m.addLayer({id: "clusters", type: "circle", source: "cams", filter: ["has", "point_count"],
+          paint: {"circle-color": "#18261e", "circle-stroke-color": "#9fd36b", "circle-stroke-width": 1.5,
+                  "circle-radius": ["step", ["get", "point_count"], 12, 10, 16, 30, 21]}});
+        m.addLayer({id: "cluster-n", type: "symbol", source: "cams", filter: ["has", "point_count"],
+          layout: {"text-field": ["get", "point_count_abbreviated"], "text-font": ["Noto Sans Regular"], "text-size": 12},
+          paint: {"text-color": "#e7eee4"}});
+        m.addLayer({id: "dots", type: "circle", source: "cams", filter: ["!", ["has", "point_count"]],
+          paint: {"circle-color": ["match", ["get", "st"], "trend", DOT.trend, "action", DOT.action, "off", DOT.off, "night", DOT.night, DOT.day],
+                  "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 4.5, 6, 7], "circle-stroke-color": "#0b120e", "circle-stroke-width": 1.5}});
+        m.on("click", "clusters", e => {
+          const f = e.features[0], src = m.getSource("cams"), id = f.properties.cluster_id;
+          src.getClusterExpansionZoom(id).then(z => {
+            if(z > 11 || m.getZoom() >= 10) src.getClusterLeaves(id, 40, 0).then(l => mapPopup(f.geometry.coordinates, l.map(x => x.properties.id)));
+            else m.easeTo({center: f.geometry.coordinates, zoom: z + 0.3});
+          });
+        });
+        m.on("click", "dots", e => mapPopup(e.features[0].geometry.coordinates, [e.features[0].properties.id]));
+        ["clusters", "dots"].forEach(l => { m.on("mouseenter", l, () => m.getCanvas().style.cursor = "pointer"); m.on("mouseleave", l, () => m.getCanvas().style.cursor = ""); });
+        const pin = document.createElement("div"); pin.className = "stage-pin"; pin.title = "On the Main Stage now";
+        MP.pin = new maplibregl.Marker({element: pin});
+        MP.ready = true; $("mapWait").hidden = true;
+        mapFollow();
+        setInterval(mapRefresh, 5*60000);
+        track("map_opened", {});
+      });
+    };
+    document.head.appendChild(js);
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-map-cam]"); if(!b) return;
+    track("map_pick", camProps(b.dataset.mapCam));
+    if(MP.popup) MP.popup.remove();
+    prepare(b.dataset.mapCam, "You picked this cam on the zoo map.", {now: true, user: true, reason: "pick"});
+    window.scrollTo({top: document.querySelector(".stage").offsetTop - 10, behavior: "smooth"});
+  });
+  if("IntersectionObserver" in window){
+    const io = new IntersectionObserver(es => { if(es.some(x => x.isIntersecting)){ io.disconnect(); mapInit(); } }, {rootMargin: "400px"});
+    io.observe($("zooMap"));
+  } else mapInit();
+  if(window.ZooWx) ZooWx.ready.then(mapRefresh);
 
   // ---------- events ----------
   $("grid").addEventListener("click", e=>{

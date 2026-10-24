@@ -78,7 +78,7 @@
   setInterval(changed, 60000);   // keeps "updated … ago" honest
 
   window.ZooWx = {
-    ready: ready, at: at, describe: describe, temp: temp, wind: wind, dir: dir, ago: ago, note: note, sun: sun,
+    ready: ready, at: at, place: function(slug){ var p = slug && geo[slug]; return p && typeof p.lat === "number" ? p : null; }, describe: describe, temp: temp, wind: wind, dir: dir, ago: ago, note: note, sun: sun,
     onChange: function(fn){ listeners.push(fn); },
     credit: '<a href="https://www.met.no/en" target="_blank" rel="noopener">MET Norway</a>'
   };
