@@ -150,6 +150,8 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .btn{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block}
 .btn.main{background:var(--ink);color:var(--paper)}
 .btn:disabled{opacity:.4;cursor:default}
+.j-actions{align-items:center}
+.why{font-size:13px;color:var(--ink-soft)}
 .hintb{border:0;background:transparent;color:var(--ink-soft);text-decoration:underline;font-size:13px;padding:0;justify-self:start}
 .done-box{display:grid;gap:10px;justify-items:start}
 .big-stamp{width:150px;height:150px;border:4px solid var(--mark);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--mark);font-family:var(--display);font-weight:800;font-size:24px;line-height:.95;text-transform:uppercase;transform:rotate(-10deg);padding:14px;animation:stampin .5s cubic-bezier(.2,1.6,.4,1)}
@@ -229,8 +231,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       {type:"spot", title:"Quiver Tree Forest", place:"Near Keetmanshoop, Namibia",
        pano:"scenes/quiver.jpg", yaw:-37, pitch:4,
        credit:'<a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0',
-       intro:{junior:"Drag to look around (or tilt your phone). When something on your list is in the middle of the lens, hold still until the ring fills up.",
-              pro:"Survey the site. Centre each feature in the lens and hold steady to log it. Hints only on request."},
+       intro:{junior:"Drag to look around (or tilt your phone). When you see something on your list, tap it. You can also hold it in the circle until the ring fills up.",
+              pro:"Survey the site. Tap a feature, or centre it in the lens and hold steady to log it. Hints only on request."},
        targets:[
         {id:"tree", yaw:-37.3, pitch:22, tol:11,
          task:{junior:"Find the biggest quiver tree", pro:"Log the largest Aloidendron dichotomum"},
@@ -353,11 +355,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   }
   function nextBtn(ok){
     const last = run.i === run.x.stops.length - 1;
-    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button></div>`;
+    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button>${ok ? "" : `<span class="why">${run.x.stops[run.i].type === "spot" ? "Find everything on the list first" : "Answer the questions first"}</span>`}</div>`;
   }
   $("journal").addEventListener("click", e => {
     if(e.target.id === "nextBtn"){ advance(); return; }
     if(e.target.id === "hintBtn"){ run.hint = true; e.target.remove(); return; }
+    if(e.target.id === "skipBtn"){ track("fs_skip", {exp: run.x.id, stop: run.i, mode}); advance(); return; }
     const o = e.target.closest("[data-q]"); if(o) answer(+o.dataset.q, +o.dataset.o);
   });
   function advance(){
@@ -413,7 +416,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         if(k >= 1){ found(s, near); holdId = null; }
       } else {
         holdId = null; fg.style.strokeDashoffset = String(C);
-        aim.textContent = open.length ? "Look around" : "All found";
+        if(!(+aim.dataset.until > Date.now())) aim.textContent = open.length ? (mode === "junior" ? "Tap it, or hold it in the circle" : "Tap or centre a feature") : "All found";
       }
       // hint arrow toward the nearest unfound target: always for Junior, after "Hint" for Pro
       if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
@@ -423,9 +426,29 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       } else arrow.hidden = true;
     };
     loop = requestAnimationFrame(step);
+    // tapping works too: a short tap (not a drag) logs whatever is under the finger
+    const pano = $("pano"); let down = null;
+    pano.addEventListener("pointerdown", e => { down = {x: e.clientX, y: e.clientY, t: Date.now()}; });
+    pano.addEventListener("pointerup", e => {
+      if(!down || !viewer) return;
+      const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y), quick = Date.now() - down.t < 600;
+      down = null;
+      if(moved > 10 || !quick || e.target.closest(".pnlm-controls-container")) return;
+      let c; try{ c = viewer.mouseEventToCoords(e); }catch(err){ return; }
+      const open = s.targets.filter(t => !run.found[t.id]);
+      let best = null, bd = 999;
+      open.forEach(t => { const d = angDist(c[1], c[0], t.yaw, t.pitch); if(d < bd){ bd = d; best = t; } });
+      if(best && bd < best.tol * 1.6){ found(s, best); flash("Found: " + best.name); }
+      else flash(open.length ? "Nothing on your list there. Keep looking!" : "You found everything here!");
+    });
+  }
+  function flash(msg){
+    const a = $("aim"); if(!a) return;
+    a.textContent = msg; a.dataset.until = String(Date.now() + 1800);
   }
   function pin(t){
-    try{ viewer.addHotSpot({id:t.id, pitch:t.pitch, yaw:t.yaw, cssClass:"found-pin", createTooltipFunc:(div) => { div.title = t.name; }}); }catch(e){}
+    try{ viewer.addHotSpot({id:t.id, pitch:t.pitch, yaw:t.yaw, cssClass:"found-pin", createTooltipFunc:(div) => { div.title = t.name; },
+      clickHandlerFunc:() => { run.last = t.id; journalSpot(run.x.stops[run.i]); }}); }catch(e){}
   }
   function found(s, t){
     run.found[t.id] = true; run.last = t.id; pin(t);
@@ -439,8 +462,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <p class="j-intro">${esc(T(s.intro))}</p>
       <ul class="tasks">${s.targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(T(t.task))}</li>`).join("")}</ul>
       ${mode === "pro" && !run.hint && !all ? `<button class="hintb" type="button" id="hintBtn">Show me which way to look</button>` : ""}
+      <p class="j-k">${s.targets.filter(t => run.found[t.id]).length} of ${s.targets.length} found</p>
       ${last ? `<div class="card"><span class="hand">found it!</span><b>${esc(last.name)}</b><span class="sci">${esc(last.sci)}</span><p>${esc(T(last.fact))}</p></div>` : ""}
-      ${nextBtn(all)}`;
+      ${nextBtn(all)}
+      ${all ? "" : `<button class="hintb" type="button" id="skipBtn">Skip this stop</button>`}`;
   }
 
   // ---------- stop type 2: watch a 360° video, answer field questions ----------
