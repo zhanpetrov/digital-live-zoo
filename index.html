@@ -623,7 +623,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   // after WARM_MS of unbroken playing (measured time + margin for slower computers). On desktop the next tour cam is kept warming in the
   // back player all the time, so "Next cam" swaps at once; on phones and Data Saver it starts
   // PRELOAD_MS before its turn.
-  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000, WARM_MS = 5500, SETTLE_MS = 3000;
+  const PRELOAD_MS = 15000, FADE_MS = 900, LOAD_TIMEOUT = 15000, FIRST_MS = 10000, WARM_MS = 5500, SETTLE_MS = 3000;
   const keepWarm = () => document.visibilityState === "visible" && !(navigator.connection && navigator.connection.saveData) && matchMedia("(min-width: 861px)").matches;
   const NO_EMBED = [100,101,150,153];
   const PV = {autoplay:1, mute:1, playsinline:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, rel:0, modestbranding:1, cc_load_policy:0};
@@ -659,7 +659,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function onBlocked(s){
     if(manual || !pend || s !== back() || s.want !== pend.id) return;
     manual = true;
-    if(!stage.id) commit();
+    if(!stage.id){ commit(); toast("Tap the video to start it"); }
     syncShield();
   }
   function stopSlot(s){ s.want = null; s.playingSince = 0; try{ s.p.mute(); s.p.stopVideo(); }catch(e){} }
@@ -690,6 +690,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       .sort((a,b)=>(isHot(b.id)-isHot(a.id)) || actScore(b.id)-actScore(a.id));
   }
   function whyFor(c, why){
+    // never claim daytime for a cam where it is night (the tour falls back to night cams when nothing else fits)
+    if(/daytime/.test(why || "") && !awakeNow(c)) why = "A popular cam where it is night right now: watch for the night shift of animals.";
     if(!actOf(c.id) || actScore(c.id) < GOOD) return why;
     const v = actOf(c.id)[2], vs = v ? " "+v.toLocaleString("en-US")+" people are watching." : "";
     if(flagged(c.id, "t")) return "Trending: far more people than usual are watching this cam right now."+vs;
@@ -745,7 +747,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     if(pend){ const po = $("stPoster"); po.src = posterUrl(BYID[pend.id]); po.classList.add("snap","on"); void po.offsetWidth; po.classList.remove("snap"); showTuning(); }
   }
   function showTuning(){
-    $("stEyebrow").textContent = (pend && pend.now && stage.id) ? "Tuning in: "+BYID[pend.id].n+"…" : "On stage now";
+    $("stEyebrow").textContent = (pend && pend.now && stage.id) ? "Tuning in: "+BYID[pend.id].n+"…" : (!stage.id && pend) ? "Tuning in…" : "On stage now";
+    if(!stage.id && pend) renderStage();
   }
 
   function commit(){
@@ -807,6 +810,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       if(due && s.ready && now - pend.t0 > 1500) commit();
       return;
     }
+    // first cam of the visit: if the player is up but the video has not started by itself within 10 s, the
+    // browser is holding autoplay back (iPhone Low Power Mode, data saver…): show YouTube's play button now
+    // instead of trying more cams for up to a minute
+    if(!stage.id && !s.playingSince && s.ready && [-1, 5].includes(pstate(s)) && now - pend.t0 > FIRST_MS){ manual = true; commit(); toast("Tap the video to start it"); return; }
     if(s.playingSince){
       if(due && now - s.playingSince >= WARM_MS && pstate(s) === 1) commit();
     } else if(now - Math.max(s.downSince, s.readyAt) > LOAD_TIMEOUT && (s.ready || now - s.downSince > 2*LOAD_TIMEOUT)){
@@ -881,24 +888,26 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       el.querySelector(".clock").textContent = t.s+" local";
       const d = el.querySelector(".dp"); d.className = "dp "+t.dp; d.textContent = DPL[t.dp];
     });
-    if(stage.id){ const t = local(BYID[stage.id].tz); $("stClock").textContent = t.s; $("stDp").className = "dp "+t.dp; $("stDp").textContent = DPL[t.dp]; }
+    if(panelId()){ const t = local(BYID[panelId()].tz); $("stClock").textContent = t.s; $("stDp").className = "dp "+t.dp; $("stDp").textContent = DPL[t.dp]; }
   }
   function markStage(){
     document.querySelectorAll("#grid .enc.onstage").forEach(el=>{ el.classList.remove("onstage"); el.querySelector(".ontag").hidden = true; });
     const el = cardEls[stage.id]; if(el){ el.classList.add("onstage"); el.querySelector(".ontag").hidden = false; }
   }
+  // the cam the stage panel describes: the one playing, or on first load the one tuning in (so it never sits on "Loading…")
+  const panelId = () => stage.id || (pend && pend.id) || null;
   function renderStage(){
-    const c = BYID[stage.id]; if(!c) return;
+    const c = BYID[panelId()]; if(!c) return;
     $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
     $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
-    $("stWhy").textContent = stage.why;
+    $("stWhy").textContent = stage.id ? stage.why : (pend ? pend.why : "");
     updateClocks(); renderWx(); if(refreshTop) refreshTop(); mapFollow();
   }
 
   // ---------- weather near the cams (assets/wx.js: MET Norway via the zoo-live Worker) ----------
   function renderWx(){
     const W = window.ZooWx; if(!W) return;
-    const r = stage.id ? W.at(SLUGS[stage.id]) : null, dd = $("stWx");
+    const r = panelId() ? W.at(SLUGS[panelId()]) : null, dd = $("stWx");
     const show = !!(r && r.w && r.d);
     dd.hidden = $("stWxL").hidden = !show;
     if(show){
