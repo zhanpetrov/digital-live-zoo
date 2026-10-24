@@ -504,6 +504,13 @@ def build(fetch_dates=False):
     home_h = hashlib.sha1(open(os.path.join(ROOT, "index.html"), "rb").read()).hexdigest()[:12]
     old = state.get("/")
     new_state["/"] = {"h": home_h, "mod": old["mod"] if old and old["h"] == home_h else day, "index": True}
+    # hand-made pages that belong in the sitemap too
+    for extra in ["/field-station/"]:
+        f = os.path.join(ROOT, extra.strip("/"), "index.html")
+        if not os.path.exists(f): continue
+        eh = hashlib.sha1(open(f, "rb").read()).hexdigest()[:12]
+        old = state.get(extra)
+        new_state[extra] = {"h": eh, "mod": old["mod"] if old and old["h"] == eh else day, "index": True}
 
     def urlset(paths):
         rows = "".join(f"<url><loc>{SITE}{p}</loc><lastmod>{new_state[p]['mod']}</lastmod></url>" for p in sorted(paths))
