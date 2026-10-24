@@ -279,6 +279,8 @@ footer a{color:var(--muted)}
 .sections{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .sections a{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:600;font-size:13.5px;text-decoration:none;color:var(--muted)}
 .sections a:hover{border-color:var(--muted);color:var(--fg)}
+.sections a.fs-link{border-color:var(--sign);color:var(--sign)}
+.sections a.fs-link:hover{background:var(--sign);color:#1d2a20}
 .enc h4 a{text-decoration:none}
 .enc h4 a:hover{text-decoration:underline}
 .browse h2{font-family:var(--display);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:.03em;color:var(--sign);margin:0 0 10px}
@@ -381,7 +383,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   <section class="intro" aria-label="About the zoo">
     <p>Every free live animal cam on YouTube we could find, in one zoo. The Main Stage tours the planet and shows animals where it is daytime right now. Pick any cam to put it on stage, or build a wall of up to 9 and watch them all at once.</p>
     <div class="stats" id="stats"><span>Opening the zoo…</span></div>
-    <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a></nav>
+    <nav class="sections" aria-label="Browse"><a href="/animals/">Cams by animal</a><a href="/places/">By place</a><a href="/habitats/">By habitat</a><a class="fs-link" href="/field-station/">Field Station: 360° expeditions →</a></nav>
   </section>
 
   <section class="topcams" id="lvTopWrap" aria-labelledby="topcamsH" hidden>
