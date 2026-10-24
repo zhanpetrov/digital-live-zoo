@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Field Station · Digital Live Zoo</title>
-<meta name="description" content="Expeditions into 360° wild places: find animals and clues, answer field questions, then check what is happening right now on live animal cams.">
+<meta name="description" content="Expeditions into 360° VR wildlife camps: spot elephants, giraffes and clues from sunrise to sunset in Kids and Adults editions, then check live animal cams right now.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://digitallivezoo.com/field-station/">
 <meta property="og:title" content="Field Station · Digital Live Zoo">
-<meta property="og:description" content="Expeditions into 360° wild places: find animals and clues, answer field questions, then check on the animals live.">
-<meta property="og:image" content="https://digitallivezoo.com/field-station/img/quiver.jpg">
+<meta property="og:description" content="Embedded 360° VR wildlife camps on site (no YouTube redirect): sunrise-to-sunset safari quests for Kids and Adults, synced with live weather and real animal cams.">
+<meta property="og:image" content="https://digitallivezoo.com/field-station/img/safari-camp.jpg">
 <meta property="og:url" content="https://digitallivezoo.com/field-station/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0b120e">
@@ -34,6 +34,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--bg)}
+html.fslock,html.fslock body{overflow:hidden}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -46,7 +47,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .bar .home:hover{color:var(--fg)}
 .word{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);margin-right:auto}
 .mode{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
-.mode button{border:0;background:transparent;border-radius:999px;padding:5px 12px;font-weight:700;font-size:13px;color:var(--muted)}
+.mode button{border:0;background:transparent;border-radius:999px;padding:5px 13px;font-weight:700;font-size:13px;color:var(--muted);transition:background .15s,color .15s}
 .mode button[aria-pressed="true"]{background:var(--sign);color:#1d2a20}
 .mode-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
 
@@ -55,25 +56,27 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:end}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
 .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(52px,9vw,110px);line-height:.85;margin:0;text-transform:uppercase;color:var(--sign)}
-.hero p{margin:12px 0 0;color:var(--muted);max-width:56ch;font-size:16px}
+.hero p{margin:12px 0 0;color:var(--muted);max-width:58ch;font-size:16px}
 .passport{background:var(--paper);color:var(--ink);border-radius:16px;padding:16px 18px;display:grid;gap:10px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 26px}
 .pp-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .pp-top b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 .pp-top span{font-family:var(--hand);font-size:22px;color:var(--mark)}
-.stamps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
-@media (max-width:420px){.stamps{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.stamp{aspect-ratio:1;max-width:100%;border:2px dashed var(--paper-line);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:6px;line-height:1.15}
+.stamps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.stamps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stamp{aspect-ratio:1;max-width:100%;border:2px dashed var(--paper-line);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);padding:5px;line-height:1.15}
 .stamp.got{border:3px solid var(--mark);color:var(--mark);transform:rotate(-8deg);font-weight:500;background:rgba(199,57,46,.06)}
-.stamp.got small{display:block;font-size:8px;margin-top:2px}
+.stamp.got small{display:block;font-size:7.5px;margin-top:2px}
 .sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .sec-h h2{font-family:var(--display);font-weight:800;font-size:34px;margin:0;text-transform:uppercase}
 .sec-h span{color:var(--muted);font-size:14px}
 .exps{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
 .ex{display:grid;grid-template-rows:auto 1fr;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;padding:0}
+.ex.featured{border-color:rgba(242,194,48,.55);box-shadow:0 0 0 1px rgba(242,194,48,.18)}
 .ex .th{position:relative;aspect-ratio:2/1;max-width:100%;background:var(--panel-2)}
 .ex .th img{width:100%;height:100%;object-fit:cover;display:block}
 .ex .th.night{background:radial-gradient(circle at 72% 32%,#f1f0e6 0 9px,rgba(241,240,230,.25) 10px,transparent 26px),radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1px 1px at 40% 18%,#fff,transparent),radial-gradient(1.5px 1.5px at 58% 52%,#fff,transparent),radial-gradient(1px 1px at 85% 70%,#fff,transparent),radial-gradient(1px 1px at 12% 72%,#fff,transparent),linear-gradient(180deg,#0a1530,#132a20)}
-.ex .tag{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,18,14,.8);border-radius:999px;padding:3px 9px}
+.ex .tag{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,18,14,.84);border-radius:999px;padding:3px 9px}
+.ex .vrtag{position:absolute;right:10px;top:10px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--sign);color:#1d2a20;border-radius:999px;padding:3px 8px}
 .ex .bd{display:grid;gap:6px;padding:14px 16px 16px;align-content:start}
 .ex h3{margin:0;font-family:var(--display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase}
 .ex p{margin:0;color:var(--muted);font-size:14px}
@@ -82,7 +85,7 @@ button.ex{cursor:pointer;transition:border-color .15s,transform .15s}
 button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .ex.soon{opacity:.62}
 .ex.soon .go{color:var(--faint)}
-.credits{font-size:12.5px;color:var(--faint);max-width:80ch}
+.credits{font-size:12.5px;color:var(--faint);max-width:84ch}
 .credits a{color:var(--muted)}
 
 /* expedition run */
@@ -94,11 +97,50 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .dots i{width:28px;height:6px;border-radius:3px;background:var(--line)}
 .dots i.done{background:var(--day)}
 .dots i.now{background:var(--sign)}
-.stage{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
 @media (max-width:980px){.stage{grid-template-columns:minmax(0,1fr)}}
 .view{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:18px;overflow:hidden;background:#000;border:1px solid var(--line)}
 @media (max-width:620px){.view{aspect-ratio:4/5;border-radius:14px}}
-#pano,.yt,#ytBox{position:absolute;inset:0;width:100%;height:100%;border:0}
+#pano,.yt,#ytBox,#liveEmbed{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Embedded On-Site WebGL 360° VR Camp Player (DLZ360Player) */
+.dlz360-wrap{position:absolute;inset:0;width:100%;height:100%;background:#060b08;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none;outline:none}
+.dlz360-wrap.dlz360-cssfull{position:fixed;inset:0;z-index:50;border-radius:0}
+.dlz360-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
+.dlz360-canvas:active{cursor:grabbing}
+.dlz360-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;opacity:.45}
+.dlz360-pins{position:absolute;inset:0;pointer-events:none;z-index:3}
+.dlz360-pin{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;padding:0}
+.dlz360-overlay{position:absolute;inset:0;pointer-events:none;z-index:4}
+.dlz360-top{position:absolute;left:10px;right:10px;top:10px;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;pointer-events:none;transition:opacity .35s}
+.dlz360-compass{background:rgba(11,18,14,.78);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:3px 10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--sign)}
+.dlz360-badges{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.dlz360-badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;background:rgba(11,18,14,.82);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:3px 9px;color:var(--fg)}
+.dlz360-live-pill{background:rgba(242,194,48,.92);color:#1d2a20;border-color:var(--sign);font-weight:700}
+.dlz360-ed-pill{color:var(--day);border-color:rgba(159,211,107,.45)}
+.dlz360-bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:7;display:grid;justify-items:center;gap:5px;text-align:center;background:rgba(11,18,14,.88);border:2px solid var(--sign);border-radius:18px;padding:16px 22px;color:var(--fg);max-width:min(360px,calc(100% - 28px));box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.dlz360-bigplay:hover{background:#121d17;transform:translate(-50%,-50%) scale(1.02)}
+.dlz360-bigplay-ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--sign);color:#1d2a20;font-size:20px;font-weight:800}
+.dlz360-bigplay b{font-family:var(--display);font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--sign);line-height:1}
+.dlz360-bigplay small{font-size:12.5px;color:var(--muted);line-height:1.35}
+.dlz360-bot{position:absolute;left:0;right:0;bottom:0;z-index:6;display:grid;gap:6px;padding:24px 10px 10px;background:linear-gradient(to top,rgba(6,11,8,.92),rgba(6,11,8,.55) 62%,transparent);transition:opacity .35s}
+.dlz360-chapters{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.dlz360-chapters::-webkit-scrollbar{display:none}
+.dlz360-chap{flex:0 0 auto;border:1px solid rgba(255,255,255,.22);background:rgba(11,18,14,.78);color:var(--muted);border-radius:999px;padding:3px 9px;font-family:var(--mono);font-size:10.5px;white-space:nowrap}
+.dlz360-chap:hover{color:var(--fg);border-color:rgba(255,255,255,.5)}
+.dlz360-chap.active{background:var(--sign);color:#1d2a20;border-color:var(--sign);font-weight:700}
+.dlz360-scrub-row{display:flex;align-items:center}
+.dlz360-scrub{width:100%;accent-color:var(--sign);height:5px;cursor:pointer;margin:0}
+.dlz360-ctrl-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.dlz360-spacer{flex:1 1 auto}
+.dlz360-btn{border:1px solid rgba(255,255,255,.24);background:rgba(11,18,14,.8);color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;line-height:1.2}
+.dlz360-btn:hover{border-color:var(--sign)}
+.dlz360-btn[aria-pressed="true"]{background:var(--sign);color:#1d2a20;border-color:var(--sign)}
+.dlz360-time{font-family:var(--mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;padding-inline:4px}
+.dlz360-full.dlz360-idle .dlz360-bot,.dlz360-full.dlz360-idle .dlz360-top{opacity:0;pointer-events:none}
+.lens-toggle{position:absolute;left:10px;top:44px;z-index:6;border:1px solid rgba(255,255,255,.25);background:rgba(11,18,14,.78);color:var(--fg);border-radius:999px;padding:4px 10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em}
+.lens-toggle:hover{border-color:var(--sign)}
+
 /* binocular lens: darkened edges, a focus ring in the middle that fills while you hold steady */
 .lens{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent 0 33%,rgba(0,0,0,.18) 45%,rgba(0,0,0,.62) 70%)}
 .ring{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;pointer-events:none}
@@ -106,16 +148,17 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .ring .bgc{fill:none;stroke:rgba(255,255,255,.55);stroke-width:2}
 .ring .fg{fill:none;stroke:var(--sign);stroke-width:5;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:240}
 .ring::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgba(255,255,255,.8)}
-.aim{position:absolute;left:50%;top:calc(50% + 54px);transform:translateX(-50%);font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:rgba(11,18,14,.78);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none}
+.aim{position:absolute;left:50%;top:calc(50% + 52px);transform:translateX(-50%);font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;background:rgba(11,18,14,.82);border-radius:999px;padding:4px 10px;white-space:nowrap;pointer-events:none;max-width:90%;overflow:hidden;text-overflow:ellipsis}
 .arrow{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
-.arrow span{position:absolute;left:-14px;top:-118px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--sign);color:#1d2a20;font-weight:800;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
-.found-pin{width:22px;height:22px;border-radius:50%;border:3px solid var(--sign);background:rgba(242,194,48,.25);box-shadow:0 0 0 3px rgba(0,0,0,.35)}
+.arrow span{position:absolute;left:-14px;top:-114px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--sign);color:#1d2a20;font-weight:800;font-size:16px;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.found-pin{width:22px;height:22px;border-radius:50%;border:3px solid var(--sign);background:rgba(242,194,48,.28);box-shadow:0 0 0 3px rgba(0,0,0,.4)}
 .look{position:absolute;right:10px;bottom:56px;display:grid;grid-template-columns:repeat(4,auto);gap:6px;z-index:3}
 .look button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(11,18,14,.75);color:#fff;font-size:14px}
 .look .tilt{grid-column:1/-1;width:auto;border-radius:999px;font-weight:700;font-size:13px}
-.appbtn{position:absolute;left:10px;right:10px;top:10px;z-index:3;display:grid;gap:2px;background:var(--sign);color:#1d2a20;text-decoration:none;border-radius:12px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-.appbtn b{font-size:15px}
-.appbtn span{font-size:12.5px;line-height:1.35}
+.appbtn{position:absolute;left:10px;right:10px;top:10px;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--sign);color:#1d2a20;text-decoration:none;border-radius:12px;padding:10px 14px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.appbtn b{font-size:14.5px;display:block}
+.appbtn span{font-size:12px;line-height:1.35;display:block}
+.appbtn button{background:#1d2a20;color:var(--paper);border:0;border-radius:999px;padding:6px 12px;font-weight:700;font-size:12.5px}
 .view .credit{position:absolute;right:10px;bottom:10px;font-size:11px;color:#dfe6dc;background:rgba(11,18,14,.7);border-radius:6px;padding:3px 8px;max-width:70%}
 .view .credit a{color:#fff}
 .livebox{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,#1d3024,#0b120e 70%)}
@@ -124,40 +167,45 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 @keyframes ping{100%{box-shadow:0 0 0 14px rgba(255,74,61,0)}}
 .livebox h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,56px);line-height:.95;margin:8px 0 6px;text-transform:uppercase}
 .livebox .clock{font-family:var(--mono);font-size:clamp(40px,6vw,64px);color:var(--sign);line-height:1}
-.livebox .sub{color:var(--muted);margin-top:8px}
+.livebox .sub{color:var(--muted);margin-top:8px;max-width:48ch}
+.livebox .sunrow{font-family:var(--mono);font-size:12px;color:var(--day);margin-top:6px}
+.livebox .watchhere{margin-top:14px;border:1px solid var(--sign);background:rgba(242,194,48,.14);color:var(--sign);border-radius:999px;padding:8px 16px;font-weight:700;font-size:13.5px}
+.livebox .watchhere:hover{background:var(--sign);color:#1d2a20}
 
 /* the field journal */
-.journal{background:var(--paper);color:var(--ink);border-radius:18px;padding:18px 18px 20px;display:grid;gap:14px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 28px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-.j-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.journal{background:var(--paper);color:var(--ink);border-radius:18px;padding:18px 18px 20px;display:grid;gap:13px;background-image:linear-gradient(var(--paper-line) 1px,transparent 1px);background-size:100% 28px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.j-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0}
 .journal h3{margin:0;font-family:var(--display);font-weight:800;font-size:30px;line-height:.95;text-transform:uppercase;color:var(--ink)}
-.j-intro{margin:0;font-size:15px}
+.j-intro{margin:0;font-size:14.5px}
+.wx-box{border:1.5px dashed var(--ink-soft);border-radius:10px;padding:8px 11px;background:rgba(29,42,32,.04);font-size:12.5px;display:grid;gap:2px}
+.wx-box b{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.wx-box span{color:var(--ink-soft)}
 .tasks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.tasks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;font-size:14.5px}
+.tasks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;font-size:14px}
 .tasks li::before{content:"";width:16px;height:16px;margin-top:3px;border:2px solid var(--ink-soft);border-radius:4px}
 .tasks li.ok::before{background:var(--ink);border-color:var(--ink);box-shadow:inset 0 0 0 3px var(--paper)}
 .tasks li.ok{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--mark)}
 .tasks li.cur{font-weight:700}
-.card{border:2px solid var(--ink);border-radius:12px;padding:12px 14px;background:var(--paper);display:grid;gap:6px;position:relative}
-.card b{font-size:15.5px}
-.card p{margin:0;font-size:14.5px}
-.card .sci{font-style:italic;color:var(--ink-soft);font-size:13px}
+.card{border:2px solid var(--ink);border-radius:12px;padding:11px 13px;background:var(--paper);display:grid;gap:5px;position:relative}
+.card b{font-size:15px}
+.card p{margin:0;font-size:14px}
+.card .sci{font-style:italic;color:var(--ink-soft);font-size:12.5px}
 .card .hand{position:absolute;right:12px;top:6px;font-family:var(--hand);font-size:24px;color:var(--mark);transform:rotate(-6deg)}
-.q{display:grid;gap:8px}
-.q > b{font-size:15px}
+.q{display:grid;gap:7px}
+.q > b{font-size:14.5px}
 .opts{display:grid;gap:6px}
-.opts button{text-align:left;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:10px;padding:8px 12px;font-weight:600;font-size:14px}
+.opts button{text-align:left;border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:10px;padding:7px 11px;font-weight:600;font-size:13.5px}
 .opts button:hover{background:rgba(29,42,32,.06)}
 .opts button.right{background:#dfeccf;border-color:#3f7a22}
 .opts button.wrong{background:#f4d9d4;border-color:var(--mark);text-decoration:line-through}
 .opts button:disabled{cursor:default}
-.fb{margin:0;font-size:14px}
-.fb .hand{font-family:var(--hand);font-size:22px;color:var(--mark);margin-right:4px}
-.j-actions{display:flex;flex-wrap:wrap;gap:8px}
+.fb{margin:0;font-size:13.5px}
+.fb .hand{font-family:var(--hand);font-size:21px;color:var(--mark);margin-right:4px}
+.j-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .btn{border:2px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block}
 .btn.main{background:var(--ink);color:var(--paper)}
 .btn:disabled{opacity:.4;cursor:default}
-.j-actions{align-items:center}
-.why{font-size:13px;color:var(--ink-soft)}
+.why{font-size:12.5px;color:var(--ink-soft)}
 .hintb{border:0;background:transparent;color:var(--ink-soft);text-decoration:underline;font-size:13px;padding:0;justify-self:start}
 .done-box{display:grid;gap:10px;justify-items:start}
 .big-stamp{width:150px;height:150px;border:4px solid var(--mark);border-radius:50%;display:grid;place-items:center;text-align:center;color:var(--mark);font-family:var(--display);font-weight:800;font-size:24px;line-height:.95;text-transform:uppercase;transform:rotate(-10deg);padding:14px;animation:stampin .5s cubic-bezier(.2,1.6,.4,1)}
@@ -176,10 +224,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   <header class="bar">
     <a class="home" href="/">← Digital Live Zoo</a>
     <span class="word">Field Station</span>
-    <span class="mode-l" id="modeL">Field level</span>
+    <span class="mode-l" id="modeL">Edition</span>
     <div class="mode" role="group" aria-labelledby="modeL">
-      <button type="button" data-mode="junior" aria-pressed="true">Junior</button>
-      <button type="button" data-mode="pro" aria-pressed="false">Pro</button>
+      <button type="button" data-mode="junior" aria-pressed="true">Kids · Junior</button>
+      <button type="button" data-mode="pro" aria-pressed="false">Adults · Pro</button>
     </div>
   </header>
 
@@ -187,7 +235,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     <section class="hero">
       <div>
         <h1>Field Station</h1>
-        <p>Pick an expedition. Look around real wild places in 360°, find what lives there, answer the field questions, then check on the animals live, right now. Junior keeps it simple and gives you hints; Pro gives you the science.</p>
+        <p>Step inside 360° VR wildlife camps right on this page — no YouTube app needed. Spot elephants, giraffes, zebras and solar clues from sunrise to sunset, switch anytime between our 6-minute <b>Kids</b> and <b>Adults</b> editions, then check live weather and real 24/7 waterhole cams.</p>
       </div>
       <div class="passport" aria-label="Your passport">
         <div class="pp-top"><b>Explorer passport</b><span id="rank">Cub</span></div>
@@ -195,10 +243,10 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       </div>
     </section>
     <section style="display:grid;gap:16px">
-      <div class="sec-h"><h2>Expeditions</h2><span>Waterhole is open. The others are being prepared.</span></div>
+      <div class="sec-h"><h2>Expeditions</h2><span>Savanna 360° Camp, Elephants &amp; Giraffes 360°, and Waterhole are open now.</span></div>
       <div class="exps" id="exps"></div>
     </section>
-    <p class="credits">360° photo: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Quiver Tree Forest</a> by Reinhard Kraasch, CC BY-SA 4.0. 360° videos play from their owners' YouTube channels: National Geographic and Wildlife Protection Solutions. Weather near the live cam: MET Norway. Your progress stays in this browser.</p>
+    <p class="credits">Embedded 360° VR Safari Camps play directly on Digital Live Zoo (WebGL spherical HLS, Kids &amp; Adults editions, synced with live MET Norway weather and local sunrise/sunset). 360° Quiver Tree photo: <a href="https://commons.wikimedia.org/wiki/File:RK_1910_R0010737_Pano_Quiver_Tree_Forest.jpg" target="_blank" rel="noopener">Reinhard Kraasch</a>, CC BY-SA 4.0. Additional Waterhole videos stream from National Geographic and Wildlife Protection Solutions. Your progress stays in this browser.</p>
   </main>
 
   <main class="run-v" id="runV" hidden>
@@ -216,6 +264,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
 <script src="/assets/wx.js"></script>
+<script src="/field-station/vr360-player.js"></script>
 <script>
 (function(){
   "use strict";
@@ -227,12 +276,206 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     set(k, v){ try{ localStorage.setItem("fs-" + k, JSON.stringify(v)); }catch(e){} }
   };
   let mode = store.get("mode", "junior");
-  const T = x => (x && typeof x === "object" && !Array.isArray(x)) ? (x[mode] || x.junior) : x;   // text for the field level
+  const T = x => (x && typeof x === "object" && !Array.isArray(x)) ? (x[mode] || x.junior) : x;
+
+  const SAFARI_STREAMS = {
+    junior: { hls: "streams/safari-kids/index.m3u8", label: "Kids Edition · Ranger Guide (5:51)" },
+    pro:    { hls: "streams/safari-adults/index.m3u8", label: "Adults Edition · Field Biologist (5:51)" }
+  };
+
+  const SAFARI_CHAPTERS = [
+    { time: 0,   label: "🌅 Sunrise · 06:08" },
+    { time: 88,  label: "🌤️ Savanna Breeze · 24°C" },
+    { time: 175, label: "✨ Golden Hour · 17:35" },
+    { time: 262, label: "🌇 Sunset Dusk · 18:19" }
+  ];
 
   // ---------- expeditions ----------
   const EXPS = [
+    {id:"safari-camp", name:"Savanna 360° Camp", img:"img/safari-camp.jpg", open:true, vrBadge:"360° VR Camp · 5:51", featured:true,
+     blurb:"Chyulu Hills & Amboseli waterhole from 06:08 sunrise to 18:19 sunset. Spot elephants, giraffes & zebras in our embedded 360° player (Kids & Adults editions), then check the live cam.",
+     stops:[
+      {type:"camp360", title:"Sunrise Watch: First Light at the Pan", place:"Chyulu Hills / Amboseli, Kenya",
+       slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
+       poster:"scenes/safari-sunrise.jpg", startAt:0, yaw:10, pitch:0,
+       chapters:SAFARI_CHAPTERS,
+       intro:{
+         junior:"Welcome to our 6-minute 360° Safari Camp! Press Enter Camp, listen to your Kenyan Ranger guide, and drag or tilt all 360° around the misty sunrise waterhole to tap or centre every animal and clue on your list.",
+         pro:"Chyulu Hills waterhole hide, 06:08 EAT sunrise watch. Stream plays natively in WebGL 360° with East African ethologist log. Pan the full horizon to log all four dawn survey targets, then complete the crepuscular observation."
+       },
+       targets:[
+        {id:"ele_dawn", yaw:68, pitch:-15, tol:17,
+         task:{junior:"Spot the elephant mom, auntie and tiny baby calf drinking", pro:"Log the Loxodonta africana matriarch, allomother & calf at the bank"},
+         name:"African bush elephant family", sci:"Loxodonta africana",
+         fact:{junior:"See how the baby calf stays right between the two big elephants? Elephant moms and aunties form a protective circle around calves at waterholes so lions cannot sneak close!",
+               pro:"Matriarchal family units maintain tight flank-shadowing around young calves when approaching open water at dawn, where tall grass transitions to exposed clay shoreline."}},
+        {id:"gir_dawn", yaw:-52, pitch:-3, tol:17,
+         task:{junior:"Find the two tall Maasai giraffes by the umbrella trees", pro:"Log the two Maasai giraffes (Giraffa tippelskirchi) along the acacia line"},
+         name:"Maasai giraffes at first light", sci:"Giraffa tippelskirchi",
+         fact:{junior:"Giraffes are the watchtowers of the savanna! Because their eyes sit up to 5 metres high, other animals watch giraffes to see if danger is nearby.",
+               pro:"Standing 4.5 to 5.5 metres tall, Maasai giraffes scan open sightlines for several minutes at dawn before splaying their forelegs to drink — the moment of peak predation risk."}},
+        {id:"sun_east", yaw:-152, pitch:16, tol:18,
+         task:{junior:"Turn around and find the pink-gold sunrise in the clouds", pro:"Log the eastern sunrise glow & partly-cloudy dawn cumulus layer"},
+         name:"Equatorial sunrise (06:08 EAT)", sci:"Partly cloudy dawn · ~17°C",
+         fact:{junior:"Near the equator in Kenya, the sun rises right around 6 o'clock almost every morning of the year! Cool mornings are prime time for animals to visit water.",
+               pro:"At 2.7° south latitude, sunrise varies by barely 15 minutes across the year (~06:08 EAT in late October). Scattered morning stratocumulus moderates early radiant heating."}},
+        {id:"mist_pan", yaw:-18, pitch:-24, tol:17,
+         task:{junior:"Find the cool morning mist floating on the waterhole", pro:"Log the thermal evaporation mist across the waterhole surface"},
+         name:"Dawn waterhole mist", sci:"Radiative night cooling over warm pan water",
+         fact:{junior:"At night the desert and savanna air gets chilly, while the pond stays warm from yesterday's sun — making ghostly mist float right over the water at sunrise!",
+               pro:"Clear nocturnal skies cool the savanna boundary layer to ~15–17°C while shallow clay-pan water retains daytime heat, producing thin steam-fog wisps until morning wind mixes the air."}}
+       ],
+       questions:[
+        {q:{junior:"Why does the baby elephant walk tucked right between its mom and auntie?", pro:"What drives tight calf-flanking as an elephant family approaches a dawn waterhole?"},
+         opts:{
+           junior:["To stay out of the mud","So the big adults shield it from lions and hyenas","Because baby elephants cannot swim"],
+           pro:["Dominance competition over mineral mud","Anti-predator perimeter defense while crepuscular carnivores are still active","Thermoregulation against morning mist"]
+         },
+         a:1,
+         fact:{junior:"Adult elephants are too big for lions, so keeping the calf in the middle keeps it safe while everyone gets a morning drink!",
+               pro:"Lions and spotted hyenas remain active through civil twilight and sunrise; allomothers and the matriarch bracket calves under two years old at exposed water points."}}
+       ]},
+      {type:"camp360", title:"Savanna Breeze: Mud Baths & Canopy Browsers", place:"Chyulu Hills, Kenya",
+       slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
+       poster:"scenes/safari-daylight.jpg", startAt:88, yaw:-22, pitch:-4,
+       chapters:SAFARI_CHAPTERS,
+       intro:{
+         junior:"It is mid-morning now — 24°C with fluffy white clouds and a warm breeze! Look around the busy waterhole in 360° to spot who is splashing, who is catching bugs, and who is munching treetops.",
+         pro:"Mid-morning watch (~24°C, partly cloudy fair-weather cumulus, 17 km/h ESE breeze). Survey niche partitioning and thermoregulation across four species sharing the pan."
+       },
+       targets:[
+        {id:"ele_spray", yaw:-30, pitch:-11, tol:17,
+         task:{junior:"Spot the big elephant spraying a shower of water over its back", pro:"Log the trunk-spraying thermoregulation behaviour in the pan"},
+         name:"Elephant mud & water shower", sci:"Evaporative cooling & UV barrier",
+         fact:{junior:"Splash! An elephant's trunk holds up to 8 litres of water at once. Spraying muddy water works as air-conditioning AND sunscreen!",
+               pro:"Wrinkled epidermis retains 5 to 10 times more water than smooth skin; trunk-sprayed water and red clay provide prolonged evaporative heat loss without sweat glands."}},
+        {id:"egrets", yaw:-68, pitch:-20, tol:15,
+         task:{junior:"Find the white cattle egrets walking on the red-earth bank", pro:"Log the commensal cattle egrets (Bubulcus ibis) on the shoreline"},
+         name:"Cattle egrets", sci:"Bubulcus ibis",
+         fact:{junior:"Cattle egrets follow big animals like elephants and zebras because heavy footsteps scare tasty grasshoppers right out of the grass!",
+               pro:"Foraging alongside megaherbivores increases egret insect-capture rates by up to 3x while cutting energy spent flushing prey."}},
+        {id:"gir_browse", yaw:55, pitch:-2, tol:17,
+         task:{junior:"Find the giraffes munching high leaves in the green acacia tree", pro:"Log canopy-stratified giraffe browsing on Vachellia tortilis"},
+         name:"Umbrella thorn browsing", sci:"Vachellia tortilis · upper-canopy guild",
+         fact:{junior:"Acacia trees have sharp thorns, but giraffes have tough lips and a 45-centimetre purple tongue that wraps right around the leaves!",
+               pro:"Feeding 3 to 5 metres above ground eliminates competition with zebras and impalas, while tough prehensile tongues strip foliage between paired stipular spines."}},
+        {id:"zebras_day", yaw:-112, pitch:-9, tol:16,
+         task:{junior:"Look left to spot the striped Plains zebras grazing", pro:"Log the peripheral Plains zebra herd (Equus quagga)"},
+         name:"Plains zebras", sci:"Equus quagga",
+         fact:{junior:"Zebras love hanging out near giraffes! Zebras have great hearing and smell, while tall giraffes have super-high eyesight — together they make an early-warning team.",
+               pro:"Mixed-species associations pair zebra olfactory/auditory acuity with giraffe elevated visual range, measurably lowering per-individual vigilance cost."}}
+       ],
+       questions:[
+        {q:{junior:"Why do cattle egrets walk right beside elephants and zebras?", pro:"How does the elephant–giraffe–zebra–egret waterhole assemblage reduce competition and risk?"},
+         opts:{
+           junior:["They ask the elephants for water","Big footsteps scare up insects for the birds to eat","They are guarding the waterhole"],
+           pro:["All four species eat identical short grass","Vertical feeding stratification plus shared multi-sensory predator vigilance","Egrets chase away lions at midday"]
+         },
+         a:1,
+         fact:{junior:"Every big step stirs up crickets, beetles and frogs — an easy lunch for a clever egret!",
+               pro:"Browsers (giraffes) use high acacia crowns, grazers (zebras) crop bunch grasses, elephants process coarse browse/water, and egrets exploit flushed arthropods while sharing alarm cues."}}
+       ]},
+      {type:"camp360", title:"Golden Hour to Sunset Dusk (Full 5:51 Camp)", place:"Serengeti & Chyulu Hills",
+       slug:"elephant-plain-ol-donyo-lodge", tz:"Africa/Nairobi",
+       poster:"scenes/safari-sunset.jpg", startAt:262, yaw:45, pitch:-2, autoSolar:false,
+       chapters:SAFARI_CHAPTERS,
+       intro:{
+         junior:"Sunset at 18:19! The sky glows fiery orange and the pond turns into a mirror. Spot the three dusk clues — and use the chapter buttons anytime to jump between Sunrise, Daytime, Golden Hour and Sunset!",
+         pro:"Sunset dusk watch (18:19 EAT). Convective wind drops and crepuscular transition begins. Log the three dusk bearings, or use the timeline chapters to compare all four watches across the full 5:51 stream."
+       },
+       targets:[
+        {id:"sun_west", yaw:92, pitch:5, tol:17,
+         task:{junior:"Find the glowing orange sunset on the horizon", pro:"Log the western solar azimuth (~092° grid / Copper dusk horizon)"},
+         name:"Savanna sunset (18:19 EAT)", sci:"Crepuscular transition · wind drop",
+         fact:{junior:"As the sun sinks, daytime heat fades away and the wind calms down. Soon the stars will come out and night animals will take over the waterhole!",
+               pro:"As surface heating ceases at sunset, turbulent boundary-layer gusts collapse within minutes, shifting acoustic propagation so low-frequency lion and elephant calls carry kilometres."}},
+        {id:"ele_dusk", yaw:5, pitch:-12, tol:17,
+         task:{junior:"Spot the elephant mom and calf taking their quiet evening drink", pro:"Log the dusk matriarch & calf drinking before withdrawing to bush cover"},
+         name:"Last drink before dark", sci:"Evening hydration & bush withdrawal",
+         fact:{junior:"One big evening drink before bedtime — then the mom leads her calf into thick bushes before night-hunting lions arrive at the water!",
+               pro:"Family herds with small calves typically complete evening water intake around sunset and move away from open pans before peak nocturnal lion activity."}},
+        {id:"gir_dusk", yaw:74, pitch:-2, tol:17,
+         task:{junior:"Find the two giraffes glowing against the sunset sky", pro:"Log the rim-lit giraffe pair moving toward open night-roost grassland"},
+         name:"Giraffes in sunset rim-light", sci:"Nocturnal open-plain positioning",
+         fact:{junior:"Did you know giraffes barely sleep? At night they only nap for a few minutes at a time so they stay safe!",
+               pro:"Total giraffe REM sleep averages under 30 minutes per 24 hours in short bouts; at dusk they favour open plains with wide visibility over dense ambush cover."}}
+       ],
+       questions:[
+        {q:{junior:"What happens at a real African waterhole right after sunset?", pro:"Why does wildlife composition at East African waterholes shift sharply after 18:30 local time?"},
+         opts:{
+           junior:["Every animal goes home to sleep until morning","Daytime families head to safety while night hunters like lions and hyenas wake up","It starts snowing"],
+           pro:["Water freezes overnight on the savanna","Vulnerable diurnal families & browsers depart open pans as nocturnal ambush predators and scavengers become active","Elephants never move after sunset"]
+         },
+         a:1,
+         fact:{junior:"Waterholes have a day shift and a night shift! Now let's check the real live waterhole camera in Kenya to see which shift is on right now.",
+               pro:"Crepuscular and nocturnal partitioning defines live African cams: diurnal herds dominate daylight/dusk, while infrared night feeds reveal hyenas, lions, porcupines and genets."}}
+       ]},
+      {type:"live", title:"Live check: Elephant Plain, ol Donyo", place:"Chyulu Hills, Kenya", slug:"elephant-plain-ol-donyo-lodge", fallbackId:"XsOU8JnEpNM", tz:"Africa/Nairobi",
+       speciesDay:{junior:"African elephants, Maasai giraffes, zebras or impalas visiting the plain", pro:"African bush elephants, Maasai giraffes, Plains zebras & fringe-eared oryx"},
+       speciesNight:{junior:"Spotted hyenas, lions, genets or night-drinking bull elephants on infrared cam", pro:"Bull elephants, spotted hyenas, lions or large-spotted genets on the infrared feed"},
+       factDay:{
+         junior:"Elephant Plain at ol Donyo Lodge sits right below Mount Kilimanjaro in Kenya! During daylight hours, big elephant families, zebras and giraffes walk right past the sunken hide.",
+         pro:"Ol Donyo's open waterhole faces Mount Kilimanjaro across the Chyulu–Amboseli corridor. Daylight brings matriarchal elephant herds, giraffes and plains game; wind and cloud cover come live from MET Norway."
+       },
+       factNight:{
+         junior:"When it is nighttime in Kenya, the camera uses special infrared night-vision! Adult bull elephants still rumble in to drink under the stars, and hyenas and lions patrol the plain.",
+         pro:"After 18:19 EAT sunset, ol Donyo switches to low-light/infrared imaging: solitary bull elephants frequently drink after dark alongside spotted hyenas and prides moving along the waterhole track."
+       },
+       intro:{junior:"You explored our 360° camp from sunrise to sunset — now check the real live weather, sun schedule, and live camera at ol Donyo in Kenya right now!", pro:"Cross-check our 360° sunrise/sunset watches against real-time MET Norway telemetry and solar phase at ol Donyo Lodge right now, then open the live stream in-page."}}
+     ]},
+
+    {id:"giraffe-elephant-hide", name:"Elephants & Giraffes 360°", img:"img/safari-sunset.jpg", open:true, vrBadge:"Kids & Adults · 5:51",
+     blurb:"A continuous 6-minute VR safari hide synced to real African sun & weather. Switch live between Kids Ranger & Adults Biologist audio, then check the Serengeti live.",
+     stops:[
+      {type:"camp360", title:"Full 6-Minute 360° Safari Hide (Sun-Synced)", place:"East African Savanna Corridor",
+       slug:"serengeti-explorer", tz:"Africa/Dar_es_Salaam",
+       poster:"scenes/safari-daylight.jpg", startAt:0, autoSolar:true, yaw:-15, pitch:-3,
+       chapters:SAFARI_CHAPTERS,
+       intro:{
+         junior:"This stop automatically checks the sun and weather in Tanzania right now! Press Enter Camp, click Clean 360° View if you want to explore freely for all 6 minutes, and answer two safari mysteries.",
+         pro:"Continuous 5m 51s spherical hide automatically cued to East Africa's solar window (or full dawn-to-dusk archive when night). Toggle Kids/Adults edition in the top bar anytime while watching."
+       },
+       targets:[
+        {id:"hide_water", yaw:-18, pitch:-22, tol:19,
+         task:{junior:"Centre the waterhole in your binoculars (or tap the water)", pro:"Log the central clay-pan water source"},
+         name:"Seasonal savanna clay pan", sci:"Keystone dry-season water point",
+         fact:{junior:"In the dry season, one small waterhole like this keeps hundreds of elephants, giraffes, zebras and birds alive!",
+               pro:"Impermeable clay pans concentrate wildlife within a 15–25 km foraging radius during East Africa's dry months, making stationary waterhole hides ideal ethological observatories."}}
+       ],
+       questions:[
+        {q:{junior:"How much water can one grown-up African elephant drink in a single day?", pro:"Why must giraffe herds remain vigilant before splaying their forelegs to drink?"},
+         opts:{
+           junior:["One small cup","About 200 litres — a whole bathtub!","They never drink water"],
+           pro:["Water damages their hooves","Splaying forelegs lowers the head 2+ metres, creating a slow recovery window vulnerable to lion ambush","Giraffes cannot see across flat water"]
+         },
+         a:1,
+         fact:{junior:"Up to 200 litres a day! That is why elephant families always remember where every waterhole is.",
+               pro:"Because a giraffe's neck is shorter than its forelegs, it must splay or bend its front knees to reach ground water, relying on jugular valves to regulate cranial blood pressure and herd sentinels to watch for lions."}},
+        {q:{junior:"If you switch between Sunrise (06:08) and Sunset (18:19) in the player, how does the sky and wind change?", pro:"Comparing the 06:08 sunrise and 18:19 sunset watches, what meteorological shift occurs at dusk?"},
+         opts:{
+           junior:["Sunrise has cool mist on the pond, daytime has a breezy blue sky, and sunset turns calm and mirror-gold","It rains non-stop all day","The sun stays in the exact same spot"],
+           pro:["Wind peaks at midnight","Dawn features radiative mist, midday builds convective cumulus & breeze, and dusk collapses wind into mirror-still twilight","Humidity hits 100% at noon"]
+         },
+         a:0,
+         fact:{junior:"Spot on! Checking sunrise, clouds, breeze and sunset is how real wildlife rangers read the savanna.",
+               pro:"Solar heating drives the diurnal cycle: dawn steam-mist gives way to midday cumulus mixing (~15–20 km/h wind) before radiative decoupling calms the pan at sunset."}}
+       ]},
+      {type:"live", title:"Live check: Serengeti Explorer", place:"Serengeti, Tanzania", slug:"serengeti-explorer", fallbackId:"BmOLK7LTKbY", tz:"Africa/Dar_es_Salaam",
+       speciesDay:{junior:"Zebras, giraffes, elephants or antelopes crossing the Serengeti plain", pro:"Plains zebras, Maasai giraffes, elephants, Thomson's gazelles or topi"},
+       speciesNight:{junior:"Lions, spotted hyenas or night-grazing hippos and zebras", pro:"Nocturnal prides, spotted hyenas, jackals or night-moving herbivores"},
+       factDay:{
+         junior:"The Serengeti means 'endless plains'! In daytime, herds of zebras, antelopes, giraffes and elephants wander past this real camera in Tanzania.",
+         pro:"Located in central Serengeti (1.96°S, 34.77°E), sunrise is ~06:21 EAT and sunset ~18:31 EAT. Daytime visibility spans open short- and medium-grass plains."
+       },
+       factNight:{
+         junior:"It is dark on the Serengeti plains right now! Listen and watch closely on the live night camera for glowing eyes or lion roars.",
+         pro:"After 18:31 EAT sunset in Tanzania, temperatures cool from ~25°C toward ~20°C under partly cloudy skies as lions and hyenas patrol waterhole approaches."
+       },
+       intro:{junior:"Now check the real clock, sunrise, sunset and weather in the Serengeti right now!", pro:"Inspect live MET Norway weather and solar state at Serengeti Explorer right now, then open the live stream."}}
+     ]},
+
     {id:"waterhole", name:"Waterhole", img:"img/quiver.jpg", open:true,
-     blurb:"Namibian desert, Botswana's flooded delta, lions at rest. Ends at a live waterhole in the Namib.",
+     blurb:"Namibian desert quiver trees, Botswana's flooded delta, lions at rest. Ends at a live waterhole in the Namib.",
      stops:[
       {type:"spot", title:"Quiver Tree Forest", place:"Near Keetmanshoop, Namibia",
        pano:"scenes/quiver.jpg", yaw:-37, pitch:4,
@@ -267,7 +510,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
                pro:"Unusually dense for a species that normally grows scattered: roughly 250 trees on the Gariganus farm, a national monument since 1955. Stands like this help researchers track age structure and die-off over decades."}}
        ]},
       {type:"watch", title:"Elephants at a waterhole", place:"Southern Africa", yt:"1vt9OpFx070", by:"Wildlife Protection Solutions",
-       intro:{junior:"Press play, then drag the video to look all around you. The elephants are behind you too!", pro:"Play, then pan the full sphere: note how the herd is spaced and what each animal is doing."},
+       onsiteCamp:{poster:"scenes/safari-daylight.jpg", startAt:88, yaw:-28, pitch:-8},
+       intro:{junior:"Press play, then drag the video to look all around you — or switch to our On-Site 360° Player if your phone shows YouTube flat!", pro:"Play, then pan the full sphere (or switch to our embedded WebGL 360° camp on iOS/mobile): note how the herd is spaced and what each animal is doing."},
        questions:[
         {q:{junior:"Why do elephants throw mud and water over their skin?", pro:"Why do elephants coat themselves in mud?"},
          opts:["To clean their tusks","Sunscreen and to stay cool","To scare away lions"], a:1,
@@ -280,6 +524,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
                pro:"Both, but mainly heat. The ears are full of blood vessels; flapping them cools the blood, which can be several degrees cooler when it returns to the body."}}
        ]},
       {type:"watch", title:"The Okavango Delta", place:"Botswana", yt:"HI7mTIxNotQ", by:"National Geographic",
+       onsiteCamp:{poster:"scenes/safari-sunrise.jpg", startAt:0, yaw:60, pitch:-10},
        intro:{junior:"A river that never reaches the sea! Watch the elephants walk through the delta and look all around.", pro:"Watch for how the herd uses the channels, and look for other species in the frame."},
        questions:[
         {q:{junior:"The Okavango floods in the dry season, when it hardly rains. Where does the water come from?", pro:"The Okavango's flood peaks in the dry winter months. Why?"},
@@ -288,6 +533,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
                pro:"Summer rain on the Angolan highlands takes roughly four months to travel down the river and spread across the flat delta, so the flood peaks in the dry season, exactly when surrounding water sources fail."}}
        ]},
       {type:"watch", title:"Lions at rest", place:"Africa", yt:"sPyAQQklc1s", by:"National Geographic",
+       onsiteCamp:{poster:"scenes/safari-sunset.jpg", startAt:262, yaw:40, pitch:-4},
        intro:{junior:"Lions all around you! Turn slowly and count them.", pro:"Pan the full sphere and note the pride's resting positions."},
        questions:[
         {q:{junior:"How long do lions sleep or rest each day?", pro:"Lions rest for most of the day. About how long?"},
@@ -301,13 +547,14 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       {type:"live", title:"Live check: Namib waterhole", place:"Garub, Namibia", slug:"namib-desert-waterhole", fallbackId:"ydYDqZQpim8", tz:"Africa/Windhoek",
        intro:{junior:"This waterhole is real, and it is live right now. What is happening there?", pro:"Use the live data to predict what the cam shows, then check."}}
      ]},
+
     {id:"reef", name:"Coral reef", img:"img/heron.jpg", blurb:"Great Barrier Reef bommies and a Red Sea dive. Ends at the Utila reef cams."},
     {id:"coast", name:"Penguin coast", img:"img/texel.jpg", blurb:"Penguins in Africa and footprints on a Dutch beach. Ends at the Stony Point colony."},
     {id:"polar", name:"Polar", img:"img/abisko.jpg", blurb:"Seals, king penguins and polar bears. Ends at the Cape Churchill cam."},
     {id:"rainforest", name:"Rainforest", img:"img/amazon.jpg", blurb:"From the forest floor to the canopy. Ends with the GRACE gorillas live."},
     {id:"night", name:"Night shift", img:null, blurb:"Only opens when it is night at the cams: bats, owls and badgers."}
   ];
-  const RANKS = [[0,"Cub"],[1,"Tracker"],[3,"Ranger"],[6,"Field Scientist"]];
+  const RANKS = [[0,"Cub"],[1,"Tracker"],[2,"Ranger"],[4,"Senior Ranger"],[6,"Field Scientist"]];
 
   // ---------- station home ----------
   function renderHome(){
@@ -320,35 +567,44 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("exps").innerHTML = EXPS.map(x => {
       const th = x.img ? `<img src="${x.img}" alt="" loading="lazy" width="480" height="240">` : "";
       const tag = x.open ? (got[x.id] ? "Done · play again" : `${x.stops.length} stops`) : "Coming soon";
-      let inner = `<span class="th">${th}<span class="tag">${tag}</span></span><span class="bd"><h3>${esc(x.name)}</h3><p>${esc(x.blurb)}</p><span class="go">${x.open ? "Start expedition →" : "Being prepared"}</span></span>`;
+      const vr = x.vrBadge ? `<span class="vrtag">${esc(x.vrBadge)}</span>` : "";
+      let inner = `<span class="th">${th}<span class="tag">${tag}</span>${vr}</span><span class="bd"><h3>${esc(x.name)}</h3><p>${esc(x.blurb)}</p><span class="go">${x.open ? "Start expedition →" : "Being prepared"}</span></span>`;
       if(!x.img) inner = inner.replace('<span class="th">', '<span class="th night">');
-      return x.open ? `<button type="button" class="ex" data-exp="${x.id}">${inner}</button>` : `<div class="ex soon">${inner}</div>`;
+      const cls = "ex" + (x.featured ? " featured" : "");
+      return x.open ? `<button type="button" class="${cls}" data-exp="${x.id}">${inner}</button>` : `<div class="ex soon">${inner}</div>`;
     }).join("");
   }
   $("exps").addEventListener("click", e => { const b = e.target.closest("[data-exp]"); if(b) start(b.dataset.exp); });
 
-  // ---------- field level ----------
+  // ---------- field level (Kids · Junior vs Adults · Pro) ----------
+  let run = null, viewer = null, campPlayer = null, loop = 0;
+
   function setMode(m){
     mode = m; store.set("mode", m);
     document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === m)));
     track("fs_mode", {mode: m});
+    if(campPlayer){
+      const ed = SAFARI_STREAMS[m] || SAFARI_STREAMS.junior;
+      campPlayer.setSource({ hlsSrc: ed.hls, preserveTime: true, editionLabel: ed.label });
+    }
     if(run) renderStop(false);
   }
   document.querySelectorAll(".mode button").forEach(b => b.addEventListener("click", () => setMode(b.dataset.mode)));
   document.querySelectorAll(".mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
 
   // ---------- running an expedition ----------
-  let run = null, viewer = null, loop = 0;
   function start(id){
     const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
-    run = {x, i:0, found:{}, answered:{}};
+    run = {x, i:0, found:{}, answered:{}, cleanLens:false};
     $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = x.name;
     track("fs_start", {exp: id, mode});
     renderStop(true); window.scrollTo({top: 0});
   }
   $("backBtn").addEventListener("click", () => { teardown(); run = null; $("runV").hidden = true; $("homeV").hidden = false; renderHome(); });
   function teardown(){
-    cancelAnimationFrame(loop); if(viewer){ try{ viewer.destroy(); }catch(e){} viewer = null; }
+    cancelAnimationFrame(loop); clearInterval(liveTick);
+    if(viewer){ try{ viewer.destroy(); }catch(e){} viewer = null; }
+    if(campPlayer){ try{ campPlayer.destroy(); }catch(e){} campPlayer = null; }
     if(ytPlayer){ try{ ytPlayer.destroy(); }catch(e){} ytPlayer = null; }
     tiltOn = false; window.removeEventListener("deviceorientation", onTilt);
     $("view").innerHTML = "";
@@ -357,16 +613,18 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function dots(){
     $("dots").innerHTML = run.x.stops.map((s, k) => `<i class="${k < run.i ? "done" : k === run.i ? "now" : ""}" title="${esc(s.title)}"></i>`).join("");
   }
-  // rebuild = load the scene again (new stop); otherwise only the journal text changes (field level switch)
   function renderStop(rebuild){
     const s = run.x.stops[run.i];
     dots();
-    if(rebuild){ teardown(); ({spot: buildSpot, watch: buildWatch, live: buildLive})[s.type](s); }
-    ({spot: journalSpot, watch: journalWatch, live: journalLive})[s.type](s);
+    const builders = {spot: buildSpot, camp360: buildCamp360, watch: buildWatch, live: buildLive};
+    const journals = {spot: journalSpot, camp360: journalCamp360, watch: journalWatch, live: journalLive};
+    if(rebuild){ teardown(); run.cleanLens = false; builders[s.type](s); }
+    journals[s.type](s);
   }
-  function nextBtn(ok){
+  function nextBtn(ok, whyText){
     const last = run.i === run.x.stops.length - 1;
-    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button>${ok ? "" : `<span class="why">${run.x.stops[run.i].type === "spot" ? "Find everything on the list first" : "Answer the questions first"}</span>`}</div>`;
+    const msg = whyText || (run.x.stops[run.i].type === "spot" ? "Find everything on the list first" : "Complete the tasks & questions first");
+    return `<div class="j-actions"><button class="btn main" type="button" id="nextBtn" ${ok ? "" : "disabled"}>${last ? "Finish expedition" : "Next stop →"}</button>${ok ? "" : `<span class="why">${esc(msg)}</span>`}</div>`;
   }
   $("journal").addEventListener("click", e => {
     if(e.target.id === "nextBtn"){ advance(); return; }
@@ -385,16 +643,52 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     got[run.x.id] = d; store.set("stamps", got);
     track("fs_finish", {exp: run.x.id, mode});
     teardown(); run.i = run.x.stops.length; dots();
-    $("view").innerHTML = `<div class="livebox"><div><span class="lt">Expedition complete</span><h3>${esc(run.x.name)}</h3><div class="sub">Stamp added to your passport.</div></div></div>`;
+    $("view").innerHTML = `<div class="livebox"><div><span class="lt">Expedition complete</span><h3>${esc(run.x.name)}</h3><div class="sub">Stamp added to your Explorer Passport.</div></div></div>`;
     const n = Object.keys(got).length, rank = RANKS.filter(r => n >= r[0]).pop()[1];
     $("journal").innerHTML = `<p class="j-k">Field journal · expedition complete</p>
       <div class="done-box"><div class="big-stamp">${esc(run.x.name)}<small>${esc(d)}</small></div>
-      <p class="j-intro">You found every clue and answered every field question. Your rank: <b>${esc(rank)}</b>.</p>
+      <p class="j-intro">You logged the 360° camp clues, checked the live solar &amp; weather telemetry, and answered every field question. Your rank: <b>${esc(rank)}</b>.</p>
       <div class="j-actions"><button class="btn main" type="button" id="toStation">Back to the station</button></div></div>`;
     $("toStation").addEventListener("click", () => $("backBtn").click());
   }
 
-  // ---------- stop type 1: spot it in a 360° photo ----------
+  // ---------- solar, sunrise/sunset & MET Norway weather helper ----------
+  function solarTelemetry(slug, tz){
+    const W = window.ZooWx, now = new Date();
+    const fmt = d => d.toLocaleTimeString("en-GB", {timeZone: tz, hour: "2-digit", minute: "2-digit"});
+    const time = fmt(now);
+    let night = null, phase = "day", riseStr = "", setStr = "", wx = "", hud = "";
+    const r = W && W.at(slug);
+    if(r && r.place){
+      const sun = W.sun(r.place.lat, r.place.lon, now);
+      if(sun.rise && sun.set){
+        riseStr = fmt(sun.rise);
+        setStr = fmt(sun.set);
+        night = !(now >= sun.rise && now < sun.set);
+        const minsFromRise = (now - sun.rise) / 60000;
+        const minsToSet = (sun.set - now) / 60000;
+        if(Math.abs(minsFromRise) <= 55) phase = "sunrise";
+        else if(Math.abs(minsToSet) <= 55) phase = "sunset";
+        else phase = night ? "night" : "day";
+      } else if(sun.polar){
+        night = sun.polar === "night";
+        phase = night ? "night" : "day";
+      }
+      if(r.w && r.d){
+        wx = `${r.d.icon} ${r.d.text} · ${W.temp(r.w.t, true)} · wind ${W.wind(r.w.ws)}`;
+        hud = `${time} local · ${r.d.icon} ${W.temp(r.w.t, false)}`;
+      }
+    }
+    if(night === null){
+      const h = +time.slice(0, 2);
+      night = h < 6 || h >= 19;
+      phase = (h >= 5 && h <= 7) ? "sunrise" : (h >= 17 && h < 19) ? "sunset" : (night ? "night" : "day");
+    }
+    if(!hud) hud = `${time} local · ${night ? "🌙 Night" : "☀️ Day"}`;
+    return {time, night, phase, riseStr, setStr, wx, hud};
+  }
+
+  // ---------- stop type 1: spot it in a 360° photo (Pannellum) ----------
   const R2D = 180 / Math.PI;
   function angDist(y1, p1, y2, p2){
     const r = Math.PI / 180, c = Math.sin(p1*r)*Math.sin(p2*r) + Math.cos(p1*r)*Math.cos(p2*r)*Math.cos((y1 - y2)*r);
@@ -429,7 +723,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         holdId = null; fg.style.strokeDashoffset = String(C);
         if(!(+aim.dataset.until > Date.now())) aim.textContent = open.length ? (mode === "junior" ? "Tap it, or hold it in the circle" : "Tap or centre a feature") : "All found";
       }
-      // hint arrow toward the nearest unfound target: always for Junior, after "Hint" for Pro
       if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
         let dy = ((near.yaw - y + 540) % 360) - 180, dp = near.pitch - p;
         const ang = Math.atan2(dy, dp) * R2D;
@@ -437,7 +730,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       } else arrow.hidden = true;
     };
     loop = requestAnimationFrame(step);
-    // tapping works too: a short tap (not a drag) logs whatever is under the finger
     const pano = $("pano"); let down = null;
     pano.addEventListener("pointerdown", e => { down = {x: e.clientX, y: e.clientY, t: Date.now()}; });
     pano.addEventListener("pointerup", e => {
@@ -479,9 +771,172 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       ${all ? "" : `<button class="hintb" type="button" id="skipBtn">Skip this stop</button>`}`;
   }
 
-  // ---------- stop type 2: watch a 360° video, answer field questions ----------
-  // 360° videos play in YouTube's player. It lets you look around on computers and Android, but iPhone and iPad
-  // Safari show 360° videos flat: there the stage offers the YouTube app, which does full 360° with drag and tilt.
+  // ---------- stop type 1B: embedded on-site 360° VR video camp (DLZ360Player) ----------
+  function buildCamp360(s){
+    const st = solarTelemetry(s.slug, s.tz);
+    const ed = SAFARI_STREAMS[mode] || SAFARI_STREAMS.junior;
+    let initTime = s.startAt || 0;
+    if(s.autoSolar){
+      if(st.phase === "sunrise") initTime = 0;
+      else if(st.phase === "day") initTime = 88;
+      else if(st.phase === "sunset") initTime = 262;
+      else initTime = 0;
+    }
+    const targets = s.targets || [];
+    let holdId = null, holdStart = 0;
+    const C = 2 * Math.PI * 38;
+
+    campPlayer = new window.DLZ360Player($("view"), {
+      hlsSrc: ed.hls,
+      poster: s.poster || "scenes/safari-sunrise.jpg",
+      yaw: s.yaw ?? 0,
+      pitch: s.pitch ?? 0,
+      hfov: 90,
+      startTime: initTime,
+      loop: true,
+      autoplay: false,
+      chapters: s.chapters || SAFARI_CHAPTERS,
+      editionLabel: ed.label,
+      telemetryText: st.hud,
+      onTapSphere(tapYaw, tapPitch){
+        if(!targets.length) return;
+        const open = targets.filter(t => !run.found[t.id]);
+        let best = null, bd = 999;
+        open.forEach(t => { const d = angDist(tapYaw, tapPitch, t.yaw, t.pitch); if(d < bd){ bd = d; best = t; } });
+        if(best && bd < best.tol * 1.65){
+          foundCampTarget(s, best);
+          flash("Found: " + best.name);
+        } else if(open.length){
+          flash("Keep panning 360° — more wildlife nearby!");
+        }
+      },
+      onFrame(pl){
+        if(!targets.length || run.cleanLens) return;
+        const fg = $("ringFg"), aim = $("aim"), arrow = $("arrow");
+        if(!fg) return;
+        const y = pl.getYaw(), p = pl.getPitch();
+        const open = targets.filter(t => !run.found[t.id]);
+        let near = null, nd = 999;
+        open.forEach(t => { const d = angDist(y, p, t.yaw, t.pitch); if(d < nd){ nd = d; near = t; } });
+        if(near && nd < near.tol){
+          if(holdId !== near.id){ holdId = near.id; holdStart = performance.now(); }
+          const k = Math.min(1, (performance.now() - holdStart) / 950);
+          fg.style.strokeDashoffset = String(C * (1 - k));
+          aim.textContent = k < 1 ? "Hold steady on " + near.name + "…" : "Logged!";
+          if(k >= 1){ foundCampTarget(s, near); holdId = null; }
+        } else {
+          holdId = null; fg.style.strokeDashoffset = String(C);
+          if(!(+aim.dataset.until > Date.now())){
+            aim.textContent = open.length
+              ? (mode === "junior" ? "Drag 360° · tap or hold in circle" : "Pan 360° · tap or centre target")
+              : "All 360° targets logged · explore freely!";
+          }
+        }
+        if(open.length && (mode === "junior" || run.hint) && nd >= (near ? near.tol : 0)){
+          let dy = ((near.yaw - y + 540) % 360) - 180, dp = near.pitch - p;
+          const ang = Math.atan2(dy, dp) * R2D;
+          arrow.hidden = false; arrow.style.transform = `rotate(${ang}deg)`;
+        } else arrow.hidden = true;
+      }
+    });
+
+    if(initTime > 0){
+      campPlayer.video.addEventListener("loadedmetadata", function seekOnce(){
+        campPlayer.video.removeEventListener("loadedmetadata", seekOnce);
+        campPlayer.seekTo(initTime);
+      });
+    }
+
+    if(targets.length){
+      campPlayer.overlayLayer.innerHTML = `<div class="lens" id="campLens"></div>
+        <div class="ring" id="campRing"><svg viewBox="0 0 84 84" aria-hidden="true"><circle class="bgc" cx="42" cy="42" r="38"/><circle class="fg" id="ringFg" cx="42" cy="42" r="38"/></svg></div>
+        <div class="arrow" id="arrow" hidden><span>↑</span></div><div class="aim" id="aim">Drag or tilt 360°</div>`;
+      const toggleBtn = document.createElement("button");
+      toggleBtn.type = "button";
+      toggleBtn.className = "lens-toggle";
+      toggleBtn.textContent = "🔭 Clean 360° View";
+      toggleBtn.addEventListener("click", () => {
+        run.cleanLens = !run.cleanLens;
+        campPlayer.overlayLayer.hidden = run.cleanLens;
+        toggleBtn.textContent = run.cleanLens ? "🔭 Show Binoculars" : "🔭 Clean 360° View";
+      });
+      campPlayer.wrap.appendChild(toggleBtn);
+      targets.forEach(t => { if(run.found[t.id]) pinCamp(s, t); });
+    }
+
+    if(window.ZooWx) ZooWx.ready.then(() => {
+      if(run && run.x.stops[run.i] === s && campPlayer){
+        const st2 = solarTelemetry(s.slug, s.tz);
+        campPlayer.setTelemetry(st2.hud);
+        journalCamp360(s);
+      }
+    });
+    track("fs_camp360", {exp: run.x.id, stop: run.i, mode, phase: st.phase});
+  }
+
+  function pinCamp(s, t){
+    if(!campPlayer) return;
+    campPlayer.addPin(t.id, t.yaw, t.pitch, t.name, () => {
+      run.last = t.id;
+      journalCamp360(s);
+    });
+  }
+  function foundCampTarget(s, t){
+    if(run.found[t.id]) return;
+    run.found[t.id] = true; run.last = t.id;
+    pinCamp(s, t);
+    track("fs_found", {exp: run.x.id, target: t.id, mode, inVideo: true});
+    journalCamp360(s);
+  }
+  function journalCamp360(s){
+    const st = solarTelemetry(s.slug, s.tz);
+    const targets = s.targets || [];
+    const questions = s.questions || [];
+    const allTargets = targets.every(t => run.found[t.id]);
+    const allQs = questions.every((q, k) => run.answered[run.i + ":" + k + ":" + mode] !== undefined);
+    const done = allTargets && allQs;
+    const last = run.last && targets.find(t => t.id === run.last && run.found[t.id]);
+
+    const sunLine = (st.riseStr && st.setStr) ? `Sunrise ${st.riseStr} · Sunset ${st.setStr}` : "";
+    const statusNote = st.night
+      ? `🌙 Now at ${s.place}: ${st.time} (after sunset) — exploring today's recorded Sunrise & Sunset 360° watches`
+      : `☀️ Live station time at ${s.place}: ${st.time} (${st.phase})`;
+
+    const wxHtml = `<div class="wx-box">
+      <b>${esc(statusNote)}</b>
+      <span>${esc([sunLine, st.wx].filter(Boolean).join(" · ") || "Checking live MET Norway station weather…")}</span>
+    </div>`;
+
+    const tasksHtml = targets.length ? `
+      <ul class="tasks">${targets.map(t => `<li class="${run.found[t.id] ? "ok" : ""}">${esc(T(t.task))}</li>`).join("")}</ul>
+      ${mode === "pro" && !run.hint && !allTargets ? `<button class="hintb" type="button" id="hintBtn">Show directional hint arrow</button>` : ""}
+      <p class="j-k">${targets.filter(t => run.found[t.id]).length} of ${targets.length} 360° clues logged</p>
+      ${last ? `<div class="card"><span class="hand">spotted!</span><b>${esc(last.name)}</b><span class="sci">${esc(last.sci)}</span><p>${esc(T(last.fact))}</p></div>` : ""}
+    ` : "";
+
+    const qsHtml = questions.map((q, k) => {
+      const key = run.i + ":" + k + ":" + mode, got = run.answered[key];
+      const opts = pickOf(q.opts), a = ansOf(q);
+      const bt = opts.map((o, j) => {
+        const cls = got === undefined ? "" : (j === a ? "right" : (j === got ? "wrong" : ""));
+        return `<button type="button" data-q="${k}" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
+      }).join("");
+      const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
+      return `<div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>`;
+    }).join("");
+
+    const whyMsg = !allTargets ? "Spot the 360° clues in the video first" : "Answer the field question first";
+    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · Embedded 360° VR Camp · ${mode === "junior" ? "Kids" : "Adults"}</p>
+      <h3>${esc(s.title)}</h3>
+      ${wxHtml}
+      <p class="j-intro">${esc(T(s.intro))}</p>
+      ${tasksHtml}
+      ${qsHtml}
+      ${nextBtn(done, whyMsg)}
+      ${done ? "" : `<button class="hintb" type="button" id="skipBtn">Skip this stop</button>`}`;
+  }
+
+  // ---------- stop type 2: external YouTube 360° video with On-Site WebGL 360° fallback ----------
   const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   let ytApi = null, ytPlayer = null, tiltOn = false;
   function loadYT(){
@@ -494,16 +949,43 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     });
     return ytApi;
   }
+  function switchWatchToOnsite(s){
+    if(ytPlayer){ try{ ytPlayer.destroy(); }catch(e){} ytPlayer = null; }
+    $("view").innerHTML = "";
+    const ed = SAFARI_STREAMS[mode] || SAFARI_STREAMS.junior;
+    const oc = s.onsiteCamp || {poster:"scenes/safari-daylight.jpg", startAt:88, yaw:0, pitch:0};
+    campPlayer = new window.DLZ360Player($("view"), {
+      hlsSrc: ed.hls,
+      poster: oc.poster,
+      yaw: oc.yaw,
+      pitch: oc.pitch,
+      hfov: 90,
+      loop: true,
+      autoplay: true,
+      chapters: SAFARI_CHAPTERS,
+      editionLabel: ed.label
+    });
+    if(oc.startAt > 0){
+      campPlayer.video.addEventListener("loadedmetadata", function sk(){
+        campPlayer.video.removeEventListener("loadedmetadata", sk);
+        campPlayer.seekTo(oc.startAt);
+      });
+    }
+    track("fs_onsite360_fallback", {yt: s.yt, mode});
+  }
   function buildWatch(s){
-    const app = `https://www.youtube.com/watch?v=${s.yt}`;
     $("view").innerHTML = `<div class="yt" id="ytBox"></div>
       <div class="look" id="look" hidden>
         <button type="button" data-look="left" aria-label="Look left">◀</button><button type="button" data-look="up" aria-label="Look up">▲</button>
         <button type="button" data-look="down" aria-label="Look down">▼</button><button type="button" data-look="right" aria-label="Look right">▶</button>
         <button type="button" data-look="tilt" class="tilt" hidden>Tilt to look</button>
       </div>
-      <a class="appbtn" id="appBtn" href="${app}" target="_blank" rel="noopener" ${IOS ? "" : "hidden"}>
-        <b>Look around in the YouTube app ↗</b><span>${IOS ? "On iPhone and iPad, 360° only works in the YouTube app. Watch there, then come back for the questions." : "Your browser shows this video flat. The YouTube app lets you look all around."}</span></a>`;
+      <div class="appbtn" id="appBtn" ${IOS ? "" : "hidden"}>
+        <div><b>Want full 360° right here on this page?</b><span>Mobile browsers show YouTube 360° flat — open our embedded On-Site 360° Safari Player without leaving Digital Live Zoo.</span></div>
+        <button type="button" id="useOnsiteBtn">Play in On-Site 360° →</button>
+      </div>`;
+    const ub = $("useOnsiteBtn");
+    if(ub) ub.addEventListener("click", () => switchWatchToOnsite(s));
     loadYT().then(() => {
       if(!$("ytBox")) return;
       ytPlayer = new YT.Player("ytBox", {videoId: s.yt, playerVars: {playsinline: 1, rel: 0, modestbranding: 1},
@@ -552,69 +1034,84 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     }).join("");
     const done = s.questions.every((q, k) => run.answered[run.i + ":" + k + ":" + mode] !== undefined);
     $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · ${esc(s.place)} · 360° video by ${esc(s.by)}</p><h3>${esc(s.title)}</h3>
-      <p class="j-intro">${esc(T(s.intro))}</p>${qs}${nextBtn(done)}`;
+      <p class="j-intro">${esc(T(s.intro))}</p>${qs}${nextBtn(done, "Answer the questions first")}`;
   }
   function answer(k, o){
     const s = run.x.stops[run.i];
-    if(s.type === "live"){ run.answered["live:" + mode] = o; track("fs_answer", {exp: run.x.id, stop: run.i, q: "live", ok: o === run.liveA}); journalLive(s); return; }
+    if(s.type === "live"){ run.answered["live:" + run.i + ":" + mode] = o; track("fs_answer", {exp: run.x.id, stop: run.i, q: "live", ok: o === run.liveA}); journalLive(s); return; }
     const key = run.i + ":" + k + ":" + mode; if(run.answered[key] !== undefined) return;
     run.answered[key] = o;
     track("fs_answer", {exp: run.x.id, stop: run.i, q: k, ok: o === ansOf(s.questions[k]), mode});
-    journalWatch(s);
+    if(s.type === "camp360") journalCamp360(s);
+    else journalWatch(s);
   }
 
-  // ---------- stop type 3: live check at a real cam ----------
+  // ---------- stop type 3: live check at a real cam (with embedded in-page stream preview!) ----------
   let liveTick = 0;
-  function liveState(s){
-    const W = window.ZooWx, now = new Date();
-    const time = now.toLocaleTimeString("en-GB", {timeZone: s.tz, hour: "2-digit", minute: "2-digit"});
-    let night = null, wx = "";
-    const r = W && W.at(s.slug);
-    if(r && r.place){
-      const sun = W.sun(r.place.lat, r.place.lon, now);
-      night = sun.polar ? sun.polar === "night" : !(now >= sun.rise && now < sun.set);
-      if(r.w && r.d) wx = `${r.d.icon} ${r.d.text} · ${W.temp(r.w.t, true)} · wind ${W.wind(r.w.ws)}`;
-    }
-    if(night === null){ const h = +time.slice(0, 2); night = h < 6 || h >= 19; }
-    return {time, night, wx};
-  }
   function buildLive(s){
-    const st = liveState(s);
-    $("view").innerHTML = `<div class="livebox"><div><span class="lt"><i aria-hidden="true"></i>Live now</span><h3>${esc(s.title.replace("Live check: ", ""))}</h3>
-      <div class="clock" id="lvClock">${esc(st.time)}</div><div class="sub" id="lvSub">${esc(s.place)} · ${st.night ? "night" : "daytime"}${st.wx ? " · " + esc(st.wx) : ""}</div></div></div>`;
+    const st = solarTelemetry(s.slug, s.tz);
+    const sunInfo = (st.riseStr && st.setStr) ? `<div class="sunrow" id="lvSun">🌅 Sunrise ${esc(st.riseStr)} · 🌇 Sunset ${esc(st.setStr)}</div>` : `<div class="sunrow" id="lvSun"></div>`;
+    $("view").innerHTML = `<div class="livebox" id="liveBoxCard"><div>
+      <span class="lt"><i aria-hidden="true"></i>Live right now</span>
+      <h3>${esc(s.title.replace("Live check: ", ""))}</h3>
+      <div class="clock" id="lvClock">${esc(st.time)}</div>
+      <div class="sub" id="lvSub">${esc(s.place)} · ${st.night ? "🌙 night" : "☀️ daytime"}${st.wx ? " · " + esc(st.wx) : ""}</div>
+      ${sunInfo}
+      <button type="button" class="watchhere" id="watchLiveInline">▶ Watch live cam right here</button>
+    </div></div>`;
+    $("watchLiveInline").addEventListener("click", () => {
+      const vid = run.liveId || s.fallbackId;
+      $("view").innerHTML = `<iframe id="liveEmbed" src="https://www.youtube.com/embed/${encodeURIComponent(vid)}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="${esc(s.title)}"></iframe>`;
+      track("fs_live_inline", {slug: s.slug, id: vid, mode});
+    });
     clearInterval(liveTick);
-    liveTick = setInterval(() => { const c = $("lvClock"); if(!c){ clearInterval(liveTick); return; } c.textContent = liveState(s).time; }, 20000);
-    // the cam's current YouTube id (owners restart streams, the slug stays the same)
+    liveTick = setInterval(() => { const c = $("lvClock"); if(!c){ clearInterval(liveTick); return; } c.textContent = solarTelemetry(s.slug, s.tz).time; }, 20000);
     run.liveId = s.fallbackId;
     fetch("/slugs.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(m => {
       if(!m) return; const id = Object.keys(m).find(k => m[k] === s.slug); if(id){ run.liveId = id; const a = $("liveLink"); if(a) a.href = "/#" + id; }
     }).catch(() => {});
-    if(window.ZooWx) ZooWx.ready.then(() => { if(run && run.x.stops[run.i] === s){ const st2 = liveState(s); const sub = $("lvSub"); if(sub) sub.textContent = `${s.place} · ${st2.night ? "night" : "daytime"}${st2.wx ? " · " + st2.wx : ""}`; journalLive(s); } });
+    if(window.ZooWx) ZooWx.ready.then(() => {
+      if(run && run.x.stops[run.i] === s){
+        const st2 = solarTelemetry(s.slug, s.tz);
+        const sub = $("lvSub"), sr = $("lvSun");
+        if(sub) sub.textContent = `${s.place} · ${st2.night ? "🌙 night" : "☀️ daytime"}${st2.wx ? " · " + st2.wx : ""}`;
+        if(sr && st2.riseStr && st2.setStr) sr.textContent = `🌅 Sunrise ${st2.riseStr} · 🌇 Sunset ${st2.setStr}`;
+        journalLive(s);
+      }
+    });
   }
   function journalLive(s){
-    const st = liveState(s);
+    const st = solarTelemetry(s.slug, s.tz);
+    const dayOpt = s.speciesDay ? T(s.speciesDay) : "Wild horses, oryx or ostriches coming to drink";
+    const nightOpt = s.speciesNight ? T(s.speciesNight) : "Spotted hyenas or jackals checking the water";
+    const dayFact = s.factDay || {
+      junior:"The famous wild horses of the Namib drink here, and so do oryx (gemsbok) and ostriches. They can go a long time without water, but they come back to this trough again and again.",
+      pro:"The feral horses of Garub, descended from horses left in the area in the early 1900s, depend on this trough; gemsbok (oryx) and ostriches use it too. Visits cluster in the cooler morning and late afternoon."
+    };
+    const nightFact = s.factNight || {
+      junior:"Hyenas and jackals are night hunters. At Garub they even wait near the water for the wild horses. Look for glowing eyes on the night camera!",
+      pro:"Spotted hyenas are the main nocturnal visitors at Garub and a known predator of the feral horses' foals; black-backed jackals scavenge around the trough. The infrared camera shows them as pale shapes with bright eyeshine."
+    };
     const q = st.night
-      ? {q:{junior:`It is ${st.time} and dark at this waterhole. Who is most likely to visit now?`, pro:`Local time ${st.time}, after sunset. Which visitors does the cam most likely show?`},
-         opts:["Nobody: every animal is asleep","Spotted hyenas or jackals checking the water","Wild horses grazing in the midday sun"], a:1,
-         fact:{junior:"Hyenas and jackals are night hunters. At Garub they even wait near the water for the wild horses. Look for glowing eyes on the night camera!",
-               pro:"Spotted hyenas are the main nocturnal visitors at Garub and a known predator of the feral horses' foals; black-backed jackals scavenge around the trough. The infrared camera shows them as pale shapes with bright eyeshine."}}
-      : {q:{junior:`It is ${st.time} and daytime at this waterhole. Who is most likely to visit now?`, pro:`Local time ${st.time}, daylight. Which visitors does the cam most likely show?`},
-         opts:["Penguins","Wild horses, oryx or ostriches coming to drink","Nobody: it is far too hot for anything"], a:1,
-         fact:{junior:"The famous wild horses of the Namib drink here, and so do oryx (gemsbok) and ostriches. They can go a long time without water, but they come back to this trough again and again.",
-               pro:"The feral horses of Garub, descended from horses left in the area in the early 1900s, depend on this trough; gemsbok (oryx) and ostriches use it too. Visits cluster in the cooler morning and late afternoon."}};
+      ? {q:{junior:`It is ${st.time} and dark at ${s.place}. Who is most likely on the live camera right now?`, pro:`Local time ${st.time} (after ${st.setStr || "sunset"}). Which visitors does this live cam most likely show?`},
+         opts:["Nobody: every animal sleeps all night", nightOpt, "Polar bears and penguins"], a:1,
+         fact:nightFact}
+      : {q:{junior:`It is ${st.time} and daytime at ${s.place}. Who is most likely visiting right now?`, pro:`Local time ${st.time} (between ${st.riseStr || "sunrise"} and ${st.setStr || "sunset"}). Which diurnal visitors are expected?`},
+         opts:["Penguins on sea ice", dayOpt, "Nobody: waterholes stay empty all day"], a:1,
+         fact:dayFact};
     run.liveA = q.a;
-    const got = run.answered["live:" + mode];
+    const got = run.answered["live:" + run.i + ":" + mode];
     const bt = q.opts.map((o, j) => {
       const cls = got === undefined ? "" : (j === q.a ? "right" : (j === got ? "wrong" : ""));
       return `<button type="button" data-q="0" data-o="${j}" class="${cls}" ${got !== undefined ? "disabled" : ""}>${esc(o)}</button>`;
     }).join("");
     const fb = got === undefined ? "" : `<p class="fb"><span class="hand">${got === q.a ? "Yes!" : "Not quite."}</span>${esc(T(q.fact))}</p>`;
     const link = `/#${run.liveId || s.fallbackId}`;
-    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · live · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
+    $("journal").innerHTML = `<p class="j-k">Stop ${run.i + 1} · Live cam · ${esc(s.place)}</p><h3>${esc(s.title)}</h3>
       <p class="j-intro">${esc(T(s.intro))}</p>
       <div class="q"><b>${esc(T(q.q))}</b><div class="opts">${bt}</div>${fb}</div>
-      ${got !== undefined ? `<div class="j-actions"><a class="btn" id="liveLink" href="${link}" target="_blank" rel="noopener">Check it live on the Main Stage ↗</a></div>` : ""}
-      ${nextBtn(got !== undefined)}`;
+      ${got !== undefined ? `<div class="j-actions"><a class="btn" id="liveLink" href="${link}" target="_blank" rel="noopener">Also open on Main Stage ↗</a></div>` : ""}
+      ${nextBtn(got !== undefined, "Predict who is at the live cam first")}`;
   }
 
   renderHome();
