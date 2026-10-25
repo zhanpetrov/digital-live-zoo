@@ -68,7 +68,7 @@ button{cursor:pointer;touch-action:manipulation}
 .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,7.6vw,96px);line-height:.88;margin:0;text-transform:uppercase;color:var(--sign)}
 .hero p{margin:12px 0 0;color:var(--muted);max-width:62ch;font-size:15.5px}
 .hero-actions{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
-.act-btn{border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:9px 16px;min-height:42px;font-weight:700;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;transition:border-color .15s,background .15s,transform .15s}
+.act-btn{border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:9px 16px;min-height:42px;font-weight:700;font-size:13.5px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:border-color .15s,background .15s,transform .15s}
 .act-btn:hover{border-color:var(--sign);transform:translateY(-1px)}
 .act-btn.gold{background:var(--sign);color:#1d2a20;border-color:var(--sign)}
 .act-btn.gold:hover{background:#ffd24a}
@@ -372,7 +372,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <h1 id="heroTitle">Field Station</h1>
         <p id="heroDesc"></p>
         <div class="hero-actions">
-          <button type="button" class="act-btn gold" id="btnSurpriseHero">🎲 Surprise Expedition</button>
+          <a class="act-btn gold" href="zebra-migration/" id="btnZebraHero">🦓 Stampede 360° (4K Film)</a>
+          <a class="act-btn" href="pink-in-the-salt/" id="btnPinkHero">🦩 Pink in the Salt (360° Film)</a>
+          <button type="button" class="act-btn" id="btnSurpriseHero">🎲 Surprise Expedition</button>
           <button type="button" class="act-btn" id="btnScienceHero">🔬 Science &amp; Child Development</button>
         </div>
       </div>
@@ -505,6 +507,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       word: "Field Station",
       sciBtnShort: "🔬 Science & Kids",
       sciBtnHero: "🔬 Science & Child Development",
+      zebraHeroBtn: "🦓 Stampede 360° (4K Film)",
+      pinkHeroBtn: "🦩 Pink in the Salt (360° Film)",
       surpriseHero: "🎲 Surprise Expedition",
       surpriseBar: "🎲 Surprise",
       langLabel: "Language",
@@ -621,6 +625,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       word: "Полевая станция",
       sciBtnShort: "🔬 Наука и дети",
       sciBtnHero: "🔬 Научная база: Дети и Про",
+      zebraHeroBtn: "🦓 Миграция зебр 360° (4K фильм)",
+      pinkHeroBtn: "🦩 Фламинго Чакса (360° фильм)",
       surpriseHero: "🎲 Случайная экспедиция",
       surpriseBar: "🎲 Случайная",
       langLabel: "Язык",
@@ -882,6 +888,89 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
           sub: { en: "Namib Desert 360° Expedition →", ru: "360°-экспедиция к водопою пустыни Намиб →" }
         }
       ]
+    },
+    "zebra-migration": {
+      masterHls: "streams/zebra-migration/master.m3u8",
+      streams: {
+        en_junior: { track: "en_junior", hls: "streams/zebra-migration/en_junior.m3u8", srt: "streams/zebra-migration/en_junior.srt", label: "EN · Family · George (2:00)" },
+        en_pro:    { track: "en_pro",    hls: "streams/zebra-migration/en_pro.m3u8",    srt: "streams/zebra-migration/en_pro.srt",    label: "EN · IMAX · George (2:00)" },
+        ru_junior: { track: "ru_junior", hls: "streams/zebra-migration/ru_junior.m3u8", srt: "streams/zebra-migration/ru.srt",        label: "RU · Приключение · Глеб (2:00)" },
+        ru_pro:    { track: "ru_pro",    hls: "streams/zebra-migration/ru_pro.m3u8",    srt: "streams/zebra-migration/ru.srt",        label: "RU · Блокбастер · Глеб (2:00)" }
+      },
+      chapters: {
+        en: [
+          { time: 0,   label: "0:00 · Roof Turret" },
+          { time: 5,   label: "0:05 · Bull-Bar POV" },
+          { time: 10,  label: "0:10 · Mud-Tire Rig" },
+          { time: 15,  label: "0:15 · Open Cockpit" },
+          { time: 25,  label: "0:25 · Inside Herd" },
+          { time: 50,  label: "0:50 · Mara River Splash!" },
+          { time: 95,  label: "1:35 · Tailgate Storm" },
+          { time: 110, label: "1:50 · Sunset FPV" }
+        ],
+        ru: [
+          { time: 0,   label: "0:00 · Башня на крыше" },
+          { time: 5,   label: "0:05 · Кенгурятник" },
+          { time: 10,  label: "0:10 · У колеса и копыт" },
+          { time: 15,  label: "0:15 · Открытый кокпит" },
+          { time: 25,  label: "0:25 · Внутри стада" },
+          { time: 50,  label: "0:50 · Брод реки Мара!" },
+          { time: 95,  label: "1:35 · Пыльный шлейф" },
+          { time: 110, label: "1:50 · Закатный пролёт" }
+        ]
+      },
+      loop: false,
+      poster: "scenes/zebra-migration-poster.jpg",
+      holdPoster: "scenes/zebra-migration-hold.jpg",
+      badgeText: {
+        en: "4K 360° ACTION FILM · 10 VR RIGS · IMAX STEREO",
+        ru: "4K 360° ЭКШЕН-ФИЛЬМ · 10 РАКУРСОВ · IMAX СТЕРЕО"
+      },
+      enterTitle: {
+        en: "▶ Launch 02:00 4K Film · Stampede 360°",
+        ru: "▶ Запустить 4K фильм 02:00 · Миграция 360°"
+      },
+      enterSub: {
+        en: "10 High-Speed VR Camera Rigs · Roaring V8 + Great Zebra Migration + Mara River Splash",
+        ru: "10 скоростных VR-ракурсов · Рёв V8 + Великая миграция зебр + прорыв через реку Мара"
+      },
+      guideTargets: [
+        { t0: 0,   t1: 15,  yaw: 8,   pitch: -2 },
+        { t0: 15,  t1: 50,  yaw: 16,  pitch: -3 },
+        { t0: 50,  t1: 70,  yaw: 10,  pitch: -4 },
+        { t0: 70,  t1: 110, yaw: 6,   pitch: -2 },
+        { t0: 110, t1: 120, yaw: 0,   pitch: -2 }
+      ],
+      timedHotspots: [
+        {
+          t0: 15.5, t1: 34.5, yaw: 18.0, pitch: -4.0,
+          label: { en: "Motion-dazzle stripe blur", ru: "Эффект «ослепления полосами»" },
+          note: {
+            en: "In a galloping group, high-contrast zebra stripes generate conflicting optic-flow vectors (How & Zanker, 2014), making individual speed and trajectory harder for predators to track.",
+            ru: "В мчащемся табуне контрастные полосы создают оптическую иллюзию вектора скорости (How & Zanker, 2014), мешая хищнику выделить одну зебру."
+          }
+        },
+        {
+          t0: 50.5, t1: 69.5, yaw: 12.0, pitch: -5.0,
+          label: { en: "Mara River shallow ford", ru: "Скоростной брод через реку Мара" },
+          note: {
+            en: "Over 250,000 plains zebras cross the Mara River each dry season, scouting tall-grass pastures ahead of over a million wildebeest.",
+            ru: "Свыше 250 000 бурчелловых зебр форсируют реку Мара в сухой сезон, первыми открывая высокотравные пастбища для миллиона гну."
+          }
+        }
+      ],
+      endRoutes: [
+        {
+          id: "atacama-altiplano-flamingos",
+          label: { en: "LAGUNA CHAXA — PINK IN THE SALT", ru: "ЛАГУНА ЧАКСА — РОЗОВОЕ НА БЕЛОЙ СОЛИ" },
+          sub: { en: "05:00 Chilean Flamingos 360° Film →", ru: "Пятиминутный 360°-фильм о фламинго Атакамы →" }
+        },
+        {
+          id: "safari-camp",
+          label: { en: "GREATER KRUGER — SAFARI CAMP", ru: "БОЛЬШОЙ КРЮГЕР — САФАРИ-ЛАГЕРЬ" },
+          sub: { en: "06:00 African Bush 360° Expedition →", ru: "Шестиминутная 360°-экспедиция в буш Африки →" }
+        }
+      ]
     }
   };
   const PANO_VOICE_LABELS = {
@@ -1048,6 +1137,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("wordTitle").textContent = s.word;
     $("btnScienceModal").textContent = s.sciBtnShort;
     $("btnScienceHero").textContent = s.sciBtnHero;
+    $("btnZebraHero").textContent = s.zebraHeroBtn;
+    $("btnPinkHero").textContent = s.pinkHeroBtn;
     $("btnSurpriseHero").textContent = s.surpriseHero;
     $("btnSurpriseBar").textContent = s.surpriseBar;
     $("langL").textContent = s.langLabel;
@@ -1391,6 +1482,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   // ---------- Running an Expedition ----------
   function start(id){
     if(id === "pink-in-the-salt") id = "atacama-altiplano-flamingos";
+    if(id === "zebra-migration") id = "maasai-mara-migration-plains";
     const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
     run = {x, i:0, found:{}, answered:{}, wrongTries:{}, cleanLens:false};
     $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = R(x.name);
@@ -1757,8 +1849,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     const qsHtml = renderQuizBlocks(questions, run.i);
     const whyMsg = !allTargets ? ui.spotCluesWhy : ui.answerFieldWhy;
     const metaLabel = s.customMeta ? R(s.customMeta) : (s.type === "pano360" ? ui.panoCampMeta(mode) : ui.vrCampMeta(mode));
+    const cinemaLabel = s.cinemaBtn ? R(s.cinemaBtn) : ui.cinemaBtn;
     const cinemaHtml = s.cinemaUrl
-      ? `<div class="j-actions" style="margin-top:0;margin-bottom:14px"><a class="btn" href="${esc(s.cinemaUrl)}">${esc(ui.cinemaBtn)}</a></div>`
+      ? `<div class="j-actions" style="margin-top:0;margin-bottom:14px"><a class="btn" href="${esc(s.cinemaUrl)}">${esc(cinemaLabel)}</a></div>`
       : "";
 
     $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(metaLabel)}</p>

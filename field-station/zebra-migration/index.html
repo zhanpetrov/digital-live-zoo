@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>STAMPEDE 360° · Great Zebra Migration 4K VR Film · Digital Live Zoo</title>
+  <meta name="description" content="Race alongside 10,000 galloping zebras across the Serengeti and Mara River from 10 high-speed 360° VR camera rigs in 4K with Hollywood V8 SFX, Hans Zimmer-style percussion, and EN/RU ElevenLabs narration." />
+  <meta property="og:title" content="STAMPEDE 360° · Great Zebra Migration 4K VR Safari Chase" />
+  <meta property="og:description" content="10 high-velocity 360° VR camera rigs · 4K Spherical Cinema · Switchable RU / EN / Kids / Pure SFX & Music · Digital Live Zoo × Zhan Petrov." />
+  <meta property="og:image" content="https://digitallivezoo.com/field-station/img/zebra-migration.jpg" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #08090c;
+      --panel: rgba(14, 16, 22, 0.86);
+      --border: rgba(255, 198, 92, 0.34);
+      --accent: #ffc24b;
+      --fire: #ff6b2b;
+      --text: #fbf6ee;
+      --muted: #c2bcb2;
+      --ok: #8ce0a4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Segoe UI", sans-serif;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #glCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+    #glCanvas:active { cursor: grabbing; }
+
+    .hud-top {
+      position: fixed;
+      top: max(12px, env(safe-area-inset-top));
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .hud-pill, .hud-controls {
+      pointer-events: auto;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 7px 13px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12.5px;
+      max-width: 100%;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    }
+    .back-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .back-link:hover { background: rgba(255, 194, 75, 0.22); border-color: var(--accent); }
+    .badge-imax {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #181206;
+      background: linear-gradient(135deg, #ffd26a, #ff9933);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    button, select {
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      min-height: 34px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s;
+      white-space: nowrap;
+    }
+    select option { background: #141720; color: var(--text); }
+    button:hover, select:hover { background: rgba(255, 194, 75, 0.20); border-color: var(--accent); }
+    button.active { background: rgba(255, 194, 75, 0.30); border-color: var(--accent); color: #fff; }
+
+    #bigStartBtn {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 11;
+      background: rgba(12, 14, 20, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 2px solid var(--accent);
+      border-radius: 24px;
+      padding: 18px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.72), 0 0 32px rgba(255, 170, 40, 0.22);
+      max-width: calc(100vw - 32px);
+      text-align: center;
+    }
+    #bigStartBtn:hover { transform: translate(-50%, -50%) scale(1.02); background: rgba(20, 22, 30, 0.95); }
+    #bigStartBtn strong { font-size: 17.5px; letter-spacing: 0.03em; color: var(--accent); }
+    #bigStartBtn span { font-size: 12.5px; color: var(--muted); white-space: normal; max-width: 44ch; line-height: 1.38; }
+
+    #rigHudBadge {
+      position: fixed;
+      top: 76px;
+      left: 12px;
+      z-index: 9;
+      background: rgba(12, 15, 22, 0.80);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 198, 92, 0.28);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      pointer-events: none;
+    }
+
+    #infoDrawer {
+      position: fixed;
+      top: 78px;
+      right: 12px;
+      width: min(360px, calc(100vw - 24px));
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 15px;
+      display: none;
+      z-index: 12;
+      line-height: 1.48;
+      font-size: 13px;
+    }
+    #infoDrawer h3 { font-size: 14px; color: var(--accent); margin-bottom: 6px; }
+    #infoDrawer p { color: var(--muted); margin-bottom: 8px; }
+
+    #captionBox {
+      position: fixed;
+      bottom: 108px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: min(760px, calc(100vw - 26px));
+      text-align: center;
+      background: rgba(8, 10, 14, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 198, 92, 0.26);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.4;
+      display: none;
+      z-index: 10;
+      pointer-events: none;
+      white-space: normal;
+    }
+
+    .hud-bottom {
+      position: fixed;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      left: 12px;
+      right: 12px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 9px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      z-index: 10;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+    }
+    .chapter-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chapter-row::-webkit-scrollbar { display: none; }
+    .chap-btn { font-size: 11px; min-height: 30px; padding: 4px 10px; color: var(--muted); }
+    .chap-btn.active { color: #181206; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+    .transport-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #scrub { flex: 1; min-width: 110px; accent-color: var(--accent); cursor: pointer; height: 6px; }
+    .mono { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+    #postFilmModal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 8, 12, 0.56);
+      z-index: 20;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .post-card {
+      width: min(680px, 100%);
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+      background: rgba(14, 17, 24, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .stamp {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .route-link {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255, 194, 75, 0.11);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 15px;
+      font-weight: 700;
+      font-size: 13.5px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .route-link:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .route-link span { display: block; font-weight: 400; font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    @media (max-width: 720px) {
+      #poseReadout, .place-sub { display: none; }
+      .hud-pill, .hud-controls { padding: 6px 10px; gap: 6px; font-size: 11.5px; }
+      button, select { padding: 5px 10px; font-size: 11.5px; min-height: 32px; }
+      .transport-row input[type="range"] { min-width: 88px; }
+      #rigHudBadge { top: auto; bottom: 218px; left: 12px; font-size: 10.5px; padding: 5px 10px; }
+      #captionBox { font-size: 13.4px; bottom: 158px; padding: 6px 12px; width: min(92vw, 760px); }
+      #infoDrawer { top: auto; bottom: 162px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="glCanvas"></canvas>
+  <video id="vid360" crossorigin="anonymous" playsinline webkit-playsinline preload="auto" style="display:none"></video>
+
+  <div class="hud-top">
+    <div class="hud-pill">
+      <a class="back-link" id="backStationLink" href="../">← Field Station</a>
+      <strong id="filmTitle">STAMPEDE 360°</strong>
+      <span class="place-sub" id="filmPlace" style="color:var(--muted)">Serengeti – Mara</span>
+      <span class="badge-imax" id="imaxBadge">4K 360° VR · IMAX MIX</span>
+    </div>
+    <div class="hud-controls">
+      <select id="editionSel" aria-label="Audio & Language Mix">
+        <option value="ru_pro">🇷🇺 RU · Блокбастер (Глеб)</option>
+        <option value="en_pro">🇬🇧 EN · IMAX Trailer (George)</option>
+        <option value="en_junior">🧒 EN · Kids Adventure</option>
+        <option value="pure_action">🔥 PURE SFX &amp; MUSIC (No VO)</option>
+      </select>
+      <select id="qualSel" aria-label="Video Quality">
+        <option value="4k">4K Ultra (3840p)</option>
+        <option value="auto">Auto ABR</option>
+      </select>
+      <button id="gyroBtn" type="button">📱 Tilt 360°</button>
+      <button id="ccBtn" type="button" class="active">CC: ON</button>
+      <button id="notesBtn" type="button">Science &amp; Rigs</button>
+      <span class="mono" id="poseReadout">Yaw 0° · Pitch 0°</span>
+    </div>
+  </div>
+
+  <div id="rigHudBadge">🎥 RIG 01 · ROOF TURRET 360°</div>
+
+  <button id="bigStartBtn" type="button">
+    <strong id="bigStartTitle">▶ LAUNCH 02:00 4K 360° SAFARI CHASE</strong>
+    <span id="bigStartSub">10 High-Speed VR Camera Rigs · Roaring V8 + 10,000 Zebras + Hans Zimmer Percussion · Drag or Tilt 360°!</span>
+  </button>
+
+  <div id="infoDrawer">
+    <h3 id="noteTitle">Great Zebra Migration · 10 VR Camera Rigs</h3>
+    <p id="noteBody">
+      Over 250,000 Plains zebras (<em>Equus quagga</em>) lead over a million wildebeest across the Serengeti–Mara ecosystem, clipping tall fibrous <em>Themeda triandra</em> grass stems to unlock tender shoots beneath. In high-speed herd motion, high-contrast stripes create motion-dazzle cues (How &amp; Zanker, 2014) while suppressing tsetse and tabanid biting flies (Caro et al., 2014, <em>Nature Comms</em>).
+    </p>
+    <p id="noteFoot" style="font-size:11.5px">Music: Zhan Petrov (“Human Evolution”) × 132 BPM Taiko/Djembe Cinema Score.</p>
+  </div>
+
+  <div id="captionBox"></div>
+
+  <div class="hud-bottom">
+    <div class="chapter-row" id="chapterRow">
+      <button type="button" class="chap-btn active" data-t="0">0:00 · Roof Turret</button>
+      <button type="button" class="chap-btn" data-t="5">0:05 · Bull-Bar POV</button>
+      <button type="button" class="chap-btn" data-t="10">0:10 · Mud-Tire Rig</button>
+      <button type="button" class="chap-btn" data-t="15">0:15 · Open Cockpit</button>
+      <button type="button" class="chap-btn" data-t="25">0:25 · Inside Herd</button>
+      <button type="button" class="chap-btn" data-t="50">0:50 · Mara River Splash!</button>
+      <button type="button" class="chap-btn" data-t="95">1:35 · Tailgate Storm</button>
+      <button type="button" class="chap-btn" data-t="110">1:50 · Sunset FPV</button>
+    </div>
+    <div class="transport-row">
+      <button id="playBtn" type="button">▶ Play</button>
+      <input id="scrub" type="range" min="0" max="120" step="0.05" value="0" aria-label="Film timeline" />
+      <span class="mono" id="timeLbl">00:00 / 02:00</span>
+      <button id="resetViewBtn" type="button">Center 360°</button>
+      <button id="fsBtn" type="button" title="Fullscreen">⛶</button>
+    </div>
+  </div>
+
+  <div id="postFilmModal">
+    <div class="post-card">
+      <div class="stamp" id="stampText">Serengeti – Mara · Raced Beside the Great Migration</div>
+      <h2 id="nextHeading" style="font-size:21px;margin-bottom:6px;">Where shall our next 360° expedition take you?</h2>
+      <p id="nextSub" style="font-size:13.5px;color:var(--muted);">Switch audio to Pure SFX &amp; Music to replay at full cinema roar, or jump straight into another 360° world:</p>
+      <div class="route-grid">
+        <a class="route-link" id="routePink" href="../pink-in-the-salt/">
+          🦩 PINK IN THE SALT (05:00 360° FILM)
+          <span>Laguna Chaxa · Chilean Flamingos in Atacama →</span>
+        </a>
+        <a class="route-link" id="routeSafariCamp" href="../?exp=safari-camp">
+          🐘 SAVANNA 360° CAMP (05:51 VR)
+          <span>Amboseli &amp; Chyulu Hills Sunrise-to-Sunset →</span>
+        </a>
+        <a class="route-link" id="routeAll100" href="../">
+          🌍 ALL 100 GLOBAL EXPEDITIONS
+          <span>Arctic to Antarctica · Kids &amp; Adults →</span>
+        </a>
+      </div>
+      <div style="margin-top:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <button id="replayActionBtn" type="button">🔥 Replay in Pure SFX &amp; Music</button>
+        <button id="replayBtn" type="button">↻ Replay 02:00 Film</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("glCanvas");
+    const gl = canvas.getContext("webgl2", { antialias: true, preserveDrawingBuffer: true })
+            || canvas.getContext("webgl", { antialias: true, preserveDrawingBuffer: true });
+    const vid = document.getElementById("vid360");
+
+    const VS = `
+      attribute vec2 aPos;
+      varying vec2 vUv;
+      void main() {
+        vUv = aPos;
+        gl_Position = vec4(aPos, 0.0, 1.0);
+      }
+    `;
+    const FS = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform sampler2D uTex;
+      uniform float uYaw;
+      uniform float uPitch;
+      uniform float uFovY;
+      uniform float uAspect;
+      const float PI = 3.141592653589793;
+
+      void main() {
+        float tanHalf = tan(0.5 * uFovY);
+        vec3 dir = normalize(vec3(vUv.x * uAspect * tanHalf, vUv.y * tanHalf, 1.0));
+        float cp = cos(uPitch), sp = sin(uPitch);
+        vec3 d1 = vec3(dir.x, cp * dir.y + sp * dir.z, -sp * dir.y + cp * dir.z);
+        float cy = cos(uYaw), sy = sin(uYaw);
+        vec3 world = vec3(cy * d1.x + sy * d1.z, d1.y, -sy * d1.x + cy * d1.z);
+
+        float lon = atan(world.x, world.z);
+        float lat = asin(clamp(world.y, -1.0, 1.0));
+        vec2 equiUv = vec2(fract(lon / (2.0 * PI) + 0.5), clamp(0.5 - lat / PI, 0.0, 1.0));
+        gl_FragColor = texture2D(uTex, equiUv);
+      }
+    `;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, "aPos");
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([24,18,12,255]));
+
+    const uYaw = gl.getUniformLocation(prog, "uYaw");
+    const uPitch = gl.getUniformLocation(prog, "uPitch");
+    const uFovY = gl.getUniformLocation(prog, "uFovY");
+    const uAspect = gl.getUniformLocation(prog, "uAspect");
+
+    const posterImg = new Image();
+    posterImg.crossOrigin = "anonymous";
+    posterImg.src = "../scenes/zebra-migration-poster.jpg";
+
+    const holdImg = new Image();
+    holdImg.crossOrigin = "anonymous";
+    holdImg.src = "../scenes/zebra-migration-hold.jpg";
+
+    let yawDeg = 0.0, pitchDeg = 0.0, fovDeg = 66.0;
+    let currentLang = "en";
+    const keys = new Set();
+
+    // Multi-pointer drag + two-finger mobile pinch zoom
+    const pointers = new Map();
+    let pinchDist0 = 0, pinchFov0 = 66.0;
+
+    canvas.addEventListener("pointerdown", e => {
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      if (pointers.size === 2) {
+        const pts = Array.from(pointers.values());
+        pinchDist0 = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        pinchFov0 = fovDeg;
+      }
+    });
+    canvas.addEventListener("pointermove", e => {
+      if (!pointers.has(e.pointerId)) return;
+      const prev = pointers.get(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 1) {
+        const dx = e.clientX - prev.x;
+        const dy = e.clientY - prev.y;
+        yawDeg = ((yawDeg - dx * 0.19 + 540) % 360) - 180;
+        pitchDeg = Math.max(-85, Math.min(85, pitchDeg + dy * 0.19));
+      } else if (pointers.size === 2 && pinchDist0 > 12) {
+        const pts = Array.from(pointers.values());
+        const d = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        if (d > 12) fovDeg = Math.max(38, Math.min(92, pinchFov0 * (pinchDist0 / d)));
+      }
+    });
+    const endPtr = e => { pointers.delete(e.pointerId); if (pointers.size < 2) pinchDist0 = 0; };
+    canvas.addEventListener("pointerup", endPtr);
+    canvas.addEventListener("pointercancel", endPtr);
+    canvas.addEventListener("wheel", e => {
+      e.preventDefault();
+      fovDeg = Math.max(38, Math.min(92, fovDeg + e.deltaY * 0.04));
+    }, { passive: false });
+
+    window.addEventListener("keydown", e => {
+      if (["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","KeyW","KeyA","KeyS","KeyD","Space"].includes(e.code)) {
+        if (e.code === "Space" && document.activeElement === document.body) {
+          e.preventDefault();
+          document.getElementById("playBtn").click();
+          return;
+        }
+        keys.add(e.code);
+      }
+    });
+    window.addEventListener("keyup", e => keys.delete(e.code));
+
+    // Mobile Gyroscope 360° support
+    let gyroActive = false, gyroBaseAlpha = null;
+    function onDeviceOrient(ev) {
+      if (!gyroActive || ev.alpha == null) return;
+      if (gyroBaseAlpha === null) gyroBaseAlpha = ev.alpha;
+      const dAlpha = ev.alpha - gyroBaseAlpha;
+      yawDeg = ((-dAlpha + 540) % 360) - 180;
+      if (typeof ev.beta === "number") {
+        pitchDeg = Math.max(-75, Math.min(75, ev.beta - 65));
+      }
+    }
+    document.getElementById("gyroBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("gyroBtn");
+      if (gyroActive) {
+        gyroActive = false;
+        window.removeEventListener("deviceorientation", onDeviceOrient);
+        btn.classList.remove("active");
+        btn.textContent = currentLang === "ru" ? "📱 Гироскоп" : "📱 Tilt 360°";
+        return;
+      }
+      if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+        try {
+          const perm = await DeviceOrientationEvent.requestPermission();
+          if (perm !== "granted") return;
+        } catch (_) { return; }
+      }
+      gyroBaseAlpha = null;
+      gyroActive = true;
+      window.addEventListener("deviceorientation", onDeviceOrient);
+      btn.classList.add("active");
+      btn.textContent = currentLang === "ru" ? "📱 360° ВКЛ" : "📱 Tilting";
+    });
+
+    document.getElementById("resetViewBtn").addEventListener("click", () => {
+      yawDeg = 0; pitchDeg = 0; fovDeg = 66; gyroBaseAlpha = null;
+    });
+    document.getElementById("fsBtn").addEventListener("click", () => {
+      const root = document.documentElement;
+      if (!document.fullscreenElement && root.requestFullscreen) root.requestFullscreen().catch(() => {});
+      else if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+    });
+
+    // 23-cut camera rig HUD telemetry
+    const RIG_TIMELINE = [
+      [0,   5,   "RIG 02 · ROOF TURRET 360° (2.3 m)",        "РАКУРС 02 · БАШНЯ НА КРЫШЕ (2.3 м)"],
+      [5,  10,   "RIG 01 · LOW BULL-BAR OUTRIGGER (0.75 m)", "РАКУРС 01 · КЕНГУРЯТНИК У ЗЕМЛИ (0.75 м)"],
+      [10, 15,   "RIG 03B · MUD-TIRE & COIL SHOCK (0.35 m)", "РАКУРС 03B · КОЛЕСО И ПОДВЕСКА (0.35 м)"],
+      [15, 20,   "RIG 04 · OPEN-TOP COCKPIT SPRINT",         "РАКУРС 04 · ОТКРЫТЫЙ КОКПИТ ДЖИПА"],
+      [20, 25,   "RIG 07 · GRASS CABLE-CAM (0.50 m)",        "РАКУРС 07 · ТРОС НАД ТРАВОЙ (0.50 м)"],
+      [25, 30,   "RIG 10 · INSIDE THE HERD THUNDER",         "РАКУРС 10 · ВНУТРИ МЧАЩЕГОСЯ СТАДА"],
+      [30, 35,   "RIG 03 · WIDE LATERAL PURSUIT",            "РАКУРС 03 · БОКОВАЯ ПОГОНЯ"],
+      [35, 40,   "RIG 01 · BULL-BAR GRAVEL APEX",            "РАКУРС 01 · ГРАВИЙНЫЙ СПРИНТ"],
+      [40, 45,   "RIG 06 · REAR TAILGATE DUST STORM",        "РАКУРС 06 · ЗАДНИЙ БОРТ В ПЫЛИ"],
+      [45, 50,   "RIG 03B · ROOSTER-TAIL DRIFT (0.35 m)",    "РАКУРС 03B · ДРИФТ У КОЛЕСА"],
+      [50, 56,   "RIG 05 · MARA RIVER SPLASH EXPLOSION!",    "РАКУРС 05 · ВЗРЫВ БРЫЗГ РЕКИ МАРА!"],
+      [56, 61,   "RIG 04 · COCKPIT HIGH-SPEED CONTROL",      "РАКУРС 04 · ПИЛОТАЖ В КОКПИТЕ"],
+      [61, 66.5, "RIG 05 · MARA RIVER GOLDEN SPRAY",         "РАКУРС 05 · ЗОЛОТЫЕ БРЫЗГИ МАРЫ"],
+      [66.5,71.5,"RIG 07 · PARALLEL GRASS PHALANX",          "РАКУРС 07 · МЕЖДУ ДЖИПОМ И СТАДОМ"],
+      [71.5,76.5,"RIG 10 · ZEBRA-EYE-LEVEL CHARGE",          "РАКУРС 10 · НА УРОВНЕ ГЛАЗ ЗЕБР"],
+      [76.5,80.5,"RIG 05 · RIVER RAPID BLITZ",               "РАКУРС 05 · ФОРСИРОВАНИЕ ПОТОКА"],
+      [80.5,85.5,"RIG 04 · NECK-AND-NECK COCKPIT",           "РАКУРС 04 · БОК О БОК СО СТАДОМ"],
+      [85.5,90,  "RIG 05 · RIVERBANK BREAKOUT",              "РАКУРС 05 · ВЫХОД НА БЕРЕГ"],
+      [90, 95,   "RIG 02 · 10,000-ZEBRA TURRET CRESCENDO",   "РАКУРС 02 · ДЕСЯТЬ ТЫСЯЧ ЗЕБР ВОКРУГ"],
+      [95, 100,  "RIG 06 · FIERY BACKLIT STAMPEDE",          "РАКУРС 06 · ОГНЕННАЯ ПЫЛЬ ПОГОНИ"],
+      [100,105,  "RIG 03 · GOLDEN SUNSET PURSUIT",           "РАКУРС 03 · ЗАКАТНЫЙ СПРИНТ"],
+      [105,110,  "RIG 04 · FINAL COCKPIT FULL THROTTLE",     "РАКУРС 04 · ПОЛНЫЙ ГАЗ К ЗАКАТУ"],
+      [110,120.5,"RIG 08 · HELICOPTER / FPV SUNSET FINALE",  "РАКУРС 08 · ПРОЛЁТ В АФРИКАНСКИЙ ЗАКАТ"]
+    ];
+
+    let cues = [];
+    let ccEnabled = true;
+    async function loadSrt(url) {
+      if (!url) { cues = []; return; }
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { cues = []; return; }
+        const txt = await res.text();
+        if (!txt.trim()) { cues = []; return; }
+        cues = txt.replace(/\r\n/g, "\n").trim().split(/\n\s*\n/).map(block => {
+          const lines = block.trim().split("\n");
+          const idx = lines.findIndex(l => l.includes("-->"));
+          if (idx < 0) return null;
+          const m = lines[idx].match(/(\d+):(\d+):(\d+)[,.](\d+)\s*-->\s*(\d+):(\d+):(\d+)[,.](\d+)/);
+          if (!m) return null;
+          const t0 = +m[1]*3600 + +m[2]*60 + +m[3] + +m[4]/1000;
+          const t1 = +m[5]*3600 + +m[6]*60 + +m[7] + +m[8]/1000;
+          return { t0, t1, text: lines.slice(idx + 1).join("<br>") };
+        }).filter(Boolean);
+      } catch (e) { cues = []; }
+    }
+
+    const MASTER_HLS = "../streams/zebra-migration/master.m3u8";
+    const EDITIONS = {
+      ru_pro: {
+        lang: "ru",
+        track: "ru_pro",
+        hls: "../streams/zebra-migration/ru_pro.m3u8",
+        srt: "../streams/zebra-migration/ru.srt"
+      },
+      en_pro: {
+        lang: "en",
+        track: "en_pro",
+        hls: "../streams/zebra-migration/en_pro.m3u8",
+        srt: "../streams/zebra-migration/en_pro.srt"
+      },
+      en_junior: {
+        lang: "en",
+        track: "en_junior",
+        hls: "../streams/zebra-migration/en_junior.m3u8",
+        srt: "../streams/zebra-migration/en_junior.srt"
+      },
+      pure_action: {
+        lang: "en",
+        track: "action",
+        hls: "../streams/zebra-migration/action.m3u8",
+        srt: ""
+      }
+    };
+
+    let hls = null;
+    let desiredTrack = "en_pro";
+
+    function selectHlsTrack(trackName) {
+      if (!hls || !Array.isArray(hls.audioTracks)) return;
+      const idx = hls.audioTracks.findIndex(t => t.name === trackName);
+      if (idx >= 0 && hls.audioTrack !== idx) hls.audioTrack = idx;
+    }
+
+    function applyQualityPref(qVal) {
+      if (!hls || !Array.isArray(hls.levels) || !hls.levels.length) return;
+      if (qVal === "4k") {
+        let bestIdx = 0, bestW = 0;
+        hls.levels.forEach((lv, i) => { if ((lv.width || 0) > bestW) { bestW = lv.width; bestIdx = i; } });
+        hls.currentLevel = bestIdx;
+      } else {
+        hls.currentLevel = -1;
+      }
+    }
+
+    function applyUiLanguage(lang) {
+      currentLang = lang;
+      const ru = lang === "ru";
+      document.getElementById("backStationLink").textContent = ru ? "← Полевая станция" : "← Field Station";
+      document.getElementById("backStationLink").href = ru ? "../?lang=ru" : "../";
+      document.getElementById("filmTitle").textContent = ru ? "МИГРАЦИЯ 360°" : "STAMPEDE 360°";
+      document.getElementById("filmPlace").textContent = ru ? "Серенгети – Мара" : "Serengeti – Mara";
+      document.getElementById("imaxBadge").textContent = ru ? "4K 360° VR · ГОЛЛИВУДСКИЙ ЗВУК" : "4K 360° VR · IMAX MIX";
+      document.getElementById("bigStartTitle").textContent = ru
+        ? "▶ ВКЛЮЧИТЬ 4K 360° САФАРИ-БЛОКБАСТЕР (02:00)"
+        : "▶ LAUNCH 02:00 4K 360° SAFARI CHASE";
+      document.getElementById("bigStartSub").textContent = ru
+        ? "10 скоростных VR-ракурсов · Рёв V8 + 10 000 зебр + барабаны Ханса Циммера · Вращайте на 360°!"
+        : "10 High-Speed VR Camera Rigs · Roaring V8 + 10,000 Zebras + Hans Zimmer Percussion · Drag or Tilt 360°!";
+      if (!gyroActive) document.getElementById("gyroBtn").textContent = ru ? "📱 Гироскоп" : "📱 Tilt 360°";
+      document.getElementById("notesBtn").textContent = ru ? "Ракурсы и наука" : "Science & Rigs";
+      document.getElementById("resetViewBtn").textContent = ru ? "По центру" : "Center 360°";
+      document.getElementById("ccBtn").textContent = ccEnabled ? (ru ? "Субтитры: ВКЛ" : "CC: ON") : (ru ? "Субтитры: ВЫКЛ" : "CC: OFF");
+      document.getElementById("stampText").textContent = ru
+        ? "Серенгети – Мара · Гонка бок о бок с великой миграцией"
+        : "Serengeti – Mara · Raced Beside the Great Migration";
+      document.getElementById("nextHeading").textContent = ru
+        ? "Куда отправимся в следующей 360°-экспедиции?"
+        : "Where shall our next 360° expedition take you?";
+      document.getElementById("nextSub").textContent = ru
+        ? "Включите режим «PURE SFX & MUSIC» для чистого рёва мотора и барабанов или выберите новый маршрут:"
+        : "Switch audio to Pure SFX & Music to replay at full cinema roar, or jump straight into another 360° world:";
+      document.getElementById("routePink").href = ru ? "../pink-in-the-salt/?lang=ru" : "../pink-in-the-salt/";
+      document.getElementById("routeSafariCamp").href = ru ? "../?exp=safari-camp&lang=ru" : "../?exp=safari-camp";
+      document.getElementById("routeAll100").href = ru ? "../?lang=ru" : "../";
+      document.getElementById("replayActionBtn").textContent = ru ? "🔥 Повтор: ЧИСТЫЙ ЗВУК И МУЗЫКА" : "🔥 Replay in Pure SFX & Music";
+      document.getElementById("replayBtn").textContent = ru ? "↻ Повторить фильм (02:00)" : "↻ Replay 02:00 Film";
+
+      const chapLabels = ru
+        ? ["0:00 · Башня 360°", "0:05 · Кенгурятник", "0:10 · У колеса!", "0:15 · Кокпит джипа", "0:25 · Внутри стада", "0:50 · Река Мара!", "1:35 · Пыль сзади", "1:50 · Пролёт в закат"]
+        : ["0:00 · Roof Turret", "0:05 · Bull-Bar POV", "0:10 · Mud-Tire Rig", "0:15 · Open Cockpit", "0:25 · Inside Herd", "0:50 · Mara River Splash!", "1:35 · Tailgate Storm", "1:50 · Sunset FPV"];
+      document.querySelectorAll(".chap-btn").forEach((b, i) => { if (chapLabels[i]) b.textContent = chapLabels[i]; });
+      updatePlayLabel();
+    }
+
+    async function loadEdition(edKey, preserveTime) {
+      const ed = EDITIONS[edKey] || EDITIONS.en_pro;
+      desiredTrack = ed.track;
+      if (edKey !== "pure_action") applyUiLanguage(ed.lang);
+      const prevTime = preserveTime ? (vid.currentTime || 0) : 0;
+      const wasPlaying = preserveTime && !vid.paused;
+
+      await loadSrt(ed.srt);
+
+      if (window.Hls && window.Hls.isSupported()) {
+        if (!hls) {
+          hls = new window.Hls({ enableWorker: true, maxBufferLength: 30, startLevel: 0 });
+          hls.loadSource(MASTER_HLS);
+          hls.attachMedia(vid);
+          hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
+            selectHlsTrack(desiredTrack);
+            applyQualityPref(document.getElementById("qualSel").value);
+          });
+          hls.on(window.Hls.Events.AUDIO_TRACKS_UPDATED, () => selectHlsTrack(desiredTrack));
+        } else {
+          selectHlsTrack(desiredTrack);
+        }
+      } else {
+        vid.src = ed.hls;
+        vid.load();
+        if (prevTime > 0) {
+          vid.addEventListener("loadedmetadata", function restoreT() {
+            vid.removeEventListener("loadedmetadata", restoreT);
+            vid.currentTime = prevTime;
+            if (wasPlaying) vid.play().catch(() => {});
+          });
+        }
+      }
+    }
+
+    document.getElementById("qualSel").addEventListener("change", e => applyQualityPref(e.target.value));
+
+    const playBtn = document.getElementById("playBtn");
+    const bigStartBtn = document.getElementById("bigStartBtn");
+    const scrub = document.getElementById("scrub");
+    const timeLbl = document.getElementById("timeLbl");
+
+    function updatePlayLabel() {
+      const ru = currentLang === "ru";
+      if (vid.ended) playBtn.textContent = ru ? "↻ Повтор" : "↻ Replay";
+      else if (vid.paused) playBtn.textContent = ru ? "▶ Пуск" : "▶ Play";
+      else playBtn.textContent = ru ? "❚❚ Пауза" : "❚❚ Pause";
+    }
+
+    function startPlayback() {
+      bigStartBtn.style.display = "none";
+      document.getElementById("postFilmModal").style.display = "none";
+      if (vid.ended) vid.currentTime = 0;
+      vid.muted = false;
+      vid.play().then(updatePlayLabel).catch(() => {
+        vid.muted = true;
+        vid.play().then(updatePlayLabel).catch(() => {});
+      });
+    }
+
+    bigStartBtn.addEventListener("click", startPlayback);
+    playBtn.addEventListener("click", () => {
+      if (vid.paused || vid.ended) startPlayback();
+      else { vid.pause(); updatePlayLabel(); }
+    });
+    vid.addEventListener("play", () => { bigStartBtn.style.display = "none"; updatePlayLabel(); });
+    vid.addEventListener("pause", updatePlayLabel);
+
+    document.getElementById("editionSel").addEventListener("change", e => loadEdition(e.target.value, true));
+
+    document.getElementById("ccBtn").addEventListener("click", e => {
+      ccEnabled = !ccEnabled;
+      e.target.classList.toggle("active", ccEnabled);
+      e.target.textContent = ccEnabled
+        ? (currentLang === "ru" ? "Субтитры: ВКЛ" : "CC: ON")
+        : (currentLang === "ru" ? "Субтитры: ВЫКЛ" : "CC: OFF");
+    });
+
+    const drawer = document.getElementById("infoDrawer");
+    document.getElementById("notesBtn").addEventListener("click", () => {
+      drawer.style.display = drawer.style.display === "block" ? "none" : "block";
+    });
+
+    scrub.addEventListener("input", () => {
+      bigStartBtn.style.display = "none";
+      vid.currentTime = parseFloat(scrub.value);
+      document.getElementById("postFilmModal").style.display = "none";
+    });
+
+    const chapBtns = Array.from(document.querySelectorAll(".chap-btn"));
+    chapBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const t = parseFloat(btn.dataset.t || "0");
+        document.getElementById("postFilmModal").style.display = "none";
+        vid.currentTime = t;
+        startPlayback();
+      });
+    });
+
+    vid.addEventListener("ended", () => {
+      updatePlayLabel();
+      document.getElementById("postFilmModal").style.display = "flex";
+      try {
+        const key = "fs-stamps";
+        const stamps = JSON.parse(localStorage.getItem(key) || "{}");
+        if (!stamps["maasai-mara-migration-plains"]) {
+          stamps["maasai-mara-migration-plains"] = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+          localStorage.setItem(key, JSON.stringify(stamps));
+        }
+      } catch (_) {}
+    });
+
+    document.getElementById("replayBtn").addEventListener("click", () => {
+      document.getElementById("postFilmModal").style.display = "none";
+      vid.currentTime = 0;
+      startPlayback();
+    });
+    document.getElementById("replayActionBtn").addEventListener("click", () => {
+      document.getElementById("editionSel").value = "pure_action";
+      loadEdition("pure_action", false);
+      document.getElementById("postFilmModal").style.display = "none";
+      vid.currentTime = 0;
+      startPlayback();
+    });
+
+    function fmtTime(s) {
+      const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+      return String(m).padStart(2, "0") + ":" + String(sec).padStart(2, "0");
+    }
+
+    window.__DLZ_SET_POSE = function(y, p, f) {
+      yawDeg = y; pitchDeg = p; if (typeof f === "number") fovDeg = f;
+    };
+
+    (function initEdition() {
+      const qp = new URLSearchParams(location.search);
+      const ql = (qp.get("lang") || "").toLowerCase();
+      const qm = (qp.get("mode") || "").toLowerCase();
+      const navRu = /^ru\b/i.test(navigator.language || "");
+      let initKey = (ql === "ru" || (!ql && navRu)) ? "ru_pro" : "en_pro";
+      if (qm === "junior" || qm === "kids") initKey = ql === "ru" ? "ru_pro" : "en_junior";
+      if (qm === "action") initKey = "pure_action";
+      document.getElementById("editionSel").value = initKey;
+      applyUiLanguage(initKey.startsWith("ru") ? "ru" : "en");
+      loadEdition(initKey, false);
+    })();
+
+    function renderLoop() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const targetW = Math.round(window.innerWidth * dpr);
+      const targetH = Math.round(window.innerHeight * dpr);
+      if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      if (keys.has("ArrowLeft") || keys.has("KeyA")) yawDeg = ((yawDeg - 1.4 + 540) % 360) - 180;
+      if (keys.has("ArrowRight") || keys.has("KeyD")) yawDeg = ((yawDeg + 1.4 + 540) % 360) - 180;
+      if (keys.has("ArrowUp") || keys.has("KeyW")) pitchDeg = Math.min(85, pitchDeg + 1.1);
+      if (keys.has("ArrowDown") || keys.has("KeyS")) pitchDeg = Math.max(-85, pitchDeg - 1.1);
+
+      const t = vid.currentTime || 0;
+      scrub.value = t;
+      timeLbl.textContent = `${fmtTime(t)} / 02:00`;
+
+      // Highlight active chapter pill & camera rig badge
+      let activeChapIdx = 0;
+      chapBtns.forEach((b, idx) => {
+        if (t >= parseFloat(b.dataset.t || "0") - 0.1) activeChapIdx = idx;
+      });
+      chapBtns.forEach((b, idx) => b.classList.toggle("active", idx === activeChapIdx));
+
+      const rigRow = RIG_TIMELINE.find(r => t >= r[0] && t < r[1]) || RIG_TIMELINE[0];
+      document.getElementById("rigHudBadge").textContent = "🎥 " + (currentLang === "ru" ? rigRow[3] : rigRow[2]);
+      document.getElementById("poseReadout").textContent = `Yaw ${Math.round(yawDeg)}° · Pitch ${Math.round(pitchDeg)}°`;
+
+      const capEl = document.getElementById("captionBox");
+      const cue = ccEnabled ? cues.find(c => t >= c.t0 && t <= c.t1) : null;
+      if (cue) {
+        capEl.innerHTML = cue.text;
+        capEl.style.display = "block";
+      } else {
+        capEl.style.display = "none";
+      }
+
+      const postOpen = document.getElementById("postFilmModal").style.display === "flex";
+      if ((vid.ended || postOpen) && holdImg.complete && holdImg.naturalWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, holdImg);
+      } else if (vid.readyState >= 2 && vid.videoWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vid);
+      } else if (posterImg.complete && posterImg.naturalWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, posterImg);
+      }
+
+      const fovRad = fovDeg * Math.PI / 180;
+      const aspect = canvas.width / Math.max(1, canvas.height);
+      gl.uniform1f(uYaw, yawDeg * Math.PI / 180);
+      gl.uniform1f(uPitch, pitchDeg * Math.PI / 180);
+      gl.uniform1f(uFovY, fovRad);
+      gl.uniform1f(uAspect, aspect);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      window.__DLZ_QA = {
+        yawDeg, pitchDeg, fovDeg, currentTime: t, duration: vid.duration || 0,
+        readyState: vid.readyState, videoWidth: vid.videoWidth || 0, videoHeight: vid.videoHeight || 0,
+        ended: vid.ended, rigBadge: document.getElementById("rigHudBadge").textContent
+      };
+      requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+  </script>
+</body>
+</html>
