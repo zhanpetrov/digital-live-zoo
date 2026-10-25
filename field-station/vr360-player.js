@@ -1,13 +1,15 @@
 /**
- * DLZ360Player — Embedded On-Site WebGL 360° Equirectangular VR Video Player for Digital Live Zoo
+ * DLZ360Player — Universal Embedded WebGL 360° Equirectangular VR Player for Digital Live Zoo
  *
- * - Renders equirectangular 360°×180° video (multi-audio HLS .m3u8 or progressive .mp4) directly inside a WebGL
- *   UV sphere on digitallivezoo.com — works natively on iPhone Safari, iPad Safari, Android Chrome, macOS/Windows,
- *   and VR headsets without ever leaving the website.
- * - Supports instant zero-frame-drop switching across 4 ElevenLabs Studio audio tracks
- *   (English Kids, English Adults, Russian Kids, Russian Adults) via HLS alternate audio renditions.
- * - Exposes exact spherical coordinates (yaw ∈ [-180, 180], pitch ∈ [-85, 85], hfov ∈ [38, 108]),
- *   screenToCoords(clientX, clientY) raycasting, and coordsToScreen(yaw, pitch) 3D pin projection.
+ * Supports two seamless 360° modes on desktop, iPhone/iPad Safari, Android Chrome, and VR browsers:
+ * 1. Multi-Audio 360° Video Mode (`masterHlsSrc` / `hlsSrc` / `mp4Src`):
+ *    Renders equirectangular 360°×180° video inside a 72×48 WebGL UV sphere with 0ms in-place
+ *    ElevenLabs audio track switching (`en_junior`, `en_pro`, `ru_junior`, `ru_pro`) via hls.js MSE
+ *    and per-track Apple HLS fallback on iOS.
+ * 2. Living 360° Habitat Panorama + Studio ElevenLabs Voice Guide Mode (`panoSrc` + `audioSrc`):
+ *    Renders high-resolution 2:1 equirectangular 360° habitat spheres with synchronized Studio
+ *    ElevenLabs narration + stereo biome soundscapes, live EN/RU & Kids/Adults voice switching,
+ *    compass bearings, gyroscope tilt, pinch/wheel zoom, fullscreen, and 3D raycasted target pins.
  */
 (function () {
   "use strict";
@@ -18,11 +20,14 @@
 
   const I18N = {
     en: {
-      ariaApp: "Interactive 360 degree wildlife camp player. Drag or use arrow keys to look around.",
-      vrBadge: "360° VR CAMP",
-      enterTitle: "Enter 360° Safari Camp",
-      enterSub: "ElevenLabs Studio Guide (EN / RU) · Stays right here on Digital Live Zoo · Drag, pinch or tilt 360°",
+      ariaApp: "Interactive 360 degree wildlife expedition player. Drag or use arrow keys to look around.",
+      vrBadgeVideo: "360° VR CAMP",
+      vrBadgePano: "360° HABITAT + VOICE",
+      enterTitleVideo: "Enter 360° VR Camp",
+      enterTitlePano: "Enter 360° Expedition",
+      enterSub: "Studio ElevenLabs Guide (EN / RU) · Drag, pinch or tilt 360° right on this page",
       play: "▶ Play",
+      replay: "↻ Voice",
       pause: "❚❚ Pause",
       sound: "🔊 Sound",
       unmute: "🔇 Unmute",
@@ -32,11 +37,14 @@
       dirs: ["N", "NE", "E 🌅", "SE", "S", "SW", "W 🌇", "NW"],
     },
     ru: {
-      ariaApp: "Интерактивный 360-градусный плеер сафари-лагеря. Вращайте мышью, пальцем или клавишами со стрелками.",
-      vrBadge: "360° VR-ЛАГЕРЬ",
-      enterTitle: "Войти в 360° сафари-лагерь",
-      enterSub: "Студийная озвучка ElevenLabs (RU / EN) · Прямо на сайте без перехода в YouTube · Обзор 360°",
-      play: "▶ Пуск",
+      ariaApp: "Интерактивный 360-градусный плеер экспедиции. Вращайте мышью, пальцем или клавишами со стрелками.",
+      vrBadgeVideo: "360° VR-ЛАГЕРЬ",
+      vrBadgePano: "360° ПАНОРАМА + ГИД",
+      enterTitleVideo: "Войти в 360° VR-лагерь",
+      enterTitlePano: "Начать 360° обзор с гидом",
+      enterSub: "Студийный гид ElevenLabs (RU / EN) · Вращайте на 360° прямо на сайте",
+      play: "▶ Гид",
+      replay: "↻ Повтор",
       pause: "❚❚ Пауза",
       sound: "🔊 Звук",
       unmute: "🔇 Вкл. звук",
@@ -176,6 +184,9 @@
           hlsSrc: "",
           audioTrackName: "",
           mp4Src: "",
+          panoSrc: "",
+          audioSrc: "",
+          audioLoop: false,
           poster: "",
           lang: "en",
           yaw: 0,
@@ -190,6 +201,7 @@
           chapters: [],
           telemetryText: "",
           editionLabel: "",
+          creditHtml: "",
           showControls: true,
           onFrame: null,
           onTapSphere: null,
@@ -200,6 +212,7 @@
       );
 
       this.lang = this.opts.lang === "ru" ? "ru" : "en";
+      this.isPano = !!(this.opts.panoSrc && !this.opts.masterHlsSrc && !this.opts.hlsSrc && !this.opts.mp4Src);
       this.yaw = this.opts.yaw;
       this.pitch = this.opts.pitch;
       this.hfov = this.opts.hfov;
@@ -208,11 +221,13 @@
 
       this.destroyed = false;
       this.hasFrame = false;
+      this.userEntered = !!this.opts.autoplay;
       this.isDragging = false;
       this.gyroEnabled = false;
       this.gyroBase = null;
       this.hls = null;
       this._loadedMasterUrl = "";
+      this._loadedPanoUrl = "";
       this.pins = new Map();
       this.keys = new Set();
       this.idleTimer = 0;
@@ -225,6 +240,8 @@
         hlsSrc: this.opts.hlsSrc,
         audioTrackName: this.opts.audioTrackName,
         mp4Src: this.opts.mp4Src,
+        panoSrc: this.opts.panoSrc,
+        audioSrc: this.opts.audioSrc,
         poster: this.opts.poster,
         startTime: this.opts.startTime,
         editionLabel: this.opts.editionLabel,
@@ -237,6 +254,10 @@
 
     _L() {
       return I18N[this.lang] || I18N.en;
+    }
+
+    _media() {
+      return this.isPano ? this.audio : this.video;
     }
 
     _buildDOM() {
@@ -269,20 +290,24 @@
       this.topHud = document.createElement("div");
       this.topHud.className = "dlz360-top";
       this.topHud.innerHTML = `
-        <div class="dlz360-compass" aria-hidden="true">
-          <div class="dlz360-compass-track"></div>
-          <span class="dlz360-compass-readout">000° N</span>
+        <div class="dlz360-top-main">
+          <div class="dlz360-compass" aria-hidden="true">
+            <div class="dlz360-compass-track"></div>
+            <span class="dlz360-compass-readout">000° N</span>
+          </div>
+          <div class="dlz360-badges">
+            <span class="dlz360-badge dlz360-live-pill">${this.isPano ? L.vrBadgePano : L.vrBadgeVideo}</span>
+            <span class="dlz360-badge dlz360-ed-pill" ${this.opts.editionLabel ? "" : "hidden"}>${this.opts.editionLabel || ""}</span>
+            <span class="dlz360-badge dlz360-wx-pill" ${this.opts.telemetryText ? "" : "hidden"}>${this.opts.telemetryText || ""}</span>
+          </div>
         </div>
-        <div class="dlz360-badges">
-          <span class="dlz360-badge dlz360-live-pill">${L.vrBadge}</span>
-          <span class="dlz360-badge dlz360-ed-pill" ${this.opts.editionLabel ? "" : "hidden"}>${this.opts.editionLabel || ""}</span>
-          <span class="dlz360-badge dlz360-wx-pill" ${this.opts.telemetryText ? "" : "hidden"}>${this.opts.telemetryText || ""}</span>
-        </div>
+        <div class="dlz360-top-sub"></div>
       `;
       this.compassReadout = this.topHud.querySelector(".dlz360-compass-readout");
       this.vrPill = this.topHud.querySelector(".dlz360-live-pill");
       this.edPill = this.topHud.querySelector(".dlz360-ed-pill");
       this.wxPill = this.topHud.querySelector(".dlz360-wx-pill");
+      this.topSub = this.topHud.querySelector(".dlz360-top-sub");
       this.wrap.appendChild(this.topHud);
 
       this.bigPlay = document.createElement("button");
@@ -290,11 +315,12 @@
       this.bigPlay.className = "dlz360-bigplay";
       this.bigPlay.innerHTML = `
         <span class="dlz360-bigplay-ic">▶</span>
-        <b class="dlz360-bp-t">${L.enterTitle}</b>
+        <b class="dlz360-bp-t">${this.isPano ? L.enterTitlePano : L.enterTitleVideo}</b>
         <small class="dlz360-bp-s">${L.enterSub}</small>
       `;
       this.bpTitle = this.bigPlay.querySelector(".dlz360-bp-t");
       this.bpSub = this.bigPlay.querySelector(".dlz360-bp-s");
+      if (this.opts.autoplay) this.bigPlay.hidden = true;
       this.wrap.appendChild(this.bigPlay);
 
       this.botHud = document.createElement("div");
@@ -331,6 +357,10 @@
       this._renderChapters();
       this.wrap.appendChild(this.botHud);
 
+      if (this.opts.creditHtml) {
+        this.setCredit(this.opts.creditHtml);
+      }
+
       this.video = document.createElement("video");
       this.video.playsInline = true;
       this.video.setAttribute("playsinline", "");
@@ -340,17 +370,34 @@
       this.video.loop = !!this.opts.loop;
       this.video.muted = !!this.opts.muted;
 
+      this.audio = document.createElement("audio");
+      this.audio.crossOrigin = "anonymous";
+      this.audio.preload = "auto";
+      this.audio.loop = !!this.opts.audioLoop;
+      this.audio.muted = !!this.opts.muted;
+
       this.root.appendChild(this.wrap);
       this.root._dlz360 = this;
     }
 
+    setCredit(html) {
+      if (!this.creditEl) {
+        this.creditEl = document.createElement("div");
+        this.creditEl.className = "dlz360-credit";
+        (this.topSub || this.wrap).appendChild(this.creditEl);
+      }
+      this.creditEl.innerHTML = html || "";
+      this.creditEl.hidden = !html;
+    }
+
     _syncLocaleTexts() {
       const L = this._L();
+      const m = this._media();
       this.wrap.setAttribute("aria-label", L.ariaApp);
-      this.vrPill.textContent = L.vrBadge;
-      this.bpTitle.textContent = L.enterTitle;
+      this.vrPill.textContent = this.isPano ? L.vrBadgePano : L.vrBadgeVideo;
+      this.bpTitle.textContent = this.isPano ? L.enterTitlePano : L.enterTitleVideo;
       this.bpSub.textContent = L.enterSub;
-      this.playBtn.textContent = this.video.paused ? L.play : L.pause;
+      this.playBtn.textContent = m.paused ? (m.ended ? L.replay : L.play) : L.pause;
       this._syncAudioBtn();
       this.langBtn.textContent = L.langBtn;
       this.gyroBtn.textContent = this.gyroEnabled ? L.tilting : L.tilt;
@@ -426,19 +473,30 @@
       gl.uniform1f(this.uReady, 0.0);
 
       if (this.opts.poster) {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.onload = () => {
-          if (this.destroyed || this.hasFrame) return;
-          try {
-            gl.bindTexture(gl.TEXTURE_2D, this.tex);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-            gl.uniform1f(this.uReady, 1.0);
-            this.posterEl.hidden = true;
-          } catch (e) {}
-        };
-        img.src = this.opts.poster;
+        this._loadImageToSphere(this.opts.poster, false);
       }
+    }
+
+    _loadImageToSphere(src, markHasFrame) {
+      if (!src) return;
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        if (this.destroyed) return;
+        if (!markHasFrame && this.hasFrame) return;
+        try {
+          const gl = this.gl;
+          gl.bindTexture(gl.TEXTURE_2D, this.tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+          gl.uniform1f(this.uReady, 1.0);
+          this.posterEl.hidden = true;
+          if (markHasFrame) {
+            this.hasFrame = true;
+            this._loadedPanoUrl = src;
+          }
+        } catch (e) {}
+      };
+      img.src = src;
     }
 
     _selectHlsAudioTrack(trackName) {
@@ -455,15 +513,27 @@
       return false;
     }
 
-    setSource({ masterHlsSrc, hlsSrc, audioTrackName, mp4Src, preserveTime, startTime, editionLabel, lang, chapters }) {
-      const targetTime = preserveTime ? this.video.currentTime || 0 : typeof startTime === "number" ? startTime : 0;
-      const wasPlaying = preserveTime ? !this.video.paused : !!this.opts.autoplay;
-
+    setSource({
+      masterHlsSrc,
+      hlsSrc,
+      audioTrackName,
+      mp4Src,
+      panoSrc,
+      audioSrc,
+      preserveTime,
+      startTime,
+      editionLabel,
+      creditHtml,
+      lang,
+      chapters,
+    }) {
       if (lang) {
         this.lang = lang === "ru" ? "ru" : "en";
-        this._syncLocaleTexts();
       }
-      if (chapters) {
+      if (creditHtml !== undefined) {
+        this.setCredit(creditHtml);
+      }
+      if (chapters !== undefined) {
         this.opts.chapters = chapters;
         this._renderChapters();
       }
@@ -480,7 +550,41 @@
         }
       }
 
-      // Fast path on hls.js: if masterHlsSrc is already loaded, switch audio rendition in-place with 0ms video drop!
+      // MODE B: 360° Habitat Panorama + Studio ElevenLabs Audio Guide
+      if ((panoSrc || this.isPano) && !masterHlsSrc && !hlsSrc && !mp4Src) {
+        this.isPano = true;
+        this._syncLocaleTexts();
+        const targetPano = panoSrc || this.opts.panoSrc;
+        if (targetPano && targetPano !== this._loadedPanoUrl) {
+          this.opts.panoSrc = targetPano;
+          this._loadImageToSphere(targetPano, true);
+        }
+        if (audioSrc !== undefined) {
+          const prevPlaying = !this.audio.paused || this.userEntered;
+          if (audioSrc && this.audio.getAttribute("data-src") !== audioSrc) {
+            this.opts.audioSrc = audioSrc;
+            this.audio.setAttribute("data-src", audioSrc);
+            this.audio.src = audioSrc;
+            this.audio.load();
+            if (prevPlaying && this.bigPlay.hidden) {
+              this.play();
+            }
+          }
+          this.botHud.querySelector(".dlz360-scrub-row").hidden = !audioSrc;
+          this.playBtn.hidden = !audioSrc;
+          this.muteBtn.hidden = !audioSrc;
+          this.timeEl.hidden = !audioSrc;
+        }
+        return;
+      }
+
+      // MODE A: 360° Video Camp (HLS / MP4)
+      this.isPano = false;
+      this._syncLocaleTexts();
+      const targetTime = preserveTime ? this.video.currentTime || 0 : typeof startTime === "number" ? startTime : 0;
+      const wasPlaying = preserveTime ? !this.video.paused : !!this.opts.autoplay;
+
+      // Fast path on hls.js: switch ElevenLabs audio rendition in-place with 0ms video interruption
       if (
         preserveTime &&
         this.hls &&
@@ -562,7 +666,6 @@
               }
             });
           } else if (canNativeHls) {
-            // Native iOS Safari fallback: per-track playlist (hlsSrc) has chosen ElevenLabs rendition as DEFAULT=YES
             attachNativeHls();
           } else if (mp4Src) {
             this.video.src = mp4Src;
@@ -586,23 +689,34 @@
     }
 
     play() {
-      const p = this.video.play();
+      this.userEntered = true;
+      this.bigPlay.hidden = true;
+      const m = this._media();
+      if (this.isPano && !this.opts.audioSrc) return;
+      if (m.ended) m.currentTime = 0;
+      const p = m.play();
       if (p && p.catch) {
         p.catch(() => {
-          this.video.muted = true;
+          if (this.isPano) {
+            this.userEntered = false;
+            this.bigPlay.hidden = false;
+            this._syncLocaleTexts();
+            return;
+          }
+          m.muted = true;
           this._syncAudioBtn();
-          this.video.play().catch(() => {});
+          m.play().catch(() => {});
         });
       }
     }
 
     pause() {
-      this.video.pause();
+      this._media().pause();
     }
 
     seekTo(sec) {
       if (isFinite(sec)) {
-        this.video.currentTime = Math.max(0, sec);
+        this._media().currentTime = Math.max(0, sec);
       }
     }
 
@@ -627,11 +741,11 @@
     }
 
     getCurrentTime() {
-      return this.video.currentTime || 0;
+      return this._media().currentTime || 0;
     }
 
     getDuration() {
-      return this.video.duration || 0;
+      return this._media().duration || 0;
     }
 
     _cameraBasis() {
@@ -697,6 +811,7 @@
       if (this.pins.has(id)) {
         const existing = this.pins.get(id);
         existing.el.title = label || id;
+        existing.el.setAttribute("aria-label", label || id);
         return;
       }
       const el = document.createElement("button");
@@ -721,14 +836,15 @@
 
     _syncAudioBtn() {
       const L = this._L();
-      this.muteBtn.textContent = this.video.muted ? L.unmute : L.sound;
+      const m = this._media();
+      this.muteBtn.textContent = m.muted ? L.unmute : L.sound;
     }
 
     _wakeHud() {
       this.wrap.classList.remove("dlz360-idle");
       clearTimeout(this.idleTimer);
       this.idleTimer = setTimeout(() => {
-        if (!this.video.paused && this.wrap.classList.contains("dlz360-full")) {
+        if (!this._media().paused && this.wrap.classList.contains("dlz360-full")) {
           this.wrap.classList.add("dlz360-idle");
         }
       }, 3200);
@@ -811,8 +927,17 @@
       };
 
       const onPointerDown = (e) => {
-        if (e.target.closest(".dlz360-bot") || e.target.closest(".dlz360-bigplay") || e.target.closest(".dlz360-pin")) {
+        if (
+          e.target.closest(".dlz360-bot") ||
+          e.target.closest(".dlz360-bigplay") ||
+          e.target.closest(".dlz360-pin") ||
+          e.target.closest(".lens-toggle") ||
+          e.target.closest(".dlz360-credit")
+        ) {
           return;
+        }
+        if (this.isPano && !this.bigPlay.hidden) {
+          this.play();
         }
         this._wakeHud();
         this.wrap.focus({ preventScroll: true });
@@ -908,12 +1033,15 @@
       });
 
       this.playBtn.addEventListener("click", () => {
-        if (this.video.paused) this.play();
+        const m = this._media();
+        if (m.paused) this.play();
         else this.pause();
       });
 
       this.muteBtn.addEventListener("click", () => {
-        this.video.muted = !this.video.muted;
+        const nextMuted = !this._media().muted;
+        this.video.muted = nextMuted;
+        this.audio.muted = nextMuted;
         this._syncAudioBtn();
       });
 
@@ -936,9 +1064,10 @@
       this.gyroBtn.addEventListener("click", () => this._toggleGyro());
 
       this.scrubEl.addEventListener("input", () => {
-        const dur = this.video.duration;
+        const m = this._media();
+        const dur = m.duration;
         if (isFinite(dur) && dur > 0) {
-          this.video.currentTime = (Number(this.scrubEl.value) / 1000) * dur;
+          m.currentTime = (Number(this.scrubEl.value) / 1000) * dur;
         }
       });
 
@@ -948,18 +1077,26 @@
         const t = parseFloat(b.dataset.t);
         if (isFinite(t)) {
           this.seekTo(t);
-          if (this.video.paused) this.play();
+          if (this._media().paused) this.play();
         }
       });
 
-      this.video.addEventListener("play", () => {
-        this.bigPlay.hidden = true;
-        this.playBtn.textContent = this._L().pause;
-        this._wakeHud();
-      });
-      this.video.addEventListener("pause", () => {
-        this.playBtn.textContent = this._L().play;
-        this.wrap.classList.remove("dlz360-idle");
+      [this.video, this.audio].forEach((m) => {
+        m.addEventListener("play", () => {
+          if (m !== this._media()) return;
+          this.bigPlay.hidden = true;
+          this.playBtn.textContent = this._L().pause;
+          this._wakeHud();
+        });
+        m.addEventListener("pause", () => {
+          if (m !== this._media()) return;
+          this.playBtn.textContent = m.ended ? this._L().replay : this._L().play;
+          this.wrap.classList.remove("dlz360-idle");
+        });
+        m.addEventListener("ended", () => {
+          if (m !== this._media()) return;
+          this.playBtn.textContent = this._L().replay;
+        });
       });
 
       this._onFsChange = () => {
@@ -975,14 +1112,16 @@
           this.keys.add(e.code);
         } else if (e.code === "Space") {
           e.preventDefault();
-          if (this.video.paused) this.play();
+          if (this._media().paused) this.play();
           else this.pause();
         } else if (e.code === "KeyF") {
           e.preventDefault();
           this._toggleFullscreen();
         } else if (e.code === "KeyM") {
           e.preventDefault();
-          this.video.muted = !this.video.muted;
+          const nm = !this._media().muted;
+          this.video.muted = nm;
+          this.audio.muted = nm;
           this._syncAudioBtn();
         }
       });
@@ -998,8 +1137,9 @@
     }
 
     _updateTimeline() {
-      const cur = this.video.currentTime || 0;
-      const dur = this.video.duration || 0;
+      const m = this._media();
+      const cur = m.currentTime || 0;
+      const dur = m.duration || 0;
       if (isFinite(dur) && dur > 0) {
         if (document.activeElement !== this.scrubEl) {
           this.scrubEl.value = String(Math.round((cur / dur) * 1000));
@@ -1007,7 +1147,7 @@
         this.timeEl.textContent = fmtTime(cur) + " / " + fmtTime(dur);
       }
       const ch = this.opts.chapters || [];
-      if (ch.length) {
+      if (ch.length && !this.isPano) {
         let activeIdx = 0;
         for (let i = 0; i < ch.length; i++) {
           if (cur >= ch[i].time - 0.25) activeIdx = i;
@@ -1051,7 +1191,7 @@
         gl.viewport(0, 0, cw, ch);
       }
 
-      if (this.video.readyState >= 2 && this.video.videoWidth > 0) {
+      if (!this.isPano && this.video.readyState >= 2 && this.video.videoWidth > 0) {
         try {
           gl.bindTexture(gl.TEXTURE_2D, this.tex);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.video);
@@ -1110,11 +1250,13 @@
         } catch (e) {}
         this.hls = null;
       }
-      try {
-        this.video.pause();
-        this.video.removeAttribute("src");
-        this.video.load();
-      } catch (e) {}
+      [this.video, this.audio].forEach((m) => {
+        try {
+          m.pause();
+          m.removeAttribute("src");
+          m.load();
+        } catch (e) {}
+      });
       if (this.gl) {
         try {
           this.gl.deleteTexture(this.tex);
@@ -1123,6 +1265,9 @@
           this.gl.deleteBuffer(this.idxBuf);
           this.gl.deleteProgram(this.prog);
         } catch (e) {}
+      }
+      if (this.root && this.root._dlz360 === this) {
+        delete this.root._dlz360;
       }
       this.wrap.remove();
     }
