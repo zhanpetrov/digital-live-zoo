@@ -17,7 +17,7 @@ concurrency:
 jobs:
   score:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20       # the first run after a state reset searches every cam's storyboard from scratch
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

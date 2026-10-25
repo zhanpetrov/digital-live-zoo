@@ -15,7 +15,8 @@ Some channels show a fixed promo image instead; those get viewer signals only.
 Writes activity.json for the site:
   {"v":2,"updated":ISO,"cams":{id:[score 0-100, flags, viewers]}}
   flags: "t" trending (viewer spike), "a" action (motion), "e" nothing to see (dark/empty/blank),
-         "x" stream offline, "s" promo thumbnail (no picture signal)
+         "x" stream offline, "s" no picture signal (fixed promo thumbnail and no live storyboard)
+  Cams whose thumbnail stays the same for hours get their picture from the live storyboard instead.
 Keeps per-cam state in .state/ (cached between runs by the workflow, never committed).
 
 Usage: python tools/activity.py [catalog.json] [activity.json] [.state] [clip_model.onnx]
@@ -105,6 +106,85 @@ def thumb(cam_id):
     return get(f"https://i.ytimg.com/vi/{cam_id}/mqdefault_live.jpg?r={int(time.time())}")
 
 
+# Most cam owners set a custom thumbnail, and then mqdefault_live.jpg is that fixed image, not a live frame.
+# The live storyboard (the scrub-preview sprite sheets) is real frames from the stream: sheet M<n>.jpg, a
+# grid of small frames, n counting up as the stream runs. Its URL template comes from the watch page.
+SB_SPEC_SECS = 12 * 3600   # re-read the watch page for a fresh storyboard URL this often
+
+
+def sb_spec(cam_id):
+    page = get(f"https://www.youtube.com/watch?v={cam_id}", headers={"Accept-Encoding": "gzip"}, timeout=30)
+    if not page:
+        return None
+    if page[:2] == b"\x1f\x8b":
+        import gzip
+        page = gzip.decompress(page)
+    m = re.search(r'"playerLiveStoryboardSpecRenderer":\{"spec":"([^"]+)"', page.decode("utf-8", "ignore"))
+    if not m:
+        return None
+    url, *dims = m.group(1).replace("\\u0026", "&").split("#")
+    try:
+        w, h, cols, rows = (int(x) for x in dims[:4])
+    except ValueError:
+        return None
+    return {"url": url, "w": w, "h": h, "cols": cols, "rows": rows, "t": time.time()}
+
+
+def sb_ok(spec, n):
+    try:
+        req = urllib.request.Request(spec["url"].replace("$M", str(n)), method="HEAD", headers={"User-Agent": UA})
+        return urllib.request.urlopen(req, timeout=10).status == 200
+    except Exception:
+        return False
+
+
+def sb_latest(spec, start):
+    """Highest sheet number that exists: gallop up from the last one we saw, then bisect."""
+    if start >= 1 and sb_ok(spec, start):
+        lo, step = start, 1
+        while step < 1 << 24 and sb_ok(spec, lo + step):
+            lo, step = lo + step, step * 2
+        hi = lo + step
+    elif sb_ok(spec, 0):
+        lo, hi = 0, 1 << 24                   # first look: plain bisection, ~24 requests
+    else:
+        return None
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        lo, hi = (mid, hi) if sb_ok(spec, mid) else (lo, mid)
+    return lo
+
+
+def sb_frame(cam_id, st):
+    """Newest live frame from the storyboard as PNG bytes, or None."""
+    spec = st.get("sb")
+    if not spec or time.time() - spec.get("t", 0) > SB_SPEC_SECS:
+        spec = sb_spec(cam_id) or (spec if spec and sb_ok(spec, st.get("sbn", 0)) else None)
+        st["sb"] = spec
+    if not spec:
+        return None
+    n = sb_latest(spec, st.get("sbn", 0))
+    if n is None:
+        st["sb"] = None                       # stale URL or stream restarted: re-read the page next run
+        return None
+    st["sbn"] = n
+    data = get(spec["url"].replace("$M", str(n)))
+    try:
+        sheet = Image.open(io.BytesIO(data)).convert("RGB")
+    except Exception:
+        return None
+    w, h = spec["w"], spec["h"]
+    tiles = [sheet.crop((c * w, r * h, c * w + w, r * h + h))
+             for r in range(spec["rows"]) for c in range(spec["cols"])
+             if c * w + w <= sheet.width and r * h + h <= sheet.height]
+    if not tiles:
+        return None
+    filled = [t for t in tiles if np.asarray(t.convert("L"), dtype=np.float32).std() >= FLAT]
+    buf = io.BytesIO()
+    (filled or tiles)[-1].save(buf, "PNG")   # the newest frame on the newest sheet
+    return buf.getvalue()
+
+
 def frac_changed(a, b):
     d = np.abs(a - b)
     return float(((d - np.median(d)) > PIX).mean())
@@ -175,25 +255,39 @@ except Exception as ex:
 
 # ---------- run ----------
 def fetch(cam):
-    return cam["id"], thumb(cam["id"]), viewers(cam["id"])
+    cam_id = cam["id"]
+    st = state[cam_id]
+    data = thumb(cam_id)
+    if data is not None:
+        h = hashlib.md5(data).hexdigest()
+        now = time.time()
+        if st.get("hash") != h or "since" not in st:
+            st["since"] = now                                  # when this exact thumbnail first appeared
+        st["hash"] = h
+        st["promo"] = now - st["since"] > STATIC_SECS
+        if st["promo"]:                                        # fixed image: take a real frame from the storyboard
+            frame = sb_frame(cam_id, st)
+            st["src"] = "sb" if frame else "promo"
+            data = frame or data
+        else:
+            st["src"] = "thumb"
+    return cam_id, data, viewers(cam_id)
 
 
-with cf.ThreadPoolExecutor(12) as ex:
+for cam in cams:
+    state.setdefault(cam["id"], {})
+with cf.ThreadPoolExecutor(24) as ex:
     fetched = list(ex.map(fetch, cams))
 
-fresh = []          # (id, image) whose thumbnail changed since last run
+fresh = []          # (id, image) whose picture changed since last run
 unjudged = []       # (id, image) the picture model hasn't looked at yet (new cam, or state from an older version)
 for cam_id, data, _ in fetched:
-    st = state.setdefault(cam_id, {})
+    st = state[cam_id]
     if data is None:
         continue
     h = hashlib.md5(data).hexdigest()
-    now = time.time()
-    if st.get("hash") != h or "since" not in st:
-        st["since"] = now                                      # when this exact image first appeared
-    st["static"] = 0 if st.get("hash") != h else 1
-    st["hash"] = h
-    st["promo"] = now - st["since"] > STATIC_SECS
+    st["static"] = 0 if st.get("fhash") != h else 1
+    st["fhash"] = h
     try:
         img = Image.open(io.BytesIO(data))
     except Exception:
@@ -238,7 +332,7 @@ for cam, (cam_id, data, (v, answered)) in zip(cams, fetched):
     surge = min(max(spike - 1.3, 0) / 1.5, 1) if v >= 50 else 0
 
     # picture
-    static = st.get("promo", False)
+    static = st.get("src") == "promo"                         # fixed thumbnail and no live storyboard
     look, lbase, mot = st.get("look"), st.get("lbase"), st.get("mot", 0.0)
     if static:
         flags += "s"
@@ -270,6 +364,7 @@ json.dump({"v": 2, "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%
 
 cnt = lambda f: sum(1 for x in out.values() if f in x[1])
 print(f"{len(out)} cams | fresh frames {len(fresh)} | viewers ok {viewer_ok} | trending {cnt('t')} | action {cnt('a')} "
-      f"| nothing to see {cnt('e')} | offline {cnt('x')} | promo thumbs {cnt('s')} | clip {'on' if clip else 'off'}")
+      f"| nothing to see {cnt('e')} | offline {cnt('x')} | storyboard frames {sum(1 for c in cams if state[c['id']].get('src') == 'sb')} "
+      f"| no picture {cnt('s')} | clip {'on' if clip else 'off'}")
 for k, x in sorted(out.items(), key=lambda kv: -kv[1][0])[:12]:
     print(f"  {x[0]:3d} {x[1]:4s} {x[2]:6d}  {names.get(k, k)}")

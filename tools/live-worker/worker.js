@@ -131,8 +131,32 @@ export default {
 
   async scheduled(event, env, ctx) {
     ctx.waitUntil(refreshWeather(env));
+    ctx.waitUntil(dispatchActivity(env, event.scheduledTime));
   },
 };
+
+// GitHub drops most scheduled runs of activity.yml (it ran every 2-5 hours instead of every 30 minutes),
+// so this cron starts it instead. Needs the GH_DISPATCH_TOKEN secret: a fine-grained token for the
+// digital-live-zoo repo with "Actions: Read and write". ACTIVITY_EVERY_MIN sets the pace (default 60).
+const ACTIVITY_DISPATCH = "https://api.github.com/repos/zhanpetrov/digital-live-zoo/actions/workflows/activity.yml/dispatches";
+
+async function dispatchActivity(env, now) {
+  if (!env.GH_DISPATCH_TOKEN || !env.WX) return;
+  const every = (+env.ACTIVITY_EVERY_MIN || 60) * 60000;
+  const last = +(await env.WX.get("activity_dispatch")) || 0;
+  if (now - last < every - 90000) return;          // a cron tick may run a little early or late
+  const r = await fetch(ACTIVITY_DISPATCH, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${env.GH_DISPATCH_TOKEN}`,
+      "Accept": "application/vnd.github+json",
+      "User-Agent": "zoo-live-worker",
+    },
+    body: JSON.stringify({ ref: "main" }),
+  });
+  await env.WX.put("activity_dispatch", String(r.status === 204 ? now : last));
+  if (r.status !== 204) console.log("activity dispatch failed", r.status, await r.text());
+}
 
 const wxKey = (lat, lon) => (+lat).toFixed(2) + "," + (+lon).toFixed(2);
 
