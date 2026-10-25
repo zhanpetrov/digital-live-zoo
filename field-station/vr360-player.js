@@ -27,13 +27,21 @@
       enterTitlePano: "Enter 360° Expedition",
       enterSub: "Studio ElevenLabs Guide (EN / RU) · Drag, pinch or tilt 360° right on this page",
       play: "▶ Play",
-      replay: "↻ Voice",
+      replay: "↻ Replay",
       pause: "❚❚ Pause",
       sound: "🔊 Sound",
       unmute: "🔇 Unmute",
+      ccOn: "CC: ON",
+      ccOff: "CC: OFF",
+      guideOff: "🧭 Guide: OFF",
+      guideOn: "🧭 Guide: ON",
       tilt: "📱 Tilt 360°",
       tilting: "📱 Tilting",
       langBtn: "🌐 EN · RU",
+      endStamp: "Laguna Chaxa — noticed the hidden meal",
+      endHeading: "Where shall we go next?",
+      endSub: "Choose your next 360° expedition or replay this 05:00 film.",
+      replayFilm: "↻ Replay 05:00 Film",
       dirs: ["N", "NE", "E 🌅", "SE", "S", "SW", "W 🌇", "NW"],
     },
     ru: {
@@ -43,17 +51,42 @@
       enterTitleVideo: "Войти в 360° VR-лагерь",
       enterTitlePano: "Начать 360° обзор с гидом",
       enterSub: "Студийный гид ElevenLabs (RU / EN) · Вращайте на 360° прямо на сайте",
-      play: "▶ Гид",
+      play: "▶ Пуск",
       replay: "↻ Повтор",
       pause: "❚❚ Пауза",
       sound: "🔊 Звук",
       unmute: "🔇 Вкл. звук",
+      ccOn: "Субтитры: ВКЛ",
+      ccOff: "Субтитры: ВЫКЛ",
+      guideOff: "🧭 Гид: ВЫКЛ",
+      guideOn: "🧭 Гид: ВКЛ",
       tilt: "📱 Наклон 360°",
       tilting: "📱 Гироскоп",
       langBtn: "🌐 RU · EN",
+      endStamp: "Лагуна Чакса — замечен скрытый обед",
+      endHeading: "Куда отправимся дальше?",
+      endSub: "Выберите следующую 360°-экспедицию или посмотрите 5-минутный фильм ещё раз.",
+      replayFilm: "↻ Повторить фильм 05:00",
       dirs: ["С", "СВ", "В 🌅", "ЮВ", "Ю", "ЮЗ", "З 🌇", "СЗ"],
     },
   };
+
+  function parseSrt(txt) {
+    if (!txt) return [];
+    return txt
+      .replace(/\r\n/g, "\n")
+      .trim()
+      .split(/\n\s*\n/)
+      .map((block) => {
+        const lines = block.trim().split("\n");
+        const m = (lines[1] || "").match(/(\d+):(\d+):(\d+)[,.](\d+)\s*-->\s*(\d+):(\d+):(\d+)[,.](\d+)/);
+        if (!m) return null;
+        const t0 = +m[1] * 3600 + +m[2] * 60 + +m[3] + +m[4] / 1000;
+        const t1 = +m[5] * 3600 + +m[6] * 60 + +m[7] + +m[8] / 1000;
+        return { t0, t1, text: lines.slice(2).join("<br>") };
+      })
+      .filter(Boolean);
+  }
 
   let hlsPromise = null;
   function ensureHlsJs() {
@@ -188,6 +221,16 @@
           audioSrc: "",
           audioLoop: false,
           poster: "",
+          holdPoster: "",
+          srtSrc: "",
+          ccDefault: true,
+          badgeText: "",
+          enterTitleText: "",
+          enterSubText: "",
+          guideTargets: [],
+          timedHotspots: [],
+          endRoutes: [],
+          onSelectRoute: null,
           lang: "en",
           yaw: 0,
           pitch: 2,
@@ -225,12 +268,22 @@
       this.isDragging = false;
       this.gyroEnabled = false;
       this.gyroBase = null;
+      this.guideEnabled = false;
+      this.ccEnabled = !!this.opts.ccDefault;
+      this.cues = [];
+      this._loadedSrtUrl = "";
+      this._holdImg = null;
+      this._endModalOpen = false;
       this.hls = null;
       this._loadedMasterUrl = "";
       this._loadedPanoUrl = "";
       this.pins = new Map();
       this.keys = new Set();
       this.idleTimer = 0;
+
+      if (this.opts.holdPoster) {
+        this._preloadHoldPoster(this.opts.holdPoster);
+      }
 
       this._buildDOM();
       this._initWebGL();
@@ -242,6 +295,10 @@
         mp4Src: this.opts.mp4Src,
         panoSrc: this.opts.panoSrc,
         audioSrc: this.opts.audioSrc,
+        srtSrc: this.opts.srtSrc,
+        badgeText: this.opts.badgeText,
+        enterTitleText: this.opts.enterTitleText,
+        enterSubText: this.opts.enterSubText,
         poster: this.opts.poster,
         startTime: this.opts.startTime,
         editionLabel: this.opts.editionLabel,
@@ -250,6 +307,45 @@
       });
       this._tick = this._tick.bind(this);
       this.raf = requestAnimationFrame(this._tick);
+    }
+
+    _preloadHoldPoster(src) {
+      if (!src) return;
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = src;
+      this._holdImg = img;
+    }
+
+    _loadSrt(url) {
+      if (!url) {
+        this.cues = [];
+        this._loadedSrtUrl = "";
+        if (this.ccBtn) this.ccBtn.hidden = true;
+        if (this.captionEl) this.captionEl.hidden = true;
+        return;
+      }
+      if (this.ccBtn) this.ccBtn.hidden = false;
+      if (this._loadedSrtUrl === url && this.cues.length) return;
+      this._loadedSrtUrl = url;
+      fetch(url)
+        .then((r) => (r.ok ? r.text() : ""))
+        .then((txt) => {
+          if (this.destroyed || this._loadedSrtUrl !== url) return;
+          this.cues = parseSrt(txt);
+        })
+        .catch(() => {
+          if (this._loadedSrtUrl === url) this.cues = [];
+        });
+    }
+
+    _yieldGuide() {
+      if (!this.guideEnabled) return;
+      this.guideEnabled = false;
+      if (this.guideBtn) {
+        this.guideBtn.setAttribute("aria-pressed", "false");
+        this.guideBtn.textContent = this._L().guideOff;
+      }
     }
 
     _L() {
@@ -283,9 +379,25 @@
       this.pinLayer.className = "dlz360-pins";
       this.wrap.appendChild(this.pinLayer);
 
+      this.timedPinEl = document.createElement("button");
+      this.timedPinEl.type = "button";
+      this.timedPinEl.className = "dlz360-timed-pin";
+      this.timedPinEl.hidden = true;
+      this.wrap.appendChild(this.timedPinEl);
+
+      this.timedNoteEl = document.createElement("div");
+      this.timedNoteEl.className = "dlz360-timed-note";
+      this.timedNoteEl.hidden = true;
+      this.wrap.appendChild(this.timedNoteEl);
+
       this.overlayLayer = document.createElement("div");
       this.overlayLayer.className = "dlz360-overlay";
       this.wrap.appendChild(this.overlayLayer);
+
+      this.captionEl = document.createElement("div");
+      this.captionEl.className = "dlz360-caption";
+      this.captionEl.hidden = true;
+      this.wrap.appendChild(this.captionEl);
 
       this.topHud = document.createElement("div");
       this.topHud.className = "dlz360-top";
@@ -296,7 +408,7 @@
             <span class="dlz360-compass-readout">000° N</span>
           </div>
           <div class="dlz360-badges">
-            <span class="dlz360-badge dlz360-live-pill">${this.isPano ? L.vrBadgePano : L.vrBadgeVideo}</span>
+            <span class="dlz360-badge dlz360-live-pill">${this.opts.badgeText || (this.isPano ? L.vrBadgePano : L.vrBadgeVideo)}</span>
             <span class="dlz360-badge dlz360-ed-pill" ${this.opts.editionLabel ? "" : "hidden"}>${this.opts.editionLabel || ""}</span>
             <span class="dlz360-badge dlz360-wx-pill" ${this.opts.telemetryText ? "" : "hidden"}>${this.opts.telemetryText || ""}</span>
           </div>
@@ -315,14 +427,21 @@
       this.bigPlay.className = "dlz360-bigplay";
       this.bigPlay.innerHTML = `
         <span class="dlz360-bigplay-ic">▶</span>
-        <b class="dlz360-bp-t">${this.isPano ? L.enterTitlePano : L.enterTitleVideo}</b>
-        <small class="dlz360-bp-s">${L.enterSub}</small>
+        <b class="dlz360-bp-t">${this.opts.enterTitleText || (this.isPano ? L.enterTitlePano : L.enterTitleVideo)}</b>
+        <small class="dlz360-bp-s">${this.opts.enterSubText || L.enterSub}</small>
       `;
       this.bpTitle = this.bigPlay.querySelector(".dlz360-bp-t");
       this.bpSub = this.bigPlay.querySelector(".dlz360-bp-s");
       if (this.opts.autoplay) this.bigPlay.hidden = true;
       this.wrap.appendChild(this.bigPlay);
 
+      this.endModal = document.createElement("div");
+      this.endModal.className = "dlz360-endmodal";
+      this.endModal.hidden = true;
+      this.wrap.appendChild(this.endModal);
+      this._renderEndModal();
+
+      const hasGuide = Array.isArray(this.opts.guideTargets) && this.opts.guideTargets.length > 0;
       this.botHud = document.createElement("div");
       this.botHud.className = "dlz360-bot";
       this.botHud.innerHTML = `
@@ -334,6 +453,8 @@
           <button type="button" class="dlz360-btn dlz360-play">${L.play}</button>
           <button type="button" class="dlz360-btn dlz360-mute">${this.opts.muted ? L.unmute : L.sound}</button>
           <button type="button" class="dlz360-btn dlz360-lang" ${typeof this.opts.onToggleLang === "function" ? "" : "hidden"}>${L.langBtn}</button>
+          <button type="button" class="dlz360-btn dlz360-cc" ${this.opts.srtSrc ? "" : "hidden"} aria-pressed="${this.ccEnabled}">${this.ccEnabled ? L.ccOn : L.ccOff}</button>
+          <button type="button" class="dlz360-btn dlz360-guide" ${hasGuide ? "" : "hidden"} aria-pressed="false" title="Gently point toward active wildlife; yields immediately when you drag">${L.guideOff}</button>
           <span class="dlz360-time">0:00 / 0:00</span>
           <div class="dlz360-spacer"></div>
           <button type="button" class="dlz360-btn dlz360-gyro" hidden aria-pressed="false">${L.tilt}</button>
@@ -348,6 +469,8 @@
       this.playBtn = this.botHud.querySelector(".dlz360-play");
       this.muteBtn = this.botHud.querySelector(".dlz360-mute");
       this.langBtn = this.botHud.querySelector(".dlz360-lang");
+      this.ccBtn = this.botHud.querySelector(".dlz360-cc");
+      this.guideBtn = this.botHud.querySelector(".dlz360-guide");
       this.timeEl = this.botHud.querySelector(".dlz360-time");
       this.gyroBtn = this.botHud.querySelector(".dlz360-gyro");
       this.fsBtn = this.botHud.querySelector(".dlz360-fs");
@@ -380,6 +503,35 @@
       this.root._dlz360 = this;
     }
 
+    _renderEndModal() {
+      if (!this.endModal) return;
+      const routes = this.opts.endRoutes || [];
+      if (!routes.length) {
+        this.endModal.innerHTML = "";
+        return;
+      }
+      const L = this._L();
+      const cards = routes
+        .map((r) => {
+          const title = typeof r.label === "object" ? r.label[this.lang] || r.label.en : r.label;
+          const sub = typeof r.sub === "object" ? r.sub[this.lang] || r.sub.en : r.sub || "";
+          return `<button type="button" class="dlz360-route-btn" data-route-id="${r.id}">
+            <b>${title}</b>
+            ${sub ? `<span>${sub}</span>` : ""}
+          </button>`;
+        })
+        .join("");
+      this.endModal.innerHTML = `
+        <div class="dlz360-endcard">
+          <span class="dlz360-endstamp">${L.endStamp}</span>
+          <h4>${L.endHeading}</h4>
+          <p>${L.endSub}</p>
+          <div class="dlz360-routes">${cards}</div>
+          <button type="button" class="dlz360-btn dlz360-end-replay">${L.replayFilm}</button>
+        </div>
+      `;
+    }
+
     setCredit(html) {
       if (!this.creditEl) {
         this.creditEl = document.createElement("div");
@@ -394,13 +546,22 @@
       const L = this._L();
       const m = this._media();
       this.wrap.setAttribute("aria-label", L.ariaApp);
-      this.vrPill.textContent = this.isPano ? L.vrBadgePano : L.vrBadgeVideo;
-      this.bpTitle.textContent = this.isPano ? L.enterTitlePano : L.enterTitleVideo;
-      this.bpSub.textContent = L.enterSub;
+      this.vrPill.textContent = this.opts.badgeText || (this.isPano ? L.vrBadgePano : L.vrBadgeVideo);
+      this.bpTitle.textContent = this.opts.enterTitleText || (this.isPano ? L.enterTitlePano : L.enterTitleVideo);
+      this.bpSub.textContent = this.opts.enterSubText || L.enterSub;
       this.playBtn.textContent = m.paused ? (m.ended ? L.replay : L.play) : L.pause;
       this._syncAudioBtn();
       this.langBtn.textContent = L.langBtn;
+      if (this.ccBtn) {
+        this.ccBtn.textContent = this.ccEnabled ? L.ccOn : L.ccOff;
+        this.ccBtn.setAttribute("aria-pressed", String(this.ccEnabled));
+      }
+      if (this.guideBtn) {
+        this.guideBtn.textContent = this.guideEnabled ? L.guideOn : L.guideOff;
+        this.guideBtn.setAttribute("aria-pressed", String(this.guideEnabled));
+      }
       this.gyroBtn.textContent = this.gyroEnabled ? L.tilting : L.tilt;
+      this._renderEndModal();
       this._updateCompass();
     }
 
@@ -421,8 +582,12 @@
 
     _initWebGL() {
       const gl =
-        this.canvas.getContext("webgl", { antialias: true, alpha: false, powerPreference: "high-performance" }) ||
-        this.canvas.getContext("experimental-webgl");
+        this.canvas.getContext("webgl", {
+          antialias: true,
+          alpha: false,
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance",
+        }) || this.canvas.getContext("experimental-webgl", { preserveDrawingBuffer: true });
       if (!gl) throw new Error("WebGL unavailable");
       this.gl = gl;
 
@@ -520,6 +685,10 @@
       mp4Src,
       panoSrc,
       audioSrc,
+      srtSrc,
+      badgeText,
+      enterTitleText,
+      enterSubText,
       preserveTime,
       startTime,
       editionLabel,
@@ -529,6 +698,19 @@
     }) {
       if (lang) {
         this.lang = lang === "ru" ? "ru" : "en";
+      }
+      if (badgeText !== undefined) {
+        this.opts.badgeText = badgeText;
+      }
+      if (enterTitleText !== undefined) {
+        this.opts.enterTitleText = enterTitleText;
+      }
+      if (enterSubText !== undefined) {
+        this.opts.enterSubText = enterSubText;
+      }
+      if (srtSrc !== undefined) {
+        this.opts.srtSrc = srtSrc;
+        this._loadSrt(srtSrc);
       }
       if (creditHtml !== undefined) {
         this.setCredit(creditHtml);
@@ -691,6 +873,8 @@
     play() {
       this.userEntered = true;
       this.bigPlay.hidden = true;
+      this._endModalOpen = false;
+      if (this.endModal) this.endModal.hidden = true;
       const m = this._media();
       if (this.isPano && !this.opts.audioSrc) return;
       if (m.ended) m.currentTime = 0;
@@ -716,6 +900,8 @@
 
     seekTo(sec) {
       if (isFinite(sec)) {
+        this._endModalOpen = false;
+        if (this.endModal) this.endModal.hidden = true;
         this._media().currentTime = Math.max(0, sec);
       }
     }
@@ -879,6 +1065,7 @@
 
     _toggleGyro() {
       const L = this._L();
+      this._yieldGuide();
       if (this.gyroEnabled) {
         this.gyroEnabled = false;
         this.gyroBase = null;
@@ -916,6 +1103,7 @@
 
       this._onDeviceOrientation = (e) => {
         if (!this.gyroEnabled || e.alpha == null || e.beta == null) return;
+        this._yieldGuide();
         if (!this.gyroBase) {
           this.gyroBase = { alpha: e.alpha, beta: e.beta, yaw0: this.yaw, pitch0: this.pitch };
           return;
@@ -930,12 +1118,16 @@
         if (
           e.target.closest(".dlz360-bot") ||
           e.target.closest(".dlz360-bigplay") ||
+          e.target.closest(".dlz360-endmodal") ||
+          e.target.closest(".dlz360-timed-pin") ||
+          e.target.closest(".dlz360-timed-note") ||
           e.target.closest(".dlz360-pin") ||
           e.target.closest(".lens-toggle") ||
           e.target.closest(".dlz360-credit")
         ) {
           return;
         }
+        this._yieldGuide();
         if (this.isPano && !this.bigPlay.hidden) {
           this.play();
         }
@@ -1022,6 +1214,7 @@
         "wheel",
         (e) => {
           e.preventDefault();
+          this._yieldGuide();
           this.hfov = clamp(this.hfov + (e.deltaY > 0 ? 4.5 : -4.5), this.opts.minHfov, this.opts.maxHfov);
         },
         { passive: false }
@@ -1051,6 +1244,64 @@
         }
       });
 
+      if (this.ccBtn) {
+        this.ccBtn.addEventListener("click", () => {
+          this.ccEnabled = !this.ccEnabled;
+          const L = this._L();
+          this.ccBtn.setAttribute("aria-pressed", String(this.ccEnabled));
+          this.ccBtn.textContent = this.ccEnabled ? L.ccOn : L.ccOff;
+          if (!this.ccEnabled && this.captionEl) this.captionEl.hidden = true;
+        });
+      }
+
+      if (this.guideBtn) {
+        this.guideBtn.addEventListener("click", () => {
+          this.guideEnabled = !this.guideEnabled;
+          const L = this._L();
+          this.guideBtn.setAttribute("aria-pressed", String(this.guideEnabled));
+          this.guideBtn.textContent = this.guideEnabled ? L.guideOn : L.guideOff;
+        });
+      }
+
+      if (this.timedPinEl) {
+        this.timedPinEl.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const hs = this._activeTimedHotspot;
+          if (!hs || !this.timedNoteEl) return;
+          const title = typeof hs.label === "object" ? hs.label[this.lang] || hs.label.en : hs.label;
+          const note = typeof hs.note === "object" ? hs.note[this.lang] || hs.note.en : hs.note;
+          this.timedNoteEl.innerHTML = `<button type="button" class="dlz360-tn-close" aria-label="Close">×</button><b>${title}</b><p>${note}</p>`;
+          this.timedNoteEl.hidden = false;
+        });
+      }
+
+      if (this.timedNoteEl) {
+        this.timedNoteEl.addEventListener("click", (e) => {
+          if (e.target.closest(".dlz360-tn-close")) {
+            this.timedNoteEl.hidden = true;
+          }
+        });
+      }
+
+      if (this.endModal) {
+        this.endModal.addEventListener("click", (e) => {
+          const rb = e.target.closest("[data-route-id]");
+          if (rb) {
+            const rid = rb.getAttribute("data-route-id");
+            if (rid && typeof this.opts.onSelectRoute === "function") {
+              this.opts.onSelectRoute(rid);
+            }
+            return;
+          }
+          if (e.target.closest(".dlz360-end-replay")) {
+            this._endModalOpen = false;
+            this.endModal.hidden = true;
+            this.seekTo(0);
+            this.play();
+          }
+        });
+      }
+
       this.botHud.querySelector(".dlz360-zin").addEventListener("click", () => {
         this.hfov = clamp(this.hfov - 10, this.opts.minHfov, this.opts.maxHfov);
       });
@@ -1058,6 +1309,7 @@
         this.hfov = clamp(this.hfov + 10, this.opts.minHfov, this.opts.maxHfov);
       });
       this.botHud.querySelector(".dlz360-recenter").addEventListener("click", () => {
+        this._yieldGuide();
         this.lookAt(this.opts.yaw || 0, this.opts.pitch || 2, 90);
       });
       this.fsBtn.addEventListener("click", () => this._toggleFullscreen());
@@ -1067,6 +1319,8 @@
         const m = this._media();
         const dur = m.duration;
         if (isFinite(dur) && dur > 0) {
+          this._endModalOpen = false;
+          if (this.endModal) this.endModal.hidden = true;
           m.currentTime = (Number(this.scrubEl.value) / 1000) * dur;
         }
       });
@@ -1085,6 +1339,8 @@
         m.addEventListener("play", () => {
           if (m !== this._media()) return;
           this.bigPlay.hidden = true;
+          this._endModalOpen = false;
+          if (this.endModal) this.endModal.hidden = true;
           this.playBtn.textContent = this._L().pause;
           this._wakeHud();
         });
@@ -1096,6 +1352,12 @@
         m.addEventListener("ended", () => {
           if (m !== this._media()) return;
           this.playBtn.textContent = this._L().replay;
+          if (!this.isPano && !this.opts.loop && (this.opts.endRoutes || []).length > 0 && this.endModal) {
+            this._endModalOpen = true;
+            this.endModal.hidden = false;
+            if (this.captionEl) this.captionEl.hidden = true;
+            if (this.timedPinEl) this.timedPinEl.hidden = true;
+          }
         });
       });
 
@@ -1109,6 +1371,7 @@
       this.wrap.addEventListener("keydown", (e) => {
         if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "KeyW", "KeyA", "KeyS", "KeyD"].includes(e.code)) {
           e.preventDefault();
+          this._yieldGuide();
           this.keys.add(e.code);
         } else if (e.code === "Space") {
           e.preventDefault();
@@ -1168,6 +1431,8 @@
       if (this.destroyed) return;
       this.raf = requestAnimationFrame(this._tick);
 
+      const curT = !this.isPano ? this.video.currentTime || 0 : 0;
+
       if (this.keys.size) {
         const spd = 1.6;
         if (this.keys.has("ArrowLeft") || this.keys.has("KeyA")) this.yaw = wrapYaw(this.yaw - spd);
@@ -1179,6 +1444,13 @@
         this.pitch = clamp(this.pitch + this.velPitch, -85, 85);
         this.velYaw *= 0.90;
         this.velPitch *= 0.90;
+      } else if (this.guideEnabled && !this.isPano && !this._endModalOpen && (this.opts.guideTargets || []).length) {
+        const gt = this.opts.guideTargets.find((g) => curT >= g.t0 && curT < g.t1);
+        if (gt) {
+          const dY = (((gt.yaw - this.yaw + 540) % 360) - 180);
+          this.yaw = wrapYaw(this.yaw + dY * 0.025);
+          this.pitch = clamp(this.pitch + (gt.pitch - this.pitch) * 0.025, -85, 85);
+        }
       }
 
       const gl = this.gl;
@@ -1191,7 +1463,21 @@
         gl.viewport(0, 0, cw, ch);
       }
 
-      if (!this.isPano && this.video.readyState >= 2 && this.video.videoWidth > 0) {
+      if (
+        !this.isPano &&
+        (this.video.ended || this._endModalOpen) &&
+        this._holdImg &&
+        this._holdImg.complete &&
+        this._holdImg.naturalWidth > 0
+      ) {
+        try {
+          gl.bindTexture(gl.TEXTURE_2D, this.tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this._holdImg);
+          gl.uniform1f(this.uReady, 1.0);
+          this.posterEl.hidden = true;
+          this.hasFrame = true;
+        } catch (e) {}
+      } else if (!this.isPano && this.video.readyState >= 2 && this.video.videoWidth > 0) {
         try {
           gl.bindTexture(gl.TEXTURE_2D, this.tex);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.video);
@@ -1225,6 +1511,48 @@
             p.el.style.transform = `translate(${s.x - 11}px, ${s.y - 11}px)`;
           }
         });
+      }
+
+      // Synchronized .srt subtitles (strictly blank during silent intervals!)
+      if (this.captionEl) {
+        if (!this.isPano && this.ccEnabled && !this._endModalOpen && this.cues.length) {
+          const cue = this.cues.find((c) => curT >= c.t0 && curT <= c.t1);
+          if (cue) {
+            if (this._lastCueText !== cue.text) {
+              this._lastCueText = cue.text;
+              this.captionEl.innerHTML = cue.text;
+            }
+            this.captionEl.hidden = false;
+          } else {
+            this.captionEl.hidden = true;
+          }
+        } else {
+          this.captionEl.hidden = true;
+        }
+      }
+
+      // Time-windowed non-pausing 3D hotspot pin
+      if (this.timedPinEl && (this.opts.timedHotspots || []).length && !this.isPano && !this._endModalOpen) {
+        const hs = this.opts.timedHotspots.find((h) => curT >= h.t0 && curT <= h.t1) || null;
+        this._activeTimedHotspot = hs;
+        if (hs) {
+          const pt = this.coordsToScreen(hs.yaw, hs.pitch);
+          const w = this.canvas.clientWidth || 640;
+          const h = this.canvas.clientHeight || 400;
+          if (pt.visible && pt.x > 36 && pt.x < w - 36 && pt.y > 48 && pt.y < h - 84) {
+            const lbl = typeof hs.label === "object" ? hs.label[this.lang] || hs.label.en : hs.label;
+            this.timedPinEl.textContent = "✦ " + lbl;
+            this.timedPinEl.style.left = pt.x + "px";
+            this.timedPinEl.style.top = pt.y + "px";
+            this.timedPinEl.hidden = false;
+          } else {
+            this.timedPinEl.hidden = true;
+          }
+        } else {
+          this.timedPinEl.hidden = true;
+        }
+      } else if (this.timedPinEl) {
+        this.timedPinEl.hidden = true;
       }
 
       this._updateCompass();

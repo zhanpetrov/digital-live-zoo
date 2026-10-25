@@ -205,11 +205,30 @@ button.ex:hover{border-color:var(--sign);transform:translateY(-2px)}
 .dlz360-full.dlz360-idle .dlz360-bot,.dlz360-full.dlz360-idle .dlz360-top{opacity:0;pointer-events:none}
 .lens-toggle{pointer-events:auto;border:1px solid rgba(255,255,255,.25);background:rgba(11,18,14,.84);color:var(--fg);border-radius:999px;padding:4px 10px;min-height:30px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;white-space:nowrap}
 .lens-toggle:hover{border-color:var(--sign)}
+.dlz360-caption{position:absolute;left:50%;bottom:102px;transform:translateX(-50%);z-index:6;max-width:min(680px,calc(100% - 24px));text-align:center;background:rgba(8,13,10,.84);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:6px 14px;font-size:14.5px;line-height:1.38;color:#f7f3ec;pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.48)}
+.dlz360-timed-pin{position:absolute;transform:translate(-50%,-50%);z-index:6;border:1.5px solid #f0b6a4;background:rgba(11,18,14,.86);color:#f7f3ec;border-radius:999px;padding:5px 12px;font-size:11.8px;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.5);white-space:nowrap}
+.dlz360-timed-pin:hover{border-color:var(--sign);color:var(--sign)}
+.dlz360-timed-note{position:absolute;top:54px;right:10px;z-index:8;width:min(310px,calc(100% - 20px));background:rgba(11,18,14,.93);backdrop-filter:blur(10px);border:1px solid rgba(240,182,164,.45);border-radius:14px;padding:12px 14px;font-size:12.5px;line-height:1.42;color:var(--fg);box-shadow:0 12px 32px rgba(0,0,0,.6)}
+.dlz360-timed-note b{display:block;color:#f0b6a4;font-size:13px;padding-right:22px;margin-bottom:4px}
+.dlz360-timed-note p{margin:0;color:var(--muted)}
+.dlz360-tn-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--fg);font-size:14px;line-height:1;display:grid;place-items:center}
+.dlz360-endmodal{position:absolute;inset:0;z-index:8;background:rgba(6,11,8,.52);backdrop-filter:blur(4px);display:grid;place-items:center;padding:14px}
+.dlz360-endcard{width:min(540px,100%);max-height:calc(100% - 16px);overflow-y:auto;background:rgba(12,20,16,.93);border:1px solid rgba(242,194,48,.45);border-radius:18px;padding:16px 18px;display:grid;gap:8px;box-shadow:0 18px 46px rgba(0,0,0,.65)}
+.dlz360-endstamp{justify-self:start;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#f0b6a4;border:1px solid rgba(240,182,164,.4);border-radius:999px;padding:3px 9px}
+.dlz360-endcard h4{margin:0;font-family:var(--display);font-size:24px;text-transform:uppercase;color:var(--sign);line-height:1.05}
+.dlz360-endcard p{margin:0;font-size:12.8px;color:var(--muted)}
+.dlz360-routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-block:4px}
+.dlz360-route-btn{text-align:left;border:1.5px solid rgba(242,194,48,.42);background:rgba(242,194,48,.1);color:var(--fg);border-radius:12px;padding:10px 12px;display:grid;gap:3px;transition:border-color .15s,background .15s,transform .15s}
+.dlz360-route-btn:hover{border-color:var(--sign);background:rgba(242,194,48,.2);transform:translateY(-1px)}
+.dlz360-route-btn b{font-size:12.5px;color:var(--sign);letter-spacing:.02em}
+.dlz360-route-btn span{font-size:11.5px;color:var(--muted)}
+.dlz360-end-replay{justify-self:end}
 @media (max-width:580px){
   .dlz360-ed-pill{display:none}
   .dlz360-credit{max-width:46vw;font-size:9.2px;padding:2px 7px}
   .dlz360-badge{font-size:9.5px;padding:2px 7px}
   .lens-toggle{font-size:9.8px;padding:3px 8px;min-height:28px}
+  .dlz360-caption{bottom:108px;font-size:12.8px;padding:5px 11px}
 }
 
 /* binocular lens & target pins */
@@ -505,8 +524,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       expSub: "All 100 expeditions open now across 8 global regions · Studio ElevenLabs EN & RU.",
       searchPlaceholder: "Search 100 places, animals, species or science topics…",
       fltDaytime: n => `☀️ Daytime Now (${n})`,
-      fltVideo: n => `🎬 6-Min 360° Video (${n})`,
+      fltVideo: n => `🎬 360° Video Films (${n})`,
       fltDone: n => `✓ Completed (${n})`,
+      cinemaBtn: "🎬 Full-Screen 05:00 Cinema Theater ↗",
       showingCount: (vis, tot, regName) => `Showing ${vis} of ${tot} expeditions${regName ? " · " + regName : ""}`,
       resetFilters: "Reset filters",
       noMatchTitle: "No expeditions match those filters right now",
@@ -620,8 +640,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       expSub: "Все 100 экспедиций в 8 регионах планеты открыты прямо сейчас · озвучка ElevenLabs RU и EN.",
       searchPlaceholder: "Поиск по 100 местам, зверям, биомам и научным темам…",
       fltDaytime: n => `☀️ Сейчас день (${n})`,
-      fltVideo: n => `🎬 360° видео 5:51 (${n})`,
+      fltVideo: n => `🎬 360° видеофильмы (${n})`,
       fltDone: n => `✓ Пройдено (${n})`,
+      cinemaBtn: "🎬 Полный кинозал 05:00 (360°) ↗",
       showingCount: (vis, tot, regName) => `Показано ${vis} из ${tot} экспедиций${regName ? " · " + regName : ""}`,
       resetFilters: "Сбросить фильтры",
       noMatchTitle: "По выбранным фильтрам экспедиции не найдены",
@@ -737,24 +758,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     ru_junior: { track: "ru_junior", hls: "streams/safari-v2/ru_junior.m3u8", label: "RU · Дети · Настя (5:51)" },
     ru_pro:    { track: "ru_pro",    hls: "streams/safari-v2/ru_pro.m3u8",    label: "RU · Взрослые · Глеб (5:51)" }
   };
-  const PANO_VOICE_LABELS = {
-    en_junior: "🎙️ EN · Kids · Anna",
-    en_pro:    "🎙️ EN · Adults · George",
-    ru_junior: "🎙️ RU · Дети · Настя",
-    ru_pro:    "🎙️ RU · Взрослые · Глеб"
-  };
-  function activeStream(){
-    return SAFARI_STREAMS[lang + "_" + mode] || SAFARI_STREAMS.en_junior;
-  }
-  function activePanoAudio(expId, stp){
-    const key = lang + "_" + mode;
-    const prefix = (stp && stp.audioPrefix) ? stp.audioPrefix : ("audio/" + expId);
-    return {
-      src: prefix + "_" + key + ".m4a",
-      label: PANO_VOICE_LABELS[key] || PANO_VOICE_LABELS.en_junior
-    };
-  }
-
   const SAFARI_CHAPTERS = {
     en: [
       { time: 0,   label: "🌅 Sunrise · 06:08" },
@@ -769,6 +772,140 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       { time: 262, label: "🌇 Закат · 18:19" }
     ]
   };
+  const STREAM_PACKS = {
+    "safari-v2": {
+      masterHls: MASTER_HLS,
+      streams: SAFARI_STREAMS,
+      chapters: SAFARI_CHAPTERS,
+      loop: true,
+      poster: "scenes/safari-sunrise.jpg",
+      holdPoster: "",
+      badgeText: { en: "", ru: "" },
+      enterTitle: { en: "", ru: "" },
+      enterSub: { en: "", ru: "" },
+      guideTargets: [],
+      timedHotspots: [],
+      endRoutes: []
+    },
+    "pink-in-the-salt": {
+      masterHls: "streams/pink-in-the-salt/master.m3u8",
+      streams: {
+        en_junior: { track: "en_junior", hls: "streams/pink-in-the-salt/en_junior.m3u8", srt: "streams/pink-in-the-salt/en_junior.srt", label: "EN · Family · George (5:00)" },
+        en_pro:    { track: "en_pro",    hls: "streams/pink-in-the-salt/en_pro.m3u8",    srt: "streams/pink-in-the-salt/en_pro.srt",    label: "EN · Adults · George (5:00)" },
+        ru_junior: { track: "ru_junior", hls: "streams/pink-in-the-salt/ru_junior.m3u8", srt: "streams/pink-in-the-salt/ru.srt",        label: "RU · Семья · Глеб (5:00)" },
+        ru_pro:    { track: "ru_pro",    hls: "streams/pink-in-the-salt/ru_pro.m3u8",    srt: "streams/pink-in-the-salt/ru.srt",        label: "RU · Взрослые · Глеб (5:00)" }
+      },
+      chapters: {
+        en: [
+          { time: 0,   label: "0:00 · Empty Salt" },
+          { time: 50,  label: "0:50 · Hidden Meal" },
+          { time: 120, label: "2:00 · Wider Flock" },
+          { time: 150, label: "2:30 · Why Pink?" },
+          { time: 250, label: "4:10 · Return Shore" }
+        ],
+        ru: [
+          { time: 0,   label: "0:00 · Белая соль" },
+          { time: 50,  label: "0:50 · Скрытый обед" },
+          { time: 120, label: "2:00 · Живая стая" },
+          { time: 150, label: "2:30 · Откуда розовый?" },
+          { time: 250, label: "4:10 · Берег и выбор" }
+        ]
+      },
+      loop: false,
+      poster: "scenes/pink-in-the-salt-poster.jpg",
+      holdPoster: "scenes/pink-in-the-salt-hold.jpg",
+      badgeText: {
+        en: "360° FILM · GENERATED · STEREO",
+        ru: "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · СТЕРЕО"
+      },
+      enterTitle: {
+        en: "Watch 05:00 Film · Pink in the Salt",
+        ru: "Смотреть фильм 05:00 · Лагуна Чакса"
+      },
+      enterSub: {
+        en: "Generated 360° reconstruction · Laguna Chaxa, Chile · Stereo · Subtitles & Guide available",
+        ru: "Сферическая 360°-реконструкция · Лагуна Чакса, Чили · Стерео · Субтитры и гид"
+      },
+      guideTargets: [
+        { t0: 0,   t1: 50,  yaw: 2,  pitch: 0 },
+        { t0: 50,  t1: 80,  yaw: 14, pitch: -6 },
+        { t0: 80,  t1: 120, yaw: 10, pitch: -10 },
+        { t0: 120, t1: 150, yaw: -2, pitch: -1 },
+        { t0: 150, t1: 200, yaw: 4,  pitch: -2 },
+        { t0: 200, t1: 210, yaw: 8,  pitch: -2 },
+        { t0: 210, t1: 250, yaw: 12, pitch: -5 },
+        { t0: 250, t1: 300, yaw: 0,  pitch: 0 }
+      ],
+      timedHotspots: [
+        {
+          t0: 51.0, t1: 79.5, yaw: 14.0, pitch: -8.0,
+          label: { en: "Upside-down filter bill", ru: "Клюв-фильтр вверх ногами" },
+          note: {
+            en: "Chilean flamingos invert their curved bills so comb-like lamellae trap microscopic brine organisms while tongue strokes pump salty water out.",
+            ru: "Чилийский фламинго переворачивает изогнутый клюв в воде: гребенчатые пластинки удерживают микроорганизмы, а язык выталкивает солёную воду."
+          }
+        },
+        {
+          t0: 100.5, t1: 118.5, yaw: 10.0, pitch: -14.0,
+          label: { en: "Intertarsal 'ankle' & ripples", ru: "Розовый «голеностоп» и круги на воде" },
+          note: {
+            en: "The pink backward-bending joint midway up a Chilean flamingo's pale grey leg is actually its ankle (intertarsal joint), not its knee!",
+            ru: "Розовый сустав посередине ноги, сгибающийся назад, — это на самом деле голеностоп (интертарзальный сустав), а не колено!"
+          }
+        },
+        {
+          t0: 121.0, t1: 148.5, yaw: -3.0, pitch: -2.0,
+          label: { en: "Single-leg resting balance", ru: "Отдых на одной ноге" },
+          note: {
+            en: "Standing on one leg reduces heat loss into cool high-altitude water while a passive stay mechanism helps stabilize balance.",
+            ru: "Стояние на одной ноге снижает потерю тепла в прохладной горной воде, а пассивная фиксация сустава бережёт силы."
+          }
+        },
+        {
+          t0: 201.0, t1: 209.5, yaw: 8.0, pitch: -2.0,
+          label: { en: "Carotenoid feather pigments", ru: "Каротиноидные пигменты перьев" },
+          note: {
+            en: "Carotenoid pigments from microscopic algae and brine crustaceans are metabolized over time and deposited into growing feathers.",
+            ru: "Каротиноиды из микроводорослей и рачков со временем усваиваются и окрашивают растущие перья в мягкие лососёво-розовые тона."
+          }
+        }
+      ],
+      endRoutes: [
+        {
+          id: "heron-island-barrier-reef",
+          label: { en: "HERON ISLAND — UNDER THE SURFACE", ru: "ОСТРОВ ХЕРОН — ПОД ПОВЕРХНОСТЬЮ" },
+          sub: { en: "Great Barrier Reef 360° Expedition →", ru: "360°-экспедиция на Большой Барьерный риф →" }
+        },
+        {
+          id: "waterhole",
+          label: { en: "SAVANNA — AT THE WATERHOLE", ru: "САВАННА — У ВОДОПОЯ" },
+          sub: { en: "Namib Desert 360° Expedition →", ru: "360°-экспедиция к водопою пустыни Намиб →" }
+        }
+      ]
+    }
+  };
+  const PANO_VOICE_LABELS = {
+    en_junior: "🎙️ EN · Kids · Anna",
+    en_pro:    "🎙️ EN · Adults · George",
+    ru_junior: "🎙️ RU · Дети · Настя",
+    ru_pro:    "🎙️ RU · Взрослые · Глеб"
+  };
+  function getStreamPack(stp){
+    const key = (stp && stp.streamKey) ? stp.streamKey : "safari-v2";
+    return STREAM_PACKS[key] || STREAM_PACKS["safari-v2"];
+  }
+  function activeStream(stp){
+    const pack = getStreamPack(stp);
+    return pack.streams[lang + "_" + mode] || pack.streams.en_junior;
+  }
+  function activePanoAudio(expId, stp){
+    const key = lang + "_" + mode;
+    const prefix = (stp && stp.audioPrefix) ? stp.audioPrefix : ("audio/" + expId);
+    return {
+      src: prefix + "_" + key + ".m4a",
+      label: PANO_VOICE_LABELS[key] || PANO_VOICE_LABELS.en_junior
+    };
+  }
 
   const RANKS = {
     en: [
@@ -1181,15 +1318,20 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         creditHtml: stp.credit ? `${S().photo360Credit} ${stp.credit}` : ""
       });
     } else {
-      const ed = activeStream();
+      const pack = getStreamPack(stp);
+      const ed = activeStream(stp);
       campPlayer.setSource({
-        masterHlsSrc: MASTER_HLS,
+        masterHlsSrc: pack.masterHls,
         hlsSrc: ed.hls,
         audioTrackName: ed.track,
+        srtSrc: ed.srt || "",
+        badgeText: (pack.badgeText && pack.badgeText[lang]) || "",
+        enterTitleText: (pack.enterTitle && pack.enterTitle[lang]) || "",
+        enterSubText: (pack.enterSub && pack.enterSub[lang]) || "",
         preserveTime: true,
         editionLabel: ed.label,
         lang: lang,
-        chapters: SAFARI_CHAPTERS[lang]
+        chapters: (pack.chapters && pack.chapters[lang]) || []
       });
     }
     const st = solarTelemetry(stp.slug, stp.tz, stp.lat, stp.lon);
@@ -1248,6 +1390,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
   // ---------- Running an Expedition ----------
   function start(id){
+    if(id === "pink-in-the-salt") id = "atacama-altiplano-flamingos";
     const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
     run = {x, i:0, found:{}, answered:{}, wrongTries:{}, cleanLens:false};
     $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = R(x.name);
@@ -1392,7 +1535,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function buildCamp360(s){
     const isPano = s.type === "pano360";
     const st = solarTelemetry(s.slug, s.tz, s.lat, s.lon);
-    const ed = activeStream();
+    const pack = !isPano ? getStreamPack(s) : null;
+    const ed = !isPano ? activeStream(s) : null;
     const aud = isPano ? activePanoAudio(run.x.id, s) : null;
     let initTime = s.startAt || 0;
     if(!isPano && s.autoSolar){
@@ -1411,11 +1555,14 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       pitch: s.pitch ?? 0,
       hfov: 90,
       startTime: initTime,
-      loop: !isPano,
+      loop: isPano ? false : (s.loop !== undefined ? !!s.loop : !!pack.loop),
       autoplay: false,
       telemetryText: st.hud,
       onToggleLang(){
         setLang(lang === "en" ? "ru" : "en");
+      },
+      onSelectRoute(routeExpId){
+        start(routeExpId);
       },
       onTapSphere(tapYaw, tapPitch){
         if(!targets.length) return;
@@ -1469,12 +1616,20 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       playerOpts.editionLabel = aud.label;
       playerOpts.creditHtml = s.credit ? `${S().photo360Credit} ${s.credit}` : "";
     } else {
-      playerOpts.masterHlsSrc = MASTER_HLS;
+      playerOpts.masterHlsSrc = pack.masterHls;
       playerOpts.hlsSrc = ed.hls;
       playerOpts.audioTrackName = ed.track;
-      playerOpts.poster = s.poster || "scenes/safari-sunrise.jpg";
-      playerOpts.chapters = SAFARI_CHAPTERS[lang];
+      playerOpts.srtSrc = ed.srt || "";
+      playerOpts.poster = s.poster || pack.poster || "scenes/safari-sunrise.jpg";
+      playerOpts.holdPoster = s.holdPoster || pack.holdPoster || "";
+      playerOpts.badgeText = (pack.badgeText && pack.badgeText[lang]) || "";
+      playerOpts.enterTitleText = (pack.enterTitle && pack.enterTitle[lang]) || "";
+      playerOpts.enterSubText = (pack.enterSub && pack.enterSub[lang]) || "";
+      playerOpts.chapters = (pack.chapters && pack.chapters[lang]) || [];
       playerOpts.editionLabel = ed.label;
+      playerOpts.guideTargets = pack.guideTargets || [];
+      playerOpts.timedHotspots = pack.timedHotspots || [];
+      playerOpts.endRoutes = pack.endRoutes || [];
     }
 
     campPlayer = new window.DLZ360Player($("view"), playerOpts);
@@ -1601,12 +1756,16 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
 
     const qsHtml = renderQuizBlocks(questions, run.i);
     const whyMsg = !allTargets ? ui.spotCluesWhy : ui.answerFieldWhy;
-    const metaLabel = s.type === "pano360" ? ui.panoCampMeta(mode) : ui.vrCampMeta(mode);
+    const metaLabel = s.customMeta ? R(s.customMeta) : (s.type === "pano360" ? ui.panoCampMeta(mode) : ui.vrCampMeta(mode));
+    const cinemaHtml = s.cinemaUrl
+      ? `<div class="j-actions" style="margin-top:0;margin-bottom:14px"><a class="btn" href="${esc(s.cinemaUrl)}">${esc(ui.cinemaBtn)}</a></div>`
+      : "";
 
     $("journal").innerHTML = `<p class="j-k">${esc(ui.stopWord(run.i + 1))} · ${esc(metaLabel)}</p>
       <h3>${esc(R(s.title))}</h3>
       ${wxHtml}
       <p class="j-intro">${esc(R(s.intro))}</p>
+      ${cinemaHtml}
       ${tasksHtml}
       ${qsHtml}
       ${pedBoxHtml}
@@ -1882,9 +2041,22 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       ${nextBtn(got !== undefined, ui.predictLiveWhy)}`;
   }
 
+  try {
+    const qp = new URLSearchParams(location.search);
+    const ql = (qp.get("lang") || "").toLowerCase();
+    if(ql === "en" || ql === "ru"){ lang = ql; store.set("lang", ql); }
+    const qm = (qp.get("mode") || "").toLowerCase();
+    if(qm === "junior" || qm === "kids" || qm === "family"){ mode = "junior"; store.set("mode", "junior"); }
+    else if(qm === "pro" || qm === "adults"){ mode = "pro"; store.set("mode", "pro"); }
+  } catch(e){}
+
   if(window.ZooWx) ZooWx.ready.then(() => { if(!run) renderHome(); });
   renderChrome();
   renderHome();
+  try {
+    const qExp = new URLSearchParams(location.search).get("exp");
+    if(qExp) start(qExp);
+  } catch(e){}
 })();
 </script>
 </body>
