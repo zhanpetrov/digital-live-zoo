@@ -373,6 +373,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <h1 id="heroTitle">Field Station</h1>
         <p id="heroDesc"></p>
         <div class="hero-actions">
+          <!-- BEGIN FIVE_REGIONAL_360_HERO -->
+          <a class="act-btn gold" href="nest-on-the-roof/" id="btnStorkHero">🏠 Nest on the Roof · Europe 360°</a>
+          <a class="act-btn gold" href="hot-water-cold-snow/" id="btnMacaqueHero">♨️ Hot Water, Cold Snow · Asia 360°</a>
+          <a class="act-btn gold" href="the-cleaning-station/" id="btnMantaHero">🌊 The Cleaning Station · Oceania 360°</a>
+          <a class="act-btn gold" href="the-bear-who-fishes/" id="btnBearHero">🐻 The Bear Who Fishes · N. America 360°</a>
+          <a class="act-btn gold" href="the-long-night/" id="btnPenguinHero">🐧 The Long Night · Antarctica 360°</a>
+          <!-- END FIVE_REGIONAL_360_HERO -->
           <a class="act-btn gold" href="zebra-migration/" id="btnZebraHero">🦓 Stampede 360° (4K Film)</a>
           <a class="act-btn" href="pink-in-the-salt/" id="btnPinkHero">🦩 Pink in the Salt (360° Film)</a>
           <button type="button" class="act-btn" id="btnSurpriseHero">🎲 Surprise Expedition</button>
@@ -973,6 +980,743 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         }
       ]
     }
+    /* BEGIN FIVE_REGIONAL_STREAM_PACKS */,
+    "nest-on-the-roof": {
+      "masterHls": "streams/nest-on-the-roof/master.m3u8",
+      "streams": {
+            "en_junior": {
+                  "track": "en_junior",
+                  "hls": "streams/nest-on-the-roof/en_junior.m3u8",
+                  "srt": "streams/nest-on-the-roof/en_junior.srt",
+                  "label": "EN · Kids · Anna (05:40)"
+            },
+            "en_pro": {
+                  "track": "en_pro",
+                  "hls": "streams/nest-on-the-roof/en_pro.m3u8",
+                  "srt": "streams/nest-on-the-roof/en_pro.srt",
+                  "label": "EN · Adults · George (05:40)"
+            },
+            "ru_junior": {
+                  "track": "ru",
+                  "hls": "streams/nest-on-the-roof/ru.m3u8",
+                  "srt": "streams/nest-on-the-roof/ru.srt",
+                  "label": "RU · Взрослые/Семья · Глеб (05:40)"
+            },
+            "ru_pro": {
+                  "track": "ru",
+                  "hls": "streams/nest-on-the-roof/ru.m3u8",
+                  "srt": "streams/nest-on-the-roof/ru.srt",
+                  "label": "RU · Взрослые · Глеб (05:40)"
+            }
+      },
+      "chapters": {
+            "en": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Blue Hour"
+                  },
+                  {
+                        "time": 70,
+                        "label": "1:10 · Bill-Clattering"
+                  },
+                  {
+                        "time": 140,
+                        "label": "2:20 · Breakfast"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Wings Test"
+                  },
+                  {
+                        "time": 300,
+                        "label": "5:00 · Live Nest Handoff"
+                  }
+            ],
+            "ru": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Синий час"
+                  },
+                  {
+                        "time": 70,
+                        "label": "1:10 · Клёкот клювов"
+                  },
+                  {
+                        "time": 140,
+                        "label": "2:20 · Завтрак птенцов"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Проба крыльев"
+                  },
+                  {
+                        "time": 300,
+                        "label": "5:00 · Живая камера"
+                  }
+            ]
+      },
+      "loop": false,
+      "poster": "scenes/nest-on-the-roof-poster.jpg",
+      "holdPoster": "scenes/nest-on-the-roof-hold.jpg",
+      "badgeText": {
+            "en": "360° FILM · GENERATED RECONSTRUCTION · EUROPE",
+            "ru": "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · ЕВРОПА"
+      },
+      "enterTitle": {
+            "en": "▶ Watch 05:40 360° Film · The Nest on the Roof",
+            "ru": "▶ Смотреть 360° фильм 05:40 · Гнездо на крыше"
+      },
+      "enterSub": {
+            "en": "Generated 360° reconstruction · Bad Salzungen, Thuringia, Germany · Stationary eye-level camera",
+            "ru": "Сферическая 360°-реконструкция · Бад-Зальцунген, Тюрингия, Германия · Неподвижная камера"
+      },
+      "guideTargets": [
+            {
+                  "t0": 0,
+                  "t1": 24,
+                  "yaw": 0,
+                  "pitch": -2
+            },
+            {
+                  "t0": 24,
+                  "t1": 46,
+                  "yaw": -12,
+                  "pitch": -18
+            },
+            {
+                  "t0": 46,
+                  "t1": 74,
+                  "yaw": 0,
+                  "pitch": -4
+            },
+            {
+                  "t0": 74,
+                  "t1": 94,
+                  "yaw": -145,
+                  "pitch": 16
+            },
+            {
+                  "t0": 94,
+                  "t1": 220,
+                  "yaw": 0,
+                  "pitch": -3
+            },
+            {
+                  "t0": 220,
+                  "t1": 268,
+                  "yaw": 2,
+                  "pitch": 2
+            },
+            {
+                  "t0": 268,
+                  "t1": 300,
+                  "yaw": -52,
+                  "pitch": -16
+            },
+            {
+                  "t0": 300,
+                  "t1": 340,
+                  "yaw": 0,
+                  "pitch": 0
+            }
+      ],
+      "timedHotspots": [],
+      "endRoutes": [
+            {
+                  "id": "hot-water-cold-snow",
+                  "label": {
+                        "en": "ASIA — HOT WATER, COLD SNOW",
+                        "ru": "АЗИЯ — ГОРЯЧАЯ ВОДА, ХОЛОДНЫЙ СНЕГ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Jigokudani Yaen-Koen, Nagano, Japan →",
+                        "ru": "360°-фильм (05:30) · Дзигокудани Яэн-Коэн, Нагано, Япония →"
+                  }
+            },
+            {
+                  "id": "the-cleaning-station",
+                  "label": {
+                        "en": "OCEANIA — THE CLEANING STATION",
+                        "ru": "ОКЕАНИЯ — СТАНЦИЯ ЧИСТКИ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Lady Elliot Island, Southern Great Barrier Reef, Australia →",
+                        "ru": "360°-фильм (05:30) · Остров Леди-Эллиот, Южный Большой Барьерный риф, Австралия →"
+                  }
+            }
+      ]
+},
+    "hot-water-cold-snow": {
+      "masterHls": "streams/hot-water-cold-snow/master.m3u8",
+      "streams": {
+            "en_junior": {
+                  "track": "en_junior",
+                  "hls": "streams/hot-water-cold-snow/en_junior.m3u8",
+                  "srt": "streams/hot-water-cold-snow/en_junior.srt",
+                  "label": "EN · Kids · Anna (05:30)"
+            },
+            "en_pro": {
+                  "track": "en_pro",
+                  "hls": "streams/hot-water-cold-snow/en_pro.m3u8",
+                  "srt": "streams/hot-water-cold-snow/en_pro.srt",
+                  "label": "EN · Adults · George (05:30)"
+            },
+            "ru_junior": {
+                  "track": "ru",
+                  "hls": "streams/hot-water-cold-snow/ru.m3u8",
+                  "srt": "streams/hot-water-cold-snow/ru.srt",
+                  "label": "RU · Взрослые/Семья · Глеб (05:30)"
+            },
+            "ru_pro": {
+                  "track": "ru",
+                  "hls": "streams/hot-water-cold-snow/ru.m3u8",
+                  "srt": "streams/hot-water-cold-snow/ru.srt",
+                  "label": "RU · Взрослые · Глеб (05:30)"
+            }
+      },
+      "chapters": {
+            "en": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Snowfall"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · The Bathers"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Grooming"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Who Gets In"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Live Macaque Handoff"
+                  }
+            ],
+            "ru": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Снегопад"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · В тёплой купели"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Груминг у камня"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Кто входит в воду"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Живая камера"
+                  }
+            ]
+      },
+      "loop": false,
+      "poster": "scenes/hot-water-cold-snow-poster.jpg",
+      "holdPoster": "scenes/hot-water-cold-snow-hold.jpg",
+      "badgeText": {
+            "en": "360° FILM · GENERATED RECONSTRUCTION · ASIA",
+            "ru": "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · АЗИЯ"
+      },
+      "enterTitle": {
+            "en": "▶ Watch 05:30 360° Film · Hot Water, Cold Snow",
+            "ru": "▶ Смотреть 360° фильм 05:30 · Горячая вода, холодный снег"
+      },
+      "enterSub": {
+            "en": "Generated 360° reconstruction · Jigokudani Yaen-Koen, Nagano, Japan · Stationary eye-level camera",
+            "ru": "Сферическая 360°-реконструкция · Дзигокудани Яэн-Коэн, Нагано, Япония · Неподвижная камера"
+      },
+      "guideTargets": [
+            {
+                  "t0": 0,
+                  "t1": 150,
+                  "yaw": 0,
+                  "pitch": -2
+            },
+            {
+                  "t0": 150,
+                  "t1": 220,
+                  "yaw": 68,
+                  "pitch": -6
+            },
+            {
+                  "t0": 220,
+                  "t1": 290,
+                  "yaw": 18,
+                  "pitch": 6
+            },
+            {
+                  "t0": 290,
+                  "t1": 330,
+                  "yaw": 0,
+                  "pitch": 0
+            }
+      ],
+      "timedHotspots": [],
+      "endRoutes": [
+            {
+                  "id": "nest-on-the-roof",
+                  "label": {
+                        "en": "EUROPE — THE NEST ON THE ROOF",
+                        "ru": "ЕВРОПА — ГНЕЗДО НА КРЫШЕ"
+                  },
+                  "sub": {
+                        "en": "05:40 360° Film · Bad Salzungen, Thuringia, Germany →",
+                        "ru": "360°-фильм (05:40) · Бад-Зальцунген, Тюрингия, Германия →"
+                  }
+            },
+            {
+                  "id": "the-cleaning-station",
+                  "label": {
+                        "en": "OCEANIA — THE CLEANING STATION",
+                        "ru": "ОКЕАНИЯ — СТАНЦИЯ ЧИСТКИ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Lady Elliot Island, Southern Great Barrier Reef, Australia →",
+                        "ru": "360°-фильм (05:30) · Остров Леди-Эллиот, Южный Большой Барьерный риф, Австралия →"
+                  }
+            }
+      ]
+},
+    "the-cleaning-station": {
+      "masterHls": "streams/the-cleaning-station/master.m3u8",
+      "streams": {
+            "en_junior": {
+                  "track": "en_junior",
+                  "hls": "streams/the-cleaning-station/en_junior.m3u8",
+                  "srt": "streams/the-cleaning-station/en_junior.srt",
+                  "label": "EN · Kids · Anna (05:30)"
+            },
+            "en_pro": {
+                  "track": "en_pro",
+                  "hls": "streams/the-cleaning-station/en_pro.m3u8",
+                  "srt": "streams/the-cleaning-station/en_pro.srt",
+                  "label": "EN · Adults · George (05:30)"
+            },
+            "ru_junior": {
+                  "track": "ru",
+                  "hls": "streams/the-cleaning-station/ru.m3u8",
+                  "srt": "streams/the-cleaning-station/ru.srt",
+                  "label": "RU · Взрослые/Семья · Глеб (05:30)"
+            },
+            "ru_pro": {
+                  "track": "ru",
+                  "hls": "streams/the-cleaning-station/ru.m3u8",
+                  "srt": "streams/the-cleaning-station/ru.srt",
+                  "label": "RU · Взрослые · Глеб (05:30)"
+            }
+      },
+      "chapters": {
+            "en": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Open Blue"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · Overhead Arrival"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · The Cleaners"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Waiting Their Turn"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Live Reef Handoff"
+                  }
+            ],
+            "ru": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Синева рифа"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · Тень манты"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Работа чистильщиков"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Круг ожидания"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Живой риф"
+                  }
+            ]
+      },
+      "loop": false,
+      "poster": "scenes/the-cleaning-station-poster.jpg",
+      "holdPoster": "scenes/the-cleaning-station-hold.jpg",
+      "badgeText": {
+            "en": "360° FILM · GENERATED RECONSTRUCTION · OCEANIA",
+            "ru": "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · ОКЕАНИЯ"
+      },
+      "enterTitle": {
+            "en": "▶ Watch 05:30 360° Film · The Cleaning Station",
+            "ru": "▶ Смотреть 360° фильм 05:30 · Станция чистки"
+      },
+      "enterSub": {
+            "en": "Generated 360° reconstruction · Lady Elliot Island, Southern Great Barrier Reef, Australia · Stationary eye-level camera",
+            "ru": "Сферическая 360°-реконструкция · Остров Леди-Эллиот, Южный Большой Барьерный риф, Австралия · Неподвижная камера"
+      },
+      "guideTargets": [
+            {
+                  "t0": 0,
+                  "t1": 64,
+                  "yaw": 0,
+                  "pitch": 2
+            },
+            {
+                  "t0": 64,
+                  "t1": 150,
+                  "yaw": 0,
+                  "pitch": 28
+            },
+            {
+                  "t0": 150,
+                  "t1": 220,
+                  "yaw": 0,
+                  "pitch": 6
+            },
+            {
+                  "t0": 220,
+                  "t1": 290,
+                  "yaw": -58,
+                  "pitch": 4
+            },
+            {
+                  "t0": 290,
+                  "t1": 330,
+                  "yaw": 0,
+                  "pitch": 4
+            }
+      ],
+      "timedHotspots": [],
+      "endRoutes": [
+            {
+                  "id": "nest-on-the-roof",
+                  "label": {
+                        "en": "EUROPE — THE NEST ON THE ROOF",
+                        "ru": "ЕВРОПА — ГНЕЗДО НА КРЫШЕ"
+                  },
+                  "sub": {
+                        "en": "05:40 360° Film · Bad Salzungen, Thuringia, Germany →",
+                        "ru": "360°-фильм (05:40) · Бад-Зальцунген, Тюрингия, Германия →"
+                  }
+            },
+            {
+                  "id": "hot-water-cold-snow",
+                  "label": {
+                        "en": "ASIA — HOT WATER, COLD SNOW",
+                        "ru": "АЗИЯ — ГОРЯЧАЯ ВОДА, ХОЛОДНЫЙ СНЕГ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Jigokudani Yaen-Koen, Nagano, Japan →",
+                        "ru": "360°-фильм (05:30) · Дзигокудани Яэн-Коэн, Нагано, Япония →"
+                  }
+            }
+      ]
+},
+    "the-bear-who-fishes": {
+      "masterHls": "streams/the-bear-who-fishes/master.m3u8",
+      "streams": {
+            "en_junior": {
+                  "track": "en_junior",
+                  "hls": "streams/the-bear-who-fishes/en_junior.m3u8",
+                  "srt": "streams/the-bear-who-fishes/en_junior.srt",
+                  "label": "EN · Kids · Anna (05:30)"
+            },
+            "en_pro": {
+                  "track": "en_pro",
+                  "hls": "streams/the-bear-who-fishes/en_pro.m3u8",
+                  "srt": "streams/the-bear-who-fishes/en_pro.srt",
+                  "label": "EN · Adults · George (05:30)"
+            },
+            "ru_junior": {
+                  "track": "ru",
+                  "hls": "streams/the-bear-who-fishes/ru.m3u8",
+                  "srt": "streams/the-bear-who-fishes/ru.srt",
+                  "label": "RU · Взрослые/Семья · Глеб (05:30)"
+            },
+            "ru_pro": {
+                  "track": "ru",
+                  "hls": "streams/the-bear-who-fishes/ru.m3u8",
+                  "srt": "streams/the-bear-who-fishes/ru.srt",
+                  "label": "RU · Взрослые · Глеб (05:30)"
+            }
+      },
+      "chapters": {
+            "en": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · The Roar"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · The Lip"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · The Jacuzzi"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Mother & Cubs"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Live Brooks Cam"
+                  }
+            ],
+            "ru": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Гул порога"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · На гребне"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Нижний котёл"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Медведица с медвежатами"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Прямой эфир Катмая"
+                  }
+            ]
+      },
+      "loop": false,
+      "poster": "scenes/the-bear-who-fishes-poster.jpg",
+      "holdPoster": "scenes/the-bear-who-fishes-hold.jpg",
+      "badgeText": {
+            "en": "360° FILM · GENERATED RECONSTRUCTION · NORTH AMERICA",
+            "ru": "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · СЕВЕРНАЯ АМЕРИКА"
+      },
+      "enterTitle": {
+            "en": "▶ Watch 05:30 360° Film · The Bear Who Fishes",
+            "ru": "▶ Смотреть 360° фильм 05:30 · Медведь-рыбак"
+      },
+      "enterSub": {
+            "en": "Generated 360° reconstruction · Brooks Falls, Katmai National Park, Alaska, USA · Stationary eye-level camera",
+            "ru": "Сферическая 360°-реконструкция · Водопад Брукс-Фолс, национальный парк Катмай, Аляска · Неподвижная камера"
+      },
+      "guideTargets": [
+            {
+                  "t0": 0,
+                  "t1": 150,
+                  "yaw": 0,
+                  "pitch": -2
+            },
+            {
+                  "t0": 150,
+                  "t1": 220,
+                  "yaw": 72,
+                  "pitch": -14
+            },
+            {
+                  "t0": 220,
+                  "t1": 290,
+                  "yaw": -65,
+                  "pitch": -6
+            },
+            {
+                  "t0": 290,
+                  "t1": 330,
+                  "yaw": 0,
+                  "pitch": -2
+            }
+      ],
+      "timedHotspots": [],
+      "endRoutes": [
+            {
+                  "id": "nest-on-the-roof",
+                  "label": {
+                        "en": "EUROPE — THE NEST ON THE ROOF",
+                        "ru": "ЕВРОПА — ГНЕЗДО НА КРЫШЕ"
+                  },
+                  "sub": {
+                        "en": "05:40 360° Film · Bad Salzungen, Thuringia, Germany →",
+                        "ru": "360°-фильм (05:40) · Бад-Зальцунген, Тюрингия, Германия →"
+                  }
+            },
+            {
+                  "id": "hot-water-cold-snow",
+                  "label": {
+                        "en": "ASIA — HOT WATER, COLD SNOW",
+                        "ru": "АЗИЯ — ГОРЯЧАЯ ВОДА, ХОЛОДНЫЙ СНЕГ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Jigokudani Yaen-Koen, Nagano, Japan →",
+                        "ru": "360°-фильм (05:30) · Дзигокудани Яэн-Коэн, Нагано, Япония →"
+                  }
+            }
+      ]
+},
+    "the-long-night": {
+      "masterHls": "streams/the-long-night/master.m3u8",
+      "streams": {
+            "en_junior": {
+                  "track": "en_junior",
+                  "hls": "streams/the-long-night/en_junior.m3u8",
+                  "srt": "streams/the-long-night/en_junior.srt",
+                  "label": "EN · Kids · Anna (05:30)"
+            },
+            "en_pro": {
+                  "track": "en_pro",
+                  "hls": "streams/the-long-night/en_pro.m3u8",
+                  "srt": "streams/the-long-night/en_pro.srt",
+                  "label": "EN · Adults · George (05:30)"
+            },
+            "ru_junior": {
+                  "track": "ru",
+                  "hls": "streams/the-long-night/ru.m3u8",
+                  "srt": "streams/the-long-night/ru.srt",
+                  "label": "RU · Взрослые/Семья · Глеб (05:30)"
+            },
+            "ru_pro": {
+                  "track": "ru",
+                  "hls": "streams/the-long-night/ru.m3u8",
+                  "srt": "streams/the-long-night/ru.srt",
+                  "label": "RU · Взрослые · Глеб (05:30)"
+            }
+      },
+      "chapters": {
+            "en": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Polar Darkness"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · The Huddle"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Two-Voice Calls"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · First Light"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Live Penguin Handoff"
+                  }
+            ],
+            "ru": [
+                  {
+                        "time": 0,
+                        "label": "0:00 · Полярная тьма"
+                  },
+                  {
+                        "time": 60,
+                        "label": "1:00 · Живое кольцо тепла"
+                  },
+                  {
+                        "time": 150,
+                        "label": "2:30 · Голоса во тьме"
+                  },
+                  {
+                        "time": 220,
+                        "label": "3:40 · Первая полоска света"
+                  },
+                  {
+                        "time": 290,
+                        "label": "4:50 · Живые пингвины"
+                  }
+            ]
+      },
+      "loop": false,
+      "poster": "scenes/the-long-night-poster.jpg",
+      "holdPoster": "scenes/the-long-night-hold.jpg",
+      "badgeText": {
+            "en": "360° FILM · GENERATED RECONSTRUCTION · ANTARCTICA",
+            "ru": "360° ФИЛЬМ · РЕКОНСТРУКЦИЯ · АНТАРКТИДА"
+      },
+      "enterTitle": {
+            "en": "▶ Watch 05:30 360° Film · The Long Night",
+            "ru": "▶ Смотреть 360° фильм 05:30 · Долгая ночь"
+      },
+      "enterSub": {
+            "en": "Generated 360° reconstruction · Atka Bay Sea Ice, Dronning Maud Land, Antarctica · Stationary eye-level camera",
+            "ru": "Сферическая 360°-реконструкция · Припайный лёд бухты Атка, Земля Королевы Мод, Антарктида · Неподвижная камера"
+      },
+      "guideTargets": [
+            {
+                  "t0": 0,
+                  "t1": 40,
+                  "yaw": 0,
+                  "pitch": 34
+            },
+            {
+                  "t0": 40,
+                  "t1": 150,
+                  "yaw": 0,
+                  "pitch": -4
+            },
+            {
+                  "t0": 150,
+                  "t1": 220,
+                  "yaw": -65,
+                  "pitch": -2
+            },
+            {
+                  "t0": 220,
+                  "t1": 330,
+                  "yaw": 0,
+                  "pitch": 2
+            }
+      ],
+      "timedHotspots": [],
+      "endRoutes": [
+            {
+                  "id": "nest-on-the-roof",
+                  "label": {
+                        "en": "EUROPE — THE NEST ON THE ROOF",
+                        "ru": "ЕВРОПА — ГНЕЗДО НА КРЫШЕ"
+                  },
+                  "sub": {
+                        "en": "05:40 360° Film · Bad Salzungen, Thuringia, Germany →",
+                        "ru": "360°-фильм (05:40) · Бад-Зальцунген, Тюрингия, Германия →"
+                  }
+            },
+            {
+                  "id": "hot-water-cold-snow",
+                  "label": {
+                        "en": "ASIA — HOT WATER, COLD SNOW",
+                        "ru": "АЗИЯ — ГОРЯЧАЯ ВОДА, ХОЛОДНЫЙ СНЕГ"
+                  },
+                  "sub": {
+                        "en": "05:30 360° Film · Jigokudani Yaen-Koen, Nagano, Japan →",
+                        "ru": "360°-фильм (05:30) · Дзигокудани Яэн-Коэн, Нагано, Япония →"
+                  }
+            }
+      ]
+}
+    /* END FIVE_REGIONAL_STREAM_PACKS */
   };
   const PANO_VOICE_LABELS = {
     en_junior: "🎙️ EN · Kids · Anna",
@@ -1140,6 +1884,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("btnScienceHero").textContent = s.sciBtnHero;
     $("btnZebraHero").textContent = s.zebraHeroBtn;
     $("btnPinkHero").textContent = s.pinkHeroBtn;
+    /* BEGIN FIVE_REGIONAL_360_I18N */
+    if($("btnStorkHero")){ $("btnStorkHero").textContent = lang === "ru" ? "🏠 Гнездо на крыше · Европа 360°" : "🏠 Nest on the Roof · Europe 360°"; $("btnStorkHero").href = lang === "ru" ? "nest-on-the-roof/?lang=ru" : "nest-on-the-roof/"; }
+    if($("btnMacaqueHero")){ $("btnMacaqueHero").textContent = lang === "ru" ? "♨️ Горячая вода, холодный снег · Азия 360°" : "♨️ Hot Water, Cold Snow · Asia 360°"; $("btnMacaqueHero").href = lang === "ru" ? "hot-water-cold-snow/?lang=ru" : "hot-water-cold-snow/"; }
+    if($("btnMantaHero")){ $("btnMantaHero").textContent = lang === "ru" ? "🌊 Станция чистки · Океания 360°" : "🌊 The Cleaning Station · Oceania 360°"; $("btnMantaHero").href = lang === "ru" ? "the-cleaning-station/?lang=ru" : "the-cleaning-station/"; }
+    if($("btnBearHero")){ $("btnBearHero").textContent = lang === "ru" ? "🐻 Медведь-рыбак · Сев. Америка 360°" : "🐻 The Bear Who Fishes · N. America 360°"; $("btnBearHero").href = lang === "ru" ? "the-bear-who-fishes/?lang=ru" : "the-bear-who-fishes/"; }
+    if($("btnPenguinHero")){ $("btnPenguinHero").textContent = lang === "ru" ? "🐧 Долгая ночь · Антарктида 360°" : "🐧 The Long Night · Antarctica 360°"; $("btnPenguinHero").href = lang === "ru" ? "the-long-night/?lang=ru" : "the-long-night/"; }
+    /* END FIVE_REGIONAL_360_I18N */
     $("btnSurpriseHero").textContent = s.surpriseHero;
     $("btnSurpriseBar").textContent = s.surpriseBar;
     $("langL").textContent = s.langLabel;
@@ -1491,6 +2242,19 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function start(id){
     if(id === "pink-in-the-salt") id = "atacama-altiplano-flamingos";
     if(id === "zebra-migration") id = "maasai-mara-migration-plains";
+    /* BEGIN FIVE_REGIONAL_ALIASES */
+    const LEGACY_360_ALIASES = {
+      "bavarian-meadow-white-storks": "nest-on-the-roof",
+      "thuringia-rooftop-white-storks": "nest-on-the-roof",
+      "awaji-island-social-macaques": "hot-water-cold-snow",
+      "heron-island-barrier-reef": "the-cleaning-station",
+      "katmai-brooks-falls-grizzlies": "the-bear-who-fishes",
+      "katmai-brooks-falls-bears": "the-bear-who-fishes",
+      "mcmurdo-weddell-antifreeze-sea": "the-long-night",
+      "atka-bay-emperor-huddle": "the-long-night"
+    };
+    if(LEGACY_360_ALIASES[id]) id = LEGACY_360_ALIASES[id];
+    /* END FIVE_REGIONAL_ALIASES */
     const x = EXPS.find(e => e.id === id); if(!x || !x.open) return;
     run = {x, i:0, found:{}, answered:{}, wrongTries:{}, cleanLens:false};
     $("homeV").hidden = true; $("runV").hidden = false; $("runName").textContent = R(x.name);

@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hot Water, Cold Snow · 360° VR Wildlife Film (Asia) · Digital Live Zoo</title>
+  <meta name="description" content="Hot Water, Cold Snow (Jigokudani Yaen-Koen, Nagano, Japan) — 05:30 stationary-camera 360° VR wildlife reconstruction with EN Junior, EN Pro, RU narration, spatial natural sound stem, and live camera handoff on Digital Live Zoo." />
+  <meta property="og:title" content="Hot Water, Cold Snow · 05:30 360° VR Film · Digital Live Zoo" />
+  <meta property="og:description" content="Your role: A snow-dusted volcanic boulder at the edge of the steaming pool, at macaque head height. Switchable EN Kids / EN Pro / RU / Natural Sound Only + Live Cam handoff." />
+  <meta property="og:image" content="https://digitallivezoo.com/field-station/img/hot-water-cold-snow.jpg" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #0b141a;
+      --panel: rgba(13, 24, 31, 0.86);
+      --border: rgba(123, 224, 199, 0.30);
+      --accent: #7be0c7;
+      --text: #f8f5ee;
+      --muted: #bcc6d1;
+      --live: #ff5d5d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Segoe UI", sans-serif;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #glCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+    #glCanvas:active { cursor: grabbing; }
+
+    .hud-top {
+      position: fixed;
+      top: max(12px, env(safe-area-inset-top));
+      left: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .hud-pill, .hud-controls {
+      pointer-events: auto;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 7px 13px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12.5px;
+      max-width: 100%;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+    }
+    .back-link, .live-pill {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .back-link:hover { background: rgba(255, 255, 255, 0.16); border-color: var(--accent); }
+    .live-pill {
+      border-color: rgba(255, 93, 93, 0.55);
+      background: rgba(255, 93, 93, 0.16);
+      color: #ffdada;
+    }
+    .live-pill:hover { background: rgba(255, 93, 93, 0.30); border-color: #ff8080; }
+    .badge-recon {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    button, select {
+      background: rgba(255, 255, 255, 0.09);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      min-height: 34px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    select option { background: #101722; color: var(--text); }
+    button:hover, select:hover { background: rgba(255, 255, 255, 0.16); border-color: var(--accent); }
+    button.active { background: rgba(255, 255, 255, 0.22); border-color: var(--accent); color: #fff; }
+
+    #roleHudBadge {
+      position: fixed;
+      top: 74px;
+      left: 12px;
+      right: 12px;
+      width: fit-content;
+      max-width: calc(100vw - 24px);
+      z-index: 9;
+      background: rgba(10, 16, 24, 0.80);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px 13px;
+      font-size: 11.5px;
+      line-height: 1.35;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    #roleHudBadge strong { color: var(--accent); font-weight: 700; }
+
+    #bigStartBtn {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 11;
+      background: rgba(10, 16, 24, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 2px solid var(--accent);
+      border-radius: 24px;
+      padding: 18px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      color: var(--text);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.72);
+      max-width: calc(100vw - 32px);
+      text-align: center;
+    }
+    #bigStartBtn:hover { transform: translate(-50%, -50%) scale(1.02); }
+    #bigStartBtn strong { font-size: 17px; letter-spacing: 0.02em; color: var(--accent); }
+    #bigStartBtn span { font-size: 12.5px; color: var(--muted); white-space: normal; max-width: 48ch; line-height: 1.42; }
+
+    #infoDrawer {
+      position: fixed;
+      top: 78px;
+      right: 12px;
+      width: min(430px, calc(100vw - 24px));
+      max-height: calc(100dvh - 195px);
+      overflow-y: auto;
+      background: var(--panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      display: none;
+      z-index: 14;
+      line-height: 1.48;
+      font-size: 12.5px;
+      user-select: text;
+    }
+    #infoDrawer h3 { font-size: 14px; color: var(--accent); margin-bottom: 6px; }
+    #infoDrawer p { color: var(--muted); margin-bottom: 10px; }
+    #infoDrawer ul { padding-left: 17px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
+
+    #captionBox {
+      position: fixed;
+      bottom: 108px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: min(760px, calc(100vw - 26px));
+      text-align: center;
+      background: rgba(8, 12, 18, 0.84);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.42;
+      display: none;
+      z-index: 10;
+      pointer-events: none;
+      white-space: normal;
+    }
+
+    .hud-bottom {
+      position: fixed;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      left: 12px;
+      right: 12px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 9px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      z-index: 10;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+    }
+    .chapter-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chapter-row::-webkit-scrollbar { display: none; }
+    .chap-btn { font-size: 11px; min-height: 30px; padding: 4px 10px; color: var(--muted); }
+    .chap-btn.active { color: #0b1017; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+    .transport-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #scrub { flex: 1; min-width: 110px; accent-color: var(--accent); cursor: pointer; height: 6px; }
+    .mono { font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+    #postFilmModal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 10, 16, 0.60);
+      z-index: 20;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .post-card {
+      width: min(700px, 100%);
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+      background: rgba(12, 18, 28, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .stamp {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .live-cta-card {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255, 93, 93, 0.24), rgba(255, 255, 255, 0.08));
+      border: 1.5px solid rgba(255, 110, 110, 0.65);
+      border-radius: 16px;
+      padding: 15px 17px;
+      margin: 12px 0;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .live-cta-card:hover { transform: translateY(-1px); border-color: #ff9494; }
+    .live-cta-card span { display: block; font-weight: 400; font-size: 12.5px; color: #ffdcdc; margin-top: 4px; }
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .route-link {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .route-link:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .route-link span { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+    @media (max-width: 740px) {
+      #poseReadout, .place-sub { display: none; }
+      .hud-pill, .hud-controls { padding: 6px 10px; gap: 6px; font-size: 11.5px; }
+      button, select { padding: 5px 10px; font-size: 11.5px; min-height: 32px; }
+      #roleHudBadge { top: auto; bottom: 168px; font-size: 10.5px; padding: 5px 10px; }
+      #captionBox { font-size: 13.5px; bottom: 116px; padding: 6px 12px; width: min(92vw, 760px); }
+      #infoDrawer { top: auto; bottom: 122px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="glCanvas"></canvas>
+  <video id="vid360" crossorigin="anonymous" playsinline webkit-playsinline preload="auto" style="display:none"></video>
+
+  <div class="hud-top">
+    <div class="hud-pill">
+      <a class="back-link" id="backStationLink" href="../">← Field Station</a>
+      <strong id="filmTitle">HOT WATER, COLD SNOW</strong>
+      <span class="place-sub" id="filmPlace" style="color:var(--muted)">Jigokudani Yaen-Koen, Nagano, Japan · Asia</span>
+      <span class="badge-recon" id="reconBadge">Generated 360° Reconstruction</span>
+    </div>
+    <div class="hud-controls">
+      <select id="editionSel" aria-label="Narration & Sound Stem">
+        <option value="en_pro">EN · Adults · Pro (George)</option>
+        <option value="en_junior">EN · Kids 6–11 · Junior (Anna)</option>
+        <option value="ru">RU · Взрослые · Про (Глеб)</option>
+        <option value="natural">Natural Sound Only (No Voice)</option>
+      </select>
+      <button id="gyroBtn" type="button">📱 Tilt 360°</button>
+      <button id="ccBtn" type="button" class="active">CC: ON</button>
+      <button id="notesBtn" type="button">🔬 Sources &amp; Notes</button>
+      <a class="live-pill" id="liveTopLink" href="/live/awaji-island-monkey-center/">🔴 Live Cam ↗</a>
+      <span class="mono" id="poseReadout">Yaw 0° · Pitch 0°</span>
+    </div>
+  </div>
+
+  <div id="roleHudBadge">
+    <strong id="shotBadgeTxt">SHOT 1/5 · STATIONARY MOUNT</strong> ·
+    <span id="roleBadgeTxt">Your role: A snow-dusted volcanic boulder at the edge of the steaming pool, at macaque head height</span>
+  </div>
+
+  <button id="bigStartBtn" type="button">
+    <strong id="bigStartTitle">▶ ENTER 05:30 360° VR EXPEDITION · HOT WATER, COLD SNOW</strong>
+    <span id="bigStartSub">Your role: A snow-dusted volcanic boulder at the edge of the steaming pool, at macaque head height · Fixed eye-level camera · Spatial audio + EN Kids / EN Pro / RU / Natural Sound</span>
+  </button>
+
+  <div id="infoDrawer">
+    <h3 id="noteTitle">Hot Water, Cold Snow · Jigokudani Yaen-Koen, Nagano, Japan</h3>
+    <p id="noteRole"><strong>Viewer Role:</strong> A snow-dusted volcanic boulder at the edge of the steaming pool, at macaque head height (January · Late Morning Snowfall).</p>
+    <p id="noteDisclosure"><strong>Transparency Disclosure:</strong> Generated 360° wildlife reconstruction built to peer-reviewed field biology and natural spatial acoustics: stationary eye-level camera (zero motion), 5 sustained shots (&ge;40 s each) joined by 1 s fades, starting at yaw 0°.</p>
+    <h3 id="srcHeading" style="margin-top:8px;">Verified Scientific Sources</h3>
+    <ul>
+      <li><strong>Takeshita, R. S., Bercovitch, F. B., Kinoshita, K., &amp; Huffman, M. A. (2018). Beneficial effect of hot spring bathing on stress levels in Japanese macaques. Primates, 59(3), 215–225.</strong> — Empirical physiological proof at Jigokudani Monkey Park that winter hot-spring bathing significantly lowers fecal glucocorticoid (stress hormone) metabolite concentrations in female Japanese macaques (Macaca fuscata). <a href="https://doi.org/10.1007/s10329-018-0655-x" target="_blank" rel="noopener" style="color:var(--accent)">[Source ↗]</a></li>
+      <li><strong>Zhang, P., Watanabe, K., Li, B., &amp; Tan, C. L. (2007). Social organization of Japanese macaques (Macaca fuscata) in relation to their hot-spring bathing behavior in Jigokudani. American Journal of Primatology, 69(11), 1207–1218.</strong> — Cultural origin (1963) and social transmission of hot-spring bathing at Jigokudani, restricted primarily to dominant matrilines while subordinate monkeys remain dry on the snowy bank. <a href="https://doi.org/10.1002/ajp.20419" target="_blank" rel="noopener" style="color:var(--accent)">[Source ↗]</a></li>
+      <li><strong>Keverne, E. B., Martensz, N. D., &amp; Tuite, B. (1989). Beta-endorphin concentrations in cerebrospinal fluid of monkeys are influenced by grooming relationships. Psychoneuroendocrinology, 14(1–2), 155–161.</strong> — Endogenous beta-endorphin social bonding function of primate allogrooming. <a href="https://doi.org/10.1016/0306-4530(89)90065-6" target="_blank" rel="noopener" style="color:var(--accent)">[Source ↗]</a></li>
+      <li><strong>Digital Live Zoo Live Cam Archive — Awaji Island Monkey Center (/live/awaji-island-monkey-center/).</strong> — Live free-ranging Japanese macaque camera on Digital Live Zoo. <a href="https://digitallivezoo.com/live/awaji-island-monkey-center/" target="_blank" rel="noopener" style="color:var(--accent)">[Source ↗]</a></li>
+    </ul>
+  </div>
+
+  <div id="captionBox"></div>
+
+  <div class="hud-bottom">
+    <div class="chapter-row" id="chapterRow">
+      <button type="button" class="chap-btn active" data-t="0">0:00 · Snowfall</button>
+      <button type="button" class="chap-btn" data-t="60">1:00 · The Bathers</button>
+      <button type="button" class="chap-btn" data-t="150">2:30 · Grooming</button>
+      <button type="button" class="chap-btn" data-t="220">3:40 · Who Gets In</button>
+      <button type="button" class="chap-btn" data-t="290">4:50 · Live Macaque Handoff</button>
+    </div>
+    <div class="transport-row">
+      <button id="playBtn" type="button">▶ Play</button>
+      <input id="scrub" type="range" min="0" max="330" step="0.05" value="0" aria-label="Film timeline" />
+      <span class="mono" id="timeLbl">00:00 / 05:30</span>
+      <button id="resetViewBtn" type="button">Center 360° (0°)</button>
+      <button id="fsBtn" type="button" title="Fullscreen">⛶</button>
+    </div>
+  </div>
+
+  <div id="postFilmModal">
+    <div class="post-card">
+      <div class="stamp" id="stampText">Asia · Jigokudani Yaen-Koen, Nagano, Japan</div>
+      <h2 id="nextHeading" style="font-size:21px;margin-bottom:6px;">See this world live right now</h2>
+      <p id="nextSub" style="font-size:13.5px;color:var(--muted);">Our 05:30 360° reconstruction has ended on the final hold frame. Jump straight to the real 24/7 live camera or explore another continent in 360°:</p>
+      <a class="live-cta-card" id="postLivePrimary" href="/live/awaji-island-monkey-center/">
+        🔴 WATCH LIVE CAM: Awaji Island Monkey Center
+        <span>Open 24/7 live stream on Digital Live Zoo (/live/awaji-island-monkey-center/) →</span>
+      </a>
+      <div class="route-grid">
+        <a class="route-link" data-other-slug="nest-on-the-roof" href="../nest-on-the-roof/">
+          🏠 THE NEST ON THE ROOF (05:40 360°)
+          <span>Europe · Bad Salzungen, Thuringia, Germany →</span>
+        </a>
+        <a class="route-link" data-other-slug="the-cleaning-station" href="../the-cleaning-station/">
+          🌊 THE CLEANING STATION (05:30 360°)
+          <span>Oceania · Lady Elliot Island, Southern Great Barrier Reef, Australia →</span>
+        </a>
+        <a class="route-link" data-other-slug="the-bear-who-fishes" href="../the-bear-who-fishes/">
+          🐻 THE BEAR WHO FISHES (05:30 360°)
+          <span>North America · Brooks Falls, Katmai National Park, Alaska, USA →</span>
+        </a>
+      </div>
+      <div style="margin-top:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+        <button id="replayNaturalBtn" type="button">🌿 Replay with Natural Sound Only</button>
+        <button id="replayBtn" type="button">↻ Replay 05:30 Film</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const FILM_META = {
+      slug: "hot-water-cold-snow",
+      durSec: 330,
+      durLabel: "05:30",
+      titleEn: "HOT WATER, COLD SNOW",
+      titleRu: "ГОРЯЧАЯ ВОДА, ХОЛОДНЫЙ СНЕГ",
+      placeEn: "Jigokudani Yaen-Koen, Nagano, Japan · Asia",
+      placeRu: "Дзигокудани Яэн-Коэн, Нагано, Япония · Азия",
+      roleEn: "Your role: A snow-dusted volcanic boulder at the edge of the steaming pool, at macaque head height",
+      roleRu: "Ваша роль: Припорошённый снегом валун у самой кромки парящего источника на уровне головы макак",
+      liveNameEn: "Awaji Island Monkey Center",
+      liveNameRu: "Центр обезьян острова Авадзи",
+      liveSlug: "awaji-island-monkey-center",
+      chapEn: ["0:00 · Snowfall", "1:00 · The Bathers", "2:30 · Grooming", "3:40 · Who Gets In", "4:50 · Live Macaque Handoff"],
+      chapRu: ["0:00 · Снегопад", "1:00 · В тёплой купели", "2:30 · Груминг у камня", "3:40 · Кто входит в воду", "4:50 · Живая камера"],
+      shotTimeline: [[0.0, 60.0, "SHOT 1/5 · SNOWFALL · STATIONARY MOUNT", "КАДР 1/5 · СНЕГОПАД · НЕПОДВИЖНАЯ КАМЕРА"], [60.0, 150.0, "SHOT 2/5 · THE BATHERS · STATIONARY MOUNT", "КАДР 2/5 · В ТЁПЛОЙ КУПЕЛИ · НЕПОДВИЖНАЯ КАМЕРА"], [150.0, 220.0, "SHOT 3/5 · GROOMING · STATIONARY MOUNT", "КАДР 3/5 · ГРУМИНГ У КАМНЯ · НЕПОДВИЖНАЯ КАМЕРА"], [220.0, 290.0, "SHOT 4/5 · WHO GETS IN · STATIONARY MOUNT", "КАДР 4/5 · КТО ВХОДИТ В ВОДУ · НЕПОДВИЖНАЯ КАМЕРА"], [290.0, 331.0, "SHOT 5/5 · LIVE MACAQUE HANDOFF · STATIONARY MOUNT", "КАДР 5/5 · ЖИВАЯ КАМЕРА · НЕПОДВИЖНАЯ КАМЕРА"]]
+    };
+
+    const canvas = document.getElementById("glCanvas");
+    const gl = canvas.getContext("webgl2", { antialias: true, preserveDrawingBuffer: true })
+            || canvas.getContext("webgl", { antialias: true, preserveDrawingBuffer: true });
+    const vid = document.getElementById("vid360");
+
+    const VS = `
+      attribute vec2 aPos;
+      varying vec2 vUv;
+      void main() {
+        vUv = aPos;
+        gl_Position = vec4(aPos, 0.0, 1.0);
+      }
+    `;
+    const FS = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform sampler2D uTex;
+      uniform float uYaw;
+      uniform float uPitch;
+      uniform float uFovY;
+      uniform float uAspect;
+      const float PI = 3.141592653589793;
+
+      void main() {
+        float tanHalf = tan(0.5 * uFovY);
+        vec3 dir = normalize(vec3(vUv.x * uAspect * tanHalf, vUv.y * tanHalf, 1.0));
+        float cp = cos(uPitch), sp = sin(uPitch);
+        vec3 d1 = vec3(dir.x, cp * dir.y + sp * dir.z, -sp * dir.y + cp * dir.z);
+        float cy = cos(uYaw), sy = sin(uYaw);
+        vec3 world = vec3(cy * d1.x + sy * d1.z, d1.y, -sy * d1.x + cy * d1.z);
+
+        float lon = atan(world.x, world.z);
+        float lat = asin(clamp(world.y, -1.0, 1.0));
+        vec2 equiUv = vec2(fract(lon / (2.0 * PI) + 0.5), clamp(0.5 - lat / PI, 0.0, 1.0));
+        gl_FragColor = texture2D(uTex, equiUv);
+      }
+    `;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      return s;
+    }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, "aPos");
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([12,18,26,255]));
+
+    const uYaw = gl.getUniformLocation(prog, "uYaw");
+    const uPitch = gl.getUniformLocation(prog, "uPitch");
+    const uFovY = gl.getUniformLocation(prog, "uFovY");
+    const uAspect = gl.getUniformLocation(prog, "uAspect");
+
+    const posterImg = new Image();
+    posterImg.crossOrigin = "anonymous";
+    posterImg.src = `../scenes/${FILM_META.slug}-poster.jpg`;
+
+    const holdImg = new Image();
+    holdImg.crossOrigin = "anonymous";
+    holdImg.src = `../scenes/${FILM_META.slug}-hold.jpg`;
+
+    // Delivery spec: front direction starts strictly at yaw 0° (straight ahead)
+    let yawDeg = 0.0, pitchDeg = 0.0, fovDeg = 68.0;
+    let currentLang = "en";
+    const keys = new Set();
+
+    const pointers = new Map();
+    let pinchDist0 = 0, pinchFov0 = 68.0;
+
+    canvas.addEventListener("pointerdown", e => {
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      if (pointers.size === 2) {
+        const pts = Array.from(pointers.values());
+        pinchDist0 = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        pinchFov0 = fovDeg;
+      }
+    });
+    canvas.addEventListener("pointermove", e => {
+      if (!pointers.has(e.pointerId)) return;
+      const prev = pointers.get(e.pointerId);
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 1) {
+        const dx = e.clientX - prev.x;
+        const dy = e.clientY - prev.y;
+        yawDeg = ((yawDeg - dx * 0.19 + 540) % 360) - 180;
+        pitchDeg = Math.max(-85, Math.min(85, pitchDeg + dy * 0.19));
+      } else if (pointers.size === 2 && pinchDist0 > 12) {
+        const pts = Array.from(pointers.values());
+        const d = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        if (d > 12) fovDeg = Math.max(38, Math.min(94, pinchFov0 * (pinchDist0 / d)));
+      }
+    });
+    const endPtr = e => { pointers.delete(e.pointerId); if (pointers.size < 2) pinchDist0 = 0; };
+    canvas.addEventListener("pointerup", endPtr);
+    canvas.addEventListener("pointercancel", endPtr);
+    canvas.addEventListener("wheel", e => {
+      e.preventDefault();
+      fovDeg = Math.max(38, Math.min(94, fovDeg + e.deltaY * 0.04));
+    }, { passive: false });
+
+    window.addEventListener("keydown", e => {
+      if (["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","KeyW","KeyA","KeyS","KeyD","Space"].includes(e.code)) {
+        if (e.code === "Space" && document.activeElement === document.body) {
+          e.preventDefault();
+          document.getElementById("playBtn").click();
+          return;
+        }
+        keys.add(e.code);
+      }
+    });
+    window.addEventListener("keyup", e => keys.delete(e.code));
+
+    let gyroActive = false, gyroBaseAlpha = null;
+    function onDeviceOrient(ev) {
+      if (!gyroActive || ev.alpha == null) return;
+      if (gyroBaseAlpha === null) gyroBaseAlpha = ev.alpha;
+      const dAlpha = ev.alpha - gyroBaseAlpha;
+      yawDeg = ((-dAlpha + 540) % 360) - 180;
+      if (typeof ev.beta === "number") {
+        pitchDeg = Math.max(-75, Math.min(75, ev.beta - 65));
+      }
+    }
+    document.getElementById("gyroBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("gyroBtn");
+      if (gyroActive) {
+        gyroActive = false;
+        window.removeEventListener("deviceorientation", onDeviceOrient);
+        btn.classList.remove("active");
+        btn.textContent = currentLang === "ru" ? "📱 Гироскоп" : "📱 Tilt 360°";
+        return;
+      }
+      if (typeof DeviceOrientationEvent !== "undefined" && typeof DeviceOrientationEvent.requestPermission === "function") {
+        try {
+          const perm = await DeviceOrientationEvent.requestPermission();
+          if (perm !== "granted") return;
+        } catch (_) { return; }
+      }
+      gyroBaseAlpha = null;
+      gyroActive = true;
+      window.addEventListener("deviceorientation", onDeviceOrient);
+      btn.classList.add("active");
+      btn.textContent = currentLang === "ru" ? "📱 360° ВКЛ" : "📱 Tilting";
+    });
+
+    document.getElementById("resetViewBtn").addEventListener("click", () => {
+      yawDeg = 0; pitchDeg = 0; fovDeg = 68; gyroBaseAlpha = null;
+    });
+    document.getElementById("fsBtn").addEventListener("click", () => {
+      const root = document.documentElement;
+      if (!document.fullscreenElement && root.requestFullscreen) root.requestFullscreen().catch(() => {});
+      else if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+    });
+
+    let cues = [];
+    let ccEnabled = true;
+    async function loadSrt(url) {
+      if (!url) { cues = []; return; }
+      try {
+        const res = await fetch(url);
+        if (!res.ok) { cues = []; return; }
+        const txt = await res.text();
+        if (!txt.trim()) { cues = []; return; }
+        cues = txt.replace(/\r\n/g, "\n").trim().split(/\n\s*\n/).map(block => {
+          const lines = block.trim().split("\n");
+          const idx = lines.findIndex(l => l.includes("-->"));
+          if (idx < 0) return null;
+          const m = lines[idx].match(/(\d+):(\d+):(\d+)[,.](\d+)\s*-->\s*(\d+):(\d+):(\d+)[,.](\d+)/);
+          if (!m) return null;
+          const t0 = +m[1]*3600 + +m[2]*60 + +m[3] + +m[4]/1000;
+          const t1 = +m[5]*3600 + +m[6]*60 + +m[7] + +m[8]/1000;
+          return { t0, t1, text: lines.slice(idx + 1).join("<br>") };
+        }).filter(Boolean);
+      } catch (_) { cues = []; }
+    }
+
+    const MASTER_HLS = `../streams/${FILM_META.slug}/master.m3u8`;
+    const EDITIONS = {
+      en_pro: {
+        lang: "en",
+        track: "en_pro",
+        hls: `../streams/${FILM_META.slug}/en_pro.m3u8`,
+        srt: `../streams/${FILM_META.slug}/en_pro.srt`
+      },
+      en_junior: {
+        lang: "en",
+        track: "en_junior",
+        hls: `../streams/${FILM_META.slug}/en_junior.m3u8`,
+        srt: `../streams/${FILM_META.slug}/en_junior.srt`
+      },
+      ru: {
+        lang: "ru",
+        track: "ru",
+        hls: `../streams/${FILM_META.slug}/ru.m3u8`,
+        srt: `../streams/${FILM_META.slug}/ru.srt`
+      },
+      natural: {
+        lang: "en",
+        track: "natural",
+        hls: `../streams/${FILM_META.slug}/natural.m3u8`,
+        srt: ""
+      }
+    };
+
+    let hls = null;
+    let desiredTrack = "en_pro";
+
+    function selectHlsTrack(trackName) {
+      if (!hls || !Array.isArray(hls.audioTracks)) return;
+      const idx = hls.audioTracks.findIndex(t => t.name === trackName);
+      if (idx >= 0 && hls.audioTrack !== idx) hls.audioTrack = idx;
+    }
+
+    function applyUiLanguage(lang) {
+      currentLang = lang;
+      const ru = lang === "ru";
+      document.documentElement.lang = ru ? "ru" : "en";
+      document.getElementById("backStationLink").textContent = ru ? "← Полевая станция" : "← Field Station";
+      document.getElementById("backStationLink").href = ru ? "../?lang=ru" : "../";
+      document.getElementById("filmTitle").textContent = ru ? FILM_META.titleRu : FILM_META.titleEn;
+      document.getElementById("filmPlace").textContent = ru ? FILM_META.placeRu : FILM_META.placeEn;
+      document.getElementById("reconBadge").textContent = ru ? "Сферическая 360°-реконструкция" : "Generated 360° Reconstruction";
+      document.getElementById("roleBadgeTxt").textContent = ru ? FILM_META.roleRu : FILM_META.roleEn;
+      document.getElementById("bigStartTitle").textContent = ru
+        ? `▶ СМОТРЕТЬ 360° VR ФИЛЬМ (${FILM_META.durLabel}) · ${FILM_META.titleRu}`
+        : `▶ ENTER ${FILM_META.durLabel} 360° VR EXPEDITION · ${FILM_META.titleEn}`;
+      document.getElementById("bigStartSub").textContent = ru
+        ? `${FILM_META.roleRu} · Неподвижная камера · Пространственный звук · RU / EN / Чистая природа`
+        : `${FILM_META.roleEn} · Fixed eye-level camera · Spatial audio + EN Kids / EN Pro / RU / Natural Sound`;
+      if (!gyroActive) document.getElementById("gyroBtn").textContent = ru ? "📱 Гироскоп" : "📱 Tilt 360°";
+      document.getElementById("notesBtn").textContent = ru ? "🔬 Источники" : "🔬 Sources & Notes";
+      document.getElementById("liveTopLink").textContent = ru ? "🔴 Живая камера ↗" : "🔴 Live Cam ↗";
+      document.getElementById("resetViewBtn").textContent = ru ? "По центру (0°)" : "Center 360° (0°)";
+      document.getElementById("ccBtn").textContent = ccEnabled ? (ru ? "Субтитры: ВКЛ" : "CC: ON") : (ru ? "Субтитры: ВЫКЛ" : "CC: OFF");
+      document.getElementById("stampText").textContent = ru ? FILM_META.placeRu : FILM_META.placeEn;
+      document.getElementById("nextHeading").textContent = ru ? "Посмотрите на это место в прямом эфире" : "See this world live right now";
+      document.getElementById("nextSub").textContent = ru
+        ? `360°-фильм (${FILM_META.durLabel}) завершился на финальном стоп-кадре. Откройте живую камеру 24/7 или выберите следующий регион:`
+        : `Our ${FILM_META.durLabel} 360° reconstruction has ended on the final hold frame. Jump straight to the real 24/7 live camera or explore another continent in 360°:`;
+      document.getElementById("postLivePrimary").innerHTML = ru
+        ? `🔴 СМОТРЕТЬ ЖИВУЮ КАМЕРУ: ${FILM_META.liveNameRu}<span>Открыть круглосуточный эфир на Digital Live Zoo (/live/${FILM_META.liveSlug}/) →</span>`
+        : `🔴 WATCH LIVE CAM: ${FILM_META.liveNameEn}<span>Open 24/7 live stream on Digital Live Zoo (/live/${FILM_META.liveSlug}/) →</span>`;
+      document.getElementById("replayNaturalBtn").textContent = ru ? "🌿 Повтор: только живой звук природы" : "🌿 Replay with Natural Sound Only";
+      document.getElementById("replayBtn").textContent = ru ? `↻ Повторить фильм (${FILM_META.durLabel})` : `↻ Replay ${FILM_META.durLabel} Film`;
+
+      const chaps = ru ? FILM_META.chapRu : FILM_META.chapEn;
+      document.querySelectorAll(".chap-btn").forEach((b, i) => { if (chaps[i]) b.textContent = chaps[i]; });
+      document.querySelectorAll("[data-other-slug]").forEach(a => {
+        const s = a.getAttribute("data-other-slug");
+        a.href = ru ? `../${s}/?lang=ru` : `../${s}/`;
+      });
+      updatePlayLabel();
+    }
+
+    async function loadEdition(edKey, preserveTime) {
+      const ed = EDITIONS[edKey] || EDITIONS.en_pro;
+      desiredTrack = ed.track;
+      if (edKey !== "natural") applyUiLanguage(ed.lang);
+      const prevTime = preserveTime ? (vid.currentTime || 0) : 0;
+      const wasPlaying = preserveTime && !vid.paused;
+
+      await loadSrt(ed.srt);
+
+      if (window.Hls && window.Hls.isSupported()) {
+        if (!hls) {
+          hls = new window.Hls({ enableWorker: true, maxBufferLength: 30, startLevel: 0 });
+          hls.loadSource(MASTER_HLS);
+          hls.attachMedia(vid);
+          hls.on(window.Hls.Events.MANIFEST_PARSED, () => selectHlsTrack(desiredTrack));
+          hls.on(window.Hls.Events.AUDIO_TRACKS_UPDATED, () => selectHlsTrack(desiredTrack));
+        } else {
+          selectHlsTrack(desiredTrack);
+        }
+      } else {
+        vid.src = ed.hls;
+        vid.load();
+        if (prevTime > 0) {
+          vid.addEventListener("loadedmetadata", function restoreT() {
+            vid.removeEventListener("loadedmetadata", restoreT);
+            vid.currentTime = prevTime;
+            if (wasPlaying) vid.play().catch(() => {});
+          });
+        }
+      }
+    }
+
+    const playBtn = document.getElementById("playBtn");
+    const bigStartBtn = document.getElementById("bigStartBtn");
+    const scrub = document.getElementById("scrub");
+    const timeLbl = document.getElementById("timeLbl");
+
+    function updatePlayLabel() {
+      const ru = currentLang === "ru";
+      if (vid.ended) playBtn.textContent = ru ? "↻ Повтор" : "↻ Replay";
+      else if (vid.paused) playBtn.textContent = ru ? "▶ Пуск" : "▶ Play";
+      else playBtn.textContent = ru ? "❚❚ Пауза" : "❚❚ Pause";
+    }
+
+    function startPlayback() {
+      bigStartBtn.style.display = "none";
+      document.getElementById("postFilmModal").style.display = "none";
+      if (vid.ended) vid.currentTime = 0;
+      vid.muted = false;
+      vid.play().then(updatePlayLabel).catch(() => {
+        vid.muted = true;
+        vid.play().then(updatePlayLabel).catch(() => {});
+      });
+    }
+
+    bigStartBtn.addEventListener("click", startPlayback);
+    playBtn.addEventListener("click", () => {
+      if (vid.paused || vid.ended) startPlayback();
+      else { vid.pause(); updatePlayLabel(); }
+    });
+    vid.addEventListener("play", () => { bigStartBtn.style.display = "none"; updatePlayLabel(); });
+    vid.addEventListener("pause", updatePlayLabel);
+
+    document.getElementById("editionSel").addEventListener("change", e => loadEdition(e.target.value, true));
+
+    document.getElementById("ccBtn").addEventListener("click", e => {
+      ccEnabled = !ccEnabled;
+      e.target.classList.toggle("active", ccEnabled);
+      e.target.textContent = ccEnabled
+        ? (currentLang === "ru" ? "Субтитры: ВКЛ" : "CC: ON")
+        : (currentLang === "ru" ? "Субтитры: ВЫКЛ" : "CC: OFF");
+    });
+
+    const drawer = document.getElementById("infoDrawer");
+    document.getElementById("notesBtn").addEventListener("click", () => {
+      drawer.style.display = drawer.style.display === "block" ? "none" : "block";
+    });
+
+    scrub.addEventListener("input", () => {
+      bigStartBtn.style.display = "none";
+      vid.currentTime = parseFloat(scrub.value);
+      document.getElementById("postFilmModal").style.display = "none";
+    });
+
+    const chapBtns = Array.from(document.querySelectorAll(".chap-btn"));
+    chapBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const t = parseFloat(btn.dataset.t || "0");
+        document.getElementById("postFilmModal").style.display = "none";
+        vid.currentTime = t;
+        startPlayback();
+      });
+    });
+
+    vid.addEventListener("ended", () => {
+      updatePlayLabel();
+      document.getElementById("postFilmModal").style.display = "flex";
+      try {
+        const key = "fs-stamps";
+        const stamps = JSON.parse(localStorage.getItem(key) || "{}");
+        if (!stamps[FILM_META.slug]) {
+          stamps[FILM_META.slug] = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+          localStorage.setItem(key, JSON.stringify(stamps));
+        }
+      } catch (_) {}
+    });
+
+    document.getElementById("replayBtn").addEventListener("click", () => {
+      document.getElementById("postFilmModal").style.display = "none";
+      vid.currentTime = 0;
+      startPlayback();
+    });
+    document.getElementById("replayNaturalBtn").addEventListener("click", () => {
+      document.getElementById("editionSel").value = "natural";
+      loadEdition("natural", false);
+      document.getElementById("postFilmModal").style.display = "none";
+      vid.currentTime = 0;
+      startPlayback();
+    });
+
+    function fmtTime(s) {
+      const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+      return String(m).padStart(2, "0") + ":" + String(sec).padStart(2, "0");
+    }
+
+    window.__DLZ_SET_POSE = function(y, p, f) {
+      yawDeg = y; pitchDeg = p; if (typeof f === "number") fovDeg = f;
+    };
+
+    (function initEdition() {
+      const qp = new URLSearchParams(location.search);
+      const ql = (qp.get("lang") || "").toLowerCase();
+      const qm = (qp.get("mode") || "").toLowerCase();
+      const navRu = /^ru\b/i.test(navigator.language || "");
+      let initKey = (ql === "ru" || (!ql && navRu)) ? "ru" : "en_pro";
+      if (qm === "junior" || qm === "kids") initKey = (ql === "ru" || (!ql && navRu)) ? "ru" : "en_junior";
+      if (qm === "natural" || qm === "ambient") initKey = "natural";
+      document.getElementById("editionSel").value = initKey;
+      applyUiLanguage(initKey === "ru" ? "ru" : "en");
+      loadEdition(initKey, false);
+    })();
+
+    function renderLoop() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const targetW = Math.round(window.innerWidth * dpr);
+      const targetH = Math.round(window.innerHeight * dpr);
+      if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      if (keys.has("ArrowLeft") || keys.has("KeyA")) yawDeg = ((yawDeg - 1.3 + 540) % 360) - 180;
+      if (keys.has("ArrowRight") || keys.has("KeyD")) yawDeg = ((yawDeg + 1.3 + 540) % 360) - 180;
+      if (keys.has("ArrowUp") || keys.has("KeyW")) pitchDeg = Math.min(85, pitchDeg + 1.0);
+      if (keys.has("ArrowDown") || keys.has("KeyS")) pitchDeg = Math.max(-85, pitchDeg - 1.0);
+
+      const t = vid.currentTime || 0;
+      scrub.value = t;
+      timeLbl.textContent = `${fmtTime(t)} / ${FILM_META.durLabel}`;
+
+      let activeChapIdx = 0;
+      chapBtns.forEach((b, idx) => {
+        if (t >= parseFloat(b.dataset.t || "0") - 0.1) activeChapIdx = idx;
+      });
+      chapBtns.forEach((b, idx) => b.classList.toggle("active", idx === activeChapIdx));
+
+      const shotRow = FILM_META.shotTimeline.find(r => t >= r[0] && t < r[1]) || FILM_META.shotTimeline[0];
+      document.getElementById("shotBadgeTxt").textContent = currentLang === "ru" ? shotRow[3] : shotRow[2];
+      document.getElementById("poseReadout").textContent = `Yaw ${Math.round(yawDeg)}° · Pitch ${Math.round(pitchDeg)}°`;
+
+      const capEl = document.getElementById("captionBox");
+      const cue = (ccEnabled && desiredTrack !== "natural") ? cues.find(c => t >= c.t0 && t <= c.t1) : null;
+      if (cue) {
+        capEl.innerHTML = cue.text;
+        capEl.style.display = "block";
+      } else {
+        capEl.style.display = "none";
+      }
+
+      const postOpen = document.getElementById("postFilmModal").style.display === "flex";
+      if ((vid.ended || postOpen) && holdImg.complete && holdImg.naturalWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, holdImg);
+      } else if (vid.readyState >= 2 && vid.videoWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, vid);
+      } else if (posterImg.complete && posterImg.naturalWidth > 0) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, posterImg);
+      }
+
+      const fovRad = fovDeg * Math.PI / 180;
+      const aspect = canvas.width / Math.max(1, canvas.height);
+      gl.uniform1f(uYaw, yawDeg * Math.PI / 180);
+      gl.uniform1f(uPitch, pitchDeg * Math.PI / 180);
+      gl.uniform1f(uFovY, fovRad);
+      gl.uniform1f(uAspect, aspect);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      window.__DLZ_QA = {
+        slug: FILM_META.slug,
+        yawDeg, pitchDeg, fovDeg,
+        currentTime: t, duration: vid.duration || 0,
+        readyState: vid.readyState, videoWidth: vid.videoWidth || 0, videoHeight: vid.videoHeight || 0,
+        desiredTrack, cuesCount: cues.length, ended: vid.ended
+      };
+      requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+  </script>
+</body>
+</html>
