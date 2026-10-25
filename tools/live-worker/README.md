@@ -24,13 +24,13 @@ on one cam still count as "here now".
 ## Starting the cam-activity job
 
 GitHub skips most scheduled runs of `activity.yml`, so the Worker's cron (the same one that refreshes the weather)
-starts it through the GitHub API, every 60 minutes by default.
+starts it through the GitHub API, every 30 minutes by default (free: the repo is public).
 
 1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.
    Repository access: only `zhanpetrov/digital-live-zoo`. Permissions: **Actions: Read and write**. Copy the token.
 2. The worker → Settings → Variables and secrets → Add → type **Secret**, name `GH_DISPATCH_TOKEN`, value = the token → Deploy.
-3. Optional: a plain variable `ACTIVITY_EVERY_MIN` (e.g. `30`) to change the pace. Every run bills ~3 Actions minutes
-   while the repo is private.
+3. Optional: a plain variable `ACTIVITY_EVERY_MIN` (e.g. `60`) to change the pace. If the repo is ever made private
+   again, every run bills ~3 Actions minutes.
 
 The last start time is kept in the `WX` KV namespace under `activity_dispatch`.
 

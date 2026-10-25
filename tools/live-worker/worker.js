@@ -137,12 +137,12 @@ export default {
 
 // GitHub drops most scheduled runs of activity.yml (it ran every 2-5 hours instead of every 30 minutes),
 // so this cron starts it instead. Needs the GH_DISPATCH_TOKEN secret: a fine-grained token for the
-// digital-live-zoo repo with "Actions: Read and write". ACTIVITY_EVERY_MIN sets the pace (default 60).
+// digital-live-zoo repo with "Actions: Read and write". ACTIVITY_EVERY_MIN sets the pace (default 30).
 const ACTIVITY_DISPATCH = "https://api.github.com/repos/zhanpetrov/digital-live-zoo/actions/workflows/activity.yml/dispatches";
 
 async function dispatchActivity(env, now) {
   if (!env.GH_DISPATCH_TOKEN || !env.WX) return;
-  const every = (+env.ACTIVITY_EVERY_MIN || 60) * 60000;
+  const every = (+env.ACTIVITY_EVERY_MIN || 30) * 60000;
   const last = +(await env.WX.get("activity_dispatch")) || 0;
   if (now - last < every - 90000) return;          // a cron tick may run a little early or late
   const r = await fetch(ACTIVITY_DISPATCH, {
