@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&family=Caveat:wght@600&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Oswald:wght@700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+<link rel="stylesheet" href="/field-station/station.css">
 <style>
 /* Field Station: dark night-green theatre for 360° spheres & live cams, warm paper field journal beside them. */
 :root{
@@ -1256,6 +1257,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     }).join("");
   }
 
+  // station.js (Start here, For you and films rails, shorter library) reads the station through this
+  window.DLZ_FS = {
+    exps: EXPS, regions: REG_MAP, R: v => R(v), track, start: id => start(id),
+    stamps: () => store.get("stamps", {}), lang: () => lang, mode: () => mode, daytime: x => isExpDaytimeNow(x),
+    filtered: () => activeRegion !== "all" || searchQuery.trim() !== "" || filterDaytime || filterVideo || filterDone,
+  };
+
   function resetAllFilters(){
     activeRegion = "all";
     searchQuery = "";
@@ -2152,5 +2160,6 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   } catch(e){}
 })();
 </script>
+<script src="/field-station/station.js"></script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+/* Field Station home, calmer: one short line under the title, the film shortcuts move into the 360° films
+   rail (station.js), a "Start here" pick and rails above a library that shows 12 cards until asked. */
+
+/* hero: short line instead of the long paragraph; Surprise and Science stay, film links live in the rail */
+#heroDesc{display:none}
+.st-tag{margin:12px 0 0;color:var(--muted);max-width:52ch;font-size:16.5px;line-height:1.45}
+.hero-actions a.act-btn{display:none}
+.hero h1{font-size:clamp(44px,6.4vw,84px)}
+
+/* header: the Science button is already in the hero */
+@media (max-width:680px){ .bar .sci-pill{display:none} }
+
+/* passport: on a phone just the progress and the "All 100" button, so "Start here" is one swipe away */
+@media (max-width:680px){ .passport .reg-badges,.passport .stamps,#ppHint{display:none} }
+
+/* start here + rails */
+.st-for{display:grid;gap:14px;min-width:0}
+.st-h{display:flex;align-items:baseline;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;margin-top:6px}
+.st-h h2{font-family:var(--display);font-weight:800;font-size:30px;margin:0;text-transform:uppercase}
+.st-h span{color:var(--muted);font-size:14px}
+.st-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,260px);gap:14px;overflow-x:auto;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding-bottom:6px;min-width:0}
+.st-card{scroll-snap-align:start;display:grid;grid-template-rows:auto 1fr;text-align:left;padding:0;min-width:0;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .15s,transform .15s}
+.st-card:hover{border-color:var(--sign);transform:translateY(-2px)}
+.st-img{position:relative;display:block;aspect-ratio:2/1;background:var(--panel-2);overflow:hidden}
+.st-img img{width:100%;height:100%;object-fit:cover;display:block}
+.st-film{position:absolute;left:9px;top:9px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--sign);color:#1d2a20;border-radius:999px;padding:3px 8px}
+.st-bd{display:grid;gap:4px;padding:12px 14px 14px;align-content:start}
+.st-why{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--day)}
+.st-card b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.02;text-transform:uppercase}
+.st-place{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-blurb{color:var(--muted);font-size:14.5px;max-width:60ch}
+.st-go{margin-top:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sign)}
+
+/* the big "Start here" card: picture beside the text on wide screens */
+.st-card.big{grid-template-rows:none;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);border-color:rgba(242,194,48,.55)}
+.st-card.big .st-img{aspect-ratio:auto;min-height:230px}
+.st-card.big .st-bd{padding:20px 22px;align-content:center;gap:8px}
+.st-card.big b{font-size:clamp(28px,3.4vw,40px)}
+.st-card.big .st-go{font-size:13px}
+@media (max-width:760px){
+  .st-card.big{grid-template-columns:minmax(0,1fr)}
+  .st-card.big .st-img{aspect-ratio:2/1;min-height:0}
+  .st-card.big .st-bd{padding:14px 15px 16px}
+}
+
+/* library: 12 cards until "Show all"; the whole card is the button, so no extra "Start" line */
+.exps.st-capped > .ex:nth-child(n+13){display:none}
+.ex .go{display:none}
+.st-more{justify-self:center;margin-top:4px}
+
+@media (prefers-reduced-motion:reduce){.st-card{transition:none}}
