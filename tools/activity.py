@@ -13,7 +13,8 @@ YouTube refreshes a live stream's thumbnail (mqdefault_live.jpg) about every fiv
 Some channels show a fixed promo image instead; those get viewer signals only.
 
 Writes activity.json for the site:
-  {"v":2,"updated":ISO,"cams":{id:[score 0-100, flags, viewers]}}
+  {"v":2,"updated":ISO,"cams":{id:[score 0-100, flags, viewers, caption?]}}
+  caption: optional short line on what the picture model saw ("Chicks in the nest"), see CAPTIONS
   flags: "t" trending (viewer spike), "a" action (motion), "e" nothing to see (dark/empty/blank),
          "x" stream offline, "s" no picture signal (fixed promo thumbnail and no live storyboard)
   Cams whose thumbnail stays the same for hours get their picture from the live storyboard instead.
@@ -51,6 +52,7 @@ DARK, FLAT = 28, 10      # too dark / too uniform (blank card) to judge
 SCENE_CUT = 0.55         # more than this changed = camera moved or switched angles
 STATIC_SECS = 3 * 3600   # same bytes this long = promo image, not a live frame
 LOOK_EMPTY = 0.3         # CLIP "something to look at" below this = nothing to see
+LOOK_EMPTY_SB = 0.2      # same for storyboard frames: 160x90 and softer, so the model scores them lower
 
 cams = json.load(open(catalog_path, encoding="utf-8"))["cams"]
 try:
@@ -234,7 +236,7 @@ class Clip:
         return ((np.asarray(sq) / 255.0 - self.MEAN) / self.STD).transpose(2, 0, 1).astype(np.float32)
 
     def look(self, imgs):
-        """0-1 per image: something to look at vs nothing to see."""
+        """Per image: (0-1 something to look at vs nothing to see, similarity to each animal prompt)."""
         out = []
         for i in range(0, len(imgs), 32):
             e = self.sess.run(None, {"pixel_values": np.stack([self.prep(x) for x in imgs[i:i + 32]])})[0]
@@ -242,8 +244,63 @@ class Clip:
             def lme(x):  # mean of exp at CLIP's temperature, so 41 animal prompts don't outvote 18 empty ones
                 m = x.max(1, keepdims=True)
                 return (m + np.log(np.exp(100 * (x - m)).mean(1, keepdims=True)) / 100)[:, 0]
-            out += (1 / (1 + np.exp(-100 * (lme(e @ self.P.T) - lme(e @ self.N.T))))).tolist()
+            pos = e @ self.P.T
+            out += zip((1 / (1 + np.exp(-100 * (lme(pos) - lme(e @ self.N.T))))).tolist(), pos)
         return out
+
+
+# ---------- captions ----------
+# What the picture model saw, as a short line for the Main Stage ("Chicks in the nest"). One per animal prompt in
+# clip_prompts.json "pos", in order: (caption, the cam's animals or habitat it may be said about; None = any cam).
+NEST = {"storks", "bald-eagles", "peregrine-falcons", "owls", "ospreys", "kestrels", "puffins", "backyard-birds", "ty:birds"}
+SAFARI = {"ty:safari", "wildebeest-migration"}
+WATER = {"ty:aqua", "coral-reefs", "sharks", "jellyfish", "kelp-forests", "manatees", "salmon"}
+CAPTIONS = [
+    ("An animal up close", None), ("Animals at the waterhole", SAFARI), ("A parent on the nest", NEST),
+    ("Eggs in the nest", NEST), ("Chicks in the nest", NEST), ("An animal sleeping", None), ("A group together", None),
+    ("A bear in the river", {"brown-bears", "salmon"}), ("Elephants in view", {"elephants"} | SAFARI),
+    ("Giraffes in view", {"giraffes"} | SAFARI), ("Zebras in view", {"zebras"} | SAFARI),
+    ("Antelopes in view", SAFARI), ("Penguins in view", {"penguins"}), ("Seals in view", {"seals"}),
+    ("An otter in view", {"otters"}), ("Fish swimming by", WATER), ("Jellyfish drifting", {"jellyfish"}),
+    ("A shark passing", {"sharks"}), ("A panda in view", {"giant-pandas", "red-pandas"}),
+    ("Apes in view", {"great-apes"}), ("A big cat in view", {"lions", "tigers"}), ("Horses in view", {"horses", "farm-animals"}),
+    ("Birds at the feeder", {"backyard-birds", "hummingbirds"}), ("A cat in view", {"cats"}), ("A dog in view", {"dogs"}),
+    ("Kittens in view", {"cats"}), ("Puppies in view", {"dogs"}), ("Farm animals in view", {"farm-animals", "goats"}),
+    ("An eagle in view", {"bald-eagles"}), ("An owl in view", {"owls"}), ("A stork in view", {"storks"}),
+    ("A hummingbird at the feeder", {"hummingbirds"}), ("A squirrel in view", {"squirrels", "backyard-birds"}),
+    ("Deer in view", {"deer", "elk"}), ("A wolf or fox in view", {"wolves", "foxes"}),
+    ("A rhino or hippo in view", {"rhinos"} | SAFARI), ("A tortoise in view", {"tortoises"}),
+    ("Ducks or swans in view", {"backyard-birds"}), ("Flamingos in view", {"ty:birds"}), ("A koala or kangaroo", set()),
+    ("A keeper with an animal", {"ty:zoo", "ty:pets"}),
+]
+CAPTION_LOOK = 0.55     # say nothing unless the model is fairly sure there is something to look at
+CAPTION_NEAR = 0.01     # the caption's prompt must be about as close as the best prompt of all
+
+
+def caption_for(sims, tags):
+    if sims is None or len(sims) != len(CAPTIONS):
+        return ""
+    best = float(np.max(sims))
+    for i in np.argsort(-sims):
+        if sims[i] < best - CAPTION_NEAR:
+            break
+        text, allowed = CAPTIONS[i]
+        if allowed is None or allowed & tags:
+            return text
+    return ""
+
+
+def cam_tags():
+    """Per video id: the cam's animal tags from data/cams.json plus its habitat as ty:<habitat>."""
+    tags = {c["id"]: {"ty:" + c.get("ty", "")} for c in cams}
+    try:
+        for c in json.load(open(os.path.join(HERE, "..", "data", "cams.json"), encoding="utf-8"))["cams"]:
+            for i in c.get("ids", []):
+                if i in tags:
+                    tags[i] |= set(c.get("animals") or [])
+    except Exception as ex:
+        print("no cam animals, generic captions only:", ex)
+    return tags
 
 
 try:
@@ -301,9 +358,11 @@ for cam_id, img in fresh:
     st = state[cam_id]
     st["mot"], st["blank"] = motion(st, img)
 if clip and (fresh or unjudged):
-    for (cam_id, _), lk in zip(fresh + unjudged, clip.look([im for _, im in fresh + unjudged])):
+    tags = cam_tags()
+    for (cam_id, _), (lk, sims) in zip(fresh + unjudged, clip.look([im for _, im in fresh + unjudged])):
         st = state[cam_id]
         st["look"] = round(lk, 3)
+        st["cap"] = caption_for(sims, tags.get(cam_id, set())) if lk >= CAPTION_LOOK else ""
         base = st.get("lbase", lk)
         st["lbase"] = round(base + 0.05 * (lk - base), 3)     # slow: this cam's usual picture
 
@@ -340,7 +399,7 @@ for cam, (cam_id, data, (v, answered)) in zip(cams, fetched):
     if look is not None:
         lift = max(look - (lbase or look), 0)
         pic = 0.55 * look + 0.25 * min(lift * 4, 1) + 0.2 * mot
-        empty = st.get("blank") or look < LOOK_EMPTY
+        empty = st.get("blank") or look < (LOOK_EMPTY_SB if st.get("src") == "sb" else LOOK_EMPTY)
     else:
         pic, empty = (0.35 if static else 0.3 + 0.4 * mot), bool(st.get("blank"))
     if mot >= 0.6 and not empty:
@@ -356,7 +415,9 @@ for cam, (cam_id, data, (v, answered)) in zip(cams, fetched):
         score = min(score, 15)
     if "x" in flags:
         score = 0
-    out[cam_id] = [int(round(min(score, 100))), flags, v] if flags else [int(round(min(score, 100))), "", v]
+    out[cam_id] = [int(round(min(score, 100))), flags, v]
+    if st.get("cap") and look is not None and not empty and "x" not in flags:
+        out[cam_id].append(st["cap"])                          # what the picture model saw last
 
 json.dump(state, open(state_file, "w"), separators=(",", ":"))
 json.dump({"v": 2, "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "cams": out},

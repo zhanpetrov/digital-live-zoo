@@ -369,6 +369,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <dt id="stWxL" hidden>Weather</dt><dd id="stWx" hidden></dd>
         <dt>Habitat</dt><dd id="stType"></dd>
         <dt>Watching</dt><dd id="stWatch"></dd>
+        <dt id="stSeenL" hidden>Last look</dt><dd id="stSeen" hidden></dd>
       </dl>
       <p class="why" id="stWhy"></p>
       <div class="progress" aria-hidden="true"><b id="stProg"></b></div>
@@ -495,9 +496,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const thumb = c => "https://i.ytimg.com/vi/"+c.id+"/mqdefault_live.jpg";
 
   // ---------- activity (tools/activity.py scores every cam's live thumbnail on a schedule) ----------
-  // activity.json: {cams:{id:[score 0-100, flags, live viewers]}}. Flags: t trending (viewer spike),
+  // activity.json: {cams:{id:[score 0-100, flags, live viewers, caption?]}}. Flags: t trending (viewer spike),
   // a action (movement), e nothing to see (dark/empty/blank), x stream offline, s promo thumbnail.
-  let ACT = {};
+  let ACT = {}, ACT_AT = 0;
   const lastOn = {};
   const actOf = id => ACT[id] || null;
   const flagged = (id, f) => { const a = actOf(id); return !!(a && a[1] && a[1].includes(f)); };
@@ -507,7 +508,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function loadActivity(){
     fetch("activity.json", {cache:"no-cache"}).then(r=>r.ok ? r.json() : null).then(a=>{
       ACT = (!a || a.v !== 2 || Date.now() - Date.parse(a.updated) > 3*3600000) ? {} : (a.cams || {});
-      if(CAMS.length){ renderStats(); renderActivity(); if(state.sort==="a") applyFilters(); }
+      ACT_AT = a && a.updated ? Date.parse(a.updated) : 0;
+      if(CAMS.length){ renderStats(); renderActivity(); renderSeen(); if(state.sort==="a") applyFilters(); }
     }).catch(()=>{});
   }
   loadActivity(); setInterval(loadActivity, 4*60000);
@@ -906,7 +908,13 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     $("stName").textContent = c.n; $("stWhere").textContent = c.p; $("stType").textContent = TYPES[c.ty];
     $("stWatch").textContent = c.w ? c.w.toLocaleString("en-US")+" people at last check" : "a few people";
     $("stWhy").textContent = stage.id ? stage.why : (pend ? pend.why : "");
-    updateClocks(); renderWx(); if(refreshTop) refreshTop(); mapFollow();
+    updateClocks(); renderWx(); renderSeen(); if(refreshTop) refreshTop(); mapFollow();
+  }
+  // what the picture model saw on this cam at the last activity run ("Chicks in the nest")
+  function renderSeen(){
+    const a = panelId() ? actOf(panelId()) : null, cap = a && a[3], dd = $("stSeen");
+    dd.hidden = $("stSeenL").hidden = !cap;
+    if(cap){ const m = Math.max(1, Math.round((Date.now() - ACT_AT)/60000)); dd.textContent = cap + (ACT_AT ? ` · ${m < 60 ? m+" min" : Math.round(m/60)+" h"} ago` : ""); }
   }
 
   // ---------- weather near the cams (assets/wx.js: MET Norway via the zoo-live Worker) ----------
