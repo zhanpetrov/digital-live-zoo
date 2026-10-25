@@ -375,6 +375,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <div class="stage-actions">
         <button class="btn sign" id="sound" type="button">Sound on</button>
         <button class="btn" id="tour" type="button" aria-pressed="true">Touring the planet</button>
+        <button class="btn" id="hl" type="button" aria-pressed="false" title="Tour only cams that are trending or have action right now">Highlights only</button>
         <button class="btn" id="next" type="button">Next cam</button>
       </div>
     </div>
@@ -429,7 +430,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     <ul>
       <li>The cams were found by searching YouTube in 14 languages. City cams, news, music loops, “cat TV” and documentary reruns were left out, so every cam here is a real live view of animals.</li>
       <li>Each cam is tagged with its place, time zone and habitat. “Awake now” keeps the cams where it is between 5 am and 8 pm locally.</li>
-      <li>The Main Stage learns when to move on. Every press of “Next cam”, by you or anyone, teaches it how long each cam holds people; your own skips change your tour right away. It follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam.</li>
+      <li>The Main Stage learns when to move on. Every press of “Next cam”, by you or anyone, teaches it how long each cam holds people; your own skips change your tour right away. It follows your filters, so choose Africa and it tours Africa. Press “Touring the planet” to stay on one cam, or “Highlights only” to tour just the cams that are trending or have action right now.</li>
       <li>A wall plays up to 9 cams at once. Tap “Sound” on a tile to hear that one.</li>
       <li>The list is checked every day: restarted streams get their new link, dead ones are removed, and new cams are added.</li>
     </ul>
@@ -474,6 +475,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   const picked = new Set(), noEmbed = new Set(), shown = {};
   try{ JSON.parse(localStorage.getItem("zoo-wall")||"[]").forEach(id=>picked.add(id)); }catch(e){}
   try{ JSON.parse(localStorage.getItem("zoo-noembed")||"[]").forEach(id=>noEmbed.add(id)); }catch(e){}
+  let highlights = false; try{ highlights = localStorage.getItem("zoo-hl") === "1"; }catch(e){}   // tour only trending / action cams
 
   const track = (ev, props)=>{ try{ window.posthog && posthog.capture(ev, props); }catch(e){} };
   const camProps = id => { const c = BYID[id] || {}; return {cam_id:id, cam_name:c.n, continent:c.c, habitat:c.ty, country:c.k}; };
@@ -708,6 +710,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
     let l = visible().filter(c=>ok(c) && !skipTour(c.id) && !(now - (lastOn[c.id]||0) < REVISIT_MS));
     if(!hasAct){ const aw = l.filter(awakeNow); if(aw.length) l = aw; }
     if(!l.length) l = visible().filter(ok);
+    if(highlights && hasAct){ const h = l.filter(c=>isHot(c.id)); if(h.length) l = h; }   // nothing hot: tour as usual
     let best = null, bs = -1;
     l.forEach(c=>{
       const v = (actOf(c.id) && actOf(c.id)[2]) || c.w || 0;
@@ -1239,6 +1242,17 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   $("awake").addEventListener("click", e=>{ state.awake = !state.awake; track("filter_changed", {filter:"awake", value:state.awake}); e.currentTarget.setAttribute("aria-pressed", String(state.awake)); applyFilters(); });
   $("sort").addEventListener("change", e=>{ state.sort = e.target.value; track("filter_changed", {filter:"sort", value:state.sort}); applyFilters(); });
   $("sound").addEventListener("click", e=>{ soundOn = !soundOn; track("sound_toggled", {on:soundOn}); e.currentTarget.textContent = soundOn ? "Sound off" : "Sound on"; const fp = S[front].p; if(fp){ try{ if(soundOn){ fp.setVolume(100); fp.unMute(); } else fp.mute(); }catch(err){} } });
+  $("hl").setAttribute("aria-pressed", String(highlights));
+  $("hl").addEventListener("click", e=>{
+    highlights = !highlights;
+    try{ localStorage.setItem("zoo-hl", highlights ? "1" : "0"); }catch(e){}
+    track("highlights_toggled", {on:highlights});
+    e.currentTarget.setAttribute("aria-pressed", String(highlights));
+    if(!highlights){ toast("Highlights off: touring every cam again."); return; }
+    const n = Object.keys(ACT).length ? visible().filter(c=>isHot(c.id)).length : 0;
+    toast(n ? `Highlights only: ${n} cam${n>1?"s":""} trending or with action right now.` : "Nothing trending or with action right now, so the tour carries on as usual.");
+    if(n && pend && !pend.user && !isHot(pend.id)) cancelPend();   // line up a highlight instead
+  });
   $("tour").addEventListener("click", e=>{ segEnd(touring ? "hold" : "resume"); touring = !touring; segStart(); track("tour_toggled", {on:touring}); e.currentTarget.setAttribute("aria-pressed", String(touring)); e.currentTarget.textContent = touring ? "Touring the planet" : "Staying on this cam"; stage.since = Date.now(); if(!touring && pend && !pend.now) cancelPend(); });
   $("next").addEventListener("click", ()=>nextCam("You skipped ahead.", {reason:"skip"}));
   $("topWall").addEventListener("click", ()=>{ const v = sorted(visible()).filter(c=>c.ty!=="pets" || state.type==="pets"); openWall(v.length?v:sorted(visible()), "Top cams in this view"); });
