@@ -1,3 +1,7 @@
 .state/
 .model/
 __pycache__/
+
+# local Worker test settings (tools/live-worker)
+.dev.vars
+.wrangler/

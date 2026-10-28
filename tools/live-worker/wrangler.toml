@@ -1,0 +1,25 @@
+# Deploy: cd tools/live-worker && npx wrangler deploy   (one-time: npx wrangler login)
+# keep_vars keeps the variables set in the Cloudflare dashboard; secrets are never touched by a deploy.
+name = "zoo-live"
+main = "worker.js"
+compatibility_date = "2026-10-23"
+keep_vars = true
+
+[triggers]
+crons = ["*/2 * * * *"]
+
+[[kv_namespaces]]
+binding = "WX"
+id = "KV_NAMESPACE_ID"
+
+# Zoo Chat: one room, held by a Durable Object (SQLite storage, available on the free plan)
+[[durable_objects.bindings]]
+name = "CHAT"
+class_name = "ChatRoom"
+
+[[migrations]]
+tag = "chat-v1"
+new_sqlite_classes = ["ChatRoom"]
+
+[observability]
+enabled = true

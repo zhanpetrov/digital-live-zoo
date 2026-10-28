@@ -34,6 +34,22 @@ starts it through the GitHub API, every 30 minutes by default (free: the repo is
 
 The last start time is kept in the `WX` KV namespace under `activity_dispatch`.
 
+## Zoo Chat
+
+One public room (`GET /chat`, WebSocket), held by the Durable Object class `ChatRoom` in `worker.js`; the page side is
+`assets/chat.js` / `assets/chat.css`, switched on by `window.ZOO_CHAT = {url, sitekey}` in `index.html` (empty url = no chat).
+
+- Safety: Cloudflare Turnstile before joining; only the zoo's own origin; text only, 200 characters; no links, e-mail,
+  @handles or phone numbers; English and Russian swear and slur filter; 1 message per 3 s and 5 per 30 s; 3 tabs per person;
+  enough reports (3, or 2 in a small room) hide everything the author wrote and mute them for 24 hours.
+- Kept: the last 50 messages for 24 hours and the mutes. People are a daily-salted hash of the IP, never the IP.
+- Settings: `TURNSTILE_SECRET` (secret, from Cloudflare → Turnstile → the zoo widget), `CHAT_OFF` = `1` closes the room at once
+  (kill switch, no deploy needed), `CHAT_SALT` (optional secret), `CHAT_DEV_ORIGINS` (local testing only).
+- Deploy with Wrangler, because a Durable Object needs a migration: `npx wrangler login` once, then
+  `cd tools/live-worker && npx wrangler deploy`. `wrangler.toml` keeps the cron and the `WX` KV binding and has `keep_vars = true`.
+- Local test: `npx wrangler dev` (uses `.dev.vars` with Cloudflare's always-pass Turnstile test secret) and open the site
+  from `http://localhost:8791`; `assets/chat.js` then talks to `ws://127.0.0.1:8787/chat` with the test site key.
+
 ## Privacy
 
 Only totals and YouTube video ids of the most watched cams leave the Worker: no person IDs, places or pages. The privacy page says the home page shows visitor totals.

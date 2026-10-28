@@ -1,0 +1,55 @@
+/* Zoo Chat (assets/chat.js): a floating button and a panel in the zoo's colours. */
+.zc-btn{position:fixed;right:16px;bottom:16px;z-index:60;display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;
+  background:var(--sign);color:#1b1500;font-weight:800;font-size:14.5px;padding:11px 16px;min-height:46px;box-shadow:0 10px 26px rgba(0,0,0,.45);cursor:pointer}
+.zc-btn:hover{filter:brightness(1.06)}
+.zc-n{background:#1b1500;color:var(--sign);border-radius:999px;padding:1px 7px;font-size:12px}
+.zc-dot{width:9px;height:9px;border-radius:50%;background:var(--live);display:inline-block}
+.zc{position:fixed;right:16px;bottom:74px;z-index:61;width:min(370px,calc(100vw - 32px));height:min(560px,calc(100dvh - 100px));
+  display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto auto auto auto auto;background:var(--panel);border:1px solid var(--line);
+  border-radius:18px;box-shadow:0 22px 50px rgba(0,0,0,.55);overflow:hidden;color:var(--fg)}
+.zc[hidden]{display:none}
+.zc-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 10px 14px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.zc-h b{font-size:15px}
+.zc-here{color:var(--day);font-family:var(--mono,monospace);font-size:11.5px;margin-left:4px}
+.zc-x{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);font-size:19px;line-height:1;cursor:pointer}
+.zc-me{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 14px;font-size:12.5px;color:var(--muted);border-bottom:1px solid var(--line)}
+.zc-roll{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:3px 9px;font-size:11.5px;cursor:pointer}
+.zc-roll:hover{color:var(--fg);border-color:var(--sign)}
+.zc-watch{display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;padding:7px 12px;font-size:11.5px;color:var(--muted);border-bottom:1px solid var(--line)}
+.zc-watch::-webkit-scrollbar{display:none}
+.zc-list{list-style:none;margin:0;padding:10px 10px 4px;overflow-y:auto;display:grid;gap:9px;align-content:start;overscroll-behavior:contain}
+.zc-m{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:8px;align-items:start}
+.zc-m.mine{grid-template-columns:30px minmax(0,1fr)}
+.zc-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:hsl(var(--h) 45% 22%)}
+.zc-b{min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:6px 10px}
+.zc-m.mine .zc-b{border-color:rgba(242,194,48,.45)}
+.zc-top{display:flex;align-items:center;flex-wrap:wrap;gap:3px 8px;font-size:11.5px}
+.zc-top b{color:hsl(var(--h) 75% 70%)}
+.zc-top time{color:var(--faint);font-size:10.5px}
+.zc-b p{margin:2px 0 0;font-size:14px;line-height:1.38;overflow-wrap:anywhere}
+.zc-b p.big{font-size:26px;line-height:1.1}
+.zc-cam{border:1px solid var(--line);background:var(--bg);color:var(--sign);border-radius:999px;padding:1px 8px;font-size:11px;white-space:nowrap;cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.zc-cam:hover{border-color:var(--sign)}
+.zc-rep{opacity:0;border:0;background:transparent;color:var(--faint);font-size:13px;padding:4px;cursor:pointer}
+.zc-m:hover .zc-rep,.zc-rep:focus{opacity:1}
+@media (hover:none){.zc-rep{opacity:.55}}
+.zc-sys{text-align:center;color:var(--muted);font-size:12.5px;padding:8px 6px}
+.zc-ts:empty{display:none}
+.zc-ts{display:flex;justify-content:center;padding:4px}
+.zc-note{margin:0;padding:7px 14px;font-size:12.5px;color:#1b1500;background:var(--sign)}
+.zc-retry{border:1px solid #1b1500;background:transparent;color:#1b1500;border-radius:999px;padding:3px 10px;font-weight:700;cursor:pointer}
+.zc-react{display:flex;gap:4px;padding:6px 10px 0;overflow-x:auto;scrollbar-width:none}
+.zc-react button{flex:0 0 auto;width:36px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-size:17px;cursor:pointer}
+.zc-react button:hover{border-color:var(--sign);transform:translateY(-1px)}
+.zc-form{display:flex;gap:6px;padding:8px 10px}
+.zc-in{flex:1;min-width:0;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:9px 13px;font-size:14.5px}
+.zc-in:focus{outline:2px solid var(--sign);border-color:transparent}
+.zc-send{border:0;border-radius:999px;background:var(--sign);color:#1b1500;font-weight:800;padding:0 15px;cursor:pointer}
+.zc-send:disabled,.zc-in:disabled{opacity:.5;cursor:default}
+.zc-rules{margin:0;padding:0 14px 10px;font-size:11px;color:var(--faint)}
+@media (max-width:560px){
+  .zc{right:0;left:0;bottom:0;width:100%;height:min(78dvh,600px);border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .zc-btn{right:12px;bottom:12px}
+}
+/* the stage in page full screen (phones) covers everything, chat included */
+html.fslock .zc-btn,html.fslock .zc{display:none}

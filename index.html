@@ -300,7 +300,11 @@ footer a{color:var(--muted)}
 window.ZOO_ADS = {client: "ca-pub-5253542233607618", slot: ""};
 /* Live visitor numbers in the header. Empty = hidden. Set to the Cloudflare Worker URL from tools/live-worker (README there). */
 window.ZOO_LIVE = {url: "https://zoo-live.zhanpetrov8.workers.dev"};
+/* Zoo Chat (assets/chat.js). Empty url = no chat button. sitekey = the Cloudflare Turnstile site key (public). */
+window.ZOO_CHAT = {url: "", sitekey: ""};
 </script>
+<link rel="stylesheet" href="assets/chat.css">
+<script src="assets/chat.js" defer></script>
 <script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"https://us.i.posthog.com", defaults:"2025-05-24", person_profiles:"identified_only"});
@@ -479,6 +483,12 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   let highlights = false; try{ highlights = localStorage.getItem("zoo-hl") === "1"; }catch(e){}   // tour only trending / action cams
 
   const track = (ev, props)=>{ try{ window.posthog && posthog.capture(ev, props); }catch(e){} };
+  // assets/chat.js reads cam names and puts a cam from the chat on the stage through this
+  window.ZOO_STAGE = {
+    name: id => (BYID[id] && BYID[id].n) || "",
+    current: () => stage.id || "",
+    put: id => { if(BYID[id]){ prepare(id, "Picked from the chat.", {now:true, user:true, reason:"pick"}); window.scrollTo({top:0, behavior:"smooth"}); } },
+  };
   const camProps = id => { const c = BYID[id] || {}; return {cam_id:id, cam_name:c.n, continent:c.c, habitat:c.ty, country:c.k}; };
 
   const fmts = {};
@@ -900,6 +910,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
   function markStage(){
     document.querySelectorAll("#grid .enc.onstage").forEach(el=>{ el.classList.remove("onstage"); el.querySelector(".ontag").hidden = true; });
     const el = cardEls[stage.id]; if(el){ el.classList.add("onstage"); el.querySelector(".ontag").hidden = false; }
+    if(window.ZooChat) ZooChat.watch(stage.id);
   }
   // the cam the stage panel describes: the one playing, or on first load the one tuning in (so it never sits on "Loading…")
   const panelId = () => stage.id || (pend && pend.id) || null;
