@@ -133,21 +133,21 @@ export default {
 
   async scheduled(event, env, ctx) {
     ctx.waitUntil(refreshWeather(env));
-    ctx.waitUntil(dispatchActivity(env, event.scheduledTime));
+    ctx.waitUntil(dispatch(env, event.scheduledTime, "activity.yml", +env.ACTIVITY_EVERY_MIN || 30));
+    ctx.waitUntil(dispatch(env, event.scheduledTime, "watchdog.yml", 60));
   },
 };
 
-// GitHub drops most scheduled runs of activity.yml (it ran every 2-5 hours instead of every 30 minutes),
-// so this cron starts it instead. Needs the GH_DISPATCH_TOKEN secret: a fine-grained token for the
-// digital-live-zoo repo with "Actions: Read and write". ACTIVITY_EVERY_MIN sets the pace (default 30).
-const ACTIVITY_DISPATCH = "https://api.github.com/repos/zhanpetrov/digital-live-zoo/actions/workflows/activity.yml/dispatches";
-
-async function dispatchActivity(env, now) {
+// GitHub drops most scheduled runs (activity.yml ran every 2-5 hours instead of every 30 minutes), so this cron
+// starts the workflows instead: activity.yml (cam scores, ACTIVITY_EVERY_MIN, default 30) and watchdog.yml (hourly
+// health check). Needs GH_DISPATCH_TOKEN: a fine-grained token for the digital-live-zoo repo with
+// "Actions: Read and write". The last start of each is kept in the WX KV namespace as dispatch:<file>.
+async function dispatch(env, now, file, everyMin) {
   if (!env.GH_DISPATCH_TOKEN || !env.WX) return;
-  const every = (+env.ACTIVITY_EVERY_MIN || 30) * 60000;
-  const last = +(await env.WX.get("activity_dispatch")) || 0;
-  if (now - last < every - 90000) return;          // a cron tick may run a little early or late
-  const r = await fetch(ACTIVITY_DISPATCH, {
+  const key = file === "activity.yml" ? "activity_dispatch" : "dispatch:" + file;
+  const last = +(await env.WX.get(key)) || 0;
+  if (now - last < everyMin * 60000 - 90000) return;          // a cron tick may run a little early or late
+  const r = await fetch(`https://api.github.com/repos/zhanpetrov/digital-live-zoo/actions/workflows/${file}/dispatches`, {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${env.GH_DISPATCH_TOKEN}`,
@@ -156,8 +156,8 @@ async function dispatchActivity(env, now) {
     },
     body: JSON.stringify({ ref: "main" }),
   });
-  await env.WX.put("activity_dispatch", String(r.status === 204 ? now : last));
-  if (r.status !== 204) console.log("activity dispatch failed", r.status, await r.text());
+  await env.WX.put(key, String(r.status === 204 ? now : last));
+  if (r.status !== 204) console.log(file, "dispatch failed", r.status, await r.text());
 }
 
 const wxKey = (lat, lon) => (+lat).toFixed(2) + "," + (+lon).toFixed(2);

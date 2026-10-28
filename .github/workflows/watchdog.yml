@@ -1,0 +1,27 @@
+name: Watchdog
+
+# Checks every hour that the zoo still runs by itself (tools/watchdog.py) and keeps one "watchdog" issue open
+# while something is broken, so GitHub e-mails the owner. The zoo-live Worker starts it hourly; the cron is a backup.
+on:
+  schedule:
+    - cron: "41 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: watchdog
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 tools/watchdog.py
+        env:
+          GH_TOKEN: ${{ github.token }}

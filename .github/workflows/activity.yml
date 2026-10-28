@@ -16,15 +16,15 @@ concurrency:
 
 jobs:
   score:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20       # the first run after a state reset searches every cam's storyboard from scratch
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install -q pillow numpy onnxruntime
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: .model
           key: clip-vit-b32-vision-quantized-v1
@@ -33,7 +33,7 @@ jobs:
           mkdir -p .model
           [ -s .model/clip_vision.onnx ] || curl -sSfL -o .model/clip_vision.onnx \
             https://huggingface.co/Xenova/clip-vit-base-patch32/resolve/main/onnx/vision_model_quantized.onnx
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v5
         with:
           path: .state
           key: activity-state-${{ github.run_id }}
@@ -44,7 +44,7 @@ jobs:
           python tools/activity.py catalog.json activity.json .state .model/clip_vision.onnx 2> err.txt | tee out.txt || {
             echo "::error title=activity.py failed::$(tail -c 1500 err.txt | tr '\n' '|')"; exit 1; }
           echo "::notice title=Activity::$(head -1 out.txt)"
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@v5
         with:
           path: .state
           key: activity-state-${{ github.run_id }}
