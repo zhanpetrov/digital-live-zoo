@@ -10,7 +10,7 @@ crons = ["*/2 * * * *"]
 
 [[kv_namespaces]]
 binding = "WX"
-id = "KV_NAMESPACE_ID"
+id = "f2e7b75bff1a46ee829d4d2b7a3b5092"   # zoo-weather
 
 # Zoo Chat: one room, held by a Durable Object (SQLite storage, available on the free plan)
 [[durable_objects.bindings]]
