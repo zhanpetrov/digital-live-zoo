@@ -77,7 +77,7 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 .live-big{display:flex;align-items:baseline;gap:10px}
 .live-big b{font-family:var(--display);font-weight:800;font-size:60px;line-height:.9;color:var(--fg);font-variant-numeric:tabular-nums}
 .live-big span{font-size:13.5px;color:var(--muted);line-height:1.25;max-width:13ch}
-.live-kpis{grid-area:kpis;display:grid;grid-template-columns:repeat(2,auto);gap:10px 24px;margin:0;align-self:end}
+.live-kpis{grid-area:kpis;display:grid;grid-template-columns:repeat(3,auto);gap:10px 24px;margin:0;align-self:end}
 .live-kpis div{display:grid;gap:1px}
 .live-kpis dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);order:2}
 .live-kpis dd{margin:0;font-family:var(--display);font-weight:800;font-size:26px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
@@ -93,7 +93,7 @@ header.sign{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justi
 @media (max-width:560px){
   .hero{grid-template-columns:minmax(0,1fr);grid-template-areas:"brand" "now" "kpis" "chart";padding:16px;border-radius:16px}
   .live-big b{font-size:48px}
-  .live-kpis{grid-template-columns:repeat(4,auto);justify-content:space-between;gap:8px 12px}.live-kpis dd{font-size:21px}
+  .live-kpis{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:8px 12px}.live-kpis dd{font-size:21px}
 }
 /* zoo map (MapLibre + OpenFreeMap tiles, loaded when it scrolls into view) */
 .zoomap{display:grid;gap:12px}
@@ -326,6 +326,8 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
         <div><dt>this week</dt><dd id="lvWeek">0</dd></div>
         <div><dt>hours watched</dt><dd id="lvHours">0</dd></div>
         <div hidden><dt>countries</dt><dd id="lvCountries">0</dd></div>
+        <div hidden><dt>visitors all time</dt><dd id="lvAllPeople">0</dd></div>
+        <div hidden><dt>watches all time</dt><dd id="lvAllWatches">0</dd></div>
       </dl>
       <div class="live-chart" data-live hidden>
         <svg id="lvChart" viewBox="0 0 240 58" preserveAspectRatio="none" role="img" aria-label="Visitors per hour, last 24 hours"></svg>
@@ -1068,6 +1070,9 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       $("lvNowLbl").textContent = here === 1 ? "watching right now (that’s you)" : "people watching right now, including you";
       setNum("lvToday", Math.max(1, d.today)); setNum("lvWeek", Math.max(1, d.week));
       setNum("lvHours", d.hours_week || 0, true); $("lvCountries").parentNode.hidden = !d.countries_week; if(d.countries_week) setNum("lvCountries", d.countries_week);
+      // since the site began (the Worker refreshes these at most once an hour); watches = cams watched on the Main Stage for 30 s or more
+      $("lvAllPeople").parentNode.hidden = !d.all_people; if(d.all_people) setNum("lvAllPeople", Math.max(d.all_people, d.week || 0));
+      $("lvAllWatches").parentNode.hidden = !d.all_watches; if(d.all_watches) setNum("lvAllWatches", d.all_watches);
       const hasChart = Array.isArray(d.hourly) && d.hourly.length; $("lvChart").parentNode.hidden = !hasChart; if(hasChart) chart(d.hourly);
       top(d.top);
       if(!CAMS.length) setTimeout(load, 2500);   // the cam list is still loading: fill in the top cams once it is here

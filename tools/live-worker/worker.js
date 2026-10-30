@@ -14,6 +14,8 @@
 //   today  = people since midnight Pacific time; week = last 7 days
 //   hourly = people per hour for the last 24 hours, oldest first, the current hour last
 //   top    = the 3 cams most people had on stage in the last 24 hours (YouTube video ids only)
+//   all_people, all_watches, all_hours = since the site began: people, cams watched on the Main Stage for 30 s or more, hours watched
+//                                        (refreshed at most once an hour)
 //
 // Weather (GET /weather): current conditions and the next 6 hours for every camera place, from MET Norway
 // (api.met.no, free incl. commercial use, credit "MET Norway" on the site). A Cron Trigger (every 2 minutes)
@@ -52,6 +54,15 @@ SELECT dateDiff('hour', toStartOfHour(timestamp), toStartOfHour(now())) AS ago, 
 FROM events
 WHERE timestamp >= toStartOfHour(now()) - INTERVAL 23 HOUR AND ${HOST}
 GROUP BY ago`;
+
+// all-time totals scan every event, so they are asked at most once an hour (ALL_SECONDS)
+const SQL_ALL = `
+SELECT uniq(person_id) AS people,
+  countIf(event = 'stage_segment' AND toFloat(properties.to_s) - toFloat(properties.from_s) >= 30) AS watches,
+  round(sumIf(toFloat(properties.to_s) - toFloat(properties.from_s), event = 'stage_segment') / 3600, 1) AS hours
+FROM events
+WHERE ${HOST}`;
+const ALL_SECONDS = 3600;
 
 const SQL_TOP = `
 SELECT properties.cam_id AS cam, uniq(person_id) AS people, count() AS plays
@@ -106,10 +117,17 @@ export default {
         return out;
       }
       // the chart and the top cams are extras: if either query fails the totals still go out
-      const [hourlyRows, topRows] = await Promise.all([
+      const allKey = new Request(new URL("/live-all-v2.json", req.url).toString());
+      const allCached = await cache.match(allKey).then(r => r && r.json()).catch(() => null);
+      const [hourlyRows, topRows, allRows] = await Promise.all([
         ask(SQL_HOURLY, "zoo live widget hourly").catch(() => []),
         ask(SQL_TOP, "zoo live widget top cams").catch(() => []),
+        allCached ? null : ask(SQL_ALL, "zoo live widget all time").catch(() => null),
       ]);
+      const all = allCached || (allRows && allRows[0]
+        ? { people: +allRows[0][0] || 0, watches: +allRows[0][1] || 0, hours: +allRows[0][2] || 0 } : null);
+      if (all && !allCached) ctx.waitUntil(cache.put(allKey, new Response(JSON.stringify(all), {
+        headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${ALL_SECONDS}` } })));
       const row = main[0] || [];
       const hourly = new Array(24).fill(0);
       for (const [ago, people] of hourlyRows) if (ago >= 0 && ago < 24) hourly[23 - ago] = +people || 0;
@@ -118,6 +136,7 @@ export default {
         now: +row[0] || 0, today: +row[1] || 0, week: +row[2] || 0, hours_week: +row[3] || 0,
         countries_today: +row[4] || 0, countries_week: +row[5] || 0,
         hourly, top, at: new Date().toISOString(),
+        ...(all ? { all_people: all.people, all_watches: all.watches, all_hours: all.hours } : {}),
       };
       res = new Response(JSON.stringify(body), {
         headers: { "Content-Type": "application/json", "Cache-Control": `public, max-age=${CACHE_SECONDS}` },
