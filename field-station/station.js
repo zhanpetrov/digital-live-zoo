@@ -165,4 +165,8 @@
     requestAnimationFrame(() => { queued = false; render(); });
   }).observe($("exps"), {childList: true});
   render();
+
+  // /field-station/?exp=<id> (from the expedition pages under /field-station/e/) opens that expedition straight away
+  const want = new URLSearchParams(location.search).get("exp");
+  if(want && F.exps.some(x => x.id === want && x.open)){ F.track("fs_deeplink", {exp: want}); F.start(want); }
 })();

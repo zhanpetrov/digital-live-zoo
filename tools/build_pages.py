@@ -29,7 +29,7 @@ INDEX_PLACES = False      # Phase 2
 INDEX_HABITATS = False    # Phase 2
 OFFLINE_NOINDEX_DAYS = 30
 COUNTRY_NAMES = {"USA": "United States", "UK": "United Kingdom", "DR Congo": "DR Congo"}
-GENERATED_DIRS = ["live", "animals", "places", "habitats", "sitemaps"]
+GENERATED_DIRS = ["live", "animals", "places", "habitats", "sitemaps", "field-station/e"]
 
 esc = lambda s: html.escape(str(s), quote=True)
 
@@ -189,6 +189,7 @@ TOP = ('<header class="top"><a class="logo" href="/">Digital Live Zoo</a>'
 
 def foot():
     return ('<footer class="foot"><a href="/">Watch the whole zoo</a> · <a href="/animals/">All animals</a> · '
+            '<a href="/field-station/e/">360° expeditions</a> · '
             '<a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a><p>Every stream plays from its owner\'s channel through YouTube\'s player. '
             'Digital Live Zoo is not affiliated with the zoos, parks and people who run these cams.</p></footer>'
             '<script src="/assets/wx.js" defer></script><script src="/assets/pages.js" defer></script></body></html>\n')
@@ -490,6 +491,10 @@ def build(fetch_dates=False):
     if out != src:
         with open(home, "w", encoding="utf-8") as f:
             f.write(out)
+
+    # readable pages for the Field Station expeditions (tools/build_expeditions.py)
+    import build_expeditions
+    pages += build_expeditions.build(head, foot, esc, set(ents))
 
     # write, removing generated pages that no longer exist
     for d in GENERATED_DIRS:

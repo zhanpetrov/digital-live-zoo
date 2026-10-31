@@ -2544,14 +2544,1024 @@
   "mod": "2026-10-30",
   "index": false
  },
+ "/field-station/e/nest-on-the-roof/": {
+  "h": "026d04510f60",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hot-water-cold-snow/": {
+  "h": "10e543dd55db",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-cleaning-station/": {
+  "h": "a73309767081",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-bear-who-fishes/": {
+  "h": "f29d402550d6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-long-night/": {
+  "h": "50dc9d2f904d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/maasai-mara-migration-plains/": {
+  "h": "4b4071db0586",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/atacama-altiplano-flamingos/": {
+  "h": "cbe65e3c8e24",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/safari-camp/": {
+  "h": "eead1c076290",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/giraffe-elephant-hide/": {
+  "h": "125af38a88a3",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/waterhole/": {
+  "h": "ee725879428b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/kilimanjaro-amboseli-elephants/": {
+  "h": "d11a217324aa",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/etosha-okaukuejo-saltpan/": {
+  "h": "e456eed1ab43",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/virunga-grace-grauers-gorillas/": {
+  "h": "9552462580ec",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/congo-basin-bonobo-sanctuary/": {
+  "h": "38ceb1521ee0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/stony-point-cape-penguins/": {
+  "h": "d3059926c552",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/chobe-senyati-elephant-corridor/": {
+  "h": "38159468c2fb",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sabi-sand-djuma-leopard-bushveld/": {
+  "h": "07c60a21272d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/zambezi-floodplain-hippo-channels/": {
+  "h": "248f7116ed07",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/tsavo-red-dust-elephants/": {
+  "h": "5c95dc7c12da",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/madikwe-kalahari-thornveld/": {
+  "h": "a0768d82ee6e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/madagascar-baobab-spiny-avenue/": {
+  "h": "0fd595af3b99",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/walvis-bay-skeleton-coast-seals/": {
+  "h": "eba13dabdfa7",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/cape-churchill-polar-bears/": {
+  "h": "addb54e4ec4e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/svalbard-pack-ice-fjords/": {
+  "h": "3ff88bdeba05",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/abisko-aurora-tundra/": {
+  "h": "11507721886f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/katmai-underwater-salmon-run/": {
+  "h": "ee3cf85e98b6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mendenhall-glacier-goats/": {
+  "h": "f5eef22b3258",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/fairbanks-permafrost-muskoxen/": {
+  "h": "1b7d57a6b799",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/anan-creek-rainforest-bears/": {
+  "h": "5480c4c89cbb",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/iceland-hornstrandir-arctic-fox/": {
+  "h": "b5c02f26b7a6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/ilulissat-disko-bay-whales/": {
+  "h": "4f4965a280d1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/okhotsk-drift-ice-seals/": {
+  "h": "2860a7c91572",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/tromso-winter-whale-fjords/": {
+  "h": "04b381cfbf10",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/antipodes-subantarctic-penguins/": {
+  "h": "2b925a44ee8f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/port-lockroy-gentoo-icebergs/": {
+  "h": "407c581db2ae",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/south-georgia-king-penguin-plain/": {
+  "h": "658455fee01a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/lemaire-channel-whale-pump/": {
+  "h": "e637ad75a7ab",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/deception-island-volcanic-caldera/": {
+  "h": "834f54bcd337",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/yellowstone-lamar-wolves/": {
+  "h": "baf7a44799a1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/monterey-giant-kelp-otters/": {
+  "h": "d1ae9da3f63b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hanson-island-orca-rubbing/": {
+  "h": "a0015bbd47b3",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/grasslands-plains-bison/": {
+  "h": "4bba3d98d8bd",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/homosassa-crystal-manatees/": {
+  "h": "3ac348aae72d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/carlsbad-bracken-bat-vortex/": {
+  "h": "4a2da13e39fa",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/channel-islands-bald-eagles/": {
+  "h": "cc3924cb2d75",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/olympic-hoh-moss-canopy/": {
+  "h": "61f3233b9fe8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/redwood-fog-drip-giants/": {
+  "h": "cf5db848221f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/everglades-cypress-spoonbills/": {
+  "h": "3c6a5e3e4bc1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/miami-coral-city-urban-reef/": {
+  "h": "3f03b3ceb72a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/big-bear-alpine-eagle-eyrie/": {
+  "h": "4cc26f915eca",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/appalachian-benezette-elk/": {
+  "h": "40c8ad295236",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sapsucker-woods-flyway-birds/": {
+  "h": "4d95af5bd436",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sonoran-saguaro-desert-bloom/": {
+  "h": "0a9caa3238a8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/block-island-atlantic-seals/": {
+  "h": "586378966e90",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/galapagos-tortoise-highlands/": {
+  "h": "df561edd92ce",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/utila-mesoamerican-reef-wall/": {
+  "h": "52a404e26276",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mindo-cloud-forest-hummingbirds/": {
+  "h": "c8856d8f205f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/panama-canopy-tower-junction/": {
+  "h": "9958b51e8cc0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/costa-rica-sloth-symphony/": {
+  "h": "ddc9c63d09a0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/cusco-sword-billed-andes/": {
+  "h": "ad417711447a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/curacao-southern-reef-slope/": {
+  "h": "1c6a20f30db7",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/pantanal-flooded-jaguar-gallery/": {
+  "h": "e2aaedb5b62f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/amazon-varzea-pink-dolphins/": {
+  "h": "d8678086ce16",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/iguazu-atlantic-mist-swifts/": {
+  "h": "0c72db253fe7",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/patagonia-valdes-whale-steppe/": {
+  "h": "80b9e472a43f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/belize-blue-hole-atoll-wall/": {
+  "h": "338abce02d5f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/el-valle-volcanic-fruit-canopy/": {
+  "h": "9a94de328074",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/polesie-primeval-fen-bison/": {
+  "h": "8ceaf56f7930",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/skomer-atlantic-puffin-cliffs/": {
+  "h": "d71e68ee47df",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/wadden-sea-tidal-harbour-seals/": {
+  "h": "3cb93a61a41b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/karula-old-growth-black-storks/": {
+  "h": "fc3f762fc96d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/durbe-baltic-sea-eagles/": {
+  "h": "a2aa6b47ab92",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/ebro-delta-flamingo-lagoons/": {
+  "h": "9b4efcdab331",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/scottish-caledonian-loch-ospreys/": {
+  "h": "fc5c60aabaea",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/peak-district-nocturnal-badgers/": {
+  "h": "442115980434",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/norwegian-fjord-osprey-crags/": {
+  "h": "23a3b8a662a2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/eifel-volcanic-eagle-owls/": {
+  "h": "3780c64faeea",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/danish-beech-stream-kingfishers/": {
+  "h": "73ddf0bf19e2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/carpathian-bear-beech-sanctuary/": {
+  "h": "3ba0cf77a5b6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/somerset-wetland-beaver-engineers/": {
+  "h": "fbf1dd9d50b5",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/swiss-alpine-ibex-timberline/": {
+  "h": "c32f7086c32c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/wolong-misty-bamboo-pandas/": {
+  "h": "b7e092860587",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/chengdu-bamboo-panda-nursery/": {
+  "h": "6efe4e9ecd0c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mindanao-canopy-philippine-eagles/": {
+  "h": "2976b09defd2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/karuizawa-japanese-alps-woodland/": {
+  "h": "8fddccfb4da9",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hokkaido-subboreal-meadow-pasture/": {
+  "h": "f0f7a42e77bc",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/borneo-kinabatangan-orangutans/": {
+  "h": "7e6516f730d2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/raja-ampat-coral-triangle/": {
+  "h": "afc0e843b272",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/komodo-savanna-tidal-dragons/": {
+  "h": "075330521435",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/oarai-kuroshio-shark-currents/": {
+  "h": "f774cbfd81e4",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/kaohsiung-monsoon-tiger-bamboo/": {
+  "h": "de49b61c06eb",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/osaka-urban-cliff-peregrines/": {
+  "h": "8b7e09d7dae7",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/lake-baikal-nerpa-ice-crystals/": {
+  "h": "102d18d59371",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/taiaroa-royal-albatross-headland/": {
+  "h": "c52e70cad3eb",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/oamaru-little-blue-penguin-dusk/": {
+  "h": "891bd8f7764b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/port-lincoln-eyre-ospreys/": {
+  "h": "f8077268fc3c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/daintree-cassowary-gondwana-forest/": {
+  "h": "f71197423e24",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/blue-mountains-eucalypt-bushland/": {
+  "h": "626e9fd8c7b0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/marlborough-sounds-korora-coves/": {
+  "h": "1758ba955206",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/melbourne-cliff-sky-falcons/": {
+  "h": "32a68e091628",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/": {
+  "h": "097a10836da8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/nest-on-the-roof/ru/": {
+  "h": "acbf1cac3fab",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hot-water-cold-snow/ru/": {
+  "h": "a70af309e2f6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-cleaning-station/ru/": {
+  "h": "56367541c6c8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-bear-who-fishes/ru/": {
+  "h": "0f642cdb8be8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/the-long-night/ru/": {
+  "h": "7dcfcc34d4a7",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/maasai-mara-migration-plains/ru/": {
+  "h": "cda9e52c5bb1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/atacama-altiplano-flamingos/ru/": {
+  "h": "60b02a45084d",
+  "mod": "2026-10-31",
+  "index": false
+ },
+ "/field-station/e/safari-camp/ru/": {
+  "h": "7fdc458d3525",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/giraffe-elephant-hide/ru/": {
+  "h": "131385d3535d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/waterhole/ru/": {
+  "h": "87c3506d1647",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/kilimanjaro-amboseli-elephants/ru/": {
+  "h": "f19ed137c57a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/etosha-okaukuejo-saltpan/ru/": {
+  "h": "cee9f60c937f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/virunga-grace-grauers-gorillas/ru/": {
+  "h": "d9dce88fc28c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/congo-basin-bonobo-sanctuary/ru/": {
+  "h": "62d5899bf528",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/stony-point-cape-penguins/ru/": {
+  "h": "6ce7121fb5e0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/chobe-senyati-elephant-corridor/ru/": {
+  "h": "a5ff3582850e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sabi-sand-djuma-leopard-bushveld/ru/": {
+  "h": "ac1ef100624e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/zambezi-floodplain-hippo-channels/ru/": {
+  "h": "219390d67bd4",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/tsavo-red-dust-elephants/ru/": {
+  "h": "661066e71323",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/madikwe-kalahari-thornveld/ru/": {
+  "h": "f4141f3d0a80",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/madagascar-baobab-spiny-avenue/ru/": {
+  "h": "315e11787bf1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/walvis-bay-skeleton-coast-seals/ru/": {
+  "h": "64b0b9beb84c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/cape-churchill-polar-bears/ru/": {
+  "h": "6b22ab1e89dd",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/svalbard-pack-ice-fjords/ru/": {
+  "h": "3cb97c40f50f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/abisko-aurora-tundra/ru/": {
+  "h": "d22f1ec842c8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/katmai-underwater-salmon-run/ru/": {
+  "h": "5318b5462d96",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mendenhall-glacier-goats/ru/": {
+  "h": "190f75cc7b04",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/fairbanks-permafrost-muskoxen/ru/": {
+  "h": "c5f7caa6dedf",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/anan-creek-rainforest-bears/ru/": {
+  "h": "2f55af1b4814",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/iceland-hornstrandir-arctic-fox/ru/": {
+  "h": "8ac0f63046ba",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/ilulissat-disko-bay-whales/ru/": {
+  "h": "5eae838a4b42",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/okhotsk-drift-ice-seals/ru/": {
+  "h": "613685da3f78",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/tromso-winter-whale-fjords/ru/": {
+  "h": "0750c2ce13ea",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/antipodes-subantarctic-penguins/ru/": {
+  "h": "eb4a138fefd3",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/port-lockroy-gentoo-icebergs/ru/": {
+  "h": "d7ac4f749443",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/south-georgia-king-penguin-plain/ru/": {
+  "h": "db6b7692a3c8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/lemaire-channel-whale-pump/ru/": {
+  "h": "9a4d50c1c564",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/deception-island-volcanic-caldera/ru/": {
+  "h": "04c6eaa04f1d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/yellowstone-lamar-wolves/ru/": {
+  "h": "bc9429869f71",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/monterey-giant-kelp-otters/ru/": {
+  "h": "07156bfdcf31",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hanson-island-orca-rubbing/ru/": {
+  "h": "453e75aa3bf5",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/grasslands-plains-bison/ru/": {
+  "h": "ad442b603e9b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/homosassa-crystal-manatees/ru/": {
+  "h": "e4cf8583fa5b",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/carlsbad-bracken-bat-vortex/ru/": {
+  "h": "bd512d8ca4fe",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/channel-islands-bald-eagles/ru/": {
+  "h": "a537c5f486b5",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/olympic-hoh-moss-canopy/ru/": {
+  "h": "d3a26ef812f6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/redwood-fog-drip-giants/ru/": {
+  "h": "21ae7702231a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/everglades-cypress-spoonbills/ru/": {
+  "h": "1dce70a659c5",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/miami-coral-city-urban-reef/ru/": {
+  "h": "2aa563ffc5e4",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/big-bear-alpine-eagle-eyrie/ru/": {
+  "h": "f8e2e3cc67b0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/appalachian-benezette-elk/ru/": {
+  "h": "6199d98869b0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sapsucker-woods-flyway-birds/ru/": {
+  "h": "d25af441e62e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/sonoran-saguaro-desert-bloom/ru/": {
+  "h": "50b5f8df3f78",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/block-island-atlantic-seals/ru/": {
+  "h": "ab5ec21b575c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/galapagos-tortoise-highlands/ru/": {
+  "h": "26dec55a0d75",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/utila-mesoamerican-reef-wall/ru/": {
+  "h": "13c490d53ca2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mindo-cloud-forest-hummingbirds/ru/": {
+  "h": "2750f14b1ccf",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/panama-canopy-tower-junction/ru/": {
+  "h": "d4b5bd8d6114",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/costa-rica-sloth-symphony/ru/": {
+  "h": "5d7849206d55",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/cusco-sword-billed-andes/ru/": {
+  "h": "ae4d037c9afd",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/curacao-southern-reef-slope/ru/": {
+  "h": "c5f077177a5a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/pantanal-flooded-jaguar-gallery/ru/": {
+  "h": "3ec08bedd73c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/amazon-varzea-pink-dolphins/ru/": {
+  "h": "3980fceeab66",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/iguazu-atlantic-mist-swifts/ru/": {
+  "h": "4c471370914c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/patagonia-valdes-whale-steppe/ru/": {
+  "h": "29f4d6c07336",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/belize-blue-hole-atoll-wall/ru/": {
+  "h": "c97348f9302e",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/el-valle-volcanic-fruit-canopy/ru/": {
+  "h": "ea9132b687a8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/polesie-primeval-fen-bison/ru/": {
+  "h": "4cb494590288",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/skomer-atlantic-puffin-cliffs/ru/": {
+  "h": "04ea99200a5d",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/wadden-sea-tidal-harbour-seals/ru/": {
+  "h": "de215d50f2f0",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/karula-old-growth-black-storks/ru/": {
+  "h": "c17810cda450",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/durbe-baltic-sea-eagles/ru/": {
+  "h": "3c289fd4ce8c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/ebro-delta-flamingo-lagoons/ru/": {
+  "h": "d8e58fd7089c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/scottish-caledonian-loch-ospreys/ru/": {
+  "h": "2d314e3f213c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/peak-district-nocturnal-badgers/ru/": {
+  "h": "503e0c6559aa",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/norwegian-fjord-osprey-crags/ru/": {
+  "h": "a5866a1523ce",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/eifel-volcanic-eagle-owls/ru/": {
+  "h": "4d1c7524681c",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/danish-beech-stream-kingfishers/ru/": {
+  "h": "9543a07c97fc",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/carpathian-bear-beech-sanctuary/ru/": {
+  "h": "37139ba42bd2",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/somerset-wetland-beaver-engineers/ru/": {
+  "h": "c6cddd5ad43f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/swiss-alpine-ibex-timberline/ru/": {
+  "h": "beab5ea9b4b8",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/wolong-misty-bamboo-pandas/ru/": {
+  "h": "78e8fede5e0f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/chengdu-bamboo-panda-nursery/ru/": {
+  "h": "f5c2fd8ebe99",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/mindanao-canopy-philippine-eagles/ru/": {
+  "h": "fa01afe3e409",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/karuizawa-japanese-alps-woodland/ru/": {
+  "h": "50f970071316",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/hokkaido-subboreal-meadow-pasture/ru/": {
+  "h": "276e8887bb0a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/borneo-kinabatangan-orangutans/ru/": {
+  "h": "fb0ec30baa9f",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/raja-ampat-coral-triangle/ru/": {
+  "h": "cfffef50110a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/komodo-savanna-tidal-dragons/ru/": {
+  "h": "21e8162f4bdd",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/oarai-kuroshio-shark-currents/ru/": {
+  "h": "34bb65281d21",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/kaohsiung-monsoon-tiger-bamboo/ru/": {
+  "h": "ef90764588fd",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/osaka-urban-cliff-peregrines/ru/": {
+  "h": "1c46aafb9e15",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/lake-baikal-nerpa-ice-crystals/ru/": {
+  "h": "25fe3c1f73e6",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/taiaroa-royal-albatross-headland/ru/": {
+  "h": "1c7ae28b98b1",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/oamaru-little-blue-penguin-dusk/ru/": {
+  "h": "16d2b4c1a976",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/port-lincoln-eyre-ospreys/ru/": {
+  "h": "13b4576a8095",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/daintree-cassowary-gondwana-forest/ru/": {
+  "h": "4cf934055452",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/blue-mountains-eucalypt-bushland/ru/": {
+  "h": "a84c193fdf7a",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/marlborough-sounds-korora-coves/ru/": {
+  "h": "e9537736b410",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/melbourne-cliff-sky-falcons/ru/": {
+  "h": "443f384d25ff",
+  "mod": "2026-10-31",
+  "index": true
+ },
+ "/field-station/e/ru/": {
+  "h": "fe17b2518f7f",
+  "mod": "2026-10-31",
+  "index": true
+ },
  "/": {
   "h": "39bf8d1f5014",
   "mod": "2026-10-30",
   "index": true
  },
  "/field-station/": {
-  "h": "f531d837b0fd",
-  "mod": "2026-10-25",
+  "h": "619ff30ce780",
+  "mod": "2026-10-31",
   "index": true
  }
 }
