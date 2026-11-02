@@ -5729,6 +5729,33 @@
    }
   },
   {
+   "slug": "elephant-pan-khwai",
+   "ids": [
+    "QJe1tGI1EZc"
+   ],
+   "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
+   "n": "Elephant Pan, Khwai",
+   "animals": [
+    "elephants"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Khwai Private Reserve, Botswana",
+    "tz": "Africa/Gaborone",
+    "ty": "safari",
+    "c": "Africa",
+    "k": "Botswana",
+    "ch": "Africam",
+    "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg"
+   }
+  },
+  {
    "slug": "elephant-plain-ol-donyo-lodge",
    "ids": [
     "XsOU8JnEpNM"
@@ -6464,6 +6491,33 @@
    }
   },
   {
+   "slug": "flying-squirrels-komoro-zoo",
+   "ids": [
+    "foyQgxYsdRU"
+   ],
+   "cid": "UCRs28y8_qHheJ_yPjZ37e-g",
+   "n": "Flying squirrels, Komoro Zoo",
+   "animals": [
+    "squirrels"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Komoro, Nagano, Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "zoo",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "KOMORO ZOO 小諸市動物園　長野県小諸市",
+    "cid": "UCRs28y8_qHheJ_yPjZ37e-g"
+   }
+  },
+  {
    "slug": "forest-feeder-and-wildlife-forest-nook",
    "ids": [
     "jcjLcGchQTI"
@@ -6946,7 +7000,8 @@
   {
    "slug": "garden-wildlife-pretoria",
    "ids": [
-    "zAH0w01lp3c"
+    "zAH0w01lp3c",
+    "hi8xV_EhY4k"
    ],
    "cid": "UCFzY3MF-rYrexk1be3gnTRw",
    "n": "Garden wildlife, Pretoria",
@@ -6968,7 +7023,8 @@
     "2026-10-20",
     "2026-10-21",
     "2026-10-22",
-    "2026-10-23"
+    "2026-10-23",
+    "2026-11-01"
    ],
    "last": {
     "p": "Pretoria, South Africa",
@@ -7176,6 +7232,31 @@
    }
   },
   {
+   "slug": "giant-petrel-colony-isla-gran-robredo",
+   "ids": [
+    "yMEL8CL-Ky4"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Giant petrel colony, Isla Gran Robredo",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Isla Gran Robredo, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
+   }
+  },
+  {
    "slug": "giant-tortoises-izoo",
    "ids": [
     "xbtcl8WuEZ4"
@@ -7311,6 +7392,33 @@
     "k": "USA",
     "ch": "EarthCam",
     "cid": "UC6qrG3W8SMK0jior2olka3g"
+   }
+  },
+  {
+   "slug": "giraffe-birth-watch-cincinnati-zoo",
+   "ids": [
+    "Zi9fTj0fmUw"
+   ],
+   "cid": "UCE3VoxyYmyQCReOXk2ogsVg",
+   "n": "Giraffe birth watch, Cincinnati Zoo",
+   "animals": [
+    "giraffes"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Cincinnati, Ohio, USA",
+    "tz": "America/New_York",
+    "ty": "zoo",
+    "c": "North America",
+    "k": "USA",
+    "ch": "The Cincinnati Zoo & Botanical Garden",
+    "cid": "UCE3VoxyYmyQCReOXk2ogsVg"
    }
   },
   {
@@ -7834,6 +7942,31 @@
     "k": "DR Congo",
     "ch": "Explore Gorilla & Bonobo Cams: Great Apes",
     "cid": "UC8pWwNkJhWfn6dwZB6xdbLQ"
+   }
+  },
+  {
+   "slug": "great-green-macaw-nest-sarapiqui",
+   "ids": [
+    "OUc-R6Mtg0E"
+   ],
+   "cid": "UCUK_FVvLqWdWFFjaqGkQYuA",
+   "n": "Great green macaw nest, Sarapiquí",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Sarapiquí, Heredia, Costa Rica",
+    "tz": "America/Costa_Rica",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Costa Rica",
+    "ch": "Explore Sloth and Macaws: Rainforest Wildlife",
+    "cid": "UCUK_FVvLqWdWFFjaqGkQYuA"
    }
   },
   {
@@ -9149,6 +9282,33 @@
    }
   },
   {
+   "slug": "korora-nest-wellington",
+   "ids": [
+    "lPiyGor0MXs"
+   ],
+   "cid": "UCLizlM6gpaVHTKPo7spoqlA",
+   "n": "Kororā nest, Wellington",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Evans Bay, Wellington, New Zealand",
+    "tz": "Pacific/Auckland",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "New Zealand",
+    "ch": "Urban Wildlife Trust WILDCAMS",
+    "cid": "UCLizlM6gpaVHTKPo7spoqlA"
+   }
+  },
+  {
    "slug": "kruger-shalati-skukuza",
    "ids": [
     "QDcUbYHgme4"
@@ -9621,6 +9781,33 @@
    }
   },
   {
+   "slug": "little-penguin-burrow-phillip-island",
+   "ids": [
+    "yTxngt2eVDM"
+   ],
+   "cid": "UCCKSu4XoRcJ6vPF7CLsPJdw",
+   "n": "Little penguin burrow, Phillip Island",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Phillip Island, Victoria, Australia",
+    "tz": "Australia/Melbourne",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "Australia",
+    "ch": "Phillip Island Nature Parks",
+    "cid": "UCCKSu4XoRcJ6vPF7CLsPJdw"
+   }
+  },
+  {
    "slug": "little-penguin-chick-new-zealand",
    "ids": [
     "Qisl6Bv2SpY"
@@ -9779,6 +9966,33 @@
     "k": "USA",
     "ch": "Lake Fairlee Association",
     "cid": "UCnFHrbtq6DwJn_5iNxgxdxg"
+   }
+  },
+  {
+   "slug": "magellanic-penguins-isla-tova",
+   "ids": [
+    "mrJ4JF2MovU"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Magellanic penguins, Isla Tova",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Isla Tova, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
    }
   },
   {
@@ -10763,6 +10977,31 @@
    ],
    "started": {
     "EXSoa7sQTzQ": "2026-03-30T16:41:36Z"
+   }
+  },
+  {
+   "slug": "monkey-mountain-iida-city-zoo",
+   "ids": [
+    "BehU1STa7Zs"
+   ],
+   "cid": "UCNI0op3CT3IXCnOAhr9r3Mg",
+   "n": "Monkey mountain, Iida City Zoo",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Iida, Nagano, Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "zoo",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "cvn サル山ライブカメラ",
+    "cid": "UCNI0op3CT3IXCnOAhr9r3Mg"
    }
   },
   {
@@ -12613,6 +12852,33 @@
    }
   },
   {
+   "slug": "penguin-hill-iida-city-zoo",
+   "ids": [
+    "831QJ5DMU3M"
+   ],
+   "cid": "UCfLSbr8eONUgh3GmCv4QJPQ",
+   "n": "Penguin hill, Iida City Zoo",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Iida, Nagano, Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "zoo",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "cvn ペンギンライブカメラ",
+    "cid": "UCfLSbr8eONUgh3GmCv4QJPQ"
+   }
+  },
+  {
    "slug": "penguin-pool-birdland",
    "ids": [
     "NXb-fQnh04Y"
@@ -14062,6 +14328,33 @@
    }
   },
   {
+   "slug": "polar-bears-ev-buggy-one",
+   "ids": [
+    "8MoaBHl8U3A"
+   ],
+   "cid": "UCQI1rdPytw4jDAjwqXVSgfA",
+   "n": "Polar bears, EV Buggy One",
+   "animals": [
+    "polar-bears"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Churchill, Manitoba, Canada",
+    "tz": "America/Winnipeg",
+    "ty": "wild",
+    "c": "North America",
+    "k": "Canada",
+    "ch": "Explore Panda and Polar Bear Cams",
+    "cid": "UCQI1rdPytw4jDAjwqXVSgfA"
+   }
+  },
+  {
    "slug": "pond-makov-rescue-station",
    "ids": [
     "VrWou0V5Mcs"
@@ -15383,6 +15676,31 @@
     "k": "Japan",
     "ch": "ANNnewsCH",
     "cid": "UCGCZAYq5Xxojl_tSXcVJhiQ"
+   }
+  },
+  {
+   "slug": "sea-eagle-nest-sydney-olympic-park",
+   "ids": [
+    "LWYBNX02Q-A"
+   ],
+   "cid": "UCZss13TJZLtZ0ones3HpYMQ",
+   "n": "Sea-eagle nest, Sydney Olympic Park",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Sydney Olympic Park, New South Wales, Australia",
+    "tz": "Australia/Sydney",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "Australia",
+    "ch": "Sea-EagleCAM4",
+    "cid": "UCZss13TJZLtZ0ones3HpYMQ"
    }
   },
   {
@@ -18522,7 +18840,8 @@
   {
    "slug": "tinykittens-incoming-langley",
    "ids": [
-    "KzFdND88kAA"
+    "KzFdND88kAA",
+    "tbuRTSnDUS8"
    ],
    "cid": "UCeL2LSl91k2VccR7XEh5IKg",
    "n": "TinyKittens incoming",
@@ -18550,7 +18869,8 @@
     "2026-10-26",
     "2026-10-27",
     "2026-10-28",
-    "2026-10-29"
+    "2026-10-29",
+    "2026-11-01"
    ],
    "last": {
     "p": "Langley, Canada",
@@ -19212,6 +19532,34 @@
     "ty": "safari",
     "c": "Africa",
     "k": "Zimbabwe",
+    "ch": "Africam",
+    "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg"
+   }
+  },
+  {
+   "slug": "waterhole-nimali-tarangire",
+   "ids": [
+    "EbdnE0I_Aoo"
+   ],
+   "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
+   "n": "Waterhole, Nimali Tarangire",
+   "animals": [
+    "elephants",
+    "zebras"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-01",
+   "seen": [
+    "2026-11-01"
+   ],
+   "last": {
+    "p": "Tarangire, Manyara, Tanzania",
+    "tz": "Africa/Dar_es_Salaam",
+    "ty": "safari",
+    "c": "Africa",
+    "k": "Tanzania",
     "ch": "Africam",
     "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg"
    }

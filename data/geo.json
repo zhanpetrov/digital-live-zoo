@@ -430,6 +430,10 @@
    "lat": 26.641,
    "lon": -81.872
   },
+  "elephant-pan-khwai": {
+   "lat": -19.15,
+   "lon": 23.78
+  },
   "elephant-plain-ol-donyo-lodge": {
    "lat": -2.683,
    "lon": 37.893
@@ -494,6 +498,10 @@
    "lat": 51.296,
    "lon": -0.329
   },
+  "flying-squirrels-komoro-zoo": {
+   "lat": 36.33,
+   "lon": 138.43
+  },
   "forest-feeder-and-wildlife-forest-nook": {
    "lat": 49.689,
    "lon": 19.203
@@ -553,6 +561,10 @@
    "lat": 31.04,
    "lon": 103.3
   },
+  "giant-petrel-colony-isla-gran-robredo": {
+   "lat": -45.13,
+   "lon": -66.05
+  },
   "giant-tortoises-izoo": {
    "lat": 34.757,
    "lon": 138.988,
@@ -566,6 +578,10 @@
    "lat": 34.851,
    "lon": -82.398,
    "in": "zoo"
+  },
+  "giraffe-birth-watch-cincinnati-zoo": {
+   "lat": 39.15,
+   "lon": -84.51
   },
   "giraffe-deck-animal-adventure-park": {
    "lat": 42.178,
@@ -608,6 +624,10 @@
   "grauers-gorillas-forest-corridor": {
    "lat": -0.256,
    "lon": 29.0
+  },
+  "great-green-macaw-nest-sarapiqui": {
+   "lat": 10.47,
+   "lon": -84.02
   },
   "guide-dog-nursery-guide-dogs-of-america": {
    "lat": 34.316,
@@ -719,6 +739,10 @@
    "lon": -118.243,
    "in": "shelter"
   },
+  "korora-nest-wellington": {
+   "lat": -41.3,
+   "lon": 174.81
+  },
   "kruger-shalati-skukuza": {
    "lat": -23.936,
    "lon": 31.508
@@ -759,6 +783,10 @@
    "lat": 51.78,
    "lon": 5.225
   },
+  "little-penguin-burrow-phillip-island": {
+   "lat": -38.51,
+   "lon": 145.15
+  },
   "little-penguin-chick-new-zealand": {
    "lat": -40.987,
    "lon": 173.849
@@ -774,6 +802,10 @@
   "loon-cam-lake-fairlee": {
    "lat": 43.89,
    "lon": -72.219
+  },
+  "magellanic-penguins-isla-tova": {
+   "lat": -45.1,
+   "lon": -66.0
   },
   "mahali-mzuri-lodge-maasai-mara": {
    "lat": -1.49,
@@ -863,6 +895,10 @@
   "mixed-flying-foxes-lubee-bat-conservancy": {
    "lat": 29.75,
    "lon": -82.42
+  },
+  "monkey-mountain-iida-city-zoo": {
+   "lat": 35.52,
+   "lon": 137.83
   },
   "monterey-bay": {
    "lat": 36.618,
@@ -1036,6 +1072,10 @@
    "lat": 33.769,
    "lon": -118.192
   },
+  "penguin-hill-iida-city-zoo": {
+   "lat": 35.52,
+   "lon": 137.83
+  },
   "penguin-pool-birdland": {
    "lat": 51.885,
    "lon": -1.759
@@ -1167,6 +1207,10 @@
    "lat": 58.75,
    "lon": -93.2
   },
+  "polar-bears-ev-buggy-one": {
+   "lat": 58.77,
+   "lon": -94.17
+  },
   "pond-makov-rescue-station": {
    "lat": 49.855,
    "lon": 16.191
@@ -1265,6 +1309,10 @@
    "lat": 36.313,
    "lon": 140.575,
    "in": "aquarium"
+  },
+  "sea-eagle-nest-sydney-olympic-park": {
+   "lat": -33.85,
+   "lon": 151.07
   },
   "sea-lion-beach-british-columbia": {
    "lat": 50.573,
