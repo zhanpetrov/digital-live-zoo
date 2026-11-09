@@ -144,6 +144,10 @@
    "lat": 40.457,
    "lon": -80.015
   },
+  "barn-owl-box-outside-riet-vell-reserve": {
+   "lat": 40.57,
+   "lon": 0.64
+  },
   "barn-owl-box-riet-vell-reserve": {
    "lat": 40.572,
    "lon": 0.643
@@ -159,6 +163,10 @@
   "barn-owl-nest-goose-pond": {
    "lat": 38.993,
    "lon": -87.185
+  },
+  "barn-owl-nest-ram-on": {
+   "lat": 32.53,
+   "lon": 35.26
   },
   "barn-owl-nest-wirral-barn-owl-trust": {
    "lat": 53.341,
@@ -240,6 +248,14 @@
   "bird-feeder-south-africa": {
    "lat": -25.75,
    "lon": 28.19
+  },
+  "bird-of-prey-feeder-2-tamasi": {
+   "lat": 46.63,
+   "lon": 18.29
+  },
+  "bird-of-prey-feeder-tamasi": {
+   "lat": 46.63,
+   "lon": 18.29
   },
   "bison-calving-plains-grasslands-national-park": {
    "lat": 49.113,
@@ -390,6 +406,10 @@
    "lat": 45.35,
    "lon": -69.051
   },
+  "deer-food-pantry-richards-ptz": {
+   "lat": 45.35,
+   "lon": -69.05
+  },
   "deteema-springs-hwange-national-park": {
    "lat": -19.189,
    "lon": 26.74
@@ -533,6 +553,10 @@
    "lon": -77.33,
    "in": "building"
   },
+  "garden-birds-dimasio-museum": {
+   "lat": 42.36,
+   "lon": 142.32
+  },
   "garden-wildlife-pretoria": {
    "lat": -25.746,
    "lon": 28.188
@@ -617,6 +641,10 @@
   "harbour-seals-underwater-ecomare": {
    "lat": 53.077,
    "lon": 4.906
+  },
+  "hawaiian-monk-seals-waikiki-aquarium": {
+   "lat": 21.27,
+   "lon": -157.82
   },
   "hedgehog-house-alkmaar": {
    "lat": 52.601,
@@ -794,6 +822,10 @@
   "majete-reserve-cam-5": {
    "lat": -15.939,
    "lon": 34.576
+  },
+  "majete-reserve-cam-6": {
+   "lat": -15.94,
+   "lon": 34.58
   },
   "manatee-new-yashima-aquarium": {
    "lat": 34.343,
@@ -1035,6 +1067,14 @@
   "penguin-beach-aquarium-of-the-pacific": {
    "lat": 33.769,
    "lon": -118.192
+  },
+  "penguin-nest-2-isla-tova": {
+   "lat": -45.1,
+   "lon": -66.0
+  },
+  "penguin-nest-isla-tova": {
+   "lat": -45.1,
+   "lon": -66.0
   },
   "penguin-pool-birdland": {
    "lat": 51.885,
@@ -1295,6 +1335,10 @@
   "sea-otters-vancouver-aquarium-cam-2": {
    "lat": 49.261,
    "lon": -123.114
+  },
+  "seabirds-and-seals-farallon-islands": {
+   "lat": 37.7,
+   "lon": -123.0
   },
   "seal-rescues-walvis-bay": {
    "lat": -22.956,
@@ -1624,6 +1668,10 @@
   "wombat-satsukiyama-zoo": {
    "lat": 34.822,
    "lon": 135.428
+  },
+  "yarens-stork-nest-eskikaraagac": {
+   "lat": 40.19,
+   "lon": 28.61
   },
   "zambezi-mubala-camp-zambezi-region": {
    "lat": -17.6,

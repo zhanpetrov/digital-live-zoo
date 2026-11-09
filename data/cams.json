@@ -2022,6 +2022,33 @@
    }
   },
   {
+   "slug": "barn-owl-box-outside-riet-vell-reserve",
+   "ids": [
+    "3BZ-rgidYyU"
+   ],
+   "cid": "UCg6OElsAGYmkuSySkZpaNGw",
+   "n": "Barn owl box outside, Riet Vell reserve",
+   "animals": [
+    "owls"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Ebro Delta, Spain",
+    "tz": "Europe/Madrid",
+    "ty": "birds",
+    "c": "Europe",
+    "k": "Spain",
+    "ch": "SEOBirdLife",
+    "cid": "UCg6OElsAGYmkuSySkZpaNGw"
+   }
+  },
+  {
    "slug": "barn-owl-box-riet-vell-reserve",
    "ids": [
     "8VFra_zCzAA"
@@ -2222,6 +2249,33 @@
    }
   },
   {
+   "slug": "barn-owl-nest-ram-on",
+   "ids": [
+    "sabQXJ5bfsU"
+   ],
+   "cid": "UCzbydNAcB7jeJGssRFb_dCA",
+   "n": "Barn owl nest, Ram On",
+   "animals": [
+    "owls"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Ram On, Jezreel Valley, Israel",
+    "tz": "Asia/Jerusalem",
+    "ty": "birds",
+    "c": "Asia",
+    "k": "Israel",
+    "ch": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
+    "cid": "UCzbydNAcB7jeJGssRFb_dCA"
+   }
+  },
+  {
    "slug": "barn-owl-nest-wirral-barn-owl-trust",
    "ids": [
     "vngGSdcM_W8"
@@ -2302,6 +2356,33 @@
     "k": "UK",
     "ch": "Robert E Fuller",
     "cid": "UCU0LJ9et5Tb3m7COFzShgLg"
+   }
+  },
+  {
+   "slug": "barn-owls-and-pigeons-israel",
+   "ids": [
+    "FefBhyyUo60"
+   ],
+   "cid": "UCzbydNAcB7jeJGssRFb_dCA",
+   "n": "Barn owls and pigeons, Israel",
+   "animals": [
+    "owls"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Israel",
+    "tz": "Asia/Jerusalem",
+    "ty": "birds",
+    "c": "Asia",
+    "k": "Israel",
+    "ch": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
+    "cid": "UCzbydNAcB7jeJGssRFb_dCA"
    }
   },
   {
@@ -3563,6 +3644,60 @@
     "k": "USA",
     "ch": "Ken Little",
     "cid": "UC-0uK90U1sH5A_2dHYVVm5Q"
+   }
+  },
+  {
+   "slug": "bird-of-prey-feeder-2-tamasi",
+   "ids": [
+    "Ze7rK5K5e4Q"
+   ],
+   "cid": "UCU31-9qcY1RDuMad67dbuhw",
+   "n": "Bird of prey feeder 2, Tamási",
+   "animals": [
+    "backyard-birds"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Tamási, Tolna, Hungary",
+    "tz": "Europe/Budapest",
+    "ty": "birds",
+    "c": "Europe",
+    "k": "Hungary",
+    "ch": "Madarles - Live Bird Cams",
+    "cid": "UCU31-9qcY1RDuMad67dbuhw"
+   }
+  },
+  {
+   "slug": "bird-of-prey-feeder-tamasi",
+   "ids": [
+    "pOP3szGiSFE"
+   ],
+   "cid": "UCU31-9qcY1RDuMad67dbuhw",
+   "n": "Bird of prey feeder, Tamási",
+   "animals": [
+    "backyard-birds"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Tamási, Tolna, Hungary",
+    "tz": "Europe/Budapest",
+    "ty": "birds",
+    "c": "Europe",
+    "k": "Hungary",
+    "ch": "Madarles - Live Bird Cams",
+    "cid": "UCU31-9qcY1RDuMad67dbuhw"
    }
   },
   {
@@ -5855,6 +5990,33 @@
    }
   },
   {
+   "slug": "deer-food-pantry-richards-ptz",
+   "ids": [
+    "DZATg9PUOHk"
+   ],
+   "cid": "UCdmPhiIJ-s7MJG2WtM7nbUw",
+   "n": "Deer food pantry, Richard's PTZ",
+   "animals": [
+    "deer"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Brownville, Maine, USA",
+    "tz": "America/New_York",
+    "ty": "wild",
+    "c": "North America",
+    "k": "USA",
+    "ch": "Brownville's Food Pantry For Deer",
+    "cid": "UCdmPhiIJ-s7MJG2WtM7nbUw"
+   }
+  },
+  {
    "slug": "deer-in-the-backwoods",
    "ids": [
     "wSBgj42cshc"
@@ -7884,6 +8046,33 @@
    }
   },
   {
+   "slug": "garden-birds-dimasio-museum",
+   "ids": [
+    "dHElrtDv-Yo"
+   ],
+   "cid": "UC5nv3SjY473p89kwbn-9CVg",
+   "n": "Garden birds, Dimasio Museum",
+   "animals": [
+    "backyard-birds"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Niikappu, Hokkaido, Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "birds",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "動物支援コノドch",
+    "cid": "UC5nv3SjY473p89kwbn-9CVg"
+   }
+  },
+  {
    "slug": "garden-wildlife-pretoria",
    "ids": [
     "zAH0w01lp3c"
@@ -9113,6 +9302,33 @@
     "k": "Netherlands",
     "ch": "Texel Informatie Webcam",
     "cid": "UCRUPbMw5-9WX_cFsBnKAHVg"
+   }
+  },
+  {
+   "slug": "hawaiian-monk-seals-waikiki-aquarium",
+   "ids": [
+    "DFO1bS546Z0"
+   ],
+   "cid": "UCJW_nwNBvudCacX7c5hR6aA",
+   "n": "Hawaiian monk seals, Waikiki Aquarium",
+   "animals": [
+    "seals"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Honolulu, Hawaii, USA",
+    "tz": "Pacific/Honolulu",
+    "ty": "aqua",
+    "c": "North America",
+    "k": "USA",
+    "ch": "Waikiki Aquarium",
+    "cid": "UCJW_nwNBvudCacX7c5hR6aA"
    }
   },
   {
@@ -11342,6 +11558,31 @@
     "2026-11-05",
     "2026-11-06",
     "2026-11-07",
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Majete Wildlife Reserve, Malawi",
+    "tz": "Africa/Blantyre",
+    "ty": "safari",
+    "c": "Africa",
+    "k": "Malawi",
+    "ch": "Pix African Cams",
+    "cid": "UCJp-n4gTHgv1bLTOjOtautQ"
+   }
+  },
+  {
+   "slug": "majete-reserve-cam-6",
+   "ids": [
+    "BF_avKDJd-k"
+   ],
+   "cid": "UCJp-n4gTHgv1bLTOjOtautQ",
+   "n": "Majete reserve cam 6",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
     "2026-11-08"
    ],
    "last": {
@@ -14342,6 +14583,60 @@
    }
   },
   {
+   "slug": "penguin-nest-2-isla-tova",
+   "ids": [
+    "3N-G4VkKN8A"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Penguin nest 2, Isla Tova",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Isla Tova, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
+   }
+  },
+  {
+   "slug": "penguin-nest-isla-tova",
+   "ids": [
+    "SY-YNsj-oCY"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Penguin nest, Isla Tova",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Isla Tova, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
+   }
+  },
+  {
    "slug": "penguin-pool-birdland",
    "ids": [
     "NXb-fQnh04Y"
@@ -16821,6 +17116,33 @@
    }
   },
   {
+   "slug": "rescue-cats-left-cage-hogo-neko-no-ie",
+   "ids": [
+    "tDl3LozlkDc"
+   ],
+   "cid": "UCpjc-Ru-GatVD_ky5NunqZA",
+   "n": "Rescue cats, left cage, Hogo Neko no Ie",
+   "animals": [
+    "cats"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "pets",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "保護ねこの家",
+    "cid": "UCpjc-Ru-GatVD_ky5NunqZA"
+   }
+  },
+  {
    "slug": "rescue-cats-woodys-safe-haven",
    "ids": [
     "R8MRTG0pYdc"
@@ -17833,6 +18155,33 @@
     "k": "Canada",
     "ch": "Vancouver Aquarium",
     "cid": "UCbzl-qtfTKY9QNgtnqmuyBw"
+   }
+  },
+  {
+   "slug": "seabirds-and-seals-farallon-islands",
+   "ids": [
+    "fHb0eB9RUgA"
+   ],
+   "cid": "UCZvXaNYIcapCEcaJe_2cP7A",
+   "n": "Seabirds and seals, Farallon Islands",
+   "animals": [
+    "seals"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Southeast Farallon Island, California, USA",
+    "tz": "America/Los_Angeles",
+    "ty": "wild",
+    "c": "North America",
+    "k": "USA",
+    "ch": "California Academy of Sciences",
+    "cid": "UCZvXaNYIcapCEcaJe_2cP7A"
    }
   },
   {
@@ -21394,6 +21743,31 @@
    }
   },
   {
+   "slug": "ulusaba-sabi-sand",
+   "ids": [
+    "zqc0Z2oWmo8"
+   ],
+   "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
+   "n": "Ulusaba, Sabi Sand",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Ulusaba, Sabi Sand, South Africa",
+    "tz": "Africa/Johannesburg",
+    "ty": "safari",
+    "c": "Africa",
+    "k": "South Africa",
+    "ch": "Africam",
+    "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg"
+   }
+  },
+  {
    "slug": "underwater-penguins-aquarium-of-the-pacific",
    "ids": [
     "KlVMg-8SIlw"
@@ -22361,6 +22735,33 @@
    },
    "started": {
     "m0zx7vPJtC0": "2025-10-17T03:07:21Z"
+   }
+  },
+  {
+   "slug": "yarens-stork-nest-eskikaraagac",
+   "ids": [
+    "Qv-LT-hXWwc"
+   ],
+   "cid": "UCkvnnEMbfD_grByYSvuoVqA",
+   "n": "Yaren's stork nest, Eskikaraağaç",
+   "animals": [
+    "storks"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-08",
+   "seen": [
+    "2026-11-08"
+   ],
+   "last": {
+    "p": "Eskikaraağaç, Karacabey, Bursa, Turkey",
+    "tz": "Europe/Istanbul",
+    "ty": "birds",
+    "c": "Asia",
+    "k": "Turkey",
+    "ch": "Karacabey Belediyesi",
+    "cid": "UCkvnnEMbfD_grByYSvuoVqA"
    }
   },
   {
