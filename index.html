@@ -324,10 +324,11 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       <dl class="live-kpis" data-live hidden>
         <div><dt>today</dt><dd id="lvToday">0</dd></div>
         <div><dt>this week</dt><dd id="lvWeek">0</dd></div>
-        <div><dt>hours watched</dt><dd id="lvHours">0</dd></div>
+        <div><dt>hours this week</dt><dd id="lvHours">0</dd></div>
         <div hidden><dt>countries</dt><dd id="lvCountries">0</dd></div>
         <div hidden><dt>visitors all time</dt><dd id="lvAllPeople">0</dd></div>
         <div hidden><dt>watches all time</dt><dd id="lvAllWatches">0</dd></div>
+        <div hidden><dt>hours watched all time</dt><dd id="lvAllHours">0</dd></div>
       </dl>
       <div class="live-chart" data-live hidden>
         <svg id="lvChart" viewBox="0 0 240 58" preserveAspectRatio="none" role="img" aria-label="Visitors per hour, last 24 hours"></svg>
@@ -1073,6 +1074,7 @@ posthog.init("phc_uJr3VL227dqniV4s4QLjuRvL65oqhhF4TKocPeHgTTPb", {api_host:"http
       // since the site began (the Worker refreshes these at most once an hour); watches = cams watched on the Main Stage for 30 s or more
       $("lvAllPeople").parentNode.hidden = !d.all_people; if(d.all_people) setNum("lvAllPeople", Math.max(d.all_people, d.week || 0));
       $("lvAllWatches").parentNode.hidden = !d.all_watches; if(d.all_watches) setNum("lvAllWatches", d.all_watches);
+      $("lvAllHours").parentNode.hidden = !d.all_hours; if(d.all_hours) setNum("lvAllHours", Math.round(Math.max(d.all_hours, d.hours_week || 0)));
       const hasChart = Array.isArray(d.hourly) && d.hourly.length; $("lvChart").parentNode.hidden = !hasChart; if(hasChart) chart(d.hourly);
       top(d.top);
       if(!CAMS.length) setTimeout(load, 2500);   // the cam list is still loading: fill in the top cams once it is here
