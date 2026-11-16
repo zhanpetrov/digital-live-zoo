@@ -5,13 +5,13 @@
   "index": false
  },
  "/live/african-penguin-colony-stony-point/": {
-  "h": "f709578ea2df",
-  "mod": "2026-11-15",
+  "h": "d942dcc2b9ba",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/african-penguin-nest-stony-point/": {
-  "h": "659f1c907408",
-  "mod": "2026-11-15",
+  "h": "1f3823f6a840",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/alligator-farm-st-augustine/": {
@@ -70,8 +70,8 @@
   "index": false
  },
  "/live/baby-kittens-kitten-rescue/": {
-  "h": "ae1d7dd7b30f",
-  "mod": "2026-11-15",
+  "h": "11236e121ad4",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/baby-pygmy-hippo-john-ball-zoo/": {
@@ -80,8 +80,8 @@
   "index": false
  },
  "/live/baby-sloths-sloth-rescue/": {
-  "h": "4ca89cb08a27",
-  "mod": "2026-11-14",
+  "h": "e3b789a413d1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/backyard-raccoon-family-austin/": {
@@ -91,7 +91,7 @@
  },
  "/live/backyard-wildlife-ohio/": {
   "h": "9c4c16c471b3",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/badgers-badgerwood/": {
@@ -184,49 +184,54 @@
   "mod": "2026-11-15",
   "index": true
  },
+ "/live/barn-owl-box-outside-riet-vell/": {
+  "h": "3e8a81339868",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/barn-owl-box-riet-vell-reserve/": {
-  "h": "906f09906f65",
-  "mod": "2026-11-15",
+  "h": "4cd2eb3ee0b3",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owl-box-somerset-levels/": {
-  "h": "b130c5401b88",
-  "mod": "2026-11-15",
+  "h": "30184c8f7f82",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owl-nest-box/": {
-  "h": "f3c504768f68",
-  "mod": "2026-11-15",
+  "h": "c5213ce62b0f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owl-nest-goose-pond/": {
-  "h": "630046f799b2",
-  "mod": "2026-11-15",
+  "h": "05f271695a9b",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owl-nest-wirral-barn-owl-trust/": {
-  "h": "e3942ca3cc18",
-  "mod": "2026-11-15",
+  "h": "a4e987f59b99",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owls-and-kestrels-fotherdale/": {
-  "h": "c36dc9463744",
-  "mod": "2026-11-15",
+  "h": "7d756e757a57",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owls-badgers-and-foxes-multiview/": {
-  "h": "c3fba4700cc9",
-  "mod": "2026-11-15",
+  "h": "d5151728cceb",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owls-florida/": {
-  "h": "96856d3be7f3",
-  "mod": "2026-11-15",
+  "h": "c7eb70551c6a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/barn-owls-university-of-nature/": {
-  "h": "701db7c7923f",
-  "mod": "2026-11-15",
+  "h": "20f74edc24d1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bat-flight-carlsbad-caverns/": {
@@ -256,82 +261,82 @@
  },
  "/live/bird-bath-and-hedgehog-feeder/": {
   "h": "c5f3d2497d45",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-bath-tiszalok/": {
   "h": "1b77487c1987",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-buffet-brownville/": {
   "h": "c1d4ab900c97",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-and-wildlife-boston-area/": {
   "h": "e9241c2ed403",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-arizona/": {
   "h": "811f496c0d0c",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-by-day-hedgehogs-by-night/": {
   "h": "a9764197d321",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-gettysburg/": {
   "h": "4e70bce23b42",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-gjvik/": {
   "h": "e7585f895178",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-grundautal/": {
   "h": "0b0c018803b8",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-illinois/": {
   "h": "dad5ce41acd8",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-makov-rescue-station/": {
   "h": "d95908bc96f4",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-mountain-nook/": {
   "h": "a3117d90998a",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-ohio/": {
   "h": "dbca0d42391e",
-  "mod": "2026-11-14",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-ozarks/": {
   "h": "8301efc8b205",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeder-south-africa/": {
   "h": "4f0de16e1cce",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/bird-feeding-station-alabama/": {
   "h": "600a9941dc88",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/birdmania-bird-park-hungary/": {
@@ -345,18 +350,18 @@
   "index": false
  },
  "/live/bison-calving-plains-grasslands-national-park/": {
-  "h": "5b15b01aff1c",
-  "mod": "2026-11-14",
+  "h": "7a13503d7a0a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/black-stork-nest-karula/": {
-  "h": "6ffde4c33b2e",
-  "mod": "2026-11-15",
+  "h": "c523f5b6f34e",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/blue-penguins-oamaru/": {
-  "h": "f2a5c4e1dbd9",
-  "mod": "2026-11-15",
+  "h": "51dd0577fd83",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/bonobos-lola-ya-bonobo/": {
@@ -385,8 +390,8 @@
   "index": false
  },
  "/live/burrowing-owl-nest-oregon/": {
-  "h": "bddfff08050a",
-  "mod": "2026-11-15",
+  "h": "6141f034be07",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/california-condor-sanctuary-san-simeon/": {
@@ -411,17 +416,17 @@
  },
  "/live/cardinal-feeder-nashville/": {
   "h": "481771f98ba1",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/cat-dormitory-south-korea/": {
-  "h": "a582ef8c1021",
-  "mod": "2026-11-15",
+  "h": "b6c00deb4357",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/cat-island-yushima/": {
-  "h": "adde20311b92",
-  "mod": "2026-11-15",
+  "h": "e50721e07525",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/cattle-pasture-farm-sanctuary/": {
@@ -450,13 +455,13 @@
   "index": false
  },
  "/live/cinereous-vulture-nest-guadarrama/": {
-  "h": "465643f190f5",
-  "mod": "2026-11-13",
+  "h": "3781ab4097a6",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/cliffside-penguin-village-komoro-zoo/": {
-  "h": "4d422ad6529b",
-  "mod": "2026-11-15",
+  "h": "519e2c4d585e",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/common-kestrel-nest-israel/": {
@@ -465,48 +470,53 @@
   "index": false
  },
  "/live/coral-and-fish-aquarium-of-the-pacific/": {
-  "h": "6c28d91b6299",
-  "mod": "2026-11-15",
+  "h": "f85790ce7c8d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/coral-city-miami/": {
-  "h": "798d162f6011",
-  "mod": "2026-11-15",
+  "h": "dbc0f51c36d7",
+  "mod": "2026-11-16",
   "index": true
  },
+ "/live/coral-kingdom-tank-nmmba/": {
+  "h": "82874b165f69",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/coral-reef-back-of-dock/": {
-  "h": "4522f60b9d37",
-  "mod": "2026-11-15",
+  "h": "e88b54ba6d6c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/coral-reef-edge-of-wall/": {
-  "h": "ffdbe0e88213",
-  "mod": "2026-11-15",
+  "h": "1fb0975026cb",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/coral-reef-front-of-dock/": {
-  "h": "c69eead5b742",
-  "mod": "2026-11-15",
+  "h": "0ba398dabc85",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/coral-reef-sandy-channel/": {
-  "h": "7504e3db4950",
-  "mod": "2026-11-15",
+  "h": "d8d488abc115",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/coral-reef-top-of-wall/": {
-  "h": "5592cda6a664",
-  "mod": "2026-11-15",
+  "h": "fe472c7e1d9e",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/coral-reef-utopia-back-channel/": {
-  "h": "ddd9d5d90a12",
-  "mod": "2026-11-15",
+  "h": "627bdbc04667",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/creek-water-tank-chiricahua-mountains/": {
   "h": "63453eb84072",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/crittervision-forest-cam-usa/": {
@@ -520,13 +530,13 @@
   "index": false
  },
  "/live/croc-rock-forest-cam-foxes-hedgehogs-deer/": {
-  "h": "d39f13d09bac",
-  "mod": "2026-11-15",
+  "h": "3031211d792d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/curacao-sea-aquarium-underwater/": {
-  "h": "5e72a23a6aae",
-  "mod": "2026-11-15",
+  "h": "948108eea4da",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/decorah-eagles/": {
@@ -540,28 +550,33 @@
   "index": true
  },
  "/live/deer-and-critters-northeast-alabama/": {
-  "h": "21d9ef396a25",
-  "mod": "2026-11-15",
+  "h": "0db516c15de2",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/deer-and-wildlife-cam/": {
-  "h": "a6c89caf6d34",
-  "mod": "2026-11-15",
+  "h": "d8d72d0e4f13",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/deer-creek-roseburg/": {
-  "h": "c549c2d38d88",
-  "mod": "2026-11-15",
+  "h": "a2e45a7688e4",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/deer-food-pantry-brownville/": {
-  "h": "ba822137fb5f",
-  "mod": "2026-11-15",
+  "h": "f1aa5dc4d363",
+  "mod": "2026-11-16",
+  "index": false
+ },
+ "/live/deer-food-pantry-ptz-brownville/": {
+  "h": "37d88ffc382d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/deer-in-the-backwoods/": {
-  "h": "dcaededc6792",
-  "mod": "2026-11-15",
+  "h": "fd3bbc69b8ad",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/deteema-springs-hwange-national-park/": {
@@ -580,8 +595,8 @@
   "index": false
  },
  "/live/dunrovin-nest-lolo/": {
-  "h": "b67a92095990",
-  "mod": "2026-11-15",
+  "h": "acfe55d9bc6c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/dunrovin-ranch-lolo/": {
@@ -605,13 +620,13 @@
   "index": false
  },
  "/live/eagle-owl-box-elisabethkirche/": {
-  "h": "f086f1970f40",
-  "mod": "2026-11-15",
+  "h": "fc90397acf89",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/eagle-owl-riga-forests/": {
-  "h": "c6425d3504ba",
-  "mod": "2026-11-15",
+  "h": "7ec33802d908",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/eagle-pond-fort-myers/": {
@@ -655,18 +670,18 @@
   "index": false
  },
  "/live/erect-crested-penguins-antipodes-island/": {
-  "h": "1cbb7d6210e3",
-  "mod": "2026-11-15",
+  "h": "71201abe5cc2",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/eurasian-eagle-owl-cam-3/": {
-  "h": "247d0f1c6135",
-  "mod": "2026-11-15",
+  "h": "8985d026cfe5",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/eurasian-eagle-owl-eifel/": {
-  "h": "c4300bf0366f",
-  "mod": "2026-11-15",
+  "h": "5fcec7de3cde",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/eustis-wildlife-cam/": {
@@ -681,7 +696,7 @@
  },
  "/live/feederwatch-sapsucker-woods/": {
   "h": "1befd53f7b20",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/fig-tree-crossing-explore/": {
@@ -706,7 +721,7 @@
  },
  "/live/forest-feeder-and-wildlife-forest-nook/": {
   "h": "aa0d902bc3a0",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/forest-stream-wildlife-morten-hilmer/": {
@@ -725,23 +740,23 @@
   "index": false
  },
  "/live/friends-of-felines-kabana/": {
-  "h": "9afe9e6dde75",
-  "mod": "2026-11-15",
+  "h": "162cb22592b9",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/friends-of-felines-rescue/": {
-  "h": "72611d23c3b3",
-  "mod": "2026-11-15",
+  "h": "d7c605e49b53",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/fru-rauer-osprey-nest/": {
-  "h": "e276969eb96f",
-  "mod": "2026-11-15",
+  "h": "f7b6ad78be66",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/fruit-feeder-canopy-lodge/": {
   "h": "0dcb2c250eff",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/full-house-puppy-cam/": {
@@ -751,12 +766,12 @@
  },
  "/live/garden-birds-and-night-wildlife/": {
   "h": "f527a8ccb486",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/garden-wildlife-pretoria/": {
   "h": "a123c96fd235",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/giant-and-sword-billed-hummingbirds/": {
@@ -768,6 +783,11 @@
   "h": "66bc5ae886b1",
   "mod": "2026-11-14",
   "index": true
+ },
+ "/live/giant-flying-squirrels-komoro-zoo/": {
+  "h": "65ec8dd45f75",
+  "mod": "2026-11-16",
+  "index": false
  },
  "/live/giant-pandas-chengdu/": {
   "h": "4cb58dcd0bcb",
@@ -820,8 +840,8 @@
   "index": false
  },
  "/live/giraffes-werribee/": {
-  "h": "0f2cfee48b5f",
-  "mod": "2026-11-15",
+  "h": "db3ee794ede3",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/goat-barn-syman-says-farms/": {
@@ -875,8 +895,8 @@
   "index": false
  },
  "/live/hellgate-ospreys-missoula/": {
-  "h": "2b21ed5d2dbe",
-  "mod": "2026-11-15",
+  "h": "8852402b74e3",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/hoge-veluwe-wildlife-hoge-veluwe-national-park/": {
@@ -925,13 +945,13 @@
   "index": false
  },
  "/live/inside-a-squirrel-nest/": {
-  "h": "3a83ffd837d9",
-  "mod": "2026-11-15",
+  "h": "f6ca9714dafc",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/iris-the-great-horned-owl/": {
-  "h": "90df3e7f8c3d",
-  "mod": "2026-11-15",
+  "h": "ce5ed2d0dcf6",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/jacks-camp-waterhole-makgadikgadi/": {
@@ -985,18 +1005,18 @@
   "index": false
  },
  "/live/kitten-academy-usa/": {
-  "h": "5235321192e8",
-  "mod": "2026-11-15",
+  "h": "8bd1b419dfe5",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/kitten-cam-hermitage-cat-shelter/": {
-  "h": "b2af264a43ae",
-  "mod": "2026-11-15",
+  "h": "f57a7da3105b",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/kitten-rescue-los-angeles/": {
-  "h": "ea64add699fc",
-  "mod": "2026-11-15",
+  "h": "a1230795da8d",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/kruger-shalati-skukuza/": {
@@ -1035,43 +1055,63 @@
   "index": false
  },
  "/live/lions-werribee/": {
-  "h": "de8d8a518426",
-  "mod": "2026-11-10",
+  "h": "7977cb24f659",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/little-blue-penguin-nest-ngamotu/": {
-  "h": "8d19602b52f9",
-  "mod": "2026-11-15",
+  "h": "42704113e031",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/little-owl-nest-tiszalok/": {
-  "h": "bc44962b4b41",
-  "mod": "2026-11-15",
+  "h": "5ecad581b24c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/little-owls-bommelerwaard/": {
-  "h": "30e79bb12587",
-  "mod": "2026-11-15",
+  "h": "667b2f418f5a",
+  "mod": "2026-11-16",
+  "index": false
+ },
+ "/live/little-penguin-burrow-phillip-island/": {
+  "h": "b9d149fcd395",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/little-penguin-chick-new-zealand/": {
-  "h": "3351f9e1d783",
-  "mod": "2026-11-15",
+  "h": "313d63de4b36",
+  "mod": "2026-11-16",
   "index": true
  },
+ "/live/little-penguin-nest-evans-bay/": {
+  "h": "763ff29b03a4",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/little-penguin-nests-oamaru/": {
-  "h": "29348f9a35d2",
-  "mod": "2026-11-15",
+  "h": "df7764b35736",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/little-penguins-burnie-penguin-centre/": {
-  "h": "a1469b33b785",
-  "mod": "2026-11-15",
-  "index": false
+  "h": "5ab3ac7c433c",
+  "mod": "2026-11-16",
+  "index": true
  },
  "/live/loon-cam-lake-fairlee/": {
   "h": "a8176ffa4390",
   "mod": "2026-11-14",
+  "index": false
+ },
+ "/live/magellanic-penguin-colony-isla-tova/": {
+  "h": "90b81694bcbc",
+  "mod": "2026-11-16",
+  "index": false
+ },
+ "/live/magellanic-penguin-nest-isla-tova/": {
+  "h": "2468b96a63bd",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/mahali-mzuri-lodge-maasai-mara/": {
@@ -1125,13 +1165,13 @@
   "index": false
  },
  "/live/manton-bay-ospreys-close-up/": {
-  "h": "452f32da6af9",
-  "mod": "2026-11-15",
+  "h": "b91c8b87c457",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/manton-bay-ospreys-wide/": {
-  "h": "3c6b4f5eb183",
-  "mod": "2026-11-15",
+  "h": "1126951a9fe9",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/mara-bushtops-maasai-mara/": {
@@ -1195,8 +1235,8 @@
   "index": true
  },
  "/live/mountain-bird-feeder-southern-alberta/": {
-  "h": "f79fbfe3d4f6",
-  "mod": "2026-11-15",
+  "h": "e186c068849b",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/mountain-goats-mendenhall-glacier/": {
@@ -1260,8 +1300,8 @@
   "index": false
  },
  "/live/obx-ospreys-outer-banks/": {
-  "h": "690083d56f62",
-  "mod": "2026-11-15",
+  "h": "bf8cba095080",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/okaukuejo-resort-waterhole-etosha-national-park/": {
@@ -1295,78 +1335,88 @@
   "index": true
  },
  "/live/orca-rubbing-beach-hanson-island/": {
-  "h": "ec5fac505eca",
-  "mod": "2026-11-14",
+  "h": "b164c01c05ac",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/orca-rubbing-beach-underwater/": {
-  "h": "0ffc31e1f045",
-  "mod": "2026-11-14",
+  "h": "301981234375",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/orcalab-lookout-hanson-island/": {
-  "h": "33c4c9dddcb8",
-  "mod": "2026-11-14",
+  "h": "35b5d87670d1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-and-goose-nest/": {
-  "h": "f922f761e387",
-  "mod": "2026-11-15",
+  "h": "12029bee381d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-achieva/": {
-  "h": "dbf37f08de66",
-  "mod": "2026-11-15",
+  "h": "583123dd6242",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-charlo/": {
-  "h": "8865de19f964",
-  "mod": "2026-11-15",
+  "h": "2c7920df32df",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-glaslyn/": {
-  "h": "744aa3c251e9",
-  "mod": "2026-11-15",
+  "h": "8989c09a25c6",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-moraine-state-park/": {
-  "h": "53ff1c2c16a8",
-  "mod": "2026-11-15",
+  "h": "ed83632508a2",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-salmon/": {
-  "h": "288ebca42d55",
-  "mod": "2026-11-15",
+  "h": "2bd42a17d012",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/osprey-nest-sandy-hook/": {
-  "h": "e124d17de9df",
-  "mod": "2026-11-15",
+  "h": "45b069b42b69",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/ospreys-barnegat-light/": {
-  "h": "9f06d820be33",
-  "mod": "2026-11-15",
+  "h": "e8472ad2437c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/ospreys-boulder/": {
-  "h": "dbca0cd44714",
-  "mod": "2026-11-15",
+  "h": "b63f05d537f1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/ospreys-loch-garten/": {
-  "h": "6e9fee40a380",
-  "mod": "2026-11-15",
+  "h": "552871e35b3b",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/ospreys-oyster-bay/": {
-  "h": "14836c480b33",
-  "mod": "2026-11-15",
+  "h": "923f7704609f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/ospreys-port-lincoln/": {
-  "h": "898285aaf8be",
-  "mod": "2026-11-15",
+  "h": "adbc862a0bfa",
+  "mod": "2026-11-16",
+  "index": false
+ },
+ "/live/ospreys-wide-view-port-lincoln/": {
+  "h": "d448506ee2d6",
+  "mod": "2026-11-16",
+  "index": false
+ },
+ "/live/otago-shag-colony-sumpter-wharf/": {
+  "h": "c03a30759ea6",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/otters-calvert-marine-museum/": {
@@ -1380,8 +1430,8 @@
   "index": false
  },
  "/live/outdoor-cat-area-syman-says-farms/": {
-  "h": "0ce8270dec31",
-  "mod": "2026-11-15",
+  "h": "aa1744783bdf",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/pacific-flyway-sacramento-national-wildlife-refuge/": {
@@ -1390,48 +1440,48 @@
   "index": false
  },
  "/live/penguin-beach-aquarium-of-the-pacific/": {
-  "h": "9dd6191f9c24",
-  "mod": "2026-11-15",
+  "h": "ec9c2138e15c",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/penguin-pool-birdland/": {
-  "h": "656a0ff8cc36",
-  "mod": "2026-11-15",
+  "h": "e2a600b05463",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/penguins-california-academy-of-sciences/": {
-  "h": "099dd59f1bce",
-  "mod": "2026-11-14",
+  "h": "476307bb5010",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/penguins-melbourne-zoo/": {
-  "h": "06d7b124378c",
-  "mod": "2026-11-15",
+  "h": "cd9a1ca06ddc",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/penguins-moody-gardens/": {
-  "h": "cd25dd780850",
-  "mod": "2026-11-15",
+  "h": "3c85e5ee96cd",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/penguins-new-england-aquarium/": {
-  "h": "6dfad4583b32",
-  "mod": "2026-11-15",
+  "h": "03828aa07211",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/penguins-pittsburgh-zoo/": {
-  "h": "7627ae1ec106",
-  "mod": "2026-11-15",
+  "h": "5eecf383a1cd",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/penguins-saint-louis-zoo/": {
-  "h": "0318f4f4bcf9",
-  "mod": "2026-11-15",
+  "h": "8c54d4aeaf41",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/peregrine-falcons-367-collins/": {
-  "h": "4a26fd1d3c49",
-  "mod": "2026-11-15",
+  "h": "27909b1f3d6f",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/peregrine-falcons-balcony-cam/": {
@@ -1440,8 +1490,8 @@
   "index": false
  },
  "/live/peregrine-falcons-box-cam/": {
-  "h": "509c67010e84",
-  "mod": "2026-11-15",
+  "h": "ce7335c122d8",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/peregrine-falcons-castle-rock/": {
@@ -1475,8 +1525,8 @@
   "index": false
  },
  "/live/peregrine-falcons-nest-cam/": {
-  "h": "69e540a1c04c",
-  "mod": "2026-11-15",
+  "h": "fbf8b4b17bcf",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/peregrine-falcons-oak-creek/": {
@@ -1500,8 +1550,8 @@
   "index": false
  },
  "/live/peregrine-falcons-tower-cam/": {
-  "h": "9f7d12319320",
-  "mod": "2026-11-15",
+  "h": "90c74a99397a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/peregrine-falcons-umass-amherst/": {
@@ -1510,13 +1560,13 @@
   "index": false
  },
  "/live/peregrine-falcons-universite-de-montreal/": {
-  "h": "c7ca44446a8c",
-  "mod": "2026-11-15",
+  "h": "401293776c4e",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/peregrine-falcons-zamora/": {
-  "h": "830887285970",
-  "mod": "2026-11-15",
+  "h": "7be8ddb802f8",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/peregrine-lookout-great-spirit-bluff/": {
@@ -1550,8 +1600,8 @@
   "index": false
  },
  "/live/polar-bears-cape-churchill/": {
-  "h": "8c6a9b3e00c5",
-  "mod": "2026-11-14",
+  "h": "214edd868028",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/pond-makov-rescue-station/": {
@@ -1620,28 +1670,28 @@
   "index": false
  },
  "/live/rescue-cat-house-japan/": {
-  "h": "c4dfbc5b0cc6",
-  "mod": "2026-11-15",
+  "h": "1e7acb62896f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/rescue-cat-room-fujimidai-animal-hospital/": {
-  "h": "75912ce065d7",
-  "mod": "2026-11-15",
+  "h": "8b4a12cfae09",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/rescue-cats-azuki-and-friends/": {
-  "h": "703a170e5d7b",
-  "mod": "2026-11-15",
+  "h": "1d10697ef6e1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/rescue-cats-hogo-neko-no-ie/": {
-  "h": "8936304c326f",
-  "mod": "2026-11-15",
+  "h": "b3f4bedc532f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/rescue-cats-woodys-safe-haven/": {
-  "h": "db1703aebd69",
-  "mod": "2026-11-15",
+  "h": "0cf55c53c91c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/rhinos-hoedspruit-endangered-species-centre/": {
@@ -1655,8 +1705,8 @@
   "index": false
  },
  "/live/riet-vell-bird-reserve-ebro-delta/": {
-  "h": "483d91191a5b",
-  "mod": "2026-11-13",
+  "h": "b2647280902c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/riffles-katmai/": {
@@ -1709,9 +1759,14 @@
   "mod": "2026-11-15",
   "index": false
  },
+ "/live/scarlet-macaw-canopy-feeder-punta-islita/": {
+  "h": "6cc23ccae358",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/sea-lion-beach-british-columbia/": {
-  "h": "b6ef5ae2bc34",
-  "mod": "2026-11-14",
+  "h": "8f51c199f956",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/sea-nettle-jellyfish-nmmba/": {
@@ -1735,13 +1790,13 @@
   "index": false
  },
  "/live/sea-otters-vancouver-aquarium/": {
-  "h": "b9a2d9bf7d71",
-  "mod": "2026-11-15",
+  "h": "1a8d32a824ed",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/sea-otters-vancouver-aquarium-cam-2/": {
-  "h": "9c0121e416f0",
-  "mod": "2026-11-15",
+  "h": "fe42853c3e78",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/seal-rescues-walvis-bay/": {
@@ -1845,8 +1900,8 @@
   "index": false
  },
  "/live/sloth-playground-toucan-rescue-ranch/": {
-  "h": "7f5bf4ec0fae",
-  "mod": "2026-11-07",
+  "h": "169f84be261c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/sloths-honolulu-zoo/": {
@@ -1856,12 +1911,12 @@
  },
  "/live/small-birds-and-squirrels/": {
   "h": "0871388e1351",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/snow-leopards-melbourne-zoo/": {
-  "h": "98c9fd400a76",
-  "mod": "2026-11-10",
+  "h": "70984f3e0b88",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/snowman-cam-wildlife-gaylord/": {
@@ -1875,8 +1930,8 @@
   "index": true
  },
  "/live/spa-storks-bad-konigshofen/": {
-  "h": "c1487dfef83d",
-  "mod": "2026-11-15",
+  "h": "20f3a53fde14",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/spider-crabs-monterey-bay-aquarium/": {
@@ -1885,118 +1940,118 @@
   "index": false
  },
  "/live/squirrel-nest-3-usa/": {
-  "h": "835fd53133e7",
-  "mod": "2026-11-15",
+  "h": "58e13e58b3b7",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-cam-mainburg/": {
-  "h": "e9056808471b",
-  "mod": "2026-11-15",
+  "h": "41d5a6848032",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-chimney-bohuslavice/": {
-  "h": "7e5c0bb6444e",
-  "mod": "2026-11-15",
+  "h": "ff9b63633fb5",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-alfeld/": {
-  "h": "95a3c446bd20",
-  "mod": "2026-11-15",
+  "h": "bd333dab390a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-bad-salzungen/": {
-  "h": "d136c5251af6",
-  "mod": "2026-11-15",
+  "h": "234fd696583a",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/stork-nest-fohrste/": {
-  "h": "a33f34d8ec2c",
-  "mod": "2026-11-15",
+  "h": "cb887bb4e4c2",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-hamm/": {
-  "h": "508384e3b872",
-  "mod": "2026-11-15",
+  "h": "bef5b7080923",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-hedeper/": {
-  "h": "edf6dd96abe1",
-  "mod": "2026-11-15",
+  "h": "bb30f47cf2f0",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-hungen/": {
-  "h": "a748e42c49b9",
-  "mod": "2026-11-15",
+  "h": "72a181178459",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-kirchzarten/": {
-  "h": "ee411046fefb",
-  "mod": "2026-11-15",
+  "h": "a2778755d05a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-kolbermoor/": {
-  "h": "2b196723d190",
-  "mod": "2026-11-15",
+  "h": "6a67e81d9146",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-langquaid/": {
-  "h": "09dd12659507",
-  "mod": "2026-11-15",
+  "h": "729897acba55",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-leutershausen/": {
-  "h": "3766fb6b5c31",
-  "mod": "2026-11-15",
+  "h": "97f8ebef3143",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-lindheim/": {
-  "h": "ca682bc236cd",
-  "mod": "2026-11-15",
+  "h": "7e59c3b1fe5f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-mlade-buky/": {
-  "h": "70c4994136b3",
-  "mod": "2026-11-15",
+  "h": "eb116f401a52",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-mlynicky-dvur/": {
-  "h": "2d2fd0cb80ad",
-  "mod": "2026-11-15",
+  "h": "ec698abec787",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-near-sokoka/": {
-  "h": "e29ae4938ae8",
-  "mod": "2026-11-15",
+  "h": "4392fcd59d69",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-pasieka/": {
-  "h": "00ecac988775",
-  "mod": "2026-11-15",
+  "h": "a7d88cbc384e",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-penafiel/": {
-  "h": "c59f713aa377",
-  "mod": "2026-11-15",
+  "h": "f998bc3542a8",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-ullo/": {
-  "h": "f0c5e1e2929b",
-  "mod": "2026-11-15",
+  "h": "419ab1b15909",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-ustron/": {
-  "h": "c1215c3320f6",
-  "mod": "2026-11-15",
+  "h": "d0f0d42856d6",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nest-vianen/": {
-  "h": "f45e8a5d5bae",
-  "mod": "2026-11-15",
+  "h": "acd8dd3fd539",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/stork-nesting-makov-rescue-station/": {
-  "h": "0f30a3cfe243",
-  "mod": "2026-11-15",
+  "h": "5db92869bcd1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/syman-says-farms-cam-3/": {
@@ -2009,19 +2064,24 @@
   "mod": "2026-11-14",
   "index": false
  },
+ "/live/tater-tot-the-kitten-tinykittens/": {
+  "h": "1d42673edcf5",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/tau-game-lodge-madikwe/": {
   "h": "735bb8cbebe0",
   "mod": "2026-11-15",
   "index": false
  },
  "/live/tawny-owl-box-hamm/": {
-  "h": "a27f432e8934",
-  "mod": "2026-11-15",
+  "h": "47c4ff6670a8",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/tawny-owls-and-badgers-ash-wood/": {
-  "h": "bb2645a8804f",
-  "mod": "2026-11-15",
+  "h": "528dc4942d8b",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/tembe-elephants-tembe-elephant-park/": {
@@ -2050,18 +2110,18 @@
   "index": false
  },
  "/live/tinykittens-crows-nest-langley/": {
-  "h": "8fe79f1bc5ea",
-  "mod": "2026-11-15",
+  "h": "7a6f6b5d4441",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/tinykittens-incoming-langley/": {
-  "h": "d4f69cf4ff92",
-  "mod": "2026-11-15",
+  "h": "48f166fbd1a9",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/toucan-rescue-toucan-rescue-ranch/": {
-  "h": "77e2765a7335",
-  "mod": "2026-11-07",
+  "h": "7fcd23d191dc",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/trempealeau-eagles/": {
@@ -2071,7 +2131,7 @@
  },
  "/live/tropical-fruit-feeder-canopy-lodge/": {
   "h": "622a4876fcd0",
-  "mod": "2026-11-14",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/tropical-hummingbirds-canopy-lodge/": {
@@ -2080,8 +2140,8 @@
   "index": false
  },
  "/live/tropical-reef-aquarium-of-the-pacific/": {
-  "h": "dc5b362046c8",
-  "mod": "2026-11-15",
+  "h": "e36a84e08de2",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/twin-pan-hide-selinda-reserve/": {
@@ -2090,23 +2150,23 @@
   "index": false
  },
  "/live/underwater-penguins-aquarium-of-the-pacific/": {
-  "h": "e95d550888ce",
-  "mod": "2026-11-15",
+  "h": "3a31bb107965",
+  "mod": "2026-11-16",
   "index": true
  },
  "/live/underwater-pier-pompano-beach/": {
-  "h": "1af6a24dce4a",
-  "mod": "2026-11-15",
+  "h": "d5abf9883616",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/underwater-reef-deerfield-beach/": {
-  "h": "fb834f95c9cf",
-  "mod": "2026-11-15",
+  "h": "07e1b1c7c63a",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/underwater-reef-wahoo-bay/": {
-  "h": "519fad273a05",
-  "mod": "2026-11-15",
+  "h": "9726527fb45f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/underwater-salmon-cam-katmai-national-park/": {
@@ -2116,12 +2176,12 @@
  },
  "/live/uw-whitewater-nature-cam/": {
   "h": "3dd43cb11f33",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/veranda-bird-cam-aoyama-plateau/": {
   "h": "d0bcfe000f6d",
-  "mod": "2026-11-15",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/victoria-falls-safari-lodge-waterhole/": {
@@ -2129,14 +2189,19 @@
   "mod": "2026-11-15",
   "index": false
  },
+ "/live/white-bellied-sea-eagle-nest-sydney/": {
+  "h": "f716836764a1",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/white-storks-polanow/": {
-  "h": "ef383e5356dd",
-  "mod": "2026-11-15",
+  "h": "605012b96cbd",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/white-storks-tukums/": {
-  "h": "a81155405ae7",
-  "mod": "2026-11-15",
+  "h": "67d7d9461345",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/white-tailed-eagle-nest-durbe/": {
@@ -2155,8 +2220,8 @@
   "index": false
  },
  "/live/wildlife-sanctuary-regional-queensland/": {
-  "h": "f7d923215729",
-  "mod": "2026-11-10",
+  "h": "3f98f9daee45",
+  "mod": "2026-11-16",
   "index": false
  },
  "/live/wolves-international-wolf-center/": {
@@ -2184,6 +2249,11 @@
   "mod": "2026-11-14",
   "index": true
  },
+ "/live/yaren-the-storks-nest-eskikaraagac/": {
+  "h": "7b263583a264",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/live/zambezi-mubala-camp-zambezi-region/": {
   "h": "af2eb1d79c26",
   "mod": "2026-11-12",
@@ -2210,13 +2280,13 @@
   "index": true
  },
  "/animals/penguins/": {
-  "h": "d26b3cabe3f5",
-  "mod": "2026-11-15",
+  "h": "e8e010a742e3",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/farm-animals/": {
-  "h": "34c3b2c228d4",
-  "mod": "2026-11-15",
+  "h": "62d0750f0f1b",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/great-apes/": {
@@ -2225,38 +2295,38 @@
   "index": true
  },
  "/animals/cats/": {
-  "h": "5568cf5cdc4c",
-  "mod": "2026-11-15",
+  "h": "a733cab3efe1",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/raccoons/": {
-  "h": "4473fd3a418f",
-  "mod": "2026-11-15",
+  "h": "8d9449f595d7",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/backyard-birds/": {
-  "h": "65ebc0054532",
-  "mod": "2026-11-15",
+  "h": "d03325a76498",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/badgers/": {
-  "h": "e9b75834f48b",
-  "mod": "2026-11-15",
+  "h": "ee7e07752209",
+  "mod": "2026-11-16",
   "index": false
  },
  "/animals/bald-eagles/": {
-  "h": "615ad97cb543",
-  "mod": "2026-11-15",
+  "h": "ccefffad124c",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/owls/": {
-  "h": "aa00a0529452",
-  "mod": "2026-11-15",
+  "h": "ac08df3d7523",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/bats/": {
-  "h": "29491c5e1793",
-  "mod": "2026-11-15",
+  "h": "71844cd28226",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/tigers/": {
@@ -2265,53 +2335,53 @@
   "index": true
  },
  "/animals/hedgehogs/": {
-  "h": "04c2da998af3",
-  "mod": "2026-11-15",
+  "h": "3096912ef0db",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/storks/": {
-  "h": "d2f92a4dab64",
-  "mod": "2026-11-15",
+  "h": "de2d8e20b4f1",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/brown-bears/": {
-  "h": "fcbb7b09aeb9",
-  "mod": "2026-11-15",
+  "h": "7678d22e6059",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/coral-reefs/": {
-  "h": "32ccf7e411f5",
-  "mod": "2026-11-15",
+  "h": "c0ff64732f7b",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/deer/": {
-  "h": "7ad3ea6286bc",
-  "mod": "2026-11-15",
+  "h": "22a24d830eec",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/goats/": {
-  "h": "a98f05026551",
-  "mod": "2026-11-15",
+  "h": "41324e77a199",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/ospreys/": {
-  "h": "4429a3273de2",
-  "mod": "2026-11-15",
+  "h": "b71ff22f5300",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/horses/": {
-  "h": "aea65e4ad065",
-  "mod": "2026-11-14",
+  "h": "4ef763a697aa",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/elk/": {
-  "h": "4d954e5f416d",
-  "mod": "2026-11-15",
+  "h": "cc597e78aab1",
+  "mod": "2026-11-16",
   "index": false
  },
  "/animals/squirrels/": {
-  "h": "84fe2053d27b",
-  "mod": "2026-11-15",
+  "h": "e92200bf15ef",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/wildebeest-migration/": {
@@ -2320,13 +2390,13 @@
   "index": true
  },
  "/animals/dogs/": {
-  "h": "af0bdf8a0aca",
-  "mod": "2026-11-12",
+  "h": "df65c0d793fc",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/hummingbirds/": {
-  "h": "4059b1a6c5d7",
-  "mod": "2026-11-15",
+  "h": "7724ddecd5bc",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/giraffes/": {
@@ -2335,33 +2405,33 @@
   "index": true
  },
  "/animals/seals/": {
-  "h": "a9aa412fad28",
-  "mod": "2026-11-15",
+  "h": "9a228ce0ee63",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/jellyfish/": {
-  "h": "40751b14e01d",
-  "mod": "2026-11-10",
+  "h": "69258a65f15d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/animals/manatees/": {
-  "h": "4cc0e3ff8f75",
-  "mod": "2026-11-10",
+  "h": "6f9ba775ba59",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/orcas/": {
-  "h": "b4a19bf8a92a",
-  "mod": "2026-11-10",
+  "h": "e85d728bd69b",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/peregrine-falcons/": {
-  "h": "96d8390d821b",
-  "mod": "2026-11-15",
+  "h": "d1a060069699",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/otters/": {
-  "h": "bbb60044da6e",
-  "mod": "2026-11-11",
+  "h": "a3b1c59aff26",
+  "mod": "2026-11-16",
   "index": true
  },
  "/animals/wolves/": {
@@ -2370,8 +2440,8 @@
   "index": true
  },
  "/animals/": {
-  "h": "fd1f3457f2d1",
-  "mod": "2026-11-15",
+  "h": "17a9cdf003c7",
+  "mod": "2026-11-16",
   "index": true
  },
  "/places/kenya/": {
@@ -2385,8 +2455,8 @@
   "index": false
  },
  "/places/united-states/": {
-  "h": "e7f084b50720",
-  "mod": "2026-11-15",
+  "h": "be282fe73c9c",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/south-africa/": {
@@ -2410,18 +2480,18 @@
   "index": false
  },
  "/places/costa-rica/": {
-  "h": "e7e5b4441d82",
-  "mod": "2026-11-14",
+  "h": "466953ddb59f",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/canada/": {
-  "h": "f3de45aa9294",
-  "mod": "2026-11-15",
+  "h": "bfd273438772",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/australia/": {
-  "h": "55c205167f0e",
-  "mod": "2026-11-10",
+  "h": "cd1ba76be162",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/united-kingdom/": {
@@ -2435,13 +2505,13 @@
   "index": false
  },
  "/places/japan/": {
-  "h": "203845b90a6e",
-  "mod": "2026-11-15",
+  "h": "177692d2cb66",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/new-zealand/": {
-  "h": "15539b31600e",
-  "mod": "2026-11-14",
+  "h": "f6b3bae7b9ea",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/netherlands/": {
@@ -2465,8 +2535,8 @@
   "index": false
  },
  "/places/taiwan/": {
-  "h": "9ea62a7c2e59",
-  "mod": "2026-11-15",
+  "h": "dd67f9b253bc",
+  "mod": "2026-11-16",
   "index": false
  },
  "/places/czech-republic/": {
@@ -2489,9 +2559,14 @@
   "mod": "2026-11-15",
   "index": false
  },
+ "/places/spain/": {
+  "h": "f66573a83a39",
+  "mod": "2026-11-16",
+  "index": false
+ },
  "/places/": {
-  "h": "fa44b72df943",
-  "mod": "2026-11-15",
+  "h": "8cee67e67574",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/safari/": {
@@ -2500,33 +2575,33 @@
   "index": false
  },
  "/habitats/zoo/": {
-  "h": "6aca8bb41182",
-  "mod": "2026-11-15",
+  "h": "ec9e65f7645d",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/aqua/": {
-  "h": "0b6164d16706",
-  "mod": "2026-11-15",
+  "h": "fc3db68ab1c2",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/birds/": {
-  "h": "b7c3ee917965",
-  "mod": "2026-11-15",
+  "h": "9f4170f0e5b5",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/wild/": {
-  "h": "1d149bc26aa8",
-  "mod": "2026-11-15",
+  "h": "99fab84b8f53",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/pets/": {
-  "h": "96ca0be8084e",
-  "mod": "2026-11-15",
+  "h": "afd0b7ea1b47",
+  "mod": "2026-11-16",
   "index": false
  },
  "/habitats/": {
-  "h": "8d0cc8a5a9f7",
-  "mod": "2026-11-15",
+  "h": "19acf603e469",
+  "mod": "2026-11-16",
   "index": false
  },
  "/field-station/e/nest-on-the-roof/": {
@@ -3540,8 +3615,8 @@
   "index": true
  },
  "/": {
-  "h": "d4f2df7571d7",
-  "mod": "2026-11-15",
+  "h": "49abf13abc2e",
+  "mod": "2026-11-16",
   "index": true
  },
  "/field-station/": {
