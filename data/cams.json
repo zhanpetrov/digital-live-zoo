@@ -2248,6 +2248,33 @@
    }
   },
   {
+   "slug": "barn-owl-box-outside-riet-vell",
+   "ids": [
+    "3BZ-rgidYyU"
+   ],
+   "cid": "UCg6OElsAGYmkuSySkZpaNGw",
+   "n": "Barn owl box outside, Riet Vell",
+   "animals": [
+    "owls"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Ebro Delta, Spain",
+    "tz": "Europe/Madrid",
+    "ty": "birds",
+    "c": "Europe",
+    "k": "Spain",
+    "ch": "SEOBirdLife",
+    "cid": "UCg6OElsAGYmkuSySkZpaNGw"
+   }
+  },
+  {
    "slug": "barn-owl-box-riet-vell-reserve",
    "ids": [
     "8VFra_zCzAA"
@@ -5489,6 +5516,33 @@
    }
   },
   {
+   "slug": "coral-kingdom-tank-nmmba",
+   "ids": [
+    "WyP-yRGgQW4"
+   ],
+   "cid": "UC0LcMY7o2QIA9RenI2g1ngQ",
+   "n": "Coral Kingdom tank, NMMBA",
+   "animals": [
+    "coral-reefs"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Pingtung, Taiwan",
+    "tz": "Asia/Taipei",
+    "ty": "aqua",
+    "c": "Asia",
+    "k": "Taiwan",
+    "ch": "國立海洋生物博物館",
+    "cid": "UC0LcMY7o2QIA9RenI2g1ngQ"
+   }
+  },
+  {
    "slug": "coral-reef-back-of-dock",
    "ids": [
     "Lv9t0hZTvz4"
@@ -6500,6 +6554,33 @@
     "2026-11-12",
     "2026-11-13",
     "2026-11-14",
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Brownville, Maine, USA",
+    "tz": "America/New_York",
+    "ty": "wild",
+    "c": "North America",
+    "k": "USA",
+    "ch": "Brownville's Food Pantry For Deer",
+    "cid": "UCdmPhiIJ-s7MJG2WtM7nbUw"
+   }
+  },
+  {
+   "slug": "deer-food-pantry-ptz-brownville",
+   "ids": [
+    "DZATg9PUOHk"
+   ],
+   "cid": "UCdmPhiIJ-s7MJG2WtM7nbUw",
+   "n": "Deer food pantry PTZ, Brownville",
+   "animals": [
+    "deer"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
     "2026-11-15"
    ],
    "last": {
@@ -8945,6 +9026,33 @@
    ],
    "started": {
     "Zahk-Cm0gqk": "2026-03-30T16:24:22Z"
+   }
+  },
+  {
+   "slug": "giant-flying-squirrels-komoro-zoo",
+   "ids": [
+    "foyQgxYsdRU"
+   ],
+   "cid": "UCRs28y8_qHheJ_yPjZ37e-g",
+   "n": "Giant flying squirrels, Komoro Zoo",
+   "animals": [
+    "squirrels"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Komoro, Nagano, Japan",
+    "tz": "Asia/Tokyo",
+    "ty": "zoo",
+    "c": "Asia",
+    "k": "Japan",
+    "ch": "KOMORO ZOO 小諸市動物園　長野県小諸市",
+    "cid": "UCRs28y8_qHheJ_yPjZ37e-g"
    }
   },
   {
@@ -12178,6 +12286,33 @@
    }
   },
   {
+   "slug": "little-penguin-burrow-phillip-island",
+   "ids": [
+    "yTxngt2eVDM"
+   ],
+   "cid": "UCCKSu4XoRcJ6vPF7CLsPJdw",
+   "n": "Little penguin burrow, Phillip Island",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Phillip Island, Victoria, Australia",
+    "tz": "Australia/Melbourne",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "Australia",
+    "ch": "Phillip Island Nature Parks",
+    "cid": "UCCKSu4XoRcJ6vPF7CLsPJdw"
+   }
+  },
+  {
    "slug": "little-penguin-chick-new-zealand",
    "ids": [
     "Qisl6Bv2SpY"
@@ -12246,6 +12381,33 @@
    }
   },
   {
+   "slug": "little-penguin-nest-evans-bay",
+   "ids": [
+    "lPiyGor0MXs"
+   ],
+   "cid": "UCLizlM6gpaVHTKPo7spoqlA",
+   "n": "Little penguin nest, Evans Bay",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Wellington, New Zealand",
+    "tz": "Pacific/Auckland",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "New Zealand",
+    "ch": "Urban Wildlife Trust WILDCAMS",
+    "cid": "UCLizlM6gpaVHTKPo7spoqlA"
+   }
+  },
+  {
    "slug": "little-penguin-nests-oamaru",
    "ids": [
     "pZkj95YqQvM"
@@ -12307,7 +12469,8 @@
   {
    "slug": "little-penguins-burnie-penguin-centre",
    "ids": [
-    "PgN15WNniF4"
+    "PgN15WNniF4",
+    "DIuv0NWbE4Y"
    ],
    "cid": "UCaABJelAz_c4H70P591Ia1A",
    "n": "Little penguins, Burnie Penguin Centre",
@@ -12321,7 +12484,8 @@
    "note_ok": true,
    "added": "",
    "seen": [
-    "2026-10-01"
+    "2026-10-01",
+    "2026-11-15"
    ],
    "last": {
     "p": "Burnie, Tasmania, Australia",
@@ -12364,6 +12528,60 @@
     "k": "USA",
     "ch": "Lake Fairlee Association",
     "cid": "UCnFHrbtq6DwJn_5iNxgxdxg"
+   }
+  },
+  {
+   "slug": "magellanic-penguin-colony-isla-tova",
+   "ids": [
+    "mrJ4JF2MovU"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Magellanic penguin colony, Isla Tova",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Isla Tova, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
+   }
+  },
+  {
+   "slug": "magellanic-penguin-nest-isla-tova",
+   "ids": [
+    "SY-YNsj-oCY"
+   ],
+   "cid": "UCQpqwndsfuLig9BRo88AD_g",
+   "n": "Magellanic penguin nest, Isla Tova",
+   "animals": [
+    "penguins"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Isla Tova, Chubut, Argentina",
+    "tz": "America/Argentina/Catamarca",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Argentina",
+    "ch": "Explore Penguin & Puffin Cams",
+    "cid": "UCQpqwndsfuLig9BRo88AD_g"
    }
   },
   {
@@ -15771,6 +15989,58 @@
     "k": "Australia",
     "ch": "Port Lincoln Osprey",
     "cid": "UCK_BLeXdJeHqA1SlC79CruQ"
+   }
+  },
+  {
+   "slug": "ospreys-wide-view-port-lincoln",
+   "ids": [
+    "_gIf6CYeDG8"
+   ],
+   "cid": "UCK_BLeXdJeHqA1SlC79CruQ",
+   "n": "Ospreys wide view, Port Lincoln",
+   "animals": [
+    "ospreys"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Port Lincoln, South Australia",
+    "tz": "Australia/Adelaide",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "Australia",
+    "ch": "Port Lincoln Osprey",
+    "cid": "UCK_BLeXdJeHqA1SlC79CruQ"
+   }
+  },
+  {
+   "slug": "otago-shag-colony-sumpter-wharf",
+   "ids": [
+    "PmzPqiB0jaE"
+   ],
+   "cid": "UCSlIi8WXERrJUce_les6V6w",
+   "n": "Otago shag colony, Sumpter Wharf",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Ōamaru, New Zealand",
+    "tz": "Pacific/Auckland",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "New Zealand",
+    "ch": "Ōamaru Penguins",
+    "cid": "UCSlIi8WXERrJUce_les6V6w"
    }
   },
   {
@@ -19459,6 +19729,31 @@
    }
   },
   {
+   "slug": "scarlet-macaw-canopy-feeder-punta-islita",
+   "ids": [
+    "8DRsVKLC2co"
+   ],
+   "cid": "UCUK_FVvLqWdWFFjaqGkQYuA",
+   "n": "Scarlet macaw canopy feeder, Punta Islita",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Punta Islita, Guanacaste, Costa Rica",
+    "tz": "America/Costa_Rica",
+    "ty": "birds",
+    "c": "Latin America",
+    "k": "Costa Rica",
+    "ch": "Explore Sloth and Macaws: Rainforest Wildlife",
+    "cid": "UCUK_FVvLqWdWFFjaqGkQYuA"
+   }
+  },
+  {
    "slug": "sea-lion-beach-british-columbia",
    "ids": [
     "-uooI2satIQ"
@@ -22907,6 +23202,33 @@
    }
   },
   {
+   "slug": "tater-tot-the-kitten-tinykittens",
+   "ids": [
+    "tbuRTSnDUS8"
+   ],
+   "cid": "UCeL2LSl91k2VccR7XEh5IKg",
+   "n": "Tater Tot the kitten, TinyKittens",
+   "animals": [
+    "cats"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Langley, Canada",
+    "tz": "America/Vancouver",
+    "ty": "pets",
+    "c": "North America",
+    "k": "Canada",
+    "ch": "TinyKittens HQ",
+    "cid": "UCeL2LSl91k2VccR7XEh5IKg"
+   }
+  },
+  {
    "slug": "tau-game-lodge-madikwe",
    "ids": [
     "8J9USywkGmw"
@@ -24325,6 +24647,31 @@
    }
   },
   {
+   "slug": "white-bellied-sea-eagle-nest-sydney",
+   "ids": [
+    "LWYBNX02Q-A"
+   ],
+   "cid": "UCZss13TJZLtZ0ones3HpYMQ",
+   "n": "White-bellied sea eagle nest, Sydney",
+   "animals": [],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Sydney Olympic Park, New South Wales, Australia",
+    "tz": "Australia/Sydney",
+    "ty": "birds",
+    "c": "Oceania",
+    "k": "Australia",
+    "ch": "Sea-EagleCAM4",
+    "cid": "UCZss13TJZLtZ0ones3HpYMQ"
+   }
+  },
+  {
    "slug": "white-storks-polanow",
    "ids": [
     "6YyixwXK7DM"
@@ -24943,6 +25290,33 @@
    },
    "started": {
     "m0zx7vPJtC0": "2025-10-17T03:07:21Z"
+   }
+  },
+  {
+   "slug": "yaren-the-storks-nest-eskikaraagac",
+   "ids": [
+    "Qv-LT-hXWwc"
+   ],
+   "cid": "UCkvnnEMbfD_grByYSvuoVqA",
+   "n": "Yaren the stork's nest, Eskikaraağaç",
+   "animals": [
+    "storks"
+   ],
+   "species": [],
+   "note": "",
+   "note_ok": false,
+   "added": "2026-11-15",
+   "seen": [
+    "2026-11-15"
+   ],
+   "last": {
+    "p": "Eskikaraağaç, Bursa, Turkey",
+    "tz": "Europe/Istanbul",
+    "ty": "birds",
+    "c": "Asia",
+    "k": "Turkey",
+    "ch": "Karacabey Belediyesi",
+    "cid": "UCkvnnEMbfD_grByYSvuoVqA"
    }
   },
   {

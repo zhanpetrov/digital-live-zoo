@@ -144,6 +144,10 @@
    "lat": 40.457,
    "lon": -80.015
   },
+  "barn-owl-box-outside-riet-vell": {
+   "lat": 40.57,
+   "lon": 0.64
+  },
   "barn-owl-box-riet-vell-reserve": {
    "lat": 40.572,
    "lon": 0.643
@@ -334,6 +338,11 @@
    "lat": 25.774,
    "lon": -80.194
   },
+  "coral-kingdom-tank-nmmba": {
+   "lat": 22.05,
+   "lon": 120.7,
+   "in": "aquarium"
+  },
   "coral-reef-back-of-dock": {
    "lat": 16.101,
    "lon": -86.895
@@ -389,6 +398,10 @@
   "deer-food-pantry-brownville": {
    "lat": 45.35,
    "lon": -69.051
+  },
+  "deer-food-pantry-ptz-brownville": {
+   "lat": 45.35,
+   "lon": -69.05
   },
   "deteema-springs-hwange-national-park": {
    "lat": -19.189,
@@ -544,6 +557,10 @@
   "giant-flying-foxes-lubee-bat-conservancy": {
    "lat": 29.75,
    "lon": -82.42
+  },
+  "giant-flying-squirrels-komoro-zoo": {
+   "lat": 36.33,
+   "lon": 138.43
   },
   "giant-pandas-chengdu": {
    "lat": 30.743,
@@ -759,9 +776,17 @@
    "lat": 51.78,
    "lon": 5.225
   },
+  "little-penguin-burrow-phillip-island": {
+   "lat": -38.51,
+   "lon": 145.15
+  },
   "little-penguin-chick-new-zealand": {
    "lat": -40.987,
    "lon": 173.849
+  },
+  "little-penguin-nest-evans-bay": {
+   "lat": -41.3,
+   "lon": 174.8
   },
   "little-penguin-nests-oamaru": {
    "lat": -45.1,
@@ -774,6 +799,14 @@
   "loon-cam-lake-fairlee": {
    "lat": 43.89,
    "lon": -72.219
+  },
+  "magellanic-penguin-colony-isla-tova": {
+   "lat": -45.1,
+   "lon": -66.0
+  },
+  "magellanic-penguin-nest-isla-tova": {
+   "lat": -45.1,
+   "lon": -66.0
   },
   "mahali-mzuri-lodge-maasai-mara": {
    "lat": -1.49,
@@ -1014,6 +1047,14 @@
   "ospreys-port-lincoln": {
    "lat": -34.721,
    "lon": 135.859
+  },
+  "ospreys-wide-view-port-lincoln": {
+   "lat": -34.72,
+   "lon": 135.86
+  },
+  "otago-shag-colony-sumpter-wharf": {
+   "lat": -45.1,
+   "lon": 170.97
   },
   "otters-calvert-marine-museum": {
    "lat": 38.335,
@@ -1266,6 +1307,10 @@
    "lon": 140.575,
    "in": "aquarium"
   },
+  "scarlet-macaw-canopy-feeder-punta-islita": {
+   "lat": 9.85,
+   "lon": -85.4
+  },
   "sea-lion-beach-british-columbia": {
    "lat": 50.573,
    "lon": -126.746
@@ -1498,6 +1543,11 @@
    "lat": 24.924,
    "lon": -80.628
   },
+  "tater-tot-the-kitten-tinykittens": {
+   "lat": 49.1,
+   "lon": -122.66,
+   "in": "shelter"
+  },
   "tau-game-lodge-madikwe": {
    "lat": -25.355,
    "lon": 26.531
@@ -1593,6 +1643,10 @@
    "lat": -17.923,
    "lon": 25.848
   },
+  "white-bellied-sea-eagle-nest-sydney": {
+   "lat": -33.84,
+   "lon": 151.07
+  },
   "white-storks-polanow": {
    "lat": 54.119,
    "lon": 16.687
@@ -1624,6 +1678,10 @@
   "wombat-satsukiyama-zoo": {
    "lat": 34.822,
    "lon": 135.428
+  },
+  "yaren-the-storks-nest-eskikaraagac": {
+   "lat": 40.19,
+   "lon": 28.61
   },
   "zambezi-mubala-camp-zambezi-region": {
    "lat": -17.6,
