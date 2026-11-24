@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T21:06:30Z",
+ "updated": "2026-11-24T02:17:07Z",
  "note": "Live, embeddable streams not yet in the zoo. To add one, write a catalog entry for it; to hide it for good, move its id to 'rejected'.",
  "candidates": {
   "tbuRTSnDUS8": {
@@ -7,7 +7,7 @@
    "channel": "TinyKittens HQ",
    "channel_url": "https://www.youtube.com/@TinyKittens",
    "cid": "",
-   "viewers": 321,
+   "viewers": 290,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-10"
   },
@@ -16,7 +16,7 @@
    "channel": "Brownville's Food Pantry For Deer",
    "channel_url": "https://www.youtube.com/@BrownvillesFoodPantryForDeer",
    "cid": "",
-   "viewers": 257,
+   "viewers": 201,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-03"
   },
@@ -25,25 +25,52 @@
    "channel": "SHOWME Caribbean",
    "channel_url": "https://www.youtube.com/@SHOWMECaribbean",
    "cid": "",
-   "viewers": 79,
+   "viewers": 46,
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "3BZ-rgidYyU": {
-   "title": "🆕 NOVEDAD 🆕 Lechuza común · [Exterior] · Reserva Natural Riet Vell -🔴DIRECTO Delta del Ebro",
-   "channel": "SEOBirdLife",
-   "channel_url": "https://www.youtube.com/@seobirdlife",
+  "sPa16xGC2yI": {
+   "title": "Live Outdoor Patio Cam 1 from Portsmouth, New Hampshire - Strawbery Banke",
+   "channel": "Boston and Maine Live",
+   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
    "cid": "",
-   "viewers": 35,
+   "viewers": 25,
    "via": "channel already in the zoo",
-   "first_seen": "2026-10-16"
+   "first_seen": "2026-11-09"
+  },
+  "5C9oM7C2Q9k": {
+   "title": "EarthCam Live:  World Trade Center - New York City, NY",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
+   "cid": "",
+   "viewers": 22,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-22"
   },
   "OBgCrw-IyhE": {
    "title": "EarthCam Live:  Seaside Heights, NJ - North View",
    "channel": "EarthCam",
    "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
-   "viewers": 27,
+   "viewers": 21,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-14"
+  },
+  "QxFFjXu_zqs": {
+   "title": "EarthCam Live: New Orleans Balcony View",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
+   "cid": "",
+   "viewers": 14,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-14"
+  },
+  "C03Itx8iSC0": {
+   "title": "高雄壽山情人觀景台 4K即時影像 | Kaohsiung Shoushan Lovers' Viewing Platform 4K Live Camera",
+   "channel": "高雄旅遊網",
+   "channel_url": "https://www.youtube.com/@travelkhh",
+   "cid": "",
+   "viewers": 14,
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
@@ -52,306 +79,207 @@
    "channel": "SEOBirdLife",
    "channel_url": "https://www.youtube.com/@seobirdlife",
    "cid": "",
-   "viewers": 23,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-11"
-  },
-  "QxFFjXu_zqs": {
-   "title": "EarthCam Live: New Orleans Balcony View",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 20,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "5C9oM7C2Q9k": {
-   "title": "EarthCam Live:  World Trade Center - New York City, NY",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 19,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "sPa16xGC2yI": {
-   "title": "Live Outdoor Patio Cam 1 from Portsmouth, New Hampshire - Strawbery Banke",
-   "channel": "Boston and Maine Live",
-   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
-   "cid": "",
-   "viewers": 19,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-09"
-  },
-  "BEG9zonwEQ4": {
-   "title": "Tugboats and Shipping on the Piscataqua River, Portsmouth, New Hampshire LIVE",
-   "channel": "Boston and Maine Live",
-   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
-   "cid": "",
-   "viewers": 19,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "ThGtckZhldE": {
-   "title": "Rebuild new Ground Feeder (in progress)",
-   "channel": "NatureTec",
-   "channel_url": "https://www.youtube.com/@NatureTec",
-   "cid": "",
-   "viewers": 18,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "KQ3YxUYxe5Y": {
-   "title": "Bald Eagle Nest LIVE Stream 2 🦅 Harry & Harriet | Traverse City, MI",
-   "channel": "Great Lakes Bald Eagle Cam",
-   "channel_url": "https://www.youtube.com/@GreatLakesBaldEagleCam",
-   "cid": "",
-   "viewers": 16,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-09"
-  },
-  "H-JJCDi3HNg": {
-   "title": "Live from Portsmouth, New Hampshire - Strawbery Banke Museum",
-   "channel": "Boston and Maine Live",
-   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
-   "cid": "",
    "viewers": 14,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-09"
-  },
-  "P3sGke9M59o": {
-   "title": "EarthCam Live: Philadelphia, PA",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 13,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-24"
-  },
-  "W9ghgZD6Ugw": {
-   "title": "EarthCam Live:  Chicago Skydeck Cam (Chicago, IL)",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 9,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "mG2gAWY_Guw": {
-   "title": "EarthCam Live:  Washington Monument (Washington, D.C.)",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 9,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-09"
-  },
-  "C03Itx8iSC0": {
-   "title": "高雄壽山情人觀景台 4K即時影像 | Kaohsiung Shoushan Lovers' Viewing Platform 4K Live Camera",
-   "channel": "高雄旅遊網",
-   "channel_url": "https://www.youtube.com/@travelkhh",
-   "cid": "",
-   "viewers": 9,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "W6RWPWmGOvE": {
-   "title": "Monson, Maine US Ice Cam 2 - Live",
-   "channel": "Boston and Maine Live",
-   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
-   "cid": "",
-   "viewers": 9,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "W9lkrGf9ldI": {
-   "title": "Kozubszczyzna - oczko wodne",
-   "channel": "WorldCam",
-   "channel_url": "https://www.youtube.com/@kameryinternetowe",
-   "cid": "",
-   "viewers": 9,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
+   "first_seen": "2026-11-11"
   },
   "IQH9o1FVz48": {
    "title": "Caribbean Tank at Moody Gardens Aquarium",
    "channel": "Moody Gardens",
    "channel_url": "https://www.youtube.com/@TheMoodyGardens",
    "cid": "",
-   "viewers": 8,
+   "viewers": 12,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-12"
   },
-  "wfuqjSNXZ14": {
-   "title": "West End Bald Eagle Nest Low Cam powered by EXPLORE.org",
-   "channel": "Explore Eagle Nest Cams",
-   "channel_url": "https://www.youtube.com/@ExploreBirds",
-   "cid": "",
-   "viewers": 8,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "-iBIy_lnINc": {
-   "title": "Kozubszczyzna - Wybieg",
-   "channel": "WorldCam",
-   "channel_url": "https://www.youtube.com/@kameryinternetowe",
-   "cid": "",
-   "viewers": 8,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "0ImA9IcyQwA": {
-   "title": "🏝️ Klein Curaçao | Mermaid Boat Trips | LIVE Cam",
-   "channel": "SHOWME Caribbean",
-   "channel_url": "https://www.youtube.com/@SHOWMECaribbean",
-   "cid": "",
-   "viewers": 7,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "58taS8R6q08": {
-   "title": "C2 | Uhu Webcam 2 Ahr – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
-   "channel": "EGE – Gesellschaft zur Erhaltung der Eulen e.V.",
-   "channel_url": "https://www.youtube.com/@ege-eulen",
-   "cid": "",
-   "viewers": 7,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "i7OhLO2zpFs": {
-   "title": "LIVE Sandhill Crane Migration Cam: Audubon's Rowe Sanctuary | explore.org",
-   "channel": "Explore Hummingbird & Bird Migration Cams",
-   "channel_url": "https://www.youtube.com/@ExploreHummingbirds",
-   "cid": "",
-   "viewers": 7,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-31"
-  },
-  "pOP3szGiSFE": {
-   "title": "LIVE Wildlife & Bird of Prey Feeder Cam #1 (Tamási, Hungary)",
-   "channel": "Madarles - Live Bird Cams",
-   "channel_url": "https://www.youtube.com/@madarles",
-   "cid": "",
-   "viewers": 7,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-03"
-  },
-  "Ro31VB4mhB4": {
-   "title": "C1–C4 | Uhu Webcams Gesamtansicht – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
-   "channel": "EGE – Gesellschaft zur Erhaltung der Eulen e.V.",
-   "channel_url": "https://www.youtube.com/@ege-eulen",
-   "cid": "",
-   "viewers": 6,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "NQIT9OOHaQs": {
-   "title": "Chocorua Lake, New Hampshire - Live Cam",
+  "1M-B5mPAIy4": {
+   "title": "Historic Greenville Junction Rail Depot, Maine - Live cam",
    "channel": "Boston and Maine Live",
    "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
    "cid": "",
-   "viewers": 6,
+   "viewers": 11,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "W9ghgZD6Ugw": {
+   "title": "EarthCam Live:  Chicago Skydeck Cam (Chicago, IL)",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
+   "cid": "",
+   "viewers": 10,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-20"
+  },
+  "H-JJCDi3HNg": {
+   "title": "Live from Portsmouth, New Hampshire - Strawbery Banke Museum",
+   "channel": "Boston and Maine Live",
+   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
+   "cid": "",
+   "viewers": 9,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-09"
+  },
+  "3BZ-rgidYyU": {
+   "title": "🆕 NOVEDAD 🆕 Lechuza común · [Exterior] · Reserva Natural Riet Vell -🔴DIRECTO Delta del Ebro",
+   "channel": "SEOBirdLife",
+   "channel_url": "https://www.youtube.com/@seobirdlife",
+   "cid": "",
+   "viewers": 9,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-16"
+  },
+  "KQ3YxUYxe5Y": {
+   "title": "Bald Eagle Nest LIVE Stream 2 🦅 Harry & Harriet | Traverse City, MI",
+   "channel": "Great Lakes Bald Eagle Cam",
+   "channel_url": "https://www.youtube.com/@GreatLakesBaldEagleCam",
+   "cid": "",
+   "viewers": 8,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-09"
+  },
+  "eoh3uirtDoc": {
+   "title": "🔴24/7 squirrel Shelly and babies born July 2025 #SqNL-6of6",
+   "channel": "SquirrelNest Live",
+   "channel_url": "https://www.youtube.com/@SquirrelNestLive",
+   "cid": "",
+   "viewers": 8,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "BEG9zonwEQ4": {
+   "title": "Tugboats and Shipping on the Piscataqua River, Portsmouth, New Hampshire LIVE",
+   "channel": "Boston and Maine Live",
+   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
+   "cid": "",
+   "viewers": 8,
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "njd-zkim0ac": {
-   "title": "\"Inside Multi Cam\" Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
+  "Njur5IV7icE": {
+   "title": "Live from Angama Mara | Maasai Mara, Kenya",
+   "channel": "Africam",
+   "channel_url": "https://www.youtube.com/@Africamvideos",
+   "cid": "",
+   "viewers": 7,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "mG2gAWY_Guw": {
+   "title": "EarthCam Live:  Washington Monument (Washington, D.C.)",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
+   "cid": "",
+   "viewers": 7,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-09"
+  },
+  "rB_nzP76ktc": {
+   "title": "【LIVE】伊豆下田港",
+   "channel": "KTV12net /小林TV",
+   "channel_url": "https://www.youtube.com/@ktv12nettv87",
+   "cid": "",
+   "viewers": 7,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-20"
+  },
+  "ThGtckZhldE": {
+   "title": "Rebuild new Ground Feeder (in progress)",
+   "channel": "NatureTec",
+   "channel_url": "https://www.youtube.com/@NatureTec",
+   "cid": "",
+   "viewers": 7,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-14"
+  },
+  "FyGb2TZB344": {
+   "title": "Castillo de San Marcos Fort LIVE 24/7 | St. Augustine",
+   "channel": "See St. Augustine",
+   "channel_url": "https://www.youtube.com/@seestaug",
    "cid": "",
    "viewers": 6,
    "via": "channel already in the zoo",
-   "first_seen": "2026-10-23"
-  },
-  "Ze7rK5K5e4Q": {
-   "title": "LIVE Wildlife & Bird of Prey Feeder Cam #2 (Tamási, Hungary)",
-   "channel": "Madarles - Live Bird Cams",
-   "channel_url": "https://www.youtube.com/@madarles",
-   "cid": "",
-   "viewers": 6,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "ItdXaWUVF48": {
-   "title": "Africam Rosie's Pan powered by EXPLORE.org",
-   "channel": "Explore Africa",
-   "channel_url": "https://www.youtube.com/@ExploreAfrica",
-   "cid": "",
-   "viewers": 5,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-24"
   },
   "hzt7mnCaYig": {
    "title": "Anacapa Ocean - Channel Islands National Park Cams powered by EXPLORE.org",
    "channel": "Explore Oceans",
    "channel_url": "https://www.youtube.com/@ExploreOceans",
    "cid": "",
-   "viewers": 5,
+   "viewers": 6,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-10"
-  },
-  "uLgdUiT9WZQ": {
-   "title": "LIVE Dumpling Mountain - Katmai National Park, Alaska Camera | explore.org",
-   "channel": "Explore Northern Lights & Nature Meditation Cams",
-   "channel_url": "https://www.youtube.com/@ExploreZenDen",
-   "cid": "",
-   "viewers": 5,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
   },
   "Syl86r2ChtM": {
    "title": "EarthCamTV 3 Live:  Trending Cams",
    "channel": "EarthCam",
    "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
-   "viewers": 5,
+   "viewers": 6,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-09"
   },
-  "nhffONcy8Eg": {
-   "title": "Iroquois National Wildlife Refuge Bald Eagle Camera",
-   "channel": "PixCams",
-   "channel_url": "https://www.youtube.com/@PixCams",
+  "o5Ie_LpZ9uk": {
+   "title": "EarthCam Live:  Statue of Liberty",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
-   "viewers": 5,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-18"
-  },
-  "CvazwVX3vZg": {
-   "title": "C1 | Uhu Webcam 1 Ahr – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
-   "channel": "EGE – Gesellschaft zur Erhaltung der Eulen e.V.",
-   "channel_url": "https://www.youtube.com/@ege-eulen",
-   "cid": "",
-   "viewers": 5,
+   "viewers": 6,
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "bI7u8SodArk": {
-   "title": "Animal spycam | Woody's Veilige Haven Texel Katten | Kattenkamer",
-   "channel": "WoodysVeiligeHaven",
-   "channel_url": "https://www.youtube.com/@Woodysveiligehaven",
+  "wfuqjSNXZ14": {
+   "title": "West End Bald Eagle Nest Low Cam powered by EXPLORE.org",
+   "channel": "Explore Eagle Nest Cams",
+   "channel_url": "https://www.youtube.com/@ExploreBirds",
+   "cid": "",
+   "viewers": 6,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-21"
+  },
+  "MQ0_YgWzDJQ": {
+   "title": "チンチラ部屋配信 Chinchilla room live  🐭【ライブカメラ】",
+   "channel": "もふもふペットCafe",
+   "channel_url": "https://www.youtube.com/@MohumohuPetCafe",
+   "cid": "",
+   "viewers": 6,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "P3sGke9M59o": {
+   "title": "EarthCam Live: Philadelphia, PA",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
    "viewers": 5,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
+   "first_seen": "2026-10-24"
   },
-  "RMvIYKbff-s": {
-   "title": "Mount Diablo Cam powered by EXPLORE.org",
-   "channel": "Explore Northern Lights & Nature Meditation Cams",
-   "channel_url": "https://www.youtube.com/@ExploreZenDen",
+  "njd-zkim0ac": {
+   "title": "\"Inside Multi Cam\" Raccoon Saloon",
+   "channel": "Raccoon Saloon",
+   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
    "cid": "",
-   "viewers": 4,
+   "viewers": 5,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-19"
+   "first_seen": "2026-10-23"
   },
-  "F1EQEDL4ddU": {
-   "title": "EarthCam Live:  Liberty Bell - Independence Hall (Philadelphia, PA)",
+  "9qbBQSZDHZ4": {
+   "title": "\"Diana's PTZ\"  Raccoon Saloon",
+   "channel": "Raccoon Saloon",
+   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
+   "cid": "",
+   "viewers": 5,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-22"
+  },
+  "dNVxDS5VUmY": {
+   "title": "EarthCam Live:  Wildwoods Cam (Wildwood, NJ)",
    "channel": "EarthCam",
    "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
    "viewers": 4,
    "via": "channel already in the zoo",
-   "first_seen": "2026-10-30"
+   "first_seen": "2026-11-24"
   },
   "qsrevo5Vdkw": {
    "title": "EarthCam Live:  Council Bluffs, Iowa",
@@ -362,32 +290,50 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "ATUUIk3pSLw": {
-   "title": "DEER FEEDER CAM — UP CLOSE & PERSONAL! 🦌 | LIVE 24/7",
-   "channel": "Eastern Backwoods Outdoors",
-   "channel_url": "https://www.youtube.com/@EasternBackwoodsOutdoors",
+  "VBSxPjy5sow": {
+   "title": "San Jose City Hall Peregrine Falcon Camera - Nest Box",
+   "channel": "City of San Jose, CA",
+   "channel_url": "https://www.youtube.com/@CityOfSanJoseCalifornia",
    "cid": "",
    "viewers": 4,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-04"
+   "first_seen": "2026-11-20"
   },
-  "9qbBQSZDHZ4": {
-   "title": "\"Diana's PTZ\"  Raccoon Saloon",
+  "i7OhLO2zpFs": {
+   "title": "LIVE Sandhill Crane Migration Cam: Audubon's Rowe Sanctuary | explore.org",
+   "channel": "Explore Hummingbird & Bird Migration Cams",
+   "channel_url": "https://www.youtube.com/@ExploreHummingbirds",
+   "cid": "",
+   "viewers": 4,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-31"
+  },
+  "bI7u8SodArk": {
+   "title": "Animal spycam | Woody's Veilige Haven Texel Katten | Kattenkamer",
+   "channel": "WoodysVeiligeHaven",
+   "channel_url": "https://www.youtube.com/@Woodysveiligehaven",
+   "cid": "",
+   "viewers": 4,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-20"
+  },
+  "u6xYSbhzVvM": {
+   "title": "\"Back PTZ\" Raccoon Saloon",
    "channel": "Raccoon Saloon",
    "channel_url": "https://www.youtube.com/@RaccoonSaloon",
    "cid": "",
    "viewers": 4,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-19"
   },
-  "_imMV0Z7ht8": {
-   "title": "Bywyd Gwyllt Glaslyn Wildlife - Ffrwd Byw / Live Stream 2 - Friends of the Ospreys Pont Croesor Nest",
-   "channel": "Bywyd Gwyllt Glaslyn Wildlife",
-   "channel_url": "https://www.youtube.com/@bywydgwylltglaslynwildlife687",
+  "-iBIy_lnINc": {
+   "title": "Kozubszczyzna - Wybieg",
+   "channel": "WorldCam",
+   "channel_url": "https://www.youtube.com/@kameryinternetowe",
    "cid": "",
    "viewers": 4,
    "via": "channel already in the zoo",
-   "first_seen": "2026-10-15"
+   "first_seen": "2026-10-14"
   },
   "FVyEjgPD95I": {
    "title": "BirdMania-WebCam-3",
@@ -398,17 +344,8 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "HUauVl81j7E": {
-   "title": "Moody Gardens Pyramid Cam LIVE | Galveston, Texas",
-   "channel": "Moody Gardens",
-   "channel_url": "https://www.youtube.com/@TheMoodyGardens",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-18"
-  },
-  "epZP0VOirh0": {
-   "title": "Kalahari Salt Pan powered by EXPLORE.org",
+  "7hKbyXxWT2k": {
+   "title": "Africam Boteti River Zebra Migration powered by EXPLORE.org",
    "channel": "Explore Africa",
    "channel_url": "https://www.youtube.com/@ExploreAfrica",
    "cid": "",
@@ -416,8 +353,17 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "o5Ie_LpZ9uk": {
-   "title": "EarthCam Live:  Statue of Liberty",
+  "ItdXaWUVF48": {
+   "title": "Africam Rosie's Pan powered by EXPLORE.org",
+   "channel": "Explore Africa",
+   "channel_url": "https://www.youtube.com/@ExploreAfrica",
+   "cid": "",
+   "viewers": 3,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-22"
+  },
+  "6tq8S2pp8PQ": {
+   "title": "EarthCam Live: Pigeon River Cam (Hartford, TN)",
    "channel": "EarthCam",
    "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
@@ -425,41 +371,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "_1_8X4psoPs": {
-   "title": "PixCams.com PA Bird Feeder 1",
-   "channel": "PixCams",
-   "channel_url": "https://www.youtube.com/@PixCams",
+  "F1EQEDL4ddU": {
+   "title": "EarthCam Live:  Liberty Bell - Independence Hall (Philadelphia, PA)",
+   "channel": "EarthCam",
+   "channel_url": "https://www.youtube.com/@earthcam",
    "cid": "",
    "viewers": 3,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-12"
+   "first_seen": "2026-10-30"
   },
-  "ZrFQ2-42kmY": {
-   "title": "Winter Woodland Retreat | Crackling Fireplace & Soft Piano",
-   "channel": "Gettysburg LiveCam",
-   "channel_url": "https://www.youtube.com/@gettysburglivecam9188",
+  "dHElrtDv-Yo": {
+   "title": "【野鳥観察ライブ】北海道新冠町ディマシオ美術館小鳥・お天気カメラ【コノド】",
+   "channel": "動物支援コノドch",
+   "channel_url": "https://www.youtube.com/@%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%B3%E3%83%8E%E3%83%89",
    "cid": "",
    "viewers": 3,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "QGT6Nqrdwbk": {
-   "title": "【LIVE】伊豆急下田駅前",
-   "channel": "KTV12net /小林TV",
-   "channel_url": "https://www.youtube.com/@ktv12nettv87",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "rB_nzP76ktc": {
-   "title": "【LIVE】伊豆下田港",
-   "channel": "KTV12net /小林TV",
-   "channel_url": "https://www.youtube.com/@ktv12nettv87",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
+   "first_seen": "2026-10-16"
   },
   "BnPoNatG-HE": {
    "title": "高雄蓮池潭4K即時影像 Kaohsiung Lianchihtan (Lotus Pond)  4K Live Camera",
@@ -470,23 +398,14 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-06"
   },
-  "1rxaHU_ZY_4": {
-   "title": "LIVE Bird Bath Cam",
-   "channel": "NatureTec",
-   "channel_url": "https://www.youtube.com/@NatureTec",
+  "YOkiYpCm0eM": {
+   "title": "LIVE Above Water Manatee-Cam at Blue Spring State Park | EXPLORE.org",
+   "channel": "Explore Manatee, River & Wetland Bird Cams",
+   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
    "cid": "",
    "viewers": 3,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "hAxPcW0zUNA": {
-   "title": "Field Cam",
-   "channel": "PixWildlifeCams",
-   "channel_url": "https://www.youtube.com/@PixWildlifeCams",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-19"
   },
   "5C93_ZzJd1U": {
    "title": "Little Miami Conservancy Bald Eagle Camera 2",
@@ -497,32 +416,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-02"
   },
-  "-ViqhY35AbQ": {
-   "title": "Nest Cam-巣内カメラ",
-   "channel": "Osaka Peregrine Falcons",
-   "channel_url": "https://www.youtube.com/@OsakaPeregrineFalcons",
+  "LIOtlT6K-OE": {
+   "title": "Live Webcam Cabra Dublin Ireland (Facing Nth West)",
+   "channel": "LivefromIreland - Live Streaming Webcams",
+   "channel_url": "https://www.youtube.com/@livefromireland",
    "cid": "",
    "viewers": 3,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-07"
+   "first_seen": "2026-11-24"
   },
-  "0_Q0YJOaiu8": {
-   "title": "Faucons UdeM - Caméra 3",
-   "channel": "Faucons UdeM",
-   "channel_url": "https://www.youtube.com/@FauconsUdeM",
+  "W9lkrGf9ldI": {
+   "title": "Kozubszczyzna - oczko wodne",
+   "channel": "WorldCam",
+   "channel_url": "https://www.youtube.com/@kameryinternetowe",
    "cid": "",
    "viewers": 3,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "ziG9Ky_5B3g": {
-   "title": "Faucons UdeM - Caméra 1",
-   "channel": "Faucons UdeM",
-   "channel_url": "https://www.youtube.com/@FauconsUdeM",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-13"
+   "first_seen": "2026-10-14"
   },
   "moG5RtB1bx0": {
    "title": "BirdMania - WebCam-1",
@@ -533,15 +443,6 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-14"
   },
-  "x40rfRAEXBg": {
-   "title": "Žacléř - Rýchorské náměstí | Live Webcam",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
   "j7OLioCp1mg": {
    "title": "LIVE Nest Box - Kjøttmeis (Eurasian great tit) - Night guest - Gjøvik, Norway",
    "channel": "Nest Box Gjøvik",
@@ -551,23 +452,14 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-01"
   },
-  "um6SLoR76hk": {
-   "title": "Kisatchie National Forest E-3 Canopy Cam",
-   "channel": "bald eagle",
-   "channel_url": "https://www.youtube.com/@KNFcams",
-   "cid": "",
-   "viewers": 3,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "BlpneEUfK-0": {
-   "title": "LIVE Whales & Seascape - Isla Tovita - Patagonia Azul Provincial Park, Chubut, Argentina.",
-   "channel": "Explore Whale Walrus & Seal Cams",
-   "channel_url": "https://www.youtube.com/@ExploreWhalesWalrusesSeals",
+  "HUauVl81j7E": {
+   "title": "Moody Gardens Pyramid Cam LIVE | Galveston, Texas",
+   "channel": "Moody Gardens",
+   "channel_url": "https://www.youtube.com/@TheMoodyGardens",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-16"
+   "first_seen": "2026-11-18"
   },
   "x0CloLdk44g": {
    "title": "LIVE Muttville Wagcam From a Dog's View | explore.org",
@@ -578,8 +470,8 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-16"
   },
-  "7hKbyXxWT2k": {
-   "title": "Africam Boteti River Zebra Migration powered by EXPLORE.org",
+  "pZZst4BOpVI": {
+   "title": "Africam Naledi Cat-EYE powered by EXPLORE.org",
    "channel": "Explore Africa",
    "channel_url": "https://www.youtube.com/@ExploreAfrica",
    "cid": "",
@@ -587,23 +479,14 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "FefBhyyUo60": {
-   "title": "LIVE Barn Owl/ Pigeon Israel 4K Cam 1| WBAIS GAIA |The Charter Group of Wildlife Ecology",
-   "channel": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
-   "channel_url": "https://www.youtube.com/@CharterGroupBirdcams",
+  "aWvHfzO3MMY": {
+   "title": "Kitten Rescue FeLV Room powered by EXPLORE.org",
+   "channel": "Explore Tiger & Kitten Cams",
+   "channel_url": "https://www.youtube.com/@ExploreCatsLionsTigers",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-18"
-  },
-  "wDgZkzkOP-s": {
-   "title": "Mission Mountain Range powered by Explore.org",
-   "channel": "Explore Northern Lights & Nature Meditation Cams",
-   "channel_url": "https://www.youtube.com/@ExploreZenDen",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
+   "first_seen": "2026-11-24"
   },
   "WHve7zk9jds": {
    "title": "EarthCam Live:  Spirit Lake, Iowa",
@@ -614,60 +497,6 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "6tq8S2pp8PQ": {
-   "title": "EarthCam Live: Pigeon River Cam (Hartford, TN)",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "VWDi2Po3ZsQ": {
-   "title": "EarthCam Live:  World's Largest Buffalo Monument (Jamestown, North Dakota)",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "fHb0eB9RUgA": {
-   "title": "Farallon Islands Live Webcam | California Academy of Sciences",
-   "channel": "California Academy of Sciences",
-   "channel_url": "https://www.youtube.com/@calacademy",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "YhXWGJQtEQY": {
-   "title": "24/7 Live: Rhino Orphans at HESC | Watch Endangered Rhinos Up Close!",
-   "channel": "Africam Conservation",
-   "channel_url": "https://www.youtube.com/@AfricamConservation",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-18"
-  },
-  "YOkt3sijzyM": {
-   "title": "Mixed Tern Colony - Isla Larga- Patagonia Azul Provincial Park, Chubut, Argentina.",
-   "channel": "Explore Penguin & Puffin Cams",
-   "channel_url": "https://www.youtube.com/@ExplorePenguinsandPuffins",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "yE9AZ2u1lmc": {
-   "title": "LIVE Imperial Cormorant Colony - Patagonia - Rewilding Argentina | explore.org",
-   "channel": "Explore Penguin & Puffin Cams",
-   "channel_url": "https://www.youtube.com/@ExplorePenguinsandPuffins",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-18"
-  },
   "E5T2eHM8tcI": {
    "title": "Two Harbors Bald Eagle Cam powered by EXPLORE.org",
    "channel": "Explore Eagle Nest Cams",
@@ -677,100 +506,82 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "9njkml1oQRQ": {
-   "title": "U. S. Steel Bald Eagle Camera Live Stream - Cam 2 - USS nest with Monongahela River in background",
+  "_1_8X4psoPs": {
+   "title": "PixCams.com PA Bird Feeder 1",
    "channel": "PixCams",
    "channel_url": "https://www.youtube.com/@PixCams",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-06"
+   "first_seen": "2026-11-12"
   },
-  "FwmMIzEoU-o": {
-   "title": "OBX Osprey Cam - PTZ Cam",
-   "channel": "OBX Osprey Cam",
-   "channel_url": "https://www.youtube.com/@obxospreycam",
+  "uxzRXhKshow": {
+   "title": "USS Bald Eagle Cam 3",
+   "channel": "PixCams",
+   "channel_url": "https://www.youtube.com/@PixCams",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-24"
   },
-  "jaNayeUXb2Y": {
-   "title": "Live #CornellHawks Fernow Nest Fixed Cam",
-   "channel": "Cornell Lab Bird Cams-Channel 2",
-   "channel_url": "https://www.youtube.com/@CornellLabBirdCams-Channel2",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "VBSxPjy5sow": {
-   "title": "San Jose City Hall Peregrine Falcon Camera - Nest Box",
-   "channel": "City of San Jose, CA",
-   "channel_url": "https://www.youtube.com/@CityOfSanJoseCalifornia",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "j1gKpKzdIjY": {
-   "title": "Peregrine Falcon Camera - Nest Box",
-   "channel": "Nebraska Game and Parks Commission",
-   "channel_url": "https://www.youtube.com/@NEGameAndParks",
+  "0ImA9IcyQwA": {
+   "title": "🏝️ Klein Curaçao | Mermaid Boat Trips | LIVE Cam",
+   "channel": "SHOWME Caribbean",
+   "channel_url": "https://www.youtube.com/@SHOWMECaribbean",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
-  "LA0eX1GXnx0": {
-   "title": "Kentucky Equine Adoption Center powered by Explore.org",
-   "channel": "Explore Farm Life",
-   "channel_url": "https://www.youtube.com/@ExploreFarmLife",
+  "Ro31VB4mhB4": {
+   "title": "C1–C4 | Uhu Webcams Gesamtansicht – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
+   "channel": "EGE – Gesellschaft zur Erhaltung der Eulen e.V.",
+   "channel_url": "https://www.youtube.com/@ege-eulen",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-14"
+  },
+  "Ho_ZUV41Py8": {
+   "title": "SqNest.Live 🔴24/7 200 squirrel auto-cameras live - no ads #SqNL-4of7",
+   "channel": "SquirrelNest Live",
+   "channel_url": "https://www.youtube.com/@SquirrelNestLive",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "eubA20t8ZMk": {
+   "title": "🔴24/7 Squirrel Wonderland Live - no ads - #SqNL-5of6 🇺🇸🎗🇺🇦",
+   "channel": "SquirrelNest Live",
+   "channel_url": "https://www.youtube.com/@SquirrelNestLive",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "QGT6Nqrdwbk": {
+   "title": "【LIVE】伊豆急下田駅前",
+   "channel": "KTV12net /小林TV",
+   "channel_url": "https://www.youtube.com/@ktv12nettv87",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-20"
   },
-  "CvhjgMSzKWI": {
-   "title": "Live Farm Sanctuary Main Cow Barn and Pasture powered by EXPLORE.org",
-   "channel": "Explore Farm Life",
-   "channel_url": "https://www.youtube.com/@ExploreFarmLife",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "dqcCOYtHtes": {
-   "title": "Wisconsin Pasture Cam at Farm Sanctuary powered by EXPLORE.org",
-   "channel": "Explore Farm Life",
-   "channel_url": "https://www.youtube.com/@ExploreFarmLife",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "dHElrtDv-Yo": {
-   "title": "【野鳥観察ライブ】北海道新冠町ディマシオ美術館小鳥・お天気カメラ【コノド】",
-   "channel": "動物支援コノドch",
-   "channel_url": "https://www.youtube.com/@%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%B3%E3%83%8E%E3%83%89",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-16"
-  },
-  "vaolOXkV6cQ": {
-   "title": "Waldkauz-Kasten",
-   "channel": "Storchennest Hamm",
-   "channel_url": "https://www.youtube.com/@Storchennest_Hamm",
+  "8AtRJpORh5A": {
+   "title": "Osprey Nest Cam LIVE 2K | Felix & Margareet | Central Florida",
+   "channel": "SuperBeaks",
+   "channel_url": "https://www.youtube.com/@SuperBeaks",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "tdUs7-Nanh8": {
-   "title": "Wildlife 2 Thermal Camera",
-   "channel": "PixWildlifeCams",
-   "channel_url": "https://www.youtube.com/@PixWildlifeCams",
+  "MchNXlFpYIM": {
+   "title": "LIVE Underwater Manatee-Cam at Blue Spring State Park | EXPLORE.org",
+   "channel": "Explore Manatee, River & Wetland Bird Cams",
+   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
@@ -785,6 +596,15 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-13"
   },
+  "NQIT9OOHaQs": {
+   "title": "Chocorua Lake, New Hampshire - Live Cam",
+   "channel": "Boston and Maine Live",
+   "channel_url": "https://www.youtube.com/@BostonAndMaineLive",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-14"
+  },
   "AylWnPkXd-U": {
    "title": "Jordan Pond, Acadia National Park - Live",
    "channel": "Boston and Maine Live",
@@ -793,6 +613,15 @@
    "viewers": 2,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-02"
+  },
+  "q6XLBqZqQwo": {
+   "title": "\"North PTZ\" Raccoon Saloon",
+   "channel": "Raccoon Saloon",
+   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-06"
   },
   "oZcJcXP72aQ": {
    "title": "\"Back Door\" Raccoon Saloon",
@@ -821,95 +650,77 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-19"
   },
-  "bUqgkOwa7Ts": {
-   "title": "Trutnovský kostel - SV směr | Live Webcam",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
+  "e6CO_0ZQRZ0": {
+   "title": "LIVE Kestrel Nest -Cam8 Live H24 - Emilia-Romagna -MCBI - University of Nature - Italy",
+   "channel": "L'universitá Della Natura",
+   "channel_url": "https://www.youtube.com/@universitadellanatura",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
+   "first_seen": "2026-11-24"
   },
-  "3sBvUltXT8M": {
-   "title": "Trutnovský kostel - SZ směr | Live Webcam",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
+  "Dzln1061uZk": {
+   "title": "LIVE Barn Owl -Cam2 Live H24  - Barbagianni -MCBI - University of Nature - Italy",
+   "channel": "L'universitá Della Natura",
+   "channel_url": "https://www.youtube.com/@universitadellanatura",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
+   "first_seen": "2026-11-24"
   },
-  "dnPinTdkuxA": {
-   "title": "Živě z čapího hnízda na pivovarském komíně v Trutnově",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
+  "_imMV0Z7ht8": {
+   "title": "Bywyd Gwyllt Glaslyn Wildlife - Ffrwd Byw / Live Stream 2 - Friends of the Ospreys Pont Croesor Nest",
+   "channel": "Bywyd Gwyllt Glaslyn Wildlife",
+   "channel_url": "https://www.youtube.com/@bywydgwylltglaslynwildlife687",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-15"
+  },
+  "pOP3szGiSFE": {
+   "title": "LIVE Wildlife & Bird of Prey Feeder Cam #1 (Tamási, Hungary)",
+   "channel": "Madarles - Live Bird Cams",
+   "channel_url": "https://www.youtube.com/@madarles",
+   "cid": "",
+   "viewers": 2,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-03"
+  },
+  "-cgrK4BlDAY": {
+   "title": "🔴 Aves en DIRECTO - Reserva Ornitológica Riet Vell, Delta del Ebro",
+   "channel": "SEOBirdLife",
+   "channel_url": "https://www.youtube.com/@seobirdlife",
    "cid": "",
    "viewers": 2,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-19"
   },
-  "Tpg0Lc75JFg": {
-   "title": "7️⃣ 机下・おこもり空間【里親様募集中】愛され保護猫 じっちゃんのお部屋｜保護ねこの家24時間ライブ配信",
-   "channel": "保護ねこの家",
-   "channel_url": "https://www.youtube.com/@SNS",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
+  "LGxFBlroOR8": {
+   "title": "Elephant Trek Live Cam",
+   "channel": "The Cincinnati Zoo & Botanical Garden",
+   "channel_url": "https://www.youtube.com/@cincinnatizoo",
+   "cid": "UCE3VoxyYmyQCReOXk2ogsVg",
+   "viewers": 1,
+   "via": "search: zoo live cam",
+   "first_seen": "2026-11-15"
   },
-  "jP766VxGxpU": {
-   "title": "🔟 保護ねこたちの見守りカメラ《中央3段ケージ》【里親様募集】｜保護ねこの家 24時間ライブ配信",
-   "channel": "保護ねこの家",
-   "channel_url": "https://www.youtube.com/@SNS",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "f-zH3tqh4Do": {
-   "title": "5️⃣ 愛され保護猫 じっちゃんのお部屋｜保護ねこの家24時間ライブ配信",
-   "channel": "保護ねこの家",
-   "channel_url": "https://www.youtube.com/@SNS",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "tIkzqrljpB4": {
-   "title": "Namibia: Live feed from the Zambezi River",
-   "channel": "Namibia LiveStream | Discover Namibia",
-   "channel_url": "https://www.youtube.com/@NamibiaWild",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "XAGhVi3THeQ": {
-   "title": "Storchennest Alfeld (Leine)",
-   "channel": "DNA",
-   "channel_url": "https://www.youtube.com/@DNA-eV",
-   "cid": "",
-   "viewers": 2,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "mfm9cjg6Khw": {
-   "title": "LIVE Naknek River Cam - Katmai National Park | explore.org",
-   "channel": "Explore Manatee, River & Wetland Bird Cams",
-   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
-   "cid": "UC7q505iPfTehVJUDYEm1jWw",
+  "f_OUEF4csuo": {
+   "title": "Bear Base Cam",
+   "channel": "BigBearMountainResort",
+   "channel_url": "https://www.youtube.com/@bearmountain",
+   "cid": "UCMwJH25UoaHPM4OAoMRDdjQ",
    "viewers": 1,
    "via": "search: bear cam live",
-   "first_seen": "2026-10-19"
+   "first_seen": "2026-11-24"
   },
-  "mCxUeoKEBo4": {
-   "title": "Sandpoint Online Osprey Live Cam",
-   "channel": "Sandpoint Online",
-   "channel_url": "https://www.youtube.com/@sandpontonlinelive",
-   "cid": "UCz-0YrIFrRptkdJimBckxZw",
+  "-GtxP7sDRk4": {
+   "title": "【🐧旭山動物園ライブ配信】ペンギン放飼場LIVE｜Penguin Live Cam | Asahiyama Zoo",
+   "channel": "Live Zoo In あさひやま 【旭山動物園公認】",
+   "channel_url": "https://www.youtube.com/@livezoo",
+   "cid": "UCrOAX9_xMtlHHR6GE8ob2zA",
    "viewers": 1,
-   "via": "search: osprey cam live",
-   "first_seen": "2026-11-18"
+   "via": "search: penguin cam live",
+   "first_seen": "2026-11-24"
   },
   "obN4dLWd3o0": {
    "title": "Seaside Osprey Cam",
@@ -920,14 +731,14 @@
    "via": "search: osprey cam live",
    "first_seen": "2026-10-21"
   },
-  "AorGWrn-vx8": {
-   "title": "🔴 Barn Owl Live 24/7 | Meet Buster | Peak District Owl Nest Box Cam with Sound",
-   "channel": "Barn Owl Live",
-   "channel_url": "https://www.youtube.com/@BarnOwllive",
-   "cid": "UCJx0OuuPwugf2JG1UyOdOtA",
+  "cFtQqGanrX0": {
+   "title": "Dubuque County - Falcon Camera PTZ View",
+   "channel": "Dubuque County",
+   "channel_url": "https://www.youtube.com/@dubuquecounty2120",
+   "cid": "UCXFvtJQ2WWIsG8vVFVreYCQ",
    "viewers": 1,
-   "via": "search: owl cam live",
-   "first_seen": "2026-10-21"
+   "via": "search: falcon cam live",
+   "first_seen": "2026-10-23"
   },
   "8DJyGfafYqw": {
    "title": "EN DIRECTO 🔴 Madrigal de las Altas Torres  - Nido de cigüeña nº 1",
@@ -947,53 +758,89 @@
    "via": "search: hummingbird live cam",
    "first_seen": "2026-10-22"
   },
-  "eOLSsLWp324": {
-   "title": "🔴 LIVE Andy's Backyard Bird Feeder - Watch Michigan Backyard Birds",
-   "channel": "Andy's Birds",
-   "channel_url": "https://www.youtube.com/@andysbirds",
-   "cid": "UClnnJ6TnM3OYHkfsYPDmaQQ",
-   "viewers": 1,
-   "via": "search: bird feeder live cam",
-   "first_seen": "2026-11-22"
-  },
-  "jRyAwGkvQec": {
-   "title": "GaiaZOO - Meekijken in het gorillaverblijf",
-   "channel": "GaiaZOO",
-   "channel_url": "https://www.youtube.com/@GaiaZOO",
-   "cid": "UCei4MfZb21Wgiq9XQGgvkxw",
-   "viewers": 1,
-   "via": "search: gorilla live cam",
-   "first_seen": "2026-10-21"
-  },
-  "LGxFBlroOR8": {
-   "title": "Elephant Trek Live Cam",
-   "channel": "The Cincinnati Zoo & Botanical Garden",
-   "channel_url": "https://www.youtube.com/@cincinnatizoo",
-   "cid": "UCE3VoxyYmyQCReOXk2ogsVg",
+  "zqc0Z2oWmo8": {
+   "title": "Ulusaba Live Wildlife Camera | Sabi Sand, South Africa",
+   "channel": "Africam",
+   "channel_url": "https://www.youtube.com/@Africamvideos",
+   "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
    "viewers": 1,
    "via": "search: elephant live cam",
-   "first_seen": "2026-11-15"
+   "first_seen": "2026-10-25"
   },
-  "OUc-R6Mtg0E": {
-   "title": "LIVE Great Green Macaw Nest Cam: Costa Rica - Macaw Recovery Network | explore.org",
-   "channel": "Explore Sloth and Macaws: Rainforest Wildlife",
-   "channel_url": "https://www.youtube.com/@ExploreSlothandMacaws",
+  "JH_NzhSsqis": {
+   "title": "USC Wrigley Catalina Marine Reserve powered by EXPLORE.org",
+   "channel": "Explore Oceans",
+   "channel_url": "https://www.youtube.com/@ExploreOceans",
+   "cid": "UCSyg9cb3Iq-NtlbxqNB9wGw",
+   "viewers": 1,
+   "via": "search: underwater live cam",
+   "first_seen": "2026-10-14"
+  },
+  "831QJ5DMU3M": {
+   "title": "cvnペンギンの丘ライブカメラ のライブ配信",
+   "channel": "cvn ペンギンライブカメラ",
+   "channel_url": "https://www.youtube.com/@cvn%E3%83%9A%E3%83%B3%E3%82%AE%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%96%E3%82%AB%E3%83%A1%E3%83%A9",
+   "cid": "UCfLSbr8eONUgh3GmCv4QJPQ",
+   "viewers": 1,
+   "via": "search: 動物園 ライブカメラ",
+   "first_seen": "2026-11-09"
+  },
+  "PzRnZgIHK0M": {
+   "title": "Live from Zoo Negara Malaysia. Presenting the Malayan Sun Bear. Daily outings at 9.00am to 5.00pm",
+   "channel": "LH Technologies & Solutions Sdn Bhd",
+   "channel_url": "https://www.youtube.com/@lhtechnologiessolutions",
+   "cid": "UC6o1Ql1pxxOEgMowo7tXKPw",
+   "viewers": 1,
+   "via": "search: 动物园 直播",
+   "first_seen": "2026-11-20"
+  },
+  "txplYzaACWM": {
+   "title": "🔴 LIVE - Storchennest Fredenbeck - Storknest - Weißstörche - Germany 21717 Fredenbeck",
+   "channel": "FLUSSCAM BUXTEHUDE",
+   "channel_url": "https://www.youtube.com/@FLUSSCAMBUXTEHUDE",
+   "cid": "UC5KqC2wOa1uEMHy2hV6258g",
+   "viewers": 1,
+   "via": "search: Storchennest live",
+   "first_seen": "2026-11-24"
+  },
+  "m20bKZNdi98": {
+   "title": "LIVE Philippine Eagle - Wild Nest | Explore.org",
+   "channel": "Explore Live Nature Cams",
+   "channel_url": "https://www.youtube.com/@ExploreLiveNatureCams",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
+   "first_seen": "2026-11-24"
   },
-  "QF2ojZmSTWs": {
-   "title": "Guide Dogs Mobility Cam powered by EXPLORE.org",
-   "channel": "Explore Dogs",
-   "channel_url": "https://www.youtube.com/@ExploreDogs",
+  "BlpneEUfK-0": {
+   "title": "LIVE Whales & Seascape - Isla Tovita - Patagonia Azul Provincial Park, Chubut, Argentina.",
+   "channel": "Explore Whale Walrus & Seal Cams",
+   "channel_url": "https://www.youtube.com/@ExploreWhalesWalrusesSeals",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-16"
   },
-  "pZZst4BOpVI": {
-   "title": "Africam Naledi Cat-EYE powered by EXPLORE.org",
+  "RIgiw5FP5Rc": {
+   "title": "Live Muttville Outdoor Playland | explore.org",
+   "channel": "Explore Dogs",
+   "channel_url": "https://www.youtube.com/@ExploreDogs",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "28gIJK_nRw4": {
+   "title": "Alaska Bird Feeder Camera",
+   "channel": "Bird Watching HQ",
+   "channel_url": "https://www.youtube.com/@BirdWatchingHQ",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "epZP0VOirh0": {
+   "title": "Kalahari Salt Pan powered by EXPLORE.org",
    "channel": "Explore Africa",
    "channel_url": "https://www.youtube.com/@ExploreAfrica",
    "cid": "",
@@ -1010,50 +857,41 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "jxnehowX-9Y": {
-   "title": "Silver Springs Above Water Manatee Camera powered by EXPLORE.org",
-   "channel": "Explore Oceans",
-   "channel_url": "https://www.youtube.com/@ExploreOceans",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
-  "lem74i_cJw4": {
-   "title": "LIVE Jackdaw/Little Owl Israel Cam 1 | כוס | The Charter Group of Wildlife Ecology",
+  "vXKPXLE-hYw": {
+   "title": "6 Live Birdcams | One Stream • Real Wildlife 24/7 – Charter Group Birdcams",
    "channel": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
    "channel_url": "https://www.youtube.com/@CharterGroupBirdcams",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
+   "first_seen": "2026-11-24"
   },
-  "pkOthyOKhXc": {
-   "title": "LIVE California Condor Nest Cam | explore.org",
-   "channel": "Explore Owl Nests & California Condors",
-   "channel_url": "https://www.youtube.com/@ExploreOwlsandCondors",
+  "FefBhyyUo60": {
+   "title": "LIVE Barn Owl/ Pigeon Israel 4K Cam 1| WBAIS GAIA |The Charter Group of Wildlife Ecology",
+   "channel": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
+   "channel_url": "https://www.youtube.com/@CharterGroupBirdcams",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-18"
   },
-  "QQdF-8CVSC0": {
-   "title": "LIVE California Condor Roost Cam - Big Sur California | explore.org",
-   "channel": "Explore Owl Nests & California Condors",
-   "channel_url": "https://www.youtube.com/@ExploreOwlsandCondors",
+  "RMvIYKbff-s": {
+   "title": "Mount Diablo Cam powered by EXPLORE.org",
+   "channel": "Explore Northern Lights & Nature Meditation Cams",
+   "channel_url": "https://www.youtube.com/@ExploreZenDen",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-19"
   },
-  "2sFs4U7F2-E": {
-   "title": "LIVE California Condor Sanctuary - Big Sur California | explore.org",
-   "channel": "Explore Owl Nests & California Condors",
-   "channel_url": "https://www.youtube.com/@ExploreOwlsandCondors",
+  "wDgZkzkOP-s": {
+   "title": "Mission Mountain Range powered by Explore.org",
+   "channel": "Explore Northern Lights & Nature Meditation Cams",
+   "channel_url": "https://www.youtube.com/@ExploreZenDen",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
+   "first_seen": "2026-10-14"
   },
   "YeEMPcYCbgQ": {
    "title": "EarthCam Live:  Cayman Islands",
@@ -1073,15 +911,6 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "4LTSTw4jnZc": {
-   "title": "EarthCam Live:  Sanibel Island",
-   "channel": "EarthCam",
-   "channel_url": "https://www.youtube.com/@earthcam",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-17"
-  },
   "PmzPqiB0jaE": {
    "title": "Otago Shag Colony , Sumpter Wharf Ōamaru",
    "channel": "Ōamaru Penguins",
@@ -1091,14 +920,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "vua5GtYnA4A": {
-   "title": "LIVE Olrog’s Gull colony - Isla Vernaci - Patagonia Azul Provincial Park, Chubut, Argentina",
-   "channel": "Explore Penguin & Puffin Cams",
-   "channel_url": "https://www.youtube.com/@ExplorePenguinsandPuffins",
+  "fHb0eB9RUgA": {
+   "title": "Farallon Islands Live Webcam | California Academy of Sciences",
+   "channel": "California Academy of Sciences",
+   "channel_url": "https://www.youtube.com/@calacademy",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-20"
+  },
+  "YhXWGJQtEQY": {
+   "title": "24/7 Live: Rhino Orphans at HESC | Watch Endangered Rhinos Up Close!",
+   "channel": "Africam Conservation",
+   "channel_url": "https://www.youtube.com/@AfricamConservation",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-10-18"
   },
   "mrJ4JF2MovU": {
    "title": "LIVE Magellanic Penguin Colony - Isla Tova - Patagonia Azul Provincial Park, Chubut, Argentina.",
@@ -1109,32 +947,50 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "yMEL8CL-Ky4": {
-   "title": "LIVE Giant Petrel Colony - Patagonia - Rewilding Argentina | explore.org",
-   "channel": "Explore Penguin & Puffin Cams",
-   "channel_url": "https://www.youtube.com/@ExplorePenguinsandPuffins",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "1_BdSTneH3s": {
-   "title": "LIVE Peregrine Falcons Nest - Chesapeake Conservancy - Boh and Barb | explore.org",
-   "channel": "Explore Osprey & Peregrine Falcon Cams",
-   "channel_url": "https://www.youtube.com/@ExploreOspreyandFalcons",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "FhMFae-SZME": {
-   "title": "Red Squirrel feeder | RSPB Scotland Loch Leven",
-   "channel": "RSPB",
-   "channel_url": "https://www.youtube.com/@RSPBvideo",
+  "nhffONcy8Eg": {
+   "title": "Iroquois National Wildlife Refuge Bald Eagle Camera",
+   "channel": "PixCams",
+   "channel_url": "https://www.youtube.com/@PixCams",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-18"
+  },
+  "9njkml1oQRQ": {
+   "title": "U. S. Steel Bald Eagle Camera Live Stream - Cam 2 - USS nest with Monongahela River in background",
+   "channel": "PixCams",
+   "channel_url": "https://www.youtube.com/@PixCams",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-06"
+  },
+  "a83Y5shllLg": {
+   "title": "USS Bald Eagle Cam 4 - River view",
+   "channel": "PixCams",
+   "channel_url": "https://www.youtube.com/@PixCams",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "_gIf6CYeDG8": {
+   "title": "Port Lincoln Osprey Live Stream WIDE",
+   "channel": "Port Lincoln Osprey",
+   "channel_url": "https://www.youtube.com/@PortLincolnOsprey",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "FwmMIzEoU-o": {
+   "title": "OBX Osprey Cam - PTZ Cam",
+   "channel": "OBX Osprey Cam",
+   "channel_url": "https://www.youtube.com/@obxospreycam",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-22"
   },
   "G_GKyVKupo8": {
    "title": "C5 | Uhu Webcam 5 Ahr – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
@@ -1145,14 +1001,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-20"
   },
-  "mNxI6aPshXk": {
-   "title": "Majete Wildlife Reserve LIVE - Auto-Switches to the Action",
-   "channel": "Pix African Cams",
-   "channel_url": "https://www.youtube.com/@PixAfricanCams",
+  "CvazwVX3vZg": {
+   "title": "C1 | Uhu Webcam 1 Ahr – EGE-Live-Stream – Bubo bubo / Eurasian Eagle-Owl",
+   "channel": "EGE – Gesellschaft zur Erhaltung der Eulen e.V.",
+   "channel_url": "https://www.youtube.com/@ege-eulen",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-15"
+   "first_seen": "2026-10-14"
+  },
+  "b7VdzDadbck": {
+   "title": "Metro Area Repeater Association (MARA) WD0HWT Repeater Live in the Twin Cities, Minnesota",
+   "channel": "@Otter Tail Channel",
+   "channel_url": "https://www.youtube.com/@NTR-OTC",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
   },
   "6qaePuLvLQU": {
    "title": "Majete Wildlife Reserve Cam 1 - LIVE from Malawi, Africa!",
@@ -1163,86 +1028,68 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-20"
   },
-  "TdVizZWSsqE": {
-   "title": "Soothing Stream in Nature ***LIVE***",
+  "ATUUIk3pSLw": {
+   "title": "DEER FEEDER CAM — UP CLOSE & PERSONAL! 🦌 | LIVE 24/7",
    "channel": "Eastern Backwoods Outdoors",
    "channel_url": "https://www.youtube.com/@EasternBackwoodsOutdoors",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-04"
   },
-  "B5I8GchAu5U": {
-   "title": "Prince and Friends - Kentucky Equine Adoption Center | explore.org",
+  "CvhjgMSzKWI": {
+   "title": "Live Farm Sanctuary Main Cow Barn and Pasture powered by EXPLORE.org",
    "channel": "Explore Farm Life",
    "channel_url": "https://www.youtube.com/@ExploreFarmLife",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "RY0BvFrFDt4": {
-   "title": "PA Wildlife Cam 3",
-   "channel": "PixWildlifeCams",
-   "channel_url": "https://www.youtube.com/@PixWildlifeCams",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "8AtRJpORh5A": {
-   "title": "Osprey Nest Cam LIVE 2K | Felix & Margareet | Central Florida",
-   "channel": "SuperBeaks",
-   "channel_url": "https://www.youtube.com/@SuperBeaks",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "caO25rPhMOg": {
-   "title": "Goose Pond Fish & Wildlife Area Visitor's Center Camera",
-   "channel": "Indiana Department of Natural Resources",
-   "channel_url": "https://www.youtube.com/@idnrvideos",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
    "first_seen": "2026-11-20"
   },
-  "MchNXlFpYIM": {
-   "title": "LIVE Underwater Manatee-Cam at Blue Spring State Park | EXPLORE.org",
-   "channel": "Explore Manatee, River & Wetland Bird Cams",
-   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
+  "_lJY3aCgRkY": {
+   "title": "Animal spycam | Woody's Veilige Haven Texel | Tuin | 24/7 Livestream",
+   "channel": "WoodysVeiligeHaven",
+   "channel_url": "https://www.youtube.com/@Woodysveiligehaven",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-24"
   },
-  "YOkiYpCm0eM": {
-   "title": "LIVE Above Water Manatee-Cam at Blue Spring State Park | EXPLORE.org",
-   "channel": "Explore Manatee, River & Wetland Bird Cams",
-   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
+  "w2ILCwLDqIw": {
+   "title": "【360° 4K LIVE】海邊夕陽即時看｜竹北新月沙灣 聽海天台",
+   "channel": "Rogy360看見台灣",
+   "channel_url": "https://www.youtube.com/@Rogy360Taiwan",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-19"
+   "first_seen": "2026-11-24"
   },
-  "nbF12irhVys": {
-   "title": "LIVE Manatees at Homosassa Springs - Above Water Cam | explore.org",
-   "channel": "Explore Manatee, River & Wetland Bird Cams",
-   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
+  "dL1tbIO3Hzk": {
+   "title": "壽山動物園 孟加拉虎小紅",
+   "channel": "高雄旅遊網",
+   "channel_url": "https://www.youtube.com/@travelkhh",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "1rxaHU_ZY_4": {
+   "title": "LIVE Bird Bath Cam",
+   "channel": "NatureTec",
+   "channel_url": "https://www.youtube.com/@NatureTec",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "bo6yE8iIpNE": {
-   "title": "Állatkert Budapest szívében - Cápasuli ÉLŐ",
-   "channel": "Budapesti Állatkert",
-   "channel_url": "https://www.youtube.com/@budapestiallatkert24",
+  "ajX5wOMF8ss": {
+   "title": "Live Webcam Texel: Vuurtoren | Uitzicht op de Rode Toren (Livecam Leuchtturm & Dünen)",
+   "channel": "Texel Informatie Webcam",
+   "channel_url": "https://www.youtube.com/@Texel-Informatie",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-24"
   },
   "Vz3pCfSinek": {
    "title": "Monson, Maine US - Live",
@@ -1262,15 +1109,6 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-07"
   },
-  "q6XLBqZqQwo": {
-   "title": "\"North PTZ\" Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-06"
-  },
   "oyggs9Cqv4U": {
    "title": "\"Pond Multi\" Raccoon Saloon",
    "channel": "Raccoon Saloon",
@@ -1280,15 +1118,6 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "A0xbXiM4pjQ": {
-   "title": "\"Over Shed\" Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-20"
-  },
   "e09LkmxjR9o": {
    "title": "\"PTZ Multi\" Raccoon Saloon",
    "channel": "Raccoon Saloon",
@@ -1297,15 +1126,6 @@
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-20"
-  },
-  "L61cwj1Q6JA": {
-   "title": "\"Driveway\"  Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
   },
   "wwBk_8U85go": {
    "title": "\"Playroom\" Raccoon Saloon",
@@ -1325,68 +1145,14 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-19"
   },
-  "u6xYSbhzVvM": {
-   "title": "\"Back PTZ\" Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-19"
-  },
-  "upp4VPzaViM": {
-   "title": "\"Broken Tree Den\" Raccoon Saloon",
-   "channel": "Raccoon Saloon",
-   "channel_url": "https://www.youtube.com/@RaccoonSaloon",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "UEKbeFKVUEg": {
-   "title": "🟢 GOMV.COM Oak Bluffs Circuit Ave Massachusetts Webcam",
-   "channel": "Go Martha's Vineyard",
-   "channel_url": "https://www.youtube.com/@gomv",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "2UYUFoxWWIc": {
-   "title": "Collins Avenue Dublin Ireland Live Webcam",
+  "Abr7V_AsEMA": {
+   "title": "The Brian Boru Pub Live Webcam Glasnevin Dublin Ireland",
    "channel": "LivefromIreland - Live Streaming Webcams",
    "channel_url": "https://www.youtube.com/@livefromireland",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "vtSQZSJ6CQU": {
-   "title": "Pond Camera",
-   "channel": "Wildlife of Maine",
-   "channel_url": "https://www.youtube.com/@WildlifeofMaine",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-21"
-  },
-  "jSq4IZT3o1M": {
-   "title": "Scenic Katahdin",
-   "channel": "Wildlife of Maine",
-   "channel_url": "https://www.youtube.com/@WildlifeofMaine",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-10-14"
-  },
-  "64CTnlr9Smo": {
-   "title": "🔴 Peak District Wildlife LIVE 24/7 | Inside a Whisky Barrel Nest Box with Sound | Meadow View Cam",
-   "channel": "Barn Owl Live",
-   "channel_url": "https://www.youtube.com/@BarnOwllive",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-11-24"
   },
   "bkji_5bPwZo": {
    "title": "LIVE Barn Owl -Cam4  (OUT) Live H24  - Barbagianni -MCBI - University of Nature - Italy",
@@ -1424,6 +1190,33 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-10-14"
   },
+  "bWahKb8_i-g": {
+   "title": "Live🦉Steenuilen Bommelerwaard CAM.2-Nok",
+   "channel": "Joan",
+   "channel_url": "https://www.youtube.com/@Joan-NL",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "JEUey0j3uNU": {
+   "title": "Live🦉Steenuilen Bommelerwaard CAM.4-Voorportaal",
+   "channel": "Joan",
+   "channel_url": "https://www.youtube.com/@Joan-NL",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "FHBBarIBDrM": {
+   "title": "Live🦉Steenuilen Bommelerwaard CAM.1-Nest",
+   "channel": "Joan",
+   "channel_url": "https://www.youtube.com/@Joan-NL",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
   "5KreuChhuwY": {
    "title": "Faucons UdeM - Caméra 4",
    "channel": "Faucons UdeM",
@@ -1432,6 +1225,15 @@
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
+  },
+  "ziG9Ky_5B3g": {
+   "title": "Faucons UdeM - Caméra 1",
+   "channel": "Faucons UdeM",
+   "channel_url": "https://www.youtube.com/@FauconsUdeM",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-13"
   },
   "OCKAG2bA-n4": {
    "title": "EN DIRECTO 🔴 Madrigal de las Altas Torres - Nido de cigüeña nº 2",
@@ -1442,41 +1244,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-22"
   },
-  "q2yn4ISHMJk": {
-   "title": "EN DIRECTO 🔴 Madrigal de las Altas Torres  - Nido de cigüeña nº 3",
-   "channel": "SEOBirdLife DIRECTO2",
-   "channel_url": "https://www.youtube.com/@seobirdlifeDIRECTO2",
+  "Hpqwq4ImdyQ": {
+   "title": "Kozubszczyzna - Gniazdo na brzozie",
+   "channel": "WorldCam",
+   "channel_url": "https://www.youtube.com/@kameryinternetowe",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-24"
+  },
+  "Ze7rK5K5e4Q": {
+   "title": "LIVE Wildlife & Bird of Prey Feeder Cam #2 (Tamási, Hungary)",
+   "channel": "Madarles - Live Bird Cams",
+   "channel_url": "https://www.youtube.com/@madarles",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
-  },
-  "vsXevNpyb5c": {
-   "title": "Černá hora - LD Hofmanky Express | Live Webcam",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "rBUrDMQsLbw": {
-   "title": "Live kamera - výstavba dálničního mostu D11 v Trutnově - Poříčí pohledem z galerie EPO1",
-   "channel": "HD internet s.r.o.",
-   "channel_url": "https://www.youtube.com/@HDinternetsro",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-22"
-  },
-  "w30acCEXd6A": {
-   "title": "4️⃣ 愛され保護猫 じっちゃんのお部屋｜保護ねこの家24時間ライブ配信",
-   "channel": "保護ねこの家",
-   "channel_url": "https://www.youtube.com/@SNS",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-17"
   },
   "pMCTRP8dtBY": {
    "title": "【ライブカメラ】エゾリスと野鳥のバードフィーダー Live Bird Feeder Cam Japan",
@@ -1487,23 +1271,23 @@
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
   },
-  "-cgrK4BlDAY": {
-   "title": "🔴 Aves en DIRECTO - Reserva Ornitológica Riet Vell, Delta del Ebro",
-   "channel": "SEOBirdLife",
-   "channel_url": "https://www.youtube.com/@seobirdlife",
-   "cid": "",
-   "viewers": 1,
-   "via": "channel already in the zoo",
-   "first_seen": "2026-11-19"
-  },
-  "5zCVAReGbkY": {
-   "title": "Kisatchie National Forest E-1 Canopy cam",
+  "um6SLoR76hk": {
+   "title": "Kisatchie National Forest E-3 Canopy Cam, Alex II and Andria III",
    "channel": "bald eagle",
    "channel_url": "https://www.youtube.com/@KNFcams",
    "cid": "",
    "viewers": 1,
    "via": "channel already in the zoo",
    "first_seen": "2026-11-21"
+  },
+  "XAGhVi3THeQ": {
+   "title": "Storchennest Alfeld (Leine)",
+   "channel": "DNA",
+   "channel_url": "https://www.youtube.com/@DNA-eV",
+   "cid": "",
+   "viewers": 1,
+   "via": "channel already in the zoo",
+   "first_seen": "2026-11-20"
   },
   "2PYRm4vIwN0": {
    "title": "Cincinnati Zoo Giraffe Birth Watch - Indoor",
@@ -1514,24 +1298,6 @@
    "via": "search: zoo live cam",
    "first_seen": "2026-10-18"
   },
-  "Zi9fTj0fmUw": {
-   "title": "Cincinnati Zoo Giraffe Birth Watch - Outdoor",
-   "channel": "The Cincinnati Zoo & Botanical Garden",
-   "channel_url": "https://www.youtube.com/@cincinnatizoo",
-   "cid": "UCE3VoxyYmyQCReOXk2ogsVg",
-   "viewers": null,
-   "via": "search: zoo live cam",
-   "first_seen": "2026-10-15"
-  },
-  "XELu3xr35aY": {
-   "title": "Animal Ambassador 24/7 Live Cams - Alveus Sanctuary",
-   "channel": "Alveus Sanctuary",
-   "channel_url": "https://www.youtube.com/@AlveusSanctuary",
-   "cid": "UCbJ-1yM55NHrR1GS9hhPuvg",
-   "viewers": null,
-   "via": "search: zoo live cam",
-   "first_seen": "2026-11-22"
-  },
   "Sr_quFooKEs": {
    "title": "Hippo Cove Front Live Cam",
    "channel": "The Cincinnati Zoo & Botanical Garden",
@@ -1540,6 +1306,15 @@
    "viewers": null,
    "via": "search: zoo live cam",
    "first_seen": "2026-11-17"
+  },
+  "Zi9fTj0fmUw": {
+   "title": "Cincinnati Zoo Giraffe Birth Watch - Outdoor",
+   "channel": "The Cincinnati Zoo & Botanical Garden",
+   "channel_url": "https://www.youtube.com/@cincinnatizoo",
+   "cid": "UCE3VoxyYmyQCReOXk2ogsVg",
+   "viewers": null,
+   "via": "search: zoo live cam",
+   "first_seen": "2026-10-15"
   },
   "-VfIE3__PR0": {
    "title": "Sea Otter Habitat Live Cam",
@@ -1559,23 +1334,32 @@
    "via": "search: wildlife live cam",
    "first_seen": "2026-11-21"
   },
-  "MiQe9ob9aDc": {
-   "title": "🔴 LIVE: Predator Battles: Lions vs Leopards vs Hyenas | Savage Kingdom Livestream | Nat Geo Animals",
-   "channel": "Nat Geo Animals",
-   "channel_url": "https://www.youtube.com/@NatGeoAnimals",
-   "cid": "UCDPk9MG2RexnOMGTD-YnSnA",
+  "6f-D2AjeEi0": {
+   "title": "LIVE American Barn Owl Florida Cam 2| The Charter Group of Wildlife Ecology| University of Florida",
+   "channel": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
+   "channel_url": "https://www.youtube.com/@CharterGroupBirdcams",
+   "cid": "UCzbydNAcB7jeJGssRFb_dCA",
    "viewers": null,
    "via": "search: wildlife live cam",
-   "first_seen": "2026-11-16"
+   "first_seen": "2026-10-21"
   },
-  "zqc0Z2oWmo8": {
-   "title": "Ulusaba Live Wildlife Camera | Sabi Sand, South Africa",
+  "qi0mY6zVQnY": {
+   "title": "Live Cam in The Lower Keys",
+   "channel": "Viva The Keys",
+   "channel_url": "https://www.youtube.com/@VivaTheKeys",
+   "cid": "UCtzYRypg21-R2suTVCetlbg",
+   "viewers": null,
+   "via": "search: safari live cam",
+   "first_seen": "2026-10-23"
+  },
+  "QJe1tGI1EZc": {
+   "title": "Elephant Pan, Botswana | Live Wildlife Camera",
    "channel": "Africam",
    "channel_url": "https://www.youtube.com/@Africamvideos",
    "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
    "viewers": null,
-   "via": "search: safari live cam",
-   "first_seen": "2026-10-25"
+   "via": "search: waterhole live cam",
+   "first_seen": "2026-10-22"
   },
   "8MoaBHl8U3A": {
    "title": "LIVE Polar Bear Cam: Buggy One - Polar Bears International | explore.org",
@@ -1595,14 +1379,41 @@
    "via": "search: panda live cam",
    "first_seen": "2026-10-26"
   },
+  "AiVNqBm41Ik": {
+   "title": "🔴 LIVE: Giant Panda Teaching You How to Eat Bamboo! Step-by-Step 🐼🎍",
+   "channel": "JohnJeeFilm",
+   "channel_url": "https://www.youtube.com/@JohnJeeFilm",
+   "cid": "UCch23Kl6c47r0iSBayPHD3A",
+   "viewers": null,
+   "via": "search: panda live cam",
+   "first_seen": "2026-11-24"
+  },
   "muO2i8ShZrY": {
    "title": "LIVE Polar Bear Cam: Tundra Buggy Lodge North – Polar Bears International | explore.org",
    "channel": "Explore Panda and Polar Bear Cams",
    "channel_url": "https://www.youtube.com/@ExplorePandasandPolarBears",
    "cid": "UCQI1rdPytw4jDAjwqXVSgfA",
    "viewers": null,
-   "via": "search: bear cam live",
+   "via": "search: panda live cam",
    "first_seen": "2026-10-26"
+  },
+  "edz0ux7JClE": {
+   "title": "San Diego Web Cam Live (Rotating/Switched Feed) 4K",
+   "channel": "San Diego Web Cam",
+   "channel_url": "https://www.youtube.com/@SanDiegoWebCam",
+   "cid": "UC88QpAaX8sdqm1fWYSjzbSQ",
+   "viewers": null,
+   "via": "search: panda live cam",
+   "first_seen": "2026-11-24"
+  },
+  "mfm9cjg6Khw": {
+   "title": "LIVE Naknek River Cam - Katmai National Park | explore.org",
+   "channel": "Explore Manatee, River & Wetland Bird Cams",
+   "channel_url": "https://www.youtube.com/@ExploreManateesandRivers",
+   "cid": "UC7q505iPfTehVJUDYEm1jWw",
+   "viewers": null,
+   "via": "search: bear cam live",
+   "first_seen": "2026-10-19"
   },
   "dF6frKSZZU8": {
    "title": "LIVE Arctic Tundra: Cape South - Wapusk National Park | explore.org",
@@ -1612,6 +1423,33 @@
    "viewers": null,
    "via": "search: bear cam live",
    "first_seen": "2026-10-19"
+  },
+  "uLgdUiT9WZQ": {
+   "title": "LIVE Dumpling Mountain - Katmai National Park, Alaska Camera | explore.org",
+   "channel": "Explore Northern Lights & Nature Meditation Cams",
+   "channel_url": "https://www.youtube.com/@ExploreZenDen",
+   "cid": "UCUtGnX65osNPQ98Y3-SSgpg",
+   "viewers": null,
+   "via": "search: bear cam live",
+   "first_seen": "2026-10-14"
+  },
+  "N3o5ff8L0rI": {
+   "title": "Live Bear Cam",
+   "channel": "Dauset Trails Nature Center",
+   "channel_url": "https://www.youtube.com/@DausetTrails",
+   "cid": "UCBky3JA6c-VxpZul-Y53PxQ",
+   "viewers": null,
+   "via": "search: bear cam live",
+   "first_seen": "2026-11-24"
+  },
+  "nXEfJjSsPv8": {
+   "title": "Bear Cam - Camperdown Wildlife Centre Live Stream",
+   "channel": "Camperdown Wildlife Centre",
+   "channel_url": "https://www.youtube.com/@camperdown-wildlife-centre",
+   "cid": "UC21OQz-yRNoui4qrG6x19Jg",
+   "viewers": null,
+   "via": "search: bear cam live",
+   "first_seen": "2026-11-24"
   },
   "1VBPxAkaNDU": {
    "title": "Live Coral Reef Cam | Monterey Bay Aquarium",
@@ -1631,15 +1469,6 @@
    "via": "search: aquarium live cam",
    "first_seen": "2026-10-21"
   },
-  "Oz5I8oS_oIw": {
-   "title": "Marvel at Sea Animals in Stunning 8K ULTRA HD Aquarium – Dive into the Mesmerizing Underwater Realm",
-   "channel": "8K TUBE Planet",
-   "channel_url": "https://www.youtube.com/@8KTUBEPlanet",
-   "cid": "UC5GBWpAHQ9zcXrDAlzdzxHA",
-   "viewers": null,
-   "via": "search: aquarium live cam",
-   "first_seen": "2026-11-22"
-  },
   "nd_ildQK6wc": {
    "title": "🐠 Peaceful 4K Aquarium Ambience (LIVE 24/7) | Real Water Flow & Colorful Marine Life",
    "channel": "Francis’s Aquarium 4K",
@@ -1648,15 +1477,6 @@
    "viewers": null,
    "via": "search: aquarium live cam",
    "first_seen": "2026-11-21"
-  },
-  "6uSmHN47Qd0": {
-   "title": "Highline MaST Center Aquarium Live Stream",
-   "channel": "Highline MaST Center Aquarium",
-   "channel_url": "https://www.youtube.com/@highlinemastcenteraquarium",
-   "cid": "UCB5dnI2d42_ZEVBpWOMFI7w",
-   "viewers": null,
-   "via": "search: aquarium live cam",
-   "first_seen": "2026-11-15"
   },
   "QWGYS9IOqYc": {
    "title": "Live African Penguin Cam | Monterey Bay Aquarium",
@@ -1703,6 +1523,15 @@
    "via": "search: penguin cam live",
    "first_seen": "2026-11-20"
   },
+  "lPiyGor0MXs": {
+   "title": "Kororā Nest Cam",
+   "channel": "Urban Wildlife Trust WILDCAMS",
+   "channel_url": "https://www.youtube.com/@urbanwildlifetrust",
+   "cid": "UCLizlM6gpaVHTKPo7spoqlA",
+   "viewers": null,
+   "via": "search: penguin cam live",
+   "first_seen": "2026-11-24"
+  },
   "3N-G4VkKN8A": {
    "title": "LIVE Penguin Nest - Patagonia - Rewilding Argentina | explore.org",
    "channel": "Explore Penguin & Puffin Cams",
@@ -1721,23 +1550,14 @@
    "via": "search: eagle nest live cam",
    "first_seen": "2026-11-12"
   },
-  "_5xTCu9be-k": {
-   "title": "Wildlife Rescue of Dade County Eagle Nest Cam",
-   "channel": "Wildlife Rescue of Dade County",
-   "channel_url": "https://www.youtube.com/@wildliferescueofdadecounty",
-   "cid": "UCtMr9ZgraacKwDyBhA_FbqQ",
+  "cMvxn_AQlgA": {
+   "title": "Kisatchie National Forest E-3 Nest Cam, Alex II and Andria III",
+   "channel": "bald eagle",
+   "channel_url": "https://www.youtube.com/@KNFcams",
+   "cid": "UC_QWzmg59OKAEmm2Af3iCDQ",
    "viewers": null,
    "via": "search: eagle nest live cam",
-   "first_seen": "2026-11-21"
-  },
-  "LWYBNX02Q-A": {
-   "title": "Sea-EagleCAM4 Live Stream",
-   "channel": "Sea-EagleCAM4",
-   "channel_url": "https://www.youtube.com/@SeaEagleCAM4",
-   "cid": "UCZss13TJZLtZ0ones3HpYMQ",
-   "viewers": null,
-   "via": "search: eagle nest live cam",
-   "first_seen": "2026-10-28"
+   "first_seen": "2026-11-19"
   },
   "tObMW3xBIYg": {
    "title": "Eagle Nest Live Texas 🦅 Cam #1",
@@ -1748,14 +1568,14 @@
    "via": "search: eagle nest live cam",
    "first_seen": "2026-11-20"
   },
-  "cMvxn_AQlgA": {
-   "title": "Kisatchie National Forest E-3 Nest Cam",
-   "channel": "bald eagle",
-   "channel_url": "https://www.youtube.com/@KNFcams",
-   "cid": "UC_QWzmg59OKAEmm2Af3iCDQ",
+  "Tx_qNufDp6A": {
+   "title": "2 Eggs! | Winter Park Eagle Cam | PTZ",
+   "channel": "Winter Park Eagle Cam",
+   "channel_url": "https://www.youtube.com/@WinterParkEagleCam",
+   "cid": "UC51tfMdZhBpyEUP_uWOC-ZA",
    "viewers": null,
    "via": "search: eagle nest live cam",
-   "first_seen": "2026-11-19"
+   "first_seen": "2026-11-22"
   },
   "pe4xqyzhrK8": {
    "title": "2 Eggs! | Winter Park Eagle Cam - Side Fixed Cam",
@@ -1766,14 +1586,14 @@
    "via": "search: eagle nest live cam",
    "first_seen": "2026-10-14"
   },
-  "Tx_qNufDp6A": {
-   "title": "2 Eggs! | Winter Park Eagle Cam | PTZ",
-   "channel": "Winter Park Eagle Cam",
-   "channel_url": "https://www.youtube.com/@WinterParkEagleCam",
-   "cid": "UC51tfMdZhBpyEUP_uWOC-ZA",
+  "LWYBNX02Q-A": {
+   "title": "Sea-EagleCAM4 Live Stream",
+   "channel": "Sea-EagleCAM4",
+   "channel_url": "https://www.youtube.com/@SeaEagleCAM4",
+   "cid": "UCZss13TJZLtZ0ones3HpYMQ",
    "viewers": null,
    "via": "search: eagle nest live cam",
-   "first_seen": "2026-11-22"
+   "first_seen": "2026-10-28"
   },
   "ngoZMdZ_jeA": {
    "title": "Live  Kings River Eagle Cam | Explore.org",
@@ -1784,15 +1604,6 @@
    "via": "search: eagle nest live cam",
    "first_seen": "2026-11-09"
   },
-  "v9yeOMQ2Rdg": {
-   "title": "Redding Eagles Live Nest Webcam",
-   "channel": "Friends of the Redding Eagles",
-   "channel_url": "https://www.youtube.com/@FriendsoftheReddingEagles",
-   "cid": "UCwAQxsF3Vgf6Vbrfen-Sm7A",
-   "viewers": null,
-   "via": "search: eagle nest live cam",
-   "first_seen": "2026-11-21"
-  },
   "J7HO0dkkomE": {
    "title": "Hellgate Ospreys Nest Cam | Cornell Lab | University of Montana",
    "channel": "Cornell Lab Bird Cams",
@@ -1802,6 +1613,15 @@
    "via": "search: osprey cam live",
    "first_seen": "2026-10-14"
   },
+  "mCxUeoKEBo4": {
+   "title": "Sandpoint Online Osprey Live Cam",
+   "channel": "Sandpoint Online",
+   "channel_url": "https://www.youtube.com/@sandpontonlinelive",
+   "cid": "UCz-0YrIFrRptkdJimBckxZw",
+   "viewers": null,
+   "via": "search: osprey cam live",
+   "first_seen": "2026-11-18"
+  },
   "M9pA4F7J1Go": {
    "title": "LIVE Osprey Nest - Chesapeake Conservancy | explore.org",
    "channel": "Explore Osprey & Peregrine Falcon Cams",
@@ -1810,6 +1630,15 @@
    "viewers": null,
    "via": "search: osprey cam live",
    "first_seen": "2026-11-18"
+  },
+  "j2uNEQazAa4": {
+   "title": "LIVE: Brevard Florida Osprey Nest (AXIS P1455-LE)",
+   "channel": "Florida Osprey Cam",
+   "channel_url": "https://www.youtube.com/@FloridaOsprey321",
+   "cid": "UCpbfXDA25pnLoye9uwXrnIQ",
+   "viewers": null,
+   "via": "search: osprey cam live",
+   "first_seen": "2026-11-24"
   },
   "2P_-1vwsVoo": {
    "title": "Live Osprey Camera - Side View",
@@ -1829,20 +1658,29 @@
    "via": "search: osprey cam live",
    "first_seen": "2026-11-22"
   },
-  "LvYhp-8OAfs": {
-   "title": "Smallwood Osprey Cam",
-   "channel": "Wild Streaming",
-   "channel_url": "https://www.youtube.com/@WildStreaminglive",
-   "cid": "UCFJmWZw_jMnIl5MPn4F2_Vw",
+  "d-jeLAzjsww": {
+   "title": "🦉 Owl Live Cam | 24/7 Live Owl Nest Box | Temecula Valley, California",
+   "channel": "Owl Live Cam",
+   "channel_url": "https://www.youtube.com/@OwlLiveCam",
+   "cid": "UC4N6vtcBbcc9BZlHagF_VRg",
    "viewers": null,
-   "via": "search: osprey cam live",
-   "first_seen": "2026-11-20"
+   "via": "search: owl cam live",
+   "first_seen": "2026-11-24"
   },
-  "6f-D2AjeEi0": {
-   "title": "LIVE American Barn Owl Florida Cam 2| The Charter Group of Wildlife Ecology| University of Florida",
-   "channel": "Charter Group Birdcams ציפורים אונליין קבוצת צ'רטר",
-   "channel_url": "https://www.youtube.com/@CharterGroupBirdcams",
-   "cid": "UCzbydNAcB7jeJGssRFb_dCA",
+  "33mpssCdIbg": {
+   "title": "Ramona Barn Owl Live Stream",
+   "channel": "Ramona Barn Owls | RBO",
+   "channel_url": "https://www.youtube.com/@RamonaBarnOwls",
+   "cid": "UCGYqznd8VD1snX1arzefUVg",
+   "viewers": null,
+   "via": "search: owl cam live",
+   "first_seen": "2026-11-24"
+  },
+  "AorGWrn-vx8": {
+   "title": "🔴 Barn Owl Live 24/7 | Meet Buster | Peak District Owl Nest Box Cam with Sound",
+   "channel": "Barn Owl Live",
+   "channel_url": "https://www.youtube.com/@BarnOwllive",
+   "cid": "UCJx0OuuPwugf2JG1UyOdOtA",
    "viewers": null,
    "via": "search: owl cam live",
    "first_seen": "2026-10-21"
@@ -1856,15 +1694,6 @@
    "via": "search: falcon cam live",
    "first_seen": "2026-10-14"
   },
-  "fRZfmrpAAM0": {
-   "title": "LIVE Peregrine Falcon Lookout  - Castle Rock | explore.org",
-   "channel": "Explore Osprey & Peregrine Falcon Cams",
-   "channel_url": "https://www.youtube.com/@ExploreOspreyandFalcons",
-   "cid": "UCv0In2Sw_YabIhMHHOoTSkA",
-   "viewers": null,
-   "via": "search: falcon cam live",
-   "first_seen": "2026-11-06"
-  },
   "4t2TxgM8YQs": {
    "title": "Union County Falcon Cam",
    "channel": "Conserve Wildlife Foundation of NJ",
@@ -1874,23 +1703,14 @@
    "via": "search: falcon cam live",
    "first_seen": "2026-10-14"
   },
-  "cFtQqGanrX0": {
-   "title": "Dubuque County - Falcon Camera PTZ View",
-   "channel": "Dubuque County",
-   "channel_url": "https://www.youtube.com/@dubuquecounty2120",
-   "cid": "UCXFvtJQ2WWIsG8vVFVreYCQ",
+  "fRZfmrpAAM0": {
+   "title": "LIVE Peregrine Falcon Lookout  - Castle Rock | explore.org",
+   "channel": "Explore Osprey & Peregrine Falcon Cams",
+   "channel_url": "https://www.youtube.com/@ExploreOspreyandFalcons",
+   "cid": "UCv0In2Sw_YabIhMHHOoTSkA",
    "viewers": null,
    "via": "search: falcon cam live",
-   "first_seen": "2026-10-23"
-  },
-  "Mj76vcmfWmw": {
-   "title": "KC Plaza Falcon Cam at American Century Investments",
-   "channel": "Falcon Cam",
-   "channel_url": "https://www.youtube.com/@falconcam6939",
-   "cid": "UCgWc76uDiS6yQv-6RBSYqpw",
-   "viewers": null,
-   "via": "search: falcon cam live",
-   "first_seen": "2026-11-11"
+   "first_seen": "2026-11-06"
   },
   "aEykA5X8vQM": {
    "title": "Union County Falcon Cam / Nestbox View",
@@ -1900,15 +1720,6 @@
    "viewers": null,
    "via": "search: falcon cam live",
    "first_seen": "2026-11-04"
-  },
-  "JGymcnKTmT4": {
-   "title": "Mill Creek Falcon Cam - 2026 Season",
-   "channel": "lgeku",
-   "channel_url": "https://www.youtube.com/@lgeku",
-   "cid": "UChthLXZFVeZqXl9U4HoAsTg",
-   "viewers": null,
-   "via": "search: falcon cam live",
-   "first_seen": "2026-11-22"
   },
   "rFrOd_wTcL0": {
    "title": "🔴 LIVE: Storchennest Fohrde - Nest 1 (2026) 🐦 White Stork Cam",
@@ -1946,14 +1757,23 @@
    "via": "search: hummingbird live cam",
    "first_seen": "2026-10-21"
   },
-  "zjwJ7sqOJ8Y": {
-   "title": "🔴North Carolina Bird Feeder Daily Live Stream 🐦The Most Cardinals on YouTube",
-   "channel": "Just Bill Bird Live Stream",
-   "channel_url": "https://www.youtube.com/@justbill",
-   "cid": "UCG1uo50XHSYJXArjRdENvfA",
+  "Dj0Or22FUw4": {
+   "title": "🔴 LIVE Hummingbird Feeder Cam 24/7 | Half Moon Bay, California",
+   "channel": "beasho1",
+   "channel_url": "https://www.youtube.com/@beasho1",
+   "cid": "UCfvrL35lgUvAiAQAOBVYQgw",
    "viewers": null,
-   "via": "search: bird feeder live cam",
-   "first_seen": "2026-10-22"
+   "via": "search: hummingbird live cam",
+   "first_seen": "2026-11-24"
+  },
+  "c88dmQVz4qc": {
+   "title": "Live Hummingbird Feeder Cam 🐦 Sunrise Birdwatching | TinyWingsTV",
+   "channel": "TinyWingsTV",
+   "channel_url": "https://www.youtube.com/@tinywingstvlive",
+   "cid": "UCekEFwkT1FepMXspVVStCpg",
+   "viewers": null,
+   "via": "search: hummingbird live cam",
+   "first_seen": "2026-11-24"
   },
   "wTVDrtShk7Y": {
    "title": "Live Boreal Birds at the Ontario FeederWatch Cam! Cornell Lab | Powered by Perky-Pet",
@@ -1963,6 +1783,24 @@
    "viewers": null,
    "via": "search: bird feeder live cam",
    "first_seen": "2026-10-28"
+  },
+  "bZish-38Bbs": {
+   "title": "🔴24/7 LIVE Birds, Unique Squirrels & Wildlife Feeder Cam - NONSTOP ACTION",
+   "channel": "Relaxing Wildlife",
+   "channel_url": "https://www.youtube.com/@relaxingwildlifecam",
+   "cid": "UCm-LBntCVU2cmS6-G3Ea6zA",
+   "viewers": null,
+   "via": "search: bird feeder live cam",
+   "first_seen": "2026-11-24"
+  },
+  "zjwJ7sqOJ8Y": {
+   "title": "🔴North Carolina Bird Feeder Daily Live Stream 🐦The Most Cardinals on YouTube",
+   "channel": "Just Bill Bird Live Stream",
+   "channel_url": "https://www.youtube.com/@justbill",
+   "cid": "UCG1uo50XHSYJXArjRdENvfA",
+   "viewers": null,
+   "via": "search: bird feeder live cam",
+   "first_seen": "2026-10-22"
   },
   "Or1Wz--cV2Y": {
    "title": "Maymont LIVE Otter Cam | Richmond, VA | Bastionpoint Technology",
@@ -1991,32 +1829,32 @@
    "via": "search: seal live cam",
    "first_seen": "2026-10-22"
   },
-  "sg-J_5KC8ZU": {
-   "title": "【4K水中ライブ】オランダ・エコマーレ | 水の中のかわいいアザラシ | 癒やしの定点カメラ",
-   "channel": "TexelInformatie",
-   "channel_url": "https://www.youtube.com/@Texelinformatie",
-   "cid": "UCne6b1whLLhDRJ-IXWNWZbQ",
+  "QzQ-7eiMw1w": {
+   "title": "🔴 Live Now: 24/7 Hawaii Humpback Whale Marine Sanctuary in Maui, Hawaii in 4K Ultra HD",
+   "channel": "afarTV",
+   "channel_url": "https://www.youtube.com/@afartv",
+   "cid": "UCaG0IHN1RMOZ4-U3wDXAkwA",
    "viewers": null,
    "via": "search: seal live cam",
-   "first_seen": "2026-10-22"
+   "first_seen": "2026-11-24"
   },
-  "qi0mY6zVQnY": {
-   "title": "Live Cam in The Lower Keys",
-   "channel": "Viva The Keys",
-   "channel_url": "https://www.youtube.com/@VivaTheKeys",
-   "cid": "UCtzYRypg21-R2suTVCetlbg",
+  "AXyxIFY3JaA": {
+   "title": "Main Lodge Woolly Cam",
+   "channel": "Mammoth Mountain",
+   "channel_url": "https://www.youtube.com/@mammothmountain",
+   "cid": "UC1zpFX74WEG2b7xa7fD22kw",
    "viewers": null,
    "via": "search: wolf live cam",
-   "first_seen": "2026-10-23"
+   "first_seen": "2026-11-24"
   },
-  "_eE4GBEjjs4": {
-   "title": "Hogs Breath Stage Cam",
-   "channel": "Hogs Breath Saloon Key West",
-   "channel_url": "https://www.youtube.com/@HogsBreathKeyWest",
-   "cid": "UCACzxtAksIzlsuBIiOT_ubw",
+  "jRyAwGkvQec": {
+   "title": "GaiaZOO - Meekijken in het gorillaverblijf",
+   "channel": "GaiaZOO",
+   "channel_url": "https://www.youtube.com/@GaiaZOO",
+   "cid": "UCei4MfZb21Wgiq9XQGgvkxw",
    "viewers": null,
-   "via": "search: wolf live cam",
-   "first_seen": "2026-11-22"
+   "via": "search: gorilla live cam",
+   "first_seen": "2026-10-21"
   },
   "QhahoVG0BfI": {
    "title": "🔴 24/7 LIVE: Orangutan Jungle School | Love Nature",
@@ -2036,14 +1874,14 @@
    "via": "search: gorilla live cam",
    "first_seen": "2026-10-21"
   },
-  "wVoYxBnswt4": {
-   "title": "[24/7 LIVE] CODE-X: 1st-Person Cyberpunk MMO Action-RPG | Ep.1-12 Story, Boss Raids & Builds [UE5.9]",
-   "channel": "NaoyaCreates",
-   "channel_url": "https://www.youtube.com/@GenAIFilims",
-   "cid": "UCJCqtW5nAvb4Pm8AG2Afmog",
+  "bnG8vw3w6u4": {
+   "title": "Your Corvette Wait Just Got Longer... Here’s Why! November Constraints and MORE!",
+   "channel": "HorsePower Obsessed",
+   "channel_url": "https://www.youtube.com/@HorsePowerObsessed",
+   "cid": "UCWO1OTO_yX58sgWInE-UAqA",
    "viewers": null,
    "via": "search: gorilla live cam",
-   "first_seen": "2026-11-19"
+   "first_seen": "2026-11-24"
   },
   "bSDC5N3AbWk": {
    "title": "BaseCam",
@@ -2053,15 +1891,6 @@
    "viewers": null,
    "via": "search: gorilla live cam",
    "first_seen": "2026-11-06"
-  },
-  "QJe1tGI1EZc": {
-   "title": "Elephant Pan, Botswana | Live Wildlife Camera",
-   "channel": "Africam",
-   "channel_url": "https://www.youtube.com/@Africamvideos",
-   "cid": "UCuoNAKa3P0QR1Lw9QdpmoVg",
-   "viewers": null,
-   "via": "search: elephant live cam",
-   "first_seen": "2026-10-22"
   },
   "DsNtwGJXTTs": {
    "title": "Africam Tau powered by EXPLORE.org",
@@ -2099,15 +1928,6 @@
    "via": "search: giraffe live cam",
    "first_seen": "2026-11-05"
   },
-  "a2NCmNFT01g": {
-   "title": "The Giraffe Center Indoor Cam | Live from Cheyenne Mountain Zoo",
-   "channel": "Cheyenne Mountain Zoo",
-   "channel_url": "https://www.youtube.com/@CheyenneMtnZoo",
-   "cid": "UCjcb1QOtYHCQcbiY9V6zIew",
-   "viewers": null,
-   "via": "search: giraffe live cam",
-   "first_seen": "2026-11-22"
-  },
   "dXKCmOEq3ns": {
    "title": "Jasmine the Tiger Cam at Turpentine Creek powered by EXPLORE.org",
    "channel": "Explore Tiger & Kitten Cams",
@@ -2116,6 +1936,15 @@
    "viewers": null,
    "via": "search: tiger live cam",
    "first_seen": "2026-10-20"
+  },
+  "HfgIFGbdGJ0": {
+   "title": "The World Live - Original Version | earthTV®",
+   "channel": "earthTV",
+   "channel_url": "https://www.youtube.com/@earthTV",
+   "cid": "UCRuyAVeVd7oUwh0LWmxxBBQ",
+   "viewers": null,
+   "via": "search: tiger live cam",
+   "first_seen": "2026-11-24"
   },
   "w_x2eYNj7o8": {
    "title": "Live Tiger Webcam - Softi & Toph",
@@ -2135,6 +1964,15 @@
    "via": "search: tiger live cam",
    "first_seen": "2026-10-21"
   },
+  "ysXSvbWLXnM": {
+   "title": "Australian Wildlife Cam Live",
+   "channel": "Australian Wildlife Cam Live",
+   "channel_url": "https://www.youtube.com/@AustralianWildlifeCamLive",
+   "cid": "UC2fT5OsZ71PBA-jdq68DyWQ",
+   "viewers": null,
+   "via": "search: koala live cam",
+   "first_seen": "2026-11-24"
+  },
   "gXKuUyKt8mc": {
    "title": "[V3cam] Kīlauea volcano, Hawaii (south Halemaʻumaʻu crater)",
    "channel": "USGS",
@@ -2153,15 +1991,6 @@
    "via": "search: koala live cam",
    "first_seen": "2026-10-29"
   },
-  "JH_NzhSsqis": {
-   "title": "USC Wrigley Catalina Marine Reserve powered by EXPLORE.org",
-   "channel": "Explore Oceans",
-   "channel_url": "https://www.youtube.com/@ExploreOceans",
-   "cid": "UCSyg9cb3Iq-NtlbxqNB9wGw",
-   "viewers": null,
-   "via": "search: underwater live cam",
-   "first_seen": "2026-10-14"
-  },
   "jOp_aAXsYmE": {
    "title": "MEGA Cam Live",
    "channel": "MEGA Lab",
@@ -2170,6 +1999,15 @@
    "viewers": null,
    "via": "search: underwater live cam",
    "first_seen": "2026-10-21"
+  },
+  "YGD4JppXDD8": {
+   "title": "Homosassa Underwater Manatee Camera",
+   "channel": "adoptamanatee",
+   "channel_url": "https://www.youtube.com/@adoptamanatee",
+   "cid": "UCTSa1WxrNvaiXBaErL3Vyrw",
+   "viewers": null,
+   "via": "search: underwater live cam",
+   "first_seen": "2026-11-24"
   },
   "Fp7l8XASb9Y": {
    "title": "LIVE Banzai Pipeline Surf Cam: North Shore, Oahu - Hawaii | explore.org",
@@ -2180,6 +2018,15 @@
    "via": "search: explore.org live cam",
    "first_seen": "2026-11-18"
   },
+  "NuvKPEhiHmM": {
+   "title": "The Cliffside Penguin Village　崖上のペンギン村LIVE　11/24　小諸市動物園",
+   "channel": "KOMORO ZOO 小諸市動物園　長野県小諸市",
+   "channel_url": "https://www.youtube.com/@KOMOROZOO",
+   "cid": "UCRs28y8_qHheJ_yPjZ37e-g",
+   "viewers": null,
+   "via": "search: 動物園 ライブカメラ",
+   "first_seen": "2026-11-24"
+  },
   "foyQgxYsdRU": {
    "title": "ムササビLIVE",
    "channel": "KOMORO ZOO 小諸市動物園　長野県小諸市",
@@ -2188,24 +2035,6 @@
    "viewers": null,
    "via": "search: 動物園 ライブカメラ",
    "first_seen": "2026-10-21"
-  },
-  "831QJ5DMU3M": {
-   "title": "cvnペンギンの丘ライブカメラ のライブ配信",
-   "channel": "cvn ペンギンライブカメラ",
-   "channel_url": "https://www.youtube.com/@cvn%E3%83%9A%E3%83%B3%E3%82%AE%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%96%E3%82%AB%E3%83%A1%E3%83%A9",
-   "cid": "UCfLSbr8eONUgh3GmCv4QJPQ",
-   "viewers": null,
-   "via": "search: 動物園 ライブカメラ",
-   "first_seen": "2026-11-09"
-  },
-  "aVGYOlIzV0A": {
-   "title": "阿蘇ライブカメラ～阿蘇火山博物館・草千里～",
-   "channel": "RKK NEWS DIG",
-   "channel_url": "https://www.youtube.com/@rkknews",
-   "cid": "UCG1ApxYbWaC9xUxgHCWyR5Q",
-   "viewers": null,
-   "via": "search: 動物園 ライブカメラ",
-   "first_seen": "2026-11-22"
   },
   "EmtsXnYXyVM": {
    "title": "オホーツクとっかりセンター ライブ配信",
@@ -2216,6 +2045,15 @@
    "via": "search: 動物園 ライブカメラ",
    "first_seen": "2026-11-21"
   },
+  "Iv2VUE_UhRQ": {
+   "title": "[4K] 上高地河童橋ライブカメラ KAMIKOCHI KAPPA-BASHI LIVE CAMERA",
+   "channel": "五千尺ホテル上高地",
+   "channel_url": "https://www.youtube.com/@gosenjaku-hotel",
+   "cid": "UCVUyX8T-vYwJYraM6957r9Q",
+   "viewers": null,
+   "via": "search: 動物園 ライブカメラ",
+   "first_seen": "2026-11-24"
+  },
   "E1zLXKr44Ec": {
    "title": "【お腹で共食い!?】“最強”だけが生まれるシロワニの静かな泳ぎ｜サメ好きの”聖地”から24時間ライブ配信！アクアワールド茨城県大洗水族館  24/7 Live Shark Cam【ANN/テレ朝】",
    "channel": "ANNnewsCH",
@@ -2224,6 +2062,15 @@
    "viewers": null,
    "via": "search: 水族館 ライブカメラ",
    "first_seen": "2026-11-19"
+  },
+  "fk-BotAOpzI": {
+   "title": "湘南 鵠沼〜新江ノ島水族館前　ライブ配信",
+   "channel": "NAMIARUMOVIE",
+   "channel_url": "https://www.youtube.com/@NAMIARUMOVIE",
+   "cid": "UCV3arNLjYmBubfETmAAzS4w",
+   "viewers": null,
+   "via": "search: 水族館 ライブカメラ",
+   "first_seen": "2026-11-24"
   },
   "5ZIw5x5jnQg": {
    "title": "🔴 【4K Live】沖縄ライブカメラ cafe CAHAYA BULAN OKINAWA JAPAN(本部町備瀬 )",
@@ -2234,32 +2081,14 @@
    "via": "search: 水族館 ライブカメラ",
    "first_seen": "2026-11-13"
   },
-  "ywXRfMLuw78": {
-   "title": "【🔴江の島ライブカメラ2】🏖江の島ズーム ：Enoshima LiveCamera 24Hours：🎥by HviewCam",
-   "channel": "FlyingSuika",
-   "channel_url": "https://www.youtube.com/@FlyingSuika",
-   "cid": "UCfoiWJgMmg4p9olz1WE0-9A",
+  "sg-J_5KC8ZU": {
+   "title": "【4K水中ライブ】オランダ・エコマーレ | 水の中のかわいいアザラシ | 癒やしの定点カメラ",
+   "channel": "TexelInformatie",
+   "channel_url": "https://www.youtube.com/@Texelinformatie",
+   "cid": "UCne6b1whLLhDRJ-IXWNWZbQ",
    "viewers": null,
    "via": "search: 水族館 ライブカメラ",
-   "first_seen": "2026-11-21"
-  },
-  "xPgeZzojY5o": {
-   "title": "【🔴江の島ライブカメラ1】🌴片瀬海岸東浜 ：Enoshima LiveCamera 24Hours🎥by HviewCam",
-   "channel": "FlyingSuika",
-   "channel_url": "https://www.youtube.com/@FlyingSuika",
-   "cid": "UCfoiWJgMmg4p9olz1WE0-9A",
-   "viewers": null,
-   "via": "search: 水族館 ライブカメラ",
-   "first_seen": "2026-11-17"
-  },
-  "gFRtAAmiFbE": {
-   "title": "【 LIVE 】 東京 新宿 歌舞伎町 ライブ ２ / 『 Kabukicho Live Channel II 』",
-   "channel": "歌舞伎町 ライブ ちゃんねる 2『 Kabukicho Live Channel II 』",
-   "channel_url": "https://www.youtube.com/@kabukicho-2",
-   "cid": "UCBFDJXGCOdMjVtg2AnReoXA",
-   "viewers": null,
-   "via": "search: 水族館 ライブカメラ",
-   "first_seen": "2026-11-17"
+   "first_seen": "2026-10-22"
   },
   "NTpwTAImNfU": {
    "title": "加茂水族館　道路状況ライブカメラ１",
@@ -2270,14 +2099,32 @@
    "via": "search: 水族館 ライブカメラ",
    "first_seen": "2026-11-09"
   },
-  "PzRnZgIHK0M": {
-   "title": "Live from Zoo Negara Malaysia. Presenting the Malayan Sun Bear. Daily outings at 9.00am to 5.00pm",
-   "channel": "LH Technologies & Solutions Sdn Bhd",
-   "channel_url": "https://www.youtube.com/@lhtechnologiessolutions",
-   "cid": "UC6o1Ql1pxxOEgMowo7tXKPw",
+  "xPgeZzojY5o": {
+   "title": "【🔴江の島ライブカメラ1】🌴片瀬海岸東浜 ：Enoshima LiveCamera 24Hours🎥by HviewCam",
+   "channel": "FlyingSuika",
+   "channel_url": "https://www.youtube.com/@FlyingSuika",
+   "cid": "UCfoiWJgMmg4p9olz1WE0-9A",
+   "viewers": null,
+   "via": "search: 水族館 ライブカメラ",
+   "first_seen": "2026-11-17"
+  },
+  "ywXRfMLuw78": {
+   "title": "【🔴江の島ライブカメラ2】🏖江の島ズーム ：Enoshima LiveCamera 24Hours：🎥by HviewCam",
+   "channel": "FlyingSuika",
+   "channel_url": "https://www.youtube.com/@FlyingSuika",
+   "cid": "UCfoiWJgMmg4p9olz1WE0-9A",
+   "viewers": null,
+   "via": "search: 水族館 ライブカメラ",
+   "first_seen": "2026-11-21"
+  },
+  "MiQe9ob9aDc": {
+   "title": "🔴 LIVE: Predator Battles: Lions vs Leopards vs Hyenas | Savage Kingdom Livestream | Nat Geo Animals",
+   "channel": "Nat Geo Animals",
+   "channel_url": "https://www.youtube.com/@NatGeoAnimals",
+   "cid": "UCDPk9MG2RexnOMGTD-YnSnA",
    "viewers": null,
    "via": "search: 动物园 直播",
-   "first_seen": "2026-11-20"
+   "first_seen": "2026-11-16"
   },
   "c5vMJo5-8Wg": {
    "title": "[🟢LIVE] 희귀 동물과 개과천선 반려 동물 24시간 LIVE",
@@ -2285,26 +2132,8 @@
    "channel_url": "https://www.youtube.com/@SBSANIMAL",
    "cid": "UC22go5LdQEw-iDuxFb4C0hw",
    "viewers": null,
-   "via": "search: Tierpark live",
+   "via": "search: 动物园 直播",
    "first_seen": "2026-11-21"
-  },
-  "aj6LSXfbM0Q": {
-   "title": "LIVE 24/7: Lion vs Buffalo & Tiger — Non-Stop Wild Animals | WILD PLANET",
-   "channel": "WILD PLANET",
-   "channel_url": "https://www.youtube.com/@WildLifeByZS",
-   "cid": "UCKppL-OennQcI5LrsKlNhjg",
-   "viewers": null,
-   "via": "search: Tierpark live",
-   "first_seen": "2026-11-22"
-  },
-  "o6LRXTHP8qs": {
-   "title": "Haus des Meeres Aqua Terra Zoo: Dachkamera Ost",
-   "channel": "Haus des Meeres Aqua Terra Zoo",
-   "channel_url": "https://www.youtube.com/@AquaTerraZoo",
-   "cid": "UCzK4mZybYjXr6kiPcSNwWJg",
-   "viewers": null,
-   "via": "search: Tierpark live",
-   "first_seen": "2026-11-20"
   },
   "gYPQ0NqIZCI": {
    "title": "Live from Zoo Negara Malaysia. Presenting the Black Panther. Daily outings at 9.00am to 5.00pm",
@@ -2315,14 +2144,32 @@
    "via": "search: Tierpark live",
    "first_seen": "2026-11-19"
   },
-  "LtMnAQlb_m4": {
-   "title": "Live-Webcam: Storchennest Zusmarshausen",
-   "channel": "Schwarzbräu Zusmarshausen",
-   "channel_url": "https://www.youtube.com/@schwarzbrauzusmarshausen7792",
-   "cid": "UC7UtlrfYwm0I4VB14-R_Jqw",
+  "XsATqwXs9eU": {
+   "title": "Live dieren kijken | Tijgercam 1 | DierenPark Amersfoort",
+   "channel": "DierenPark Amersfoort",
+   "channel_url": "https://www.youtube.com/@dpamersfoort",
+   "cid": "UCo8xAfuSYDfSY5OTLx6euaA",
    "viewers": null,
-   "via": "search: Storchennest live",
-   "first_seen": "2026-11-09"
+   "via": "search: Tierpark live",
+   "first_seen": "2026-10-21"
+  },
+  "UFt5yU2W8ng": {
+   "title": "LIVE Deer Feeder Cam | 24/7 Wildlife Trough | Fernwood Hills",
+   "channel": "Fernwood Hills",
+   "channel_url": "https://www.youtube.com/@fernwoodhills",
+   "cid": "UCcrE2oxFzsz9COkzbckQ6sg",
+   "viewers": null,
+   "via": "search: Tierpark live",
+   "first_seen": "2026-11-24"
+  },
+  "o6LRXTHP8qs": {
+   "title": "Haus des Meeres Aqua Terra Zoo: Dachkamera Ost",
+   "channel": "Haus des Meeres Aqua Terra Zoo",
+   "channel_url": "https://www.youtube.com/@AquaTerraZoo",
+   "cid": "UCzK4mZybYjXr6kiPcSNwWJg",
+   "viewers": null,
+   "via": "search: Tierpark live",
+   "first_seen": "2026-11-20"
   },
   "2ZKR4Q1EOdk": {
    "title": "Storchennest Kolbermoor [LIVE🔴] Stork live",
@@ -2333,14 +2180,14 @@
    "via": "search: Storchennest live",
    "first_seen": "2026-11-17"
   },
-  "yboNtDfMOxY": {
-   "title": "Livestream von HorstsHorst",
-   "channel": "HorstsHorst",
-   "channel_url": "https://www.youtube.com/@HorstsHorst",
-   "cid": "UCtgCU94-q2r9sezfpZHzO4w",
+  "LtMnAQlb_m4": {
+   "title": "Live-Webcam: Storchennest Zusmarshausen",
+   "channel": "Schwarzbräu Zusmarshausen",
+   "channel_url": "https://www.youtube.com/@schwarzbrauzusmarshausen7792",
+   "cid": "UC7UtlrfYwm0I4VB14-R_Jqw",
    "viewers": null,
    "via": "search: Storchennest live",
-   "first_seen": "2026-11-21"
+   "first_seen": "2026-11-09"
   },
   "ct9V3Lafos8": {
    "title": "Storchennest Pausin Schönwalde-Glien Havelland",
@@ -2351,8 +2198,8 @@
    "via": "search: Storchennest live",
    "first_seen": "2026-11-09"
   },
-  "XsATqwXs9eU": {
-   "title": "Live dieren kijken | Tijgercam 1 | DierenPark Amersfoort",
+  "LVl9TqP6hW8": {
+   "title": "Live dieren kijken | Tijgercam 2 | DierenPark Amersfoort",
    "channel": "DierenPark Amersfoort",
    "channel_url": "https://www.youtube.com/@dpamersfoort",
    "cid": "UCo8xAfuSYDfSY5OTLx6euaA",
@@ -2360,11 +2207,11 @@
    "via": "search: dierentuin live",
    "first_seen": "2026-10-21"
   },
-  "LVl9TqP6hW8": {
-   "title": "Live dieren kijken | Tijgercam 2 | DierenPark Amersfoort",
-   "channel": "DierenPark Amersfoort",
-   "channel_url": "https://www.youtube.com/@dpamersfoort",
-   "cid": "UCo8xAfuSYDfSY5OTLx6euaA",
+  "YQcNDAs0IT8": {
+   "title": "🦁 Pretlettertjes Dierentuin: Alle dieren op een rij! Eerste Woordjes voor Peuters",
+   "channel": "Pretlettertjes",
+   "channel_url": "https://www.youtube.com/@Pretlettertjes",
+   "cid": "UCEAE-iM9NxWZHrXj51nnU1w",
    "viewers": null,
    "via": "search: dierentuin live",
    "first_seen": "2026-10-21"
@@ -2378,14 +2225,14 @@
    "via": "search: dierentuin live",
    "first_seen": "2026-11-21"
   },
-  "YQcNDAs0IT8": {
-   "title": "🦁 Pretlettertjes Dierentuin: Alle dieren op een rij! Eerste Woordjes voor Peuters",
-   "channel": "Pretlettertjes",
-   "channel_url": "https://www.youtube.com/@Pretlettertjes",
-   "cid": "UCEAE-iM9NxWZHrXj51nnU1w",
+  "PTQAOImE6AA": {
+   "title": "Uilencam | Kijk live mee met de kerkuil op de Kwetterterp | DierenPark Amersfoort",
+   "channel": "DierenPark Amersfoort",
+   "channel_url": "https://www.youtube.com/@dpamersfoort",
+   "cid": "UCo8xAfuSYDfSY5OTLx6euaA",
    "viewers": null,
    "via": "search: dierentuin live",
-   "first_seen": "2026-10-21"
+   "first_seen": "2026-11-01"
   },
   "QaG5w8dwXNQ": {
    "title": "Diana and Roma feed the animals at the Emirates Park Zoo - Best Adventures with Diana and Roma",
@@ -2396,15 +2243,6 @@
    "via": "search: dierentuin live",
    "first_seen": "2026-10-22"
   },
-  "PTQAOImE6AA": {
-   "title": "Uilencam | Kijk live mee met de kerkuil op de Kwetterterp | DierenPark Amersfoort",
-   "channel": "DierenPark Amersfoort",
-   "channel_url": "https://www.youtube.com/@dpamersfoort",
-   "cid": "UCo8xAfuSYDfSY5OTLx6euaA",
-   "viewers": null,
-   "via": "search: dierentuin live",
-   "first_seen": "2026-11-01"
-  },
   "9Rcxrjd9fF0": {
    "title": "Dentist Teaches Maya How Important It Is to Take Care of Her Teeth",
    "channel": "Maya Mary Mia",
@@ -2413,6 +2251,24 @@
    "viewers": null,
    "via": "search: dierentuin live",
    "first_seen": "2026-11-18"
+  },
+  "Rn_ga4yXkME": {
+   "title": "🔴 Turystyczne ujęcia z polskich miast (Zakopane, Kraków, Warszawa i więcej) WebCamera.pl",
+   "channel": "WebCamera.pl",
+   "channel_url": "https://www.youtube.com/@WebCameraPl",
+   "cid": "UCh2MI-QmqjA40IYO4oCXdUw",
+   "viewers": null,
+   "via": "search: зоопарк онлайн камера",
+   "first_seen": "2026-11-24"
+  },
+  "mNxI6aPshXk": {
+   "title": "Majete Wildlife Reserve LIVE - Auto-Switches to the Action",
+   "channel": "Pix African Cams",
+   "channel_url": "https://www.youtube.com/@PixAfricanCams",
+   "cid": "UCJp-n4gTHgv1bLTOjOtautQ",
+   "viewers": null,
+   "via": "search: зоопарк онлайн камера",
+   "first_seen": "2026-11-15"
   }
  },
  "rejected": []
